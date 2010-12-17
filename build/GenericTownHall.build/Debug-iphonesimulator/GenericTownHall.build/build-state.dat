@@ -1,1210 +1,0 @@
-TGenericTownHall
-v7
-r0
-t314199605.203786
-cCheck dependencies
-cProcessInfoPlistFile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/Info.plist GenericTownHall-Info.plist
-cCompileXIB /Users/David/Documents/GenericTownHall/MainWindow.xib
-cCompileXIB /Users/David/Documents/GenericTownHall/DetailView.xib
-cCompileXIB /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.xib
-cCompileXIB /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.xib
-cCompileXIB /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.xib
-cCopyPlistFile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/configs.plist configs.plist
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/arrow_left_24.png arrow_left_24.png
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/arrow_right_24.png arrow_right_24.png
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/reload_24.png reload_24.png
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/arrow_circle_right_24.png arrow_circle_right_24.png
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/aelogica.png aelogica.png
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/pencil_24.png pencil_24.png
-cCpResource build/Debug-iphonesimulator/GenericTownHall.app/comment_24.png comment_24.png
-cProcessPCH /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch.gch GenericTownHall_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/main.o /Users/David/Documents/GenericTownHall/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHallAppDelegate.o /Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/RootViewController.o /Users/David/Documents/GenericTownHall/Classes/RootViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/DetailViewController.o /Users/David/Documents/GenericTownHall/Classes/DetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSObject+SBJSON.o /Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSString+SBJSON.o /Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonBase.o /Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonParser.o /Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonWriter.o /Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMGatherInputStream.o /Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcher.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherLogging.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherService.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetchHistory.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPUploadFetcher.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMMIMEDocument.o /Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/TopicsViewController.o /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/QuestionsViewController.o /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/ResponsesViewController.o /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Category.o /Users/David/Documents/GenericTownHall/Classes/Category.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Question.o /Users/David/Documents/GenericTownHall/Classes/Question.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Response.o /Users/David/Documents/GenericTownHall/Classes/Response.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Topic.o /Users/David/Documents/GenericTownHall/Classes/Topic.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/MBProgressHUD.o /Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cLd /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall normal i386
-cGenerateDSYMFile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app.dSYM /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall
-cTouch /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk
-c000000004BD236930000000000000110
-t1272067731
-s272
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004BD1CD90000000000026F020
-t1272040848
-s2551840
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004BD1FFC200000000002A96A0
-t1272053698
-s2791072
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004BD1FF9E0000000000001355
-t1272053662
-s4949
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004BD20412000000000000098F
-t1272054802
-s2447
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004BD20471000000000222E640
-t1272054897
-s35841600
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/Availability.h
-c000000004BD1CFC10000000000001A1A
-t1272041409
-s6682
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/sys/stat.h
-c00000000476344C000000000000047CE
-t1197688000
-s18382
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/unistd.h
-c000000004748A13300000000000053FF
-t1195942195
-s21503
-
-N/Users/David/Documents/GenericTownHall/Classes/Category.h
-c000000004C360F0100000000000002A5
-t1278611201
-s677
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/Category.m
-c000000004C360F01000000000000025D
-t1278611201
-s605
-i"Category.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/DetailViewController.h
-c000000004D0707D40000000000000265
-t1292306388
-s613
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/DetailViewController.m
-c000000004D09E1780000000000001182
-t1292493176
-s4482
-i"DetailViewController.h"
-i"RootViewController.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.h
-c000000004D05DA0E00000000000009B4
-t1292229134
-s2484
-i<Foundation/Foundation.h>
-i"GTLDefines.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m
-c000000004D05DA0E00000000000013FC
-t1292229134
-s5116
-i"GTMGatherInputStream.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.h
-c000000004D05DA0E00000000000018AE
-t1292229134
-s6318
-i<Foundation/Foundation.h>
-i"GTMHTTPFetcher.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m
-c000000004D05DA0E0000000000003FEE
-t1292229134
-s16366
-i"GTMHTTPFetchHistory.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.h
-c000000004D05DA0E0000000000005578
-t1292229134
-s21880
-i<Foundation/Foundation.h>
-i"GTLDefines.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m
-c000000004D05DA0E000000000000B07C
-t1292229134
-s45180
-i"GTMHTTPFetcher.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.h
-c000000004D05DA0E0000000000000AED
-t1292229134
-s2797
-i"GTMHTTPFetcher.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m
-c000000004D05DA0E0000000000009AF6
-t1292229134
-s39670
-i<sys/stat.h>
-i<unistd.h>
-i"GTLDefines.h"
-i"GTMHTTPFetcherLogging.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.h
-c000000004D05DA0E00000000000009CC
-t1292229134
-s2508
-i"GTMHTTPFetcher.h"
-i"GTMHTTPFetchHistory.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m
-c000000004D05DA0E0000000000000B19
-t1292229134
-s2841
-i"GTMHTTPFetcherService.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.h
-c000000004D05DA0E0000000000001039
-t1292229134
-s4153
-i"GTMHTTPFetcher.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m
-c000000004D05DA0E000000000000645A
-t1292229134
-s25690
-i"GTMHTTPUploadFetcher.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.h
-c000000004D05DA0E00000000000007BE
-t1292229134
-s1982
-i<Foundation/Foundation.h>
-i"GTLDefines.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m
-c000000004D05DA0E000000000000221E
-t1292229134
-s8734
-i"GTMMIMEDocument.h"
-i"GTMGatherInputStream.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.h
-c000000004D0A0B1300000000000005F7
-t1292503827
-s1527
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m
-c000000004D0A0B130000000000000B16
-t1292503827
-s2838
-i"GenericTownHallAppDelegate.h"
-i"RootViewController.h"
-i"DetailViewController.h"
-i"MBProgressHUD.h"
-i"globals.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.h
-c000000004B66D6D80000000000001811
-t1265030872
-s6161
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m
-c000000004B66D6D80000000000002EFA
-t1265030872
-s12026
-i"MBProgressHUD.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.h
-c000000004C9CC2D6000000000000085F
-t1285341910
-s2143
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m
-c000000004C9CC2D6000000000000077D
-t1285341910
-s1917
-i"NSObject+SBJSON.h"
-i"SBJsonWriter.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.h
-c000000004C9CC2D600000000000007F0
-t1285341910
-s2032
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m
-c000000004C9CC2D6000000000000075D
-t1285341910
-s1885
-i"NSString+SBJSON.h"
-i"SBJsonParser.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/Nugget.h
-c000000004C360F010000000000000576
-t1278611201
-s1398
-i<Foundation/Foundation.h>
-i"Originator.h"
-i"Votes.h"
-i"CurrentUserVote.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/Nugget.m
-c000000004C3F560E0000000000000542
-t1279219214
-s1346
-i"Nugget.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/Question.h
-c000000004D074D690000000000000585
-t1292324201
-s1413
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/Question.m
-c000000004D074D89000000000000054E
-t1292324233
-s1358
-i"Question.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.h
-c000000004D073A4E00000000000001E2
-t1292319310
-s482
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m
-c000000004D0A141F00000000000020B5
-t1292506143
-s8373
-i"QuestionsViewController.h"
-i"Question.h"
-i"GTMHTTPFetcher.h"
-i"GenericTownHallAppDelegate.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.xib
-c000000004D09DC4F0000000000004784
-t1292491855
-s18308
-
-N/Users/David/Documents/GenericTownHall/Classes/Response.h
-c000000004D074D3F00000000000001DF
-t1292324159
-s479
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/Response.m
-c000000004D074D48000000000000019C
-t1292324168
-s412
-i"Response.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.h
-c000000004D0740B400000000000001E1
-t1292320948
-s481
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m
-c000000004D0A0B130000000000001387
-t1292503827
-s4999
-i"ResponsesViewController.h"
-i"GTMHTTPFetcher.h"
-i"GenericTownHallAppDelegate.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.xib
-c000000004D09FCAE0000000000004785
-t1292500142
-s18309
-
-N/Users/David/Documents/GenericTownHall/Classes/RootViewController.h
-c000000004D0A081A00000000000004A3
-t1292503066
-s1187
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/RootViewController.m
-c000000004D0A16B4000000000000343E
-t1292506804
-s13374
-i"RootViewController.h"
-i"DetailViewController.h"
-i"TopicsViewController.h"
-i"QuestionsViewController.h"
-i"ResponsesViewController.h"
-i"GTMHTTPFetcher.h"
-i"Category.h"
-i"Topic.h"
-i"Question.h"
-i"globals.h"
-i"GenericTownHallAppDelegate.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/SBJsonBase.h
-c000000004C9CC2D60000000000000B82
-t1285341910
-s2946
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m
-c000000004C9CC2D60000000000000AC1
-t1285341910
-s2753
-i"SBJsonBase.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/SBJsonParser.h
-c000000004C9CC2D60000000000000C8F
-t1285341910
-s3215
-i<Foundation/Foundation.h>
-i"SBJsonBase.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m
-c000000004C9CC2D60000000000003B7A
-t1285341910
-s15226
-i"SBJsonParser.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.h
-c000000004C9CC2D600000000000011D9
-t1285341910
-s4569
-i<Foundation/Foundation.h>
-i"SBJsonBase.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m
-c000000004C9CC2D6000000000000206D
-t1285341910
-s8301
-i"SBJsonWriter.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/Topic.h
-c000000004C360F010000000000000299
-t1278611201
-s665
-i<Foundation/Foundation.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/Topic.m
-c000000004C360F01000000000000024C
-t1278611201
-s588
-i"Topic.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.h
-c000000004D074E0600000000000001D3
-t1292324358
-s467
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m
-c000000004D0A0B1300000000000018DB
-t1292503827
-s6363
-i"TopicsViewController.h"
-i"Topic.h"
-i"GTMHTTPFetcher.h"
-i"GenericTownHallAppDelegate.h"
-
-N/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.xib
-c000000004D08A4BA000000000000477D
-t1292412090
-s18301
-
-N/Users/David/Documents/GenericTownHall/DetailView.xib
-c000000004D076377000000000000565A
-t1292329847
-s22106
-
-N/Users/David/Documents/GenericTownHall/GenericTownHall_Prefix.pch
-c000000004D05B6420000000000000150
-t1292219970
-s336
-i<Availability.h>
-i<Foundation/Foundation.h>
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/MainWindow.xib
-c000000004D073B7A000000000000828E
-t1292319610
-s33422
-
-N/Users/David/Documents/GenericTownHall/aelogica.png
-c000000004D0A004300000000000024F4
-t1292501059
-s9460
-
-N/Users/David/Documents/GenericTownHall/arrow_circle_right_24.png
-c000000004CC049AA00000000000001E4
-t1287670186
-s484
-
-N/Users/David/Documents/GenericTownHall/arrow_left_24.png
-c000000004CBF6EFC000000000000014D
-t1287614204
-s333
-
-N/Users/David/Documents/GenericTownHall/arrow_right_24.png
-c000000004CBF6EF00000000000000166
-t1287614192
-s358
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app
-t1292506805
-s612
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app.dSYM
-t1292506805
-s102
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/DetailView.nib
-t1292329941
-s1421
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall
-t1292506805
-s313520
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/Info.plist
-t1292489704
-s836
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/MainWindow.nib
-t1292319700
-s1942
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/PkgInfo
-t1292489704
-s8
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/QuestionsViewController.nib
-t1292491903
-s795
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/ResponsesViewController.nib
-t1292500157
-s795
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/TopicsViewController.nib
-t1292412114
-s795
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/aelogica.png
-t1292501368
-s9460
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/arrow_circle_right_24.png
-t1292497134
-s484
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/arrow_left_24.png
-t1292496815
-s333
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/arrow_right_24.png
-t1292497004
-s358
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/comment_24.png
-t1292504592
-s278
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/configs.plist
-t1292503828
-s174
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/pencil_24.png
-t1292504592
-s396
-
-N/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/reload_24.png
-t1292497004
-s454
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Category.o
-t1292323648
-s13364
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/DetailViewController.o
-t1292503066
-s49872
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMGatherInputStream.o
-t1292230129
-s23960
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetchHistory.o
-t1292230131
-s59940
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcher.o
-t1292230130
-s108480
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherLogging.o
-t1292230130
-s63036
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherService.o
-t1292230131
-s23668
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPUploadFetcher.o
-t1292230131
-s56736
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMMIMEDocument.o
-t1292230132
-s24916
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHall.LinkFileList
-c000000004D088B3F0000000000000E02
-t1292405567
-s3586
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHallAppDelegate.o
-t1292503828
-s58152
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/MBProgressHUD.o
-t1292405567
-s56244
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSObject+SBJSON.o
-t1292230118
-s7388
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSString+SBJSON.o
-t1292230126
-s7280
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Nugget.o
-t2
-s0
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Question.o
-t1292324235
-s20556
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/QuestionsViewController.o
-t1292506144
-s76176
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Response.o
-t1292324169
-s8788
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/ResponsesViewController.o
-t1292503829
-s64236
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/RootViewController.o
-t1292506804
-s87520
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonBase.o
-t1292230127
-s13208
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonParser.o
-t1292230128
-s36920
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonWriter.o
-t1292230128
-s26660
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Topic.o
-t1292323649
-s13144
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/TopicsViewController.o
-t1292503829
-s70316
-
-N/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/main.o
-t1292219998
-s6304
-
-N/Users/David/Documents/GenericTownHall/comment_24.png
-c000000004CBF6B550000000000000116
-t1287613269
-s278
-
-N/Users/David/Documents/GenericTownHall/configs.plist
-c000000004D0A0B130000000000000170
-t1292503827
-s368
-
-N/Users/David/Documents/GenericTownHall/globals.h
-c000000004D09D3E800000000000000CA
-t1292489704
-s202
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/main.m
-c000000004D05B642000000000000016F
-t1292219970
-s367
-i<UIKit/UIKit.h>
-
-N/Users/David/Documents/GenericTownHall/pencil_24.png
-c000000004CBF70AA000000000000018C
-t1287614634
-s396
-
-N/Users/David/Documents/GenericTownHall/reload_24.png
-c000000004CBF735600000000000001C6
-t1287615318
-s454
-
-N/var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch.gch
-t1292219997
-s13825936
-
-NGenericTownHall-Info.plist
-c000000004D09D2BC00000000000004AB
-t1292489404
-s1195
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies314199604#314199605#0(0"0(0#1#0"8655277440#0"0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Category.o /Users/David/Documents/GenericTownHall/Classes/Category.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314016448.756117
-e314016448.834085
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Category.o
-x/Users/David/Documents/GenericTownHall/Classes/Category.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@65"Compile /Users/David/Documents/GenericTownHall/Classes/Category.m314016448#314016448#0(0"0(0#0#57"/Users/David/Documents/GenericTownHall/Classes/Category.m8607011456#2077"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/Category.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Category.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/DetailViewController.o /Users/David/Documents/GenericTownHall/Classes/DetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314195866.608184
-e314195866.733237
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/DetailViewController.o
-x/Users/David/Documents/GenericTownHall/Classes/DetailViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/David/Documents/GenericTownHall/Classes/DetailViewController.m314195866#314195866#0(0"0(0#0#69"/Users/David/Documents/GenericTownHall/Classes/DetailViewController.m8651099456#2101"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/DetailViewController.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/DetailViewController.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMGatherInputStream.o /Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922928.942195
-e313922929.251115
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMGatherInputStream.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m313922928#313922929#0(0"0(0#0#69"/Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m8615050496#2101"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMGatherInputStream.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMGatherInputStream.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetchHistory.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922931.134061
-e313922931.526527
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetchHistory.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@76"Compile /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m313922931#313922931#0(0"0(0#0#68"/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m8609348384#2099"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetchHistory.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetchHistory.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcher.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922929.251325
-e313922930.378183
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcher.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@71"Compile /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m313922929#313922930#0(0"0(0#0#63"/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m8620452544#2089"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcher.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcher.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherLogging.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922930.378490
-e313922930.927203
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherLogging.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@78"Compile /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m313922930#313922930#0(0"0(0#0#70"/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m8614843360#2103"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherLogging.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherLogging.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherService.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922930.927409
-e313922931.133853
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherService.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@78"Compile /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m313922930#313922931#0(0"0(0#0#70"/Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m8614721600#2103"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMHTTPFetcherService.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPFetcherService.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPUploadFetcher.o /Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922931.526744
-e313922931.878381
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPUploadFetcher.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m313922931#313922931#0(0"0(0#0#69"/Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m8621558336#2101"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMHTTPUploadFetcher.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMHTTPUploadFetcher.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMMIMEDocument.o /Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922931.878727
-e313922932.101803
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMMIMEDocument.o
-x/Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@72"Compile /Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m313922931#313922932#0(0"0(0#0#64"/Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m8615472608#2091"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GTMMIMEDocument.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GTMMIMEDocument.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHallAppDelegate.o /Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314196628.728294
-e314196628.850000
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHallAppDelegate.o
-x/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@83"Compile /Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m314196628#314196628#0(0"0(0#0#75"/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m8654552256#2113"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHallAppDelegate.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/MBProgressHUD.o /Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314098367.362630
-e314098367.621922
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/MBProgressHUD.o
-x/Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m314098367#314098367#0(0"0(0#0#62"/Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m8624395232#2087"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/MBProgressHUD.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/MBProgressHUD.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSObject+SBJSON.o /Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922907.032080
-e313922918.426136
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSObject+SBJSON.o
-x/Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@72"Compile /Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m313922907#313922919#0(0"0(0#0#64"/Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m7165020502508533760#2091"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/NSObject+SBJSON.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSObject+SBJSON.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSString+SBJSON.o /Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922918.426411
-e313922926.909002
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSString+SBJSON.o
-x/Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@72"Compile /Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m313922918#313922926#0(0"0(0#0#64"/Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m8621435936#2091"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/NSString+SBJSON.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/NSString+SBJSON.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Nugget.o /Users/David/Documents/GenericTownHall/Classes/Nugget.m normal i386 objective-c com.apple.compilers.gcc.4_2
-r0
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Question.o /Users/David/Documents/GenericTownHall/Classes/Question.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314017033.711909
-e314017035.032849
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Question.o
-x/Users/David/Documents/GenericTownHall/Classes/Question.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@65"Compile /Users/David/Documents/GenericTownHall/Classes/Question.m314017033#314017035#0(0"0(0#0#57"/Users/David/Documents/GenericTownHall/Classes/Question.m8627330432#2077"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/Question.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Question.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/QuestionsViewController.o /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314198943.590198
-e314198944.034530
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/QuestionsViewController.o
-x/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m: In function '-[QuestionsViewController tableView:cellForRowAtIndexPath:]':
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:135: warning: local declaration of 'tableView' hides instance variable
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m: In function '-[QuestionsViewController fetchQuestions:]':
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: no '-showUsingAnimation:' method found
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: (Messages without a matching method signature
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: will be assumed to return 'id' and accept
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: '...' as arguments.)
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m: In function '-[QuestionsViewController myFetcher:finishedWithData:error:]':
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:195: warning: no '-hideUsingAnimation:' method found
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:202: warning: unused variable 'status'
-o/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:211: warning: 'NSString' may not respond to '-JSONValue'
-lSLF07#2@80"Compile /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#314198944#0(1439"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m: In function '-[QuestionsViewController tableView:cellForRowAtIndexPath:]':/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:135: warning: local declaration of 'tableView' hides instance variable/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m: In function '-[QuestionsViewController fetchQuestions:]':/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: no '-showUsingAnimation:' method found/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: (Messages without a matching method signature/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: will be assumed to return 'id' and accept/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:187: warning: '...' as arguments.)/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m: In function '-[QuestionsViewController myFetcher:finishedWithData:error:]':/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:195: warning: no '-hideUsingAnimation:' method found/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:202: warning: unused variable 'status'/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m:211: warning: 'NSString' may not respond to '-JSONValue'6(22@56"Local declaration of 'tableView' hides instance variable314198943#149#144#0(6@72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#135#0#135#0#0"0(22@38"No '-showUsingAnimation:' method found314198943#425#126#0(6@72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#187#0#187#0#19"no '*' method found0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)314198943#551#133#0(6@72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#187#0#187#0#0"0(22@38"No '-hideUsingAnimation:' method found314198943#1071#126#0(6@72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#195#0#195#0#19"no '*' method found0(22@24"Unused variable 'status'314198943#1197#112#0(6@72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#202#0#202#0#19"unused variable '*'0(22@42"'NSString' may not respond to '-JSONValue'314198943#1309#130#0(6@72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m314198943#211#0#211#0#26"'*' may not respond to '*'0(0#0#72"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m8638038688#2107"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/QuestionsViewController.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Response.o /Users/David/Documents/GenericTownHall/Classes/Response.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314016969.029421
-e314016969.221293
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Response.o
-x/Users/David/Documents/GenericTownHall/Classes/Response.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@65"Compile /Users/David/Documents/GenericTownHall/Classes/Response.m314016969#314016969#0(0"0(0#0#57"/Users/David/Documents/GenericTownHall/Classes/Response.m8633003328#2077"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/Response.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Response.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/ResponsesViewController.o /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314196629.271159
-e314196629.430496
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/ResponsesViewController.o
-x/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m: In function '-[ResponsesViewController tableView:cellForRowAtIndexPath:]':
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:64: warning: local declaration of 'tableView' hides instance variable
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m: In function '-[ResponsesViewController fetchResponses:]':
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: no '-showUsingAnimation:' method found
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: (Messages without a matching method signature
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: will be assumed to return 'id' and accept
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: '...' as arguments.)
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m: In function '-[ResponsesViewController myFetcher:finishedWithData:error:]':
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:119: warning: no '-hideUsingAnimation:' method found
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:126: warning: unused variable 'status'
-o/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:135: warning: 'NSString' may not respond to '-JSONValue'
-lSLF07#2@80"Compile /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196629#314196629#0(1438"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m: In function '-[ResponsesViewController tableView:cellForRowAtIndexPath:]':/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:64: warning: local declaration of 'tableView' hides instance variable/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m: In function '-[ResponsesViewController fetchResponses:]':/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: no '-showUsingAnimation:' method found/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: (Messages without a matching method signature/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: will be assumed to return 'id' and accept/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:114: warning: '...' as arguments.)/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m: In function '-[ResponsesViewController myFetcher:finishedWithData:error:]':/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:119: warning: no '-hideUsingAnimation:' method found/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:126: warning: unused variable 'status'/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m:135: warning: 'NSString' may not respond to '-JSONValue'6(22@56"Local declaration of 'tableView' hides instance variable314196629#149#143#0(6@72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196627#64#0#64#0#0"0(22@38"No '-showUsingAnimation:' method found314196629#424#126#0(6@72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196627#114#0#114#0#19"no '*' method found0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)314196629#550#133#0(6@72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196627#114#0#114#0#0"0(22@38"No '-hideUsingAnimation:' method found314196629#1070#126#0(6@72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196627#119#0#119#0#19"no '*' method found0(22@24"Unused variable 'status'314196629#1196#112#0(6@72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196627#126#0#126#0#19"unused variable '*'0(22@42"'NSString' may not respond to '-JSONValue'314196629#1308#130#0(6@72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m314196627#135#0#135#0#26"'*' may not respond to '*'0(0#0#72"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m8651855552#2107"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/ResponsesViewController.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/RootViewController.o /Users/David/Documents/GenericTownHall/Classes/RootViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314199604.735662
-e314199604.976743
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/RootViewController.o
-x/Users/David/Documents/GenericTownHall/Classes/RootViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/David/Documents/GenericTownHall/Classes/RootViewController.m: In function '-[RootViewController myFetcher:finishedWithData:error:]':
-o/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:344: warning: unused variable 'status'
-o/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: 'NSString' may not respond to '-JSONValue'
-o/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: (Messages without a matching method signature
-o/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: will be assumed to return 'id' and accept
-o/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: '...' as arguments.)
-lSLF07#2@75"Compile /Users/David/Documents/GenericTownHall/Classes/RootViewController.m314199604#314199605#0(727"/Users/David/Documents/GenericTownHall/Classes/RootViewController.m: In function '-[RootViewController myFetcher:finishedWithData:error:]':/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:344: warning: unused variable 'status'/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: 'NSString' may not respond to '-JSONValue'/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: (Messages without a matching method signature/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: will be assumed to return 'id' and accept/Users/David/Documents/GenericTownHall/Classes/RootViewController.m:351: warning: '...' as arguments.)3(22@24"Unused variable 'status'314199604#140#107#0(6@67"/Users/David/Documents/GenericTownHall/Classes/RootViewController.m314199604#344#0#344#0#19"unused variable '*'0(22@42"'NSString' may not respond to '-JSONValue'314199604#247#125#0(6@67"/Users/David/Documents/GenericTownHall/Classes/RootViewController.m314199604#351#0#351#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)314199604#372#128#0(6@67"/Users/David/Documents/GenericTownHall/Classes/RootViewController.m314199604#351#0#351#0#0"0(0#0#67"/Users/David/Documents/GenericTownHall/Classes/RootViewController.m8652518528#2097"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/RootViewController.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/RootViewController.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonBase.o /Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922926.909362
-e313922927.668425
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonBase.o
-x/Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@67"Compile /Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m313922926#313922927#0(0"0(0#0#59"/Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m8625567808#2081"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/SBJsonBase.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonBase.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonParser.o /Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922927.668631
-e313922928.637720
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonParser.o
-x/Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@69"Compile /Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m313922927#313922928#0(0"0(0#0#61"/Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m8619223776#2085"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/SBJsonParser.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonParser.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonWriter.o /Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313922928.638037
-e313922928.941984
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonWriter.o
-x/Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@69"Compile /Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m313922928#313922928#0(0"0(0#0#61"/Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m8600749184#2085"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/SBJsonWriter.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/SBJsonWriter.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Topic.o /Users/David/Documents/GenericTownHall/Classes/Topic.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314016449.083416
-e314016449.159482
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Topic.o
-x/Users/David/Documents/GenericTownHall/Classes/Topic.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/David/Documents/GenericTownHall/Classes/Topic.m314016449#314016449#0(0"0(0#0#54"/Users/David/Documents/GenericTownHall/Classes/Topic.m8636531072#2071"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/Topic.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/Topic.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/TopicsViewController.o /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s314196629.009523
-e314196629.141958
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/TopicsViewController.o
-x/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m: In function '-[TopicsViewController tableView:cellForRowAtIndexPath:]':
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:91: warning: local declaration of 'tableView' hides instance variable
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m: In function '-[TopicsViewController fetchTopics:]':
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: no '-showUsingAnimation:' method found
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: (Messages without a matching method signature
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: will be assumed to return 'id' and accept
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: '...' as arguments.)
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m: In function '-[TopicsViewController myFetcher:finishedWithData:error:]':
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:153: warning: no '-hideUsingAnimation:' method found
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:160: warning: unused variable 'status'
-o/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:169: warning: 'NSString' may not respond to '-JSONValue'
-lSLF07#2@77"Compile /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196629#314196629#0(1393"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m: In function '-[TopicsViewController tableView:cellForRowAtIndexPath:]':/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:91: warning: local declaration of 'tableView' hides instance variable/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m: In function '-[TopicsViewController fetchTopics:]':/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: no '-showUsingAnimation:' method found/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: (Messages without a matching method signature/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: will be assumed to return 'id' and accept/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:145: warning: '...' as arguments.)/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m: In function '-[TopicsViewController myFetcher:finishedWithData:error:]':/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:153: warning: no '-hideUsingAnimation:' method found/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:160: warning: unused variable 'status'/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m:169: warning: 'NSString' may not respond to '-JSONValue'6(22@56"Local declaration of 'tableView' hides instance variable314196629#143#140#0(6@69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196627#91#0#91#0#0"0(22@38"No '-showUsingAnimation:' method found314196629#406#123#0(6@69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196627#145#0#145#0#19"no '*' method found0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)314196629#529#130#0(6@69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196627#145#0#145#0#0"0(22@38"No '-hideUsingAnimation:' method found314196629#1034#123#0(6@69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196627#153#0#153#0#19"no '*' method found0(22@24"Unused variable 'status'314196629#1157#109#0(6@69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196627#160#0#160#0#19"unused variable '*'0(22@42"'NSString' may not respond to '-JSONValue'314196629#1266#127#0(6@69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m314196627#169#0#169#0#26"'*' may not respond to '*'0(0#0#69"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m8651313216#2101"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/TopicsViewController.o0#
-
-CCompileC build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/main.o /Users/David/Documents/GenericTownHall/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s313912798.225268
-e313912798.976945
-r1
-xCompileC
-xbuild/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/main.o
-x/Users/David/Documents/GenericTownHall/main.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@53"Compile /Users/David/Documents/GenericTownHall/main.m313912798#313912798#0(0"0(0#0#45"/Users/David/Documents/GenericTownHall/main.m8614474240#2061"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -include /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch -c /Users/David/Documents/GenericTownHall/main.m -o /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/main.o0#
-
-CCompileXIB /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.xib
-s314184701.066315
-e314184703.911586
-r1
-xCompileXIB
-x/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.xib
-lSLF07#2@46"CompileXIB Classes/QuestionsViewController.xib314184701#314184703#0(0"0(0#0#74"/Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.xib8619916192#612"    cd /Users/David/Documents/GenericTownHall    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/QuestionsViewController.nib /Users/David/Documents/GenericTownHall/Classes/QuestionsViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk0#
-
-CCompileXIB /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.xib
-s314192949.932838
-e314192957.343163
-r1
-xCompileXIB
-x/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.xib
-lSLF07#2@46"CompileXIB Classes/ResponsesViewController.xib314192949#314192957#0(0"0(0#0#74"/Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.xib8645695584#612"    cd /Users/David/Documents/GenericTownHall    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/ResponsesViewController.nib /Users/David/Documents/GenericTownHall/Classes/ResponsesViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk0#
-
-CCompileXIB /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.xib
-s314104912.266271
-e314104914.202167
-r1
-xCompileXIB
-x/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.xib
-lSLF07#2@43"CompileXIB Classes/TopicsViewController.xib314104912#314104914#0(0"0(0#0#71"/Users/David/Documents/GenericTownHall/Classes/TopicsViewController.xib8625376096#606"    cd /Users/David/Documents/GenericTownHall    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/TopicsViewController.nib /Users/David/Documents/GenericTownHall/Classes/TopicsViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk0#
-
-CCompileXIB /Users/David/Documents/GenericTownHall/DetailView.xib
-s314022737.109941
-e314022741.615592
-r1
-xCompileXIB
-x/Users/David/Documents/GenericTownHall/DetailView.xib
-lSLF07#2@25"CompileXIB DetailView.xib314022737#314022741#0(0"0(0#0#53"/Users/David/Documents/GenericTownHall/DetailView.xib8604502464#578"    cd /Users/David/Documents/GenericTownHall    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/DetailView.nib /Users/David/Documents/GenericTownHall/DetailView.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk0#
-
-CCompileXIB /Users/David/Documents/GenericTownHall/MainWindow.xib
-s314012494.239096
-e314012500.950212
-r1
-xCompileXIB
-x/Users/David/Documents/GenericTownHall/MainWindow.xib
-lSLF07#2@25"CompileXIB MainWindow.xib314012494#314012500#0(0"0(0#0#53"/Users/David/Documents/GenericTownHall/MainWindow.xib8623678752#578"    cd /Users/David/Documents/GenericTownHall    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/MainWindow.nib /Users/David/Documents/GenericTownHall/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk0#
-
-CCopyPlistFile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/configs.plist configs.plist
-s314196627.881217
-e314196628.727613
-r1
-xCopyPlistFile
-x/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/configs.plist
-xconfigs.plist
-lSLF07#2@18"Copy configs.plist314196627#314196628#0(0"0(0#0#52"/Users/David/Documents/GenericTownHall/configs.plist8645933664#396"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 configs.plist --outdir /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/aelogica.png aelogica.png
-s314194168.047998
-e314194168.242942
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/aelogica.png
-xaelogica.png
-lSLF07#2@17"Copy aelogica.png314194168#314194168#0(0"0(0#0#51"/Users/David/Documents/GenericTownHall/aelogica.png8655559936#464"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/aelogica.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/arrow_circle_right_24.png arrow_circle_right_24.png
-s314189933.991747
-e314189934.065066
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/arrow_circle_right_24.png
-xarrow_circle_right_24.png
-lSLF07#2@30"Copy arrow_circle_right_24.png314189933#314189934#0(0"0(0#0#64"/Users/David/Documents/GenericTownHall/arrow_circle_right_24.png8633057120#477"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/arrow_circle_right_24.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/arrow_left_24.png arrow_left_24.png
-s314189615.078062
-e314189615.354121
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/arrow_left_24.png
-xarrow_left_24.png
-lSLF07#2@22"Copy arrow_left_24.png314189615#314189615#0(0"0(0#0#56"/Users/David/Documents/GenericTownHall/arrow_left_24.png8643937792#469"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/arrow_left_24.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/arrow_right_24.png arrow_right_24.png
-s314189804.042315
-e314189804.097465
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/arrow_right_24.png
-xarrow_right_24.png
-lSLF07#2@23"Copy arrow_right_24.png314189804#314189804#0(0"0(0#0#57"/Users/David/Documents/GenericTownHall/arrow_right_24.png8644197440#470"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/arrow_right_24.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/comment_24.png comment_24.png
-s314197392.354325
-e314197392.448859
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/comment_24.png
-xcomment_24.png
-lSLF07#2@19"Copy comment_24.png314197392#314197392#0(0"0(0#0#53"/Users/David/Documents/GenericTownHall/comment_24.png8624937888#466"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/comment_24.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/pencil_24.png pencil_24.png
-s314197392.338215
-e314197392.450679
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/pencil_24.png
-xpencil_24.png
-lSLF07#2@18"Copy pencil_24.png314197392#314197392#0(0"0(0#0#52"/Users/David/Documents/GenericTownHall/pencil_24.png8643843488#465"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/pencil_24.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CCpResource build/Debug-iphonesimulator/GenericTownHall.app/reload_24.png reload_24.png
-s314189804.070396
-e314189804.099939
-r1
-xCpResource
-xbuild/Debug-iphonesimulator/GenericTownHall.app/reload_24.png
-xreload_24.png
-lSLF07#2@18"Copy reload_24.png314189804#314189804#0(0"0(0#0#52"/Users/David/Documents/GenericTownHall/reload_24.png8636333248#465"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/David/Documents/GenericTownHall/reload_24.png /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-
-CGenerateDSYMFile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app.dSYM /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall
-s314199605.107929
-e314199605.193431
-r1
-xGenerateDSYMFile
-x/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app.dSYM
-x/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall
-lSLF07#2@133"GenerateDSYMFile build/Debug-iphonesimulator/GenericTownHall.app.dSYM build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall314199605#314199605#0(0"0(0#0#102"/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall8655051104#407"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall -o /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app.dSYM0#
-
-CLd /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall normal i386
-s314199604.976850
-e314199605.107803
-r1
-xLd
-x/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall
-xnormal
-xi386
-lSLF07#2@107"Link /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall314199604#314199605#0(0"0(0#0#0"8646469376#940"    cd /Users/David/Documents/GenericTownHall    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -L/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -filelist /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/Objects-normal/i386/GenericTownHall.LinkFileList -mmacosx-version-min=10.5 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -o /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/GenericTownHall0#
-
-CProcessInfoPlistFile /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/Info.plist GenericTownHall-Info.plist
-s314182504.425059
-e314182504.575036
-r1
-xProcessInfoPlistFile
-x/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/Info.plist
-xGenericTownHall-Info.plist
-lSLF07#2@34"Process GenericTownHall-Info.plist314182504#314182504#0(0"0(0#0#65"/Users/David/Documents/GenericTownHall/GenericTownHall-Info.plist8622125600#503"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility GenericTownHall-Info.plist -genpkginfo /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app/Info.plist0#
-
-CProcessPCH /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch.gch GenericTownHall_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-s313912793.263317
-e313912798.224918
-r1
-xProcessPCH
-x/var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch.gch
-xGenericTownHall_Prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@37"Precompile GenericTownHall_Prefix.pch313912793#313912798#0(0"0(0#0#65"/Users/David/Documents/GenericTownHall/GenericTownHall_Prefix.pch8590257792#1945"    cd /Users/David/Documents/GenericTownHall    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-generated-files.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-own-target-headers.hmap -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-all-target-headers.hmap -iquote /Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/GenericTownHall-project-headers.hmap -F/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator -I/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/include -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources/i386 -I/Users/David/Documents/GenericTownHall/build/GenericTownHall.build/Debug-iphonesimulator/GenericTownHall.build/DerivedSources -c /Users/David/Documents/GenericTownHall/GenericTownHall_Prefix.pch -o /var/folders/nm/nm+V6VrZFuabSZiupuqZW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GenericTownHall_Prefix-annohiuleltczibfcsbjcrrtfnbk/GenericTownHall_Prefix.pch.gch0#
-
-CTouch /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app
-s314199605.193535
-e314199605.203727
-r1
-xTouch
-x/Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app
-lSLF07#2@92"Touch /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app314199605#314199605#0(0"0(0#0#0"8656186976#286"    cd /Users/David/Documents/GenericTownHall    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/David/Documents/GenericTownHall/build/Debug-iphonesimulator/GenericTownHall.app0#
-

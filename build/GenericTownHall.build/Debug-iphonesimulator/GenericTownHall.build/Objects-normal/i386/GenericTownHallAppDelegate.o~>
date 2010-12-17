@@ -1,5 +1,0 @@
-/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m:20: error: no declaration of property 'serverDataUrl' found in the interface
-/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m: In function '-[GenericTownHallAppDelegate application:didFinishLaunchingWithOptions:]':
-/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m:35: error: 'serverDataUrl' undeclared (first use in this function)
-/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m:35: error: (Each undeclared identifier is reported only once
-/Users/David/Documents/GenericTownHall/Classes/GenericTownHallAppDelegate.m:35: error: for each function it appears in.)
