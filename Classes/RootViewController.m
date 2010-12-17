@@ -17,7 +17,8 @@
 #import "Question.h"
 #import "globals.h"
 #import "GenericTownHallAppDelegate.h"
-
+#import "InputDialog.h"
+#import "LoginDialog.h"
 
 @implementation RootViewController
 
@@ -25,6 +26,7 @@
 @synthesize topicsViewController;
 @synthesize questionsViewController, responsesViewController;
 @synthesize categories, currentItems;
+@synthesize dimmer;
 
 enum {
 	CategoriesView, TopicsView, QuestionsView, ResponsesView
@@ -42,7 +44,7 @@ NSUInteger currentView;
 	
 	categories = [[NSMutableArray alloc] init];
 	currentItems = [[NSMutableArray alloc] init];
-	
+
     topicsViewController = [[TopicsViewController alloc]init];
 	questionsViewController = [[QuestionsViewController alloc]init];
 	responsesViewController = [[ResponsesViewController alloc]init];
@@ -58,15 +60,17 @@ NSUInteger currentView;
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_circle_right_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshButtonPressed:)];
 	UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_right_24.png"] style:UIBarButtonItemStylePlain target:nil action:nil];
 	UIBarButtonItem *writeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"pencil_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(writeButtonPressed:)];
+	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
 	
 	backButton.enabled = YES;
     forwardButton.enabled = NO;
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, forwardButton, writeButton, nil]];
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, forwardButton, writeButton, loginButton, nil]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToQuestions:) name:@"ChangeToQuestions" object:nil]; 
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dialogClose:) name:@"DialogClose" object:nil]; 	
 	
 	UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(homeButtonPressed:)];          	
 	self.navigationItem.leftBarButtonItem = homeButton;
@@ -74,6 +78,11 @@ NSUInteger currentView;
 	currentView = CategoriesView;
 	
 	self.navigationController.navigationBar.topItem.title = @"Categories";
+	
+	// Initialize our dimmer view
+	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1003.f)];
+	[dimmer setBackgroundColor:[UIColor blackColor]];
+	[dimmer setAlpha:0.f];
 	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/categories/all?format=json", UIAppDelegate.serverDataUrl]];
 	NSLog(@"Fetching top categories URL: %@", url);
@@ -83,20 +92,55 @@ NSUInteger currentView;
 	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(myFetcher:finishedWithData:error:)];
 }
 
--(void)writeButtonPressed:(UIBarButtonItem *)button {
-	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(.0f, 0.f, 300.f, 400.f)];
-	textView.backgroundColor = [UIColor yellowColor];
-	textView.text = @"some txt";
-	textView.tag = 1;
+-(void)homeButtonPressed:(UIBarButtonItem *)button {
+}
 
+-(void)loginButtonPressed:(UIBarButtonItem *)button {
+	// Dim the background
+	[self.view.window addSubview:dimmer];
 	
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithFrame: CGRectMake(0,0,620, 650)];
-	actionSheet.title = @"Write your question";
-													
-//														initWithTitle:@"Write your question" delegate:self cancelButtonTitle:@"Ok" destructiveButtonTitle:@"Cool" otherButtonTitles:nil];
-	[actionSheet addSubview:textView];
-	[actionSheet showInView:detailViewController.view];	
-	[actionSheet release];
+	LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	[dialog setCenter:self.view.window.center];
+	[dialog setAlpha:0.f];
+	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
+	
+	[self.view.window addSubview:dialog];
+	
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:.7f];
+	[dimmer setAlpha:0.5f];	
+	[dialog setAlpha:1.f];
+	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(1.57))];
+	[UIView commitAnimations];
+	[dialog release];
+}
+
+
+-(void)writeButtonPressed:(UIBarButtonItem *)button {
+	// Dim the background
+	[self.view.window addSubview:dimmer];
+
+	InputDialog *dialog = [[InputDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	[dialog setCenter:self.view.window.center];
+	[dialog setAlpha:0.f];
+	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
+	
+	[self.view.window addSubview:dialog];
+		
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:.7f];
+	[dimmer setAlpha:0.5f];	
+	[dialog setAlpha:1.f];
+	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(1.57))];
+	[UIView commitAnimations];
+	[dialog release];
+}
+
+-(void)dialogClose:(NSNotification *)pUserInfo { 
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:.3f];
+	[dimmer setAlpha:.0f];	
+	[UIView commitAnimations];	
 }
 
 - (void)backButtonPressed:(UIBarButtonItem *)button {
@@ -329,9 +373,13 @@ NSUInteger currentView;
 
 
 - (void)dealloc {
-	[currentItems release];
+	[currentItems release];	
+	[categories release];
+	[dimmer release];
 	[topicsViewController release];
     [detailViewController release];
+	[questionsViewController release];
+	[responsesViewController release];
     [super dealloc];
 }
 

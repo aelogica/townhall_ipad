@@ -18,6 +18,8 @@
 	TopicsViewController *topicsViewController;
 	QuestionsViewController *questionsViewController;
 	ResponsesViewController *responsesViewController;
+	
+	UIView *dimmer;
 
 	NSMutableArray *categories;
 	NSMutableArray *currentItems;
@@ -29,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet ResponsesViewController *responsesViewController;
 @property (nonatomic, retain) NSMutableArray *currentItems;
 @property (nonatomic, retain) NSMutableArray *categories;
+@property (nonatomic, retain) UIView *dimmer;
 
 -(void)changeDetailsTitle:(NSString*)newTitle;
 -(void)changeToCategories:(NSNotification *)pUserInfo;
