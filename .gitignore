@@ -1,0 +1,4 @@
+build/*
+GenericTownHall.xcodeproj/*.mode1v3
+GenericTownHall.xcodeproj/*.pbxuser
+
