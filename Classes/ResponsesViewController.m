@@ -113,7 +113,7 @@
 		CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		CGSize bodyTextSize = [currentQuestion.body sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		
-		return  subjectTextsize.height + bodyTextSize.height + 30.f;
+		return  subjectTextsize.height + bodyTextSize.height + 5.f;
 		
 	} else {
 		NSString *text = [(Response*)[self.responses objectAtIndex:indexPath.row-1] body];
@@ -122,9 +122,9 @@
 		
 		CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
 		
-		CGFloat height = MAX(size.height, 44.0f);
+		//CGFloat height = MAX(size.height, 44.0f);
 		
-		return height + 20.f;
+		return size.height - 10.f;
 	}
 }
 
@@ -132,17 +132,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     static NSString *CellIdentifier = @"Cell";
-	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	static NSString *CellIdentifier2 = @"Cell2";
 	
 	if( indexPath.row == 0 ) {
 		// Construct the header
 		CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		CGSize bodyTextSize = [currentQuestion.body sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-		
+
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];		
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-			[cell.contentView setBackgroundColor:UIColorFromRGB(0x8DB6CD)];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
+			
+			UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, 200.f)];
+			[customView setBackgroundColor:UIColorFromRGB(0x8DB6CD)];			
 			
 			// create the button object
 			UILabel *subjectLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 0.0, cell.contentView.frame.size.width, subjectTextsize.height)];
@@ -166,32 +168,38 @@
 
 			bodyLabel.textAlignment = UITextAlignmentLeft;
 			
-			[cell.contentView addSubview:subjectLabel];	
-			[cell.contentView addSubview:authorLabel];	
+			[customView addSubview:subjectLabel];	
+			[customView addSubview:authorLabel];	
+			[cell.contentView addSubview:customView];
 			[cell.contentView addSubview:bodyLabel];
 			
 			[subjectLabel release];
 			[authorLabel release];
 			[bodyLabel release];
 		}
+		UIView *customView = (UIView*)[cell.contentView.subviews objectAtIndex:0];
+		[customView setFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, subjectTextsize.height + 24.f)];
 		
-		UILabel *subject = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
-		UILabel *author = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
-		UILabel *body = (UILabel*)[cell.contentView.subviews objectAtIndex:2];
-		
-		//CGRect frame = CGRectMake(0 ,5, tableView.frame.size.width, subjectTextsize.height);
-		//subject.frame = frame;
-		//frame= CGRectMake(0 ,frame.size.height + frame.origin.y, tableView.frame.size.width, bodyTextSize.height);
-		//author.frame = frame;
-		//frame= CGRectMake(0 ,frame.size.height + frame.origin.y, tableView.frame.size.width, bodyTextSize.height);
-		//body.frame = frame;
+		UILabel *subject = (UILabel*)[customView.subviews objectAtIndex: 0];
+		UILabel *author = (UILabel*)[customView.subviews objectAtIndex:1];
+		UILabel *body = (UILabel*)[cell.contentView.subviews objectAtIndex:1];		
+
+		CGRect frame = CGRectMake(15.f, 4.f, cell.contentView.frame.size.width, subjectTextsize.height);
+		subject.frame = frame;
+		frame = CGRectMake(15.f ,frame.size.height + frame.origin.y, tableView.frame.size.width, 20.f);
+		author.frame = frame;
+		frame = CGRectMake(10.f ,frame.size.height + frame.origin.y + 10.f, tableView.frame.size.width, bodyTextSize.height);
+		body.frame = frame;
 		
 		author.text = [NSString stringWithFormat:@"Posted by %@ at %@ (%@ pts).", currentQuestion.nuggetOriginator.displayName, @"December 18, 2010", currentQuestion.nuggetOriginator.userReputationString];
 		subject.text = currentQuestion.subject;
 		body.text = currentQuestion.body;
-		//NSLog(@"Showing row0");
+		
+		return cell;
 
-	} else if(indexPath.row > 0) {
+	} else {
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 			
@@ -207,34 +215,34 @@
 			secondaryLabel.textAlignment = UITextAlignmentLeft;
 			secondaryLabel.font = [UIFont systemFontOfSize:9];
 			secondaryLabel.backgroundColor = [UIColor clearColor];	
+			secondaryLabel.textColor = UIColorFromRGB(0xdd0000);
 			
 			[cell.contentView addSubview:primaryLabel];
 			[cell.contentView addSubview:secondaryLabel];
+			[cell.contentView addSubview:[[[UILabel alloc] init] autorelease]];
 			
 		}		
 		Response *response = (Response *)[self.responses objectAtIndex:indexPath.row - 1];
-		UILabel *primary = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
-		UILabel *secondary = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
+		UILabel *body = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
+		UILabel *author = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
 		CGSize size = [response.body sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-		CGRect contentRect = cell.contentView.bounds;
-		CGFloat boundsX = contentRect.origin.x;	
 		
-		CGRect frame = CGRectMake(0 ,5, size.width, size.height);
-		primary.frame = frame;
-		frame= CGRectMake(0 ,frame.size.height + frame.origin.y, 500, 15);
-		secondary.frame = frame;	
+		CGRect frame = CGRectMake(10.f, 0.f, tableView.frame.size.width, 15.f);
+		author.frame = frame;
+		frame = CGRectMake(10.f, frame.origin.y + 15.f, tableView.frame.size.width, size.height - 15.f);
+		body.frame = frame;	
 		
-		primary.text = response.body;
-		secondary.text = [NSString stringWithFormat:@"Posted by %@ (%@ pts).", response.originator.displayName, response.originator.userReputationString];
+		body.text = response.body;
+		author.text = [NSString stringWithFormat:@"Posted by %@ (%@ pts).", response.originator.displayName, response.originator.userReputationString];
 		
 
 		if( [indexPath row] % 2)
 			[cell setBackgroundColor:[UIColor whiteColor]];
 		else
 			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];
-	}
-	
-    return cell;
+		
+		return cell;
+	}	
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
