@@ -50,54 +50,6 @@
 }
 
 #pragma mark Table view methods
-/*
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	// create the parent view that will hold header Label
-	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, 200.f)];
-	[customView setBackgroundColor:UIColorFromRGB(0x8DB6CD)];
-	
-	CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-
-	// create the button object
-	UILabel *subjectLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 0.0, customView.frame.size.width, subjectTextsize.height)];
-	subjectLabel.backgroundColor = [UIColor clearColor];
-	subjectLabel.numberOfLines = 0;
-	subjectLabel.lineBreakMode = UILineBreakModeWordWrap;
-	subjectLabel.textColor = UIColorFromRGB(0x104E8B);
-	subjectLabel.font = [UIFont systemFontOfSize:15];
-	subjectLabel.text = currentQuestion.subject;
-	
-	UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, subjectLabel.frame.origin.y + subjectLabel.frame.size.height, customView.frame.size.width, 20.f)];
-	authorLabel.backgroundColor = [UIColor clearColor];
-	authorLabel.textColor = UIColorFromRGB(0xCD0000);
-	authorLabel.font = [UIFont systemFontOfSize:12];
-	authorLabel.text = [NSString stringWithFormat:@"Posted by %@ at %@ (%@ pts).", currentQuestion.nuggetOriginator.displayName, @"December 18, 2010", currentQuestion.nuggetOriginator.userReputationString];
-	
-	CGSize bodyTextSize = [currentQuestion.body sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-	UILabel *bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, authorLabel.frame.origin.y + authorLabel.frame.size.height + 10.f, customView.frame.size.width, bodyTextSize.height)];
-	bodyLabel.backgroundColor = [UIColor whiteColor];
-	bodyLabel.numberOfLines = 0;
-	bodyLabel.lineBreakMode = UILineBreakModeWordWrap;
-	bodyLabel.opaque = NO;
-	bodyLabel.font = [UIFont systemFontOfSize:15];
-	bodyLabel.text = currentQuestion.body;
-	bodyLabel.textAlignment = UITextAlignmentLeft;
-	
-	[customView setFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, subjectTextsize.height + bodyTextSize.height)];
-	[customView addSubview:subjectLabel];	
-	[customView addSubview:authorLabel];	
-	[customView addSubview:bodyLabel];	
-
-	return customView;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-	CGSize bodyTextSize = [currentQuestion.body sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-	
-	return  subjectTextsize.height + bodyTextSize.height + 30.f;
-}
- */
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -122,9 +74,9 @@
 		
 		CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
 		
-		//CGFloat height = MAX(size.height, 44.0f);
+		CGFloat height = MAX(size.height, 44.0f);
 		
-		return size.height - 10.f;
+		return height + 25.f;
 	}
 }
 
@@ -227,9 +179,9 @@
 		UILabel *author = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
 		CGSize size = [response.body sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		
-		CGRect frame = CGRectMake(10.f, 0.f, tableView.frame.size.width, 15.f);
+		CGRect frame = CGRectMake(10.f, 0.f, tableView.frame.size.width, 20.f);
 		author.frame = frame;
-		frame = CGRectMake(10.f, frame.origin.y + 15.f, tableView.frame.size.width, size.height - 15.f);
+		frame = CGRectMake(10.f, frame.origin.y + 20.f, 684.f, size.height);
 		body.frame = frame;	
 		
 		body.text = response.body;

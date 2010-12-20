@@ -19,6 +19,7 @@
 #import "GenericTownHallAppDelegate.h"
 #import "InputDialog.h"
 #import "LoginDialog.h"
+#import "ResponseDialog.h"
 
 @implementation RootViewController
 
@@ -65,11 +66,12 @@ NSUInteger currentView;
 	//UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_right_24.png"] style:UIBarButtonItemStylePlain target:nil action:nil];
 	UIBarButtonItem *writeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"pencil_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(writeButtonPressed:)];
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
+	UIBarButtonItem *responseButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"comment_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(responseButtonPressed:)];
 	
 	backButton.enabled = YES;
     //forwardButton.enabled = NO;
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, writeButton, loginButton, nil]];
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, writeButton, loginButton, responseButton, nil]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
@@ -134,6 +136,26 @@ NSUInteger currentView;
 	
 	[self.view.window addSubview:dialog];
 		
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:.7f];
+	[dimmer setAlpha:0.5f];	
+	[dialog setAlpha:1.f];
+	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(1.57))];
+	[UIView commitAnimations];
+	[dialog release];
+}
+
+-(void)responseButtonPressed:(UIBarButtonItem *)button {
+	// Dim the background
+	[self.view.window addSubview:dimmer];
+	
+	ResponseDialog *dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	[dialog setCenter:self.view.window.center];
+	[dialog setAlpha:0.f];
+	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
+	
+	[self.view.window addSubview:dialog];
+	
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:.7f];
 	[dimmer setAlpha:0.5f];	

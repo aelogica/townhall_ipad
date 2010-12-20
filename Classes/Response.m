@@ -15,6 +15,13 @@
 @synthesize body= _body;
 @synthesize originator = _originator;
 
+-(id)init {
+    if (self = [super init]) {		
+		_originator = [[Originator alloc]init];
+    }
+    return self;
+}
+
 -(void)dealloc{
 	self.responseId = nil;
 	self.body = nil;
