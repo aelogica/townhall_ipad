@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "Originator.h";
+#import "Originator.h";
 
 
 @interface Response : NSObject {
 	NSInteger * _responseId;
 	NSString * _body;
-//	Originator * _originator;
+	Originator * _originator;
 }
 
 @property(nonatomic, assign) NSInteger * responseId;
 @property(nonatomic, copy) NSString * body;
-//@property(nonatomic, copy) Originator * originator;
+@property(nonatomic, copy) Originator * originator;
 
 @end

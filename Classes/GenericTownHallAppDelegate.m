@@ -49,7 +49,7 @@
 	[window addSubview:progressHUD];
 	progressHUD.center = CGPointMake(384,512);		
  
-	[NSTimer scheduledTimerWithTimeInterval:2.0 target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
+	[NSTimer scheduledTimerWithTimeInterval:.5f target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
 	
@@ -57,7 +57,6 @@
 }
 
 -(void) fadeScreen {
-	NSLog(@"SplashViewController::fadeScreen");
 	[UIView beginAnimations: nil context: nil];
 	[UIView setAnimationDuration: 0.75];
 	[UIView setAnimationDelegate: self];
@@ -67,7 +66,6 @@
 }
 
 -(void) finishedFading {
-	NSLog(@"SplashViewController::finishedFading");
 	[UIView beginAnimations: nil context: nil];
 	[UIView setAnimationDuration: 0.5];
 	//self.view.alpha = 1.0;

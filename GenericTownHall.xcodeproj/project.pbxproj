@@ -51,6 +51,9 @@
 		63A44DA712B77E7A0020FA06 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A44DA612B77E7A0020FA06 /* Question.m */; };
 		63A44DAA12B77EBA0020FA06 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A44DA912B77EBA0020FA06 /* Response.m */; };
 		63A44DAD12B780600020FA06 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A44DAC12B780600020FA06 /* Topic.m */; };
+		63A56A2512BCDAC200BE6B67 /* Originator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A56A2212BCDAC200BE6B67 /* Originator.m */; };
+		63A56A2612BCDAC200BE6B67 /* Votes.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A56A2412BCDAC200BE6B67 /* Votes.m */; };
+		63A56D4212BD716900BE6B67 /* AsynchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A56D4112BD716900BE6B67 /* AsynchImageView.m */; };
 		63C7D62612BB6E1000F18706 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C7D62512BB6E1000F18706 /* SplashViewController.m */; };
 		63C7D7F012BB936C00F18706 /* splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63C7D7EF12BB936C00F18706 /* splash.jpg */; };
 /* End PBXBuildFile section */
@@ -129,6 +132,12 @@
 		63A44DA912B77EBA0020FA06 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
 		63A44DAB12B780600020FA06 /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		63A44DAC12B780600020FA06 /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
+		63A56A2112BCDAC200BE6B67 /* Originator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Originator.h; sourceTree = "<group>"; };
+		63A56A2212BCDAC200BE6B67 /* Originator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Originator.m; sourceTree = "<group>"; };
+		63A56A2312BCDAC200BE6B67 /* Votes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Votes.h; sourceTree = "<group>"; };
+		63A56A2412BCDAC200BE6B67 /* Votes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Votes.m; sourceTree = "<group>"; };
+		63A56D4012BD716900BE6B67 /* AsynchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchImageView.h; sourceTree = "<group>"; };
+		63A56D4112BD716900BE6B67 /* AsynchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchImageView.m; sourceTree = "<group>"; };
 		63C7D62412BB6E1000F18706 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		63C7D62512BB6E1000F18706 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		63C7D7EF12BB936C00F18706 /* splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash.jpg; sourceTree = "<group>"; };
@@ -237,6 +246,8 @@
 		63A363D512B8C18D0028AC5B /* Extras */ = {
 			isa = PBXGroup;
 			children = (
+				63A56D4012BD716900BE6B67 /* AsynchImageView.h */,
+				63A56D4112BD716900BE6B67 /* AsynchImageView.m */,
 				63A363D812B8C1B60028AC5B /* MBProgressHUD.h */,
 				63A363D912B8C1B60028AC5B /* MBProgressHUD.m */,
 			);
@@ -310,6 +321,10 @@
 		63A44DA112B77E520020FA06 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				63A56A2112BCDAC200BE6B67 /* Originator.h */,
+				63A56A2212BCDAC200BE6B67 /* Originator.m */,
+				63A56A2312BCDAC200BE6B67 /* Votes.h */,
+				63A56A2412BCDAC200BE6B67 /* Votes.m */,
 				63A44DAB12B780600020FA06 /* Topic.h */,
 				63A44DAC12B780600020FA06 /* Topic.m */,
 				63A44DA812B77EBA0020FA06 /* Response.h */,
@@ -424,6 +439,9 @@
 				63A36A7D12BA51DD0028AC5B /* InputDialog.m in Sources */,
 				63A36D9612BB549A0028AC5B /* LoginDialog.m in Sources */,
 				63C7D62612BB6E1000F18706 /* SplashViewController.m in Sources */,
+				63A56A2512BCDAC200BE6B67 /* Originator.m in Sources */,
+				63A56A2612BCDAC200BE6B67 /* Votes.m in Sources */,
+				63A56D4212BD716900BE6B67 /* AsynchImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

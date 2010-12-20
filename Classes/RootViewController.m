@@ -27,6 +27,7 @@
 @synthesize questionsViewController, responsesViewController;
 @synthesize categories, currentItems;
 @synthesize dimmer;
+@synthesize oldTableView;
 
 enum {
 	CategoriesView, TopicsView, QuestionsView, ResponsesView
@@ -41,6 +42,9 @@ NSUInteger currentView;
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+
+	UITableView *categoriesTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
+    self.tableView = categoriesTableView;	
 	
 	categories = [[NSMutableArray alloc] init];
 	currentItems = [[NSMutableArray alloc] init];
@@ -58,14 +62,14 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_left_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_circle_right_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshButtonPressed:)];
-	UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_right_24.png"] style:UIBarButtonItemStylePlain target:nil action:nil];
+	//UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_right_24.png"] style:UIBarButtonItemStylePlain target:nil action:nil];
 	UIBarButtonItem *writeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"pencil_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(writeButtonPressed:)];
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
 	
 	backButton.enabled = YES;
-    forwardButton.enabled = NO;
+    //forwardButton.enabled = NO;
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, forwardButton, writeButton, loginButton, nil]];
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, writeButton, loginButton, nil]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
@@ -74,13 +78,16 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(homeButtonPressed:)];          	
 	self.navigationItem.leftBarButtonItem = homeButton;
+
+	UIImageView *logo = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"aelogica.png"]] autorelease];	
+	self.navigationItem.titleView = logo;	
 	
 	currentView = CategoriesView;
 	
-	self.navigationController.navigationBar.topItem.title = @"Categories";
+	//self.navigationController.navigationBar.topItem.title = @"Categories";	
 	
 	// Initialize our dimmer view
-	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1003.f)];
+	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1024.f)];
 	[dimmer setBackgroundColor:[UIColor blackColor]];
 	[dimmer setAlpha:0.f];
 	
@@ -156,18 +163,6 @@ NSUInteger currentView;
 }
 
 
--(void)changeToCategories:(NSNotification *)pUserInfo { 
-	[currentItems removeAllObjects];
-	[currentItems addObjectsFromArray:categories];
-	[self.tableView reloadData];
-
-	currentView = CategoriesView;
-	self.navigationController.navigationBar.topItem.title = @"Categories";
-	[self changeDetailsTitle:@"Questions"];
-	
-	[self.responsesViewController.view removeFromSuperview];
-}
-
 -(void)changeDetailsTitle:(NSString *)newTitle {
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120.f, 44.f)];	
 	label.textAlignment = UITextAlignmentCenter;
@@ -186,36 +181,57 @@ NSUInteger currentView;
     [items release];
 }
 
+-(void)changeToCategories:(NSNotification *)pUserInfo { 
+	//[questionsViewController.view removeFromSuperview];
+	[self.responsesViewController.view removeFromSuperview];
+	[detailViewController.view addSubview:questionsViewController.view];	
+	
+	//UITableView *newTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
+    //self.tableView = newTableView;	
+	
+	[currentItems removeAllObjects];
+	[currentItems addObjectsFromArray:categories];
+	[self.tableView reloadData];
+
+	currentView = CategoriesView;
+	[self changeDetailsTitle:@"Questions"];	
+}
+
 -(void)changeToTopics:(NSNotification *)pUserInfo { 
 	[currentItems removeAllObjects];
 	[currentItems addObjectsFromArray:topicsViewController.topics];
 	[self.tableView reloadData];
 	
 	currentView = TopicsView;
-	self.navigationController.navigationBar.topItem.title = @"Topics";
 	[self changeDetailsTitle:@"Questions"];
 	
 	[responsesViewController.view removeFromSuperview];
 	
 	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:pass] slug]];
-	[detailViewController.view addSubview:questionsViewController.view];
-	
+	[detailViewController.view addSubview:questionsViewController.view];	
 } 
 
 
 -(void)changeToQuestions:(NSNotification *)pUserInfo { 
+	// Remove all items and replace it with those from the questions
 	[currentItems removeAllObjects];
 	[currentItems addObjectsFromArray:questionsViewController.questions];
-
-	[self.tableView reloadData];
+	[self.tableView reloadData];	
 	
+	//[self.view addSubview:questionsViewController.view];
+	//oldTableView = self.tableView;
+	//self.tableView = questionsViewController.tableView;	
+	
+	// Set current root view to questions
 	currentView = QuestionsView;
-	self.navigationController.navigationBar.topItem.title = @"Questions";
 	[self changeDetailsTitle:@"Responses"];
 	
-	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
-	[responsesViewController fetchResponses: [(Question*)[currentItems objectAtIndex:pass] nuggetId]];	
+	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue]	;
+	[responsesViewController fetchResponses: (Question*)[questionsViewController.questions objectAtIndex:pass]];	
+
+	// Show the response view controller
+	[questionsViewController.view removeFromSuperview];
 	[detailViewController.view addSubview:responsesViewController.view];	
 } 
 
@@ -269,7 +285,7 @@ NSUInteger currentView;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Configure the cell.
@@ -289,6 +305,31 @@ NSUInteger currentView;
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	// create the parent view that will hold header Label
+	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(15.0, 0.0, 300.0, 44.0)];
+	
+	// create the button object
+	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.opaque = NO;
+	headerLabel.textColor = UIColorFromRGB(0x104E8B);
+	headerLabel.highlightedTextColor = [UIColor whiteColor];
+	headerLabel.font = [UIFont boldSystemFontOfSize:20];
+	headerLabel.frame = CGRectMake(15.0, 0.0, 300.0, 44.0);
+	
+	// If you want to align the header text as centered
+	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
+	
+	headerLabel.text = @"Categories";
+	[customView addSubview:headerLabel];
+	
+	return customView;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 44.0;
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -346,11 +387,13 @@ NSUInteger currentView;
 
 	if(currentView == CategoriesView) {		
 		//[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
+		[questionsViewController.questions removeAllObjects];
+		[questionsViewController setCurrentPage:1];
 		[questionsViewController fetchQuestions: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];
 	} else if (currentView == TopicsView) {
 		[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:indexPath.row] slug]];
 	} else if (currentView == QuestionsView) {
-		[responsesViewController fetchResponses: [(Question*)[currentItems objectAtIndex:indexPath.row] nuggetId]];	
+		[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
 	}
 		
 }	

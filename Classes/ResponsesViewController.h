@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class Question;
+
 @interface ResponsesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	NSMutableArray *responses;
+	
+	Question *currentQuestion;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray *responses;
+@property(nonatomic, retain) Question *currentQuestion;
 
--(void)fetchResponses:(NSString *) slug;
+-(void)fetchResponses:(Question *) question;
 
 @end

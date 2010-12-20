@@ -26,18 +26,15 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
-	NSLog(@"loadview...");
-	
 	CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-	UIView *view = [[UIView alloc] initWithFrame: CGRectMake(0,0,1034,778)];
+	UIView *view = [[UIView alloc] initWithFrame: CGRectMake(0,0,778,1034)];
 	
 	//view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
 	self.view = view;
-	[view release];
-	
+	[view release];	
 
 	splashImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash.jpg"]];
-	splashImageView.frame = CGRectMake(0, 0, 1034, 778);
+	splashImageView.frame = CGRectMake(0, 0, 778, 1034);
 	[self.view addSubview: splashImageView];
 	[splashImageView release];
 	
@@ -46,19 +43,19 @@
     switch (orientation) {
         case UIInterfaceOrientationPortrait:		
 			view.transform = CGAffineTransformMakeRotation(6.28f);
-			splashImageView.frame = CGRectMake(0, 0, 778, 1034);
-			view.frame = CGRectMake(0,0,778,1034);
 			break;
         case UIInterfaceOrientationPortraitUpsideDown:
 			view.transform = CGAffineTransformMakeRotation(3.14f);
-			splashImageView.frame = CGRectMake(0, 0, 778, 1034);
-			view.frame = CGRectMake(0,0,778,1034);
 			break;
 		case UIInterfaceOrientationLandscapeLeft:
 			view.transform = CGAffineTransformMakeRotation(4.71f);
+			splashImageView.frame = CGRectMake(0, 0, 1034, 778);
+			view.frame = CGRectMake(0,0,1034,778);
 			break;
 		case UIInterfaceOrientationLandscapeRight:
 			view.transform = CGAffineTransformMakeRotation(1.57f);
+			splashImageView.frame = CGRectMake(0, 0, 1034, 778);
+			view.frame = CGRectMake(0,0,1034,778);
             break;
     }
 	

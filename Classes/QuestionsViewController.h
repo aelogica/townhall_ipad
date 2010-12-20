@@ -11,10 +11,14 @@
 
 @interface QuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	NSMutableArray *questions;
+	NSInteger currentPage;
+	NSString *currentSlug;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray *questions;
+@property(nonatomic, assign) NSInteger currentPage;
+@property(nonatomic, assign) NSString *currentSlug;
 
 -(void)fetchQuestions:(NSString *) slug;
 

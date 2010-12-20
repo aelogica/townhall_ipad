@@ -20,6 +20,7 @@
 	ResponsesViewController *responsesViewController;
 	
 	UIView *dimmer;
+	UITableView *oldTableView;
 
 	NSMutableArray *categories;
 	NSMutableArray *currentItems;
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) NSMutableArray *currentItems;
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic, retain) UIView *dimmer;
+@property (nonatomic, retain) UITableView *oldTableView;
 
 -(void)changeDetailsTitle:(NSString*)newTitle;
 -(void)changeToCategories:(NSNotification *)pUserInfo;

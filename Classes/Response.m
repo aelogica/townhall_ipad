@@ -13,12 +13,12 @@
 
 @synthesize responseId = _responseId;
 @synthesize body= _body;
-//@synthesize originator = _originator;
+@synthesize originator = _originator;
 
 -(void)dealloc{
 	self.responseId = nil;
 	self.body = nil;
-//	self.originator = nil;
+	self.originator = nil;
 	[super dealloc];
 }
 @end

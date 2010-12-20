@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "Originator.h";
-//#import "Votes.h";
+#import "Originator.h";
+#import "Votes.h";
 //#import "CurrentUserVote.h";
 
 
@@ -20,13 +20,14 @@
 	NSString * _categoryName;
 
 	NSString * _body;
-//	Originator * _nuggetOriginator;
-//	Votes * _votes;
+	Originator * _nuggetOriginator;
+	Votes * _votes;
 	NSInteger * _topNuggetVoteCount;
     NSString * _nuggetFlags;
-    NSDate * _dateCreated;
+    NSString * _dateCreated;
 	NSDate * _dateModified;
 	NSMutableArray * _userSpecificTags;
+	NSString *_responseCount;
 	NSMutableArray * _responses;
 	
 }
@@ -37,12 +38,21 @@
 @property(nonatomic, copy) NSString * category;
 @property(nonatomic, copy) NSString * categoryName;
 @property(nonatomic, copy) NSString * body;
-//@property(nonatomic, assign) Originator * nuggetOriginator;
-//@property(nonatomic, assign) Votes * votes;
+@property(nonatomic, assign) Originator * nuggetOriginator;
+@property(nonatomic, assign) Votes * votes;
 @property(nonatomic, assign) NSInteger * topNuggetVoteCount;
 @property(nonatomic, assign) NSString * nuggetFlags;
-@property(nonatomic,copy) NSDate * dateCreated;
+@property(nonatomic,copy) NSString * dateCreated;
 @property(nonatomic,copy) NSDate * dateModified;
 @property(nonatomic, assign)  NSMutableArray * userSpecificTags;
 @property(nonatomic, assign)  NSMutableArray * responses;
+@property(nonatomic, assign)  NSString *responseCount;
+
+-(NSString*)dateCreatedFormatted;
+-(NSString*)dateStringFromString:(NSString *)sourceString
+					  sourceFormat:(NSString *)sourceFormat
+				 destinationFormat:(NSString *)destinationFormat;
+
+
+
 @end

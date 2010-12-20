@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "RootViewController.h"
+#import "GenericTownHallAppDelegate.h"
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
@@ -18,7 +19,7 @@
 
 @implementation DetailViewController
 
-@synthesize toolbar, popoverController, detailItem, detailDescriptionLabel;
+@synthesize toolbar, popoverController, detailItem;
 
 #pragma mark -
 #pragma mark Managing the detail item
@@ -44,7 +45,7 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    detailDescriptionLabel.text = [detailItem description];   
+    //detailDescriptionLabel.text = [detailItem description];   
 }
 
 
@@ -104,6 +105,7 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[self.view setBackgroundColor:UIColorFromRGB(0x8DB6CD)];
 }
 
 
@@ -152,7 +154,6 @@
     [toolbar release];
     
     [detailItem release];
-    [detailDescriptionLabel release];
     [super dealloc];
 }
 

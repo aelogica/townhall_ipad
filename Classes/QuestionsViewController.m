@@ -10,10 +10,11 @@
 #import "Question.h"
 #import "GTMHTTPFetcher.h"
 #import "GenericTownHallAppDelegate.h"
+#import "AsynchImageView.h"
 
 @implementation QuestionsViewController
 
-@synthesize tableView, questions;
+@synthesize tableView, questions, currentPage, currentSlug;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -29,79 +30,23 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+
 	self.questions = [[NSMutableArray alloc] init];
-	
+	self.currentPage = 1;
+
+	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
 	
 	// Create the UI for this view
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 703.f, 126.f) style:UITableViewStyleGrouped];
-	[tableView setDataSource:self];
-	[tableView setDelegate:self];
-	[tableView setBackgroundColor:[UIColor purpleColor]];
-	[self.view addSubview:tableView];	
-	
-	// Create textview and put right after the table view
-	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(.0f, tableView.frame.size.height + tableView.frame.origin.y + 1.f, tableView.frame.size.width, 200.f)];
-	textView.backgroundColor = [UIColor yellowColor];
-	textView.text = @"some txt";
-	textView.tag = 1;
-	//[self.view addSubview:textView];
-	
-	// Create submit button after the text view
-	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];	
-	button.frame = CGRectMake(.0f, textView.frame.size.height + textView.frame.origin.y + 1.f, 100.f, 30.f);
-	[button setTitle:@"Submit" forState:UIControlStateNormal];
-	[button addTarget:self action:@selector(submitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	button.tag = 2;
-	//[self.view addSubview:button];
-	
-	UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];	
-	button2.frame = CGRectMake(.0f, button.frame.size.height + button.frame.origin.y + 1.f, 100.f, 30.f);
-	[button2 setTitle:@"Login" forState:UIControlStateNormal];
-	[button2 addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	button2.tag = 3;
-	//[self.view addSubview:button2];	
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 768.f, 704.f) style:UITableViewStyleGrouped];
+	self.tableView.separatorColor = [UIColor clearColor];
+	[self.tableView setBackgroundView:nil];
+	[self.tableView setDataSource:self];
+	[self.tableView setDelegate:self];
+	[self.view addSubview:self.tableView];		
 	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
-}
-
-
-#pragma mark Event listener methods
-
-
--(void)loginButtonPressed {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/account/authenticate?format=xml", UIAppDelegate.serverBaseUrl]];	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	
-	NSString *post = @"username=mickey&password=karen143";  
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody: postData];
-	
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self
-					didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];	
-}
-
--(void)submitButtonPressed {
-	NSString *slug = @"stem";
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, slug]];	
-	NSLog(@"Posting a question to Url: %@", url);
-	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	
-	NSString *post = @"body=val1&tags=val2&categorySlug=stem";  
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody: postData];
-	
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self
-					didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];	
 }
 
 -(void)orientationChange:(NSNotification *)orientation { 
@@ -110,8 +55,10 @@
 	CGRect f = tableView.frame;
 	if(o == @"Portrait") {		
 		f.size.width = 768.f;		
+		f.size.height = 960.f;
 	} else {		
 		f.size.width = 703.f;
+		f.size.height = 704.f;
 	}
 	tableView.frame = f;		
 }
@@ -124,6 +71,13 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+/*	NSInteger count = [questions count];
+	if( count < self.currentPage * 10 ) {
+		return count;
+	} else {
+		return count + 1;
+	}
+ */
 	return [self.questions count];
 }
 
@@ -133,19 +87,129 @@
     static NSString *CellIdentifier = @"Cell";
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+
+	if( indexPath.row < self.currentPage * 10 ) {
+
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		
+			UILabel *primaryLabel = [[UILabel alloc]init];
+			primaryLabel.textAlignment = UITextAlignmentLeft;
+			primaryLabel.font = [UIFont systemFontOfSize:12];
+
+			primaryLabel.numberOfLines = 0;
+			primaryLabel.lineBreakMode = UILineBreakModeWordWrap;
+			primaryLabel.backgroundColor = [UIColor clearColor];
+			
+			UILabel *secondaryLabel = [[UILabel alloc]init];
+			secondaryLabel.textAlignment = UITextAlignmentLeft;
+			secondaryLabel.font = [UIFont systemFontOfSize:9];
+			secondaryLabel.backgroundColor = [UIColor clearColor];	
+			
+			UILabel *thirdLabel = [[UILabel alloc]init];
+			thirdLabel.textAlignment = UITextAlignmentCenter;
+			thirdLabel.font = [UIFont systemFontOfSize:20];		
+			thirdLabel.textColor = [UIColor blueColor];
+			thirdLabel.backgroundColor = [UIColor clearColor];
+			
+			UILabel *fourthLabel = [[UILabel alloc]init];
+			fourthLabel.textAlignment = UITextAlignmentCenter;
+			fourthLabel.font = [UIFont systemFontOfSize:9];		
+			fourthLabel.textColor = [UIColor blueColor];		
+			fourthLabel.backgroundColor = [UIColor clearColor];
+			
+			[cell.contentView addSubview:primaryLabel];
+			[cell.contentView addSubview:secondaryLabel];
+			[cell.contentView addSubview:thirdLabel];
+			[cell.contentView addSubview:fourthLabel];
+			
+			CGRect frame;
+			frame.size.width=50; frame.size.height=42;
+			frame.origin.x=5; frame.origin.y=3;
+			AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
+			[asyncImage loadImageFromURL:[NSURL URLWithString:@"http://c0030282.cdn.cloudfiles.rackspacecloud.com/empty-avatar-ml.png"]];
+			[cell.contentView addSubview:asyncImage];			
+		}	
+		
+		// Set up the cell...
+		//cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+		//cell.textLabel.text = [(Question *)[questions objectAtIndex:indexPath.row] subject];
+		
+		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
+		UILabel *primary = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
+		UILabel *secondary = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
+		UILabel *third = (UILabel*)[cell.contentView.subviews objectAtIndex:2];	
+		UILabel *fourth = (UILabel*)[cell.contentView.subviews objectAtIndex:3];		
+		CGSize size = [question.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
+		CGRect contentRect = cell.contentView.bounds;
+		CGFloat boundsX = contentRect.origin.x;	
+		
+		CGRect frame = CGRectMake(boundsX+70 ,5, size.width, size.height);
+		primary.frame = frame;	
+		frame= CGRectMake(boundsX+70 ,frame.size.height + frame.origin.y, 500, 15);
+		secondary.frame = frame;	
+		frame = CGRectMake(560, 10, 50, 40);
+		third.frame = frame;	
+		frame = CGRectMake(5, 43, 40, 20);
+		fourth.frame = frame;	
+		
+		primary.text = question.subject;
+		secondary.text = [NSString stringWithFormat:@"Posted by %@ at %@.", question.nuggetOriginator.displayName, @"December 18, 2010"];
+		third.text = [NSString stringWithFormat:@"%@", question.responseCount];
+		fourth.text = [NSString stringWithFormat:@"%@ pts", question.nuggetOriginator.userReputationString];
+		
+		if( [indexPath row] % 2)
+			[cell setBackgroundColor:[UIColor whiteColor]];
+		else
+			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];
+		
+	}
 	
-    // Set up the cell...
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-	cell.textLabel.text = [(Question *)[questions objectAtIndex:indexPath.row] subject];
+	if( indexPath.row == self.currentPage * 10 ) {		
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+		
+		cell.accessoryType = UITableViewCellAccessoryNone;
+	}
+	
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 60.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"pass"];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	// create the parent view that will hold header Label
+	UIView* customView = [[[UIView alloc] init] autorelease];
+	
+ 	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	
+	//the button should be as big as a table view cell
+	[button setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 6, 200, 30)];
+	
+	//set title, font size and font color
+	[button setTitle:@"Show next 10 questions" forState:UIControlStateNormal];
+	[button.titleLabel setFont:[UIFont systemFontOfSize:15]];
+	[button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+	
+	//set action of the button
+	[button addTarget:self action:@selector(showMorePressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	//add the button to the view
+	[customView addSubview:button];
+	
+	return customView;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	return 40.0;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -173,9 +237,17 @@
     [super dealloc];
 }
 
+-(void)showMorePressed:(UIButton *)button {
+	self.currentPage++;
+	[self fetchQuestions: currentSlug];
+}
+
+
 
 -(void)fetchQuestions :(NSString *) slug {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@?format=json", UIAppDelegate.serverDataUrl, slug]];
+	currentSlug = slug;	
+	
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json", UIAppDelegate.serverDataUrl, currentSlug, self.currentPage]];
 	NSLog(@"Fetching questions URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -202,7 +274,7 @@
 		int status = [error code];
 		NSLog(@"Fetch questions failed");
 	} else {
-		[questions removeAllObjects];
+		//[questions removeAllObjects];
 		
 		// Store incoming data into a string
 		NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];
@@ -214,21 +286,23 @@
 		
 		for (NSDictionary *objectInstance in results) {
 			
-			Question *question = [Question alloc];
+			Question *question = [[Question alloc] init];
 			question.subject = [objectInstance objectForKey:@"Subject"];
 			question.body = [objectInstance objectForKey:@"Body"];
 			question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
+			question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
+			question.dateCreated = (NSString*)[objectInstance objectForKey:@"DateCreated"];
+			NSDate *now = [NSDate date];
+			NSLog(@"dated created %@ and now %@", question.dateCreated, now);
 			
-			[self.questions addObject: question];
+
+			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];
+			question.nuggetOriginator.displayName = [nuggetOriginator objectForKey:@"DisplayName"];
+			question.nuggetOriginator.userReputationString = [nuggetOriginator objectForKey:@"UserReputationString"];	
 			
+			[self.questions addObject: question];			
 		}
 		[self.tableView reloadData];		
-		
-		// Adjust table view height
-		CGRect f = tableView.frame;
-		f.size.height = [tableView contentSize].height;
-		tableView.frame = f;		
-		
 	}
 }
 
