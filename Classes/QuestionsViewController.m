@@ -87,6 +87,7 @@
     static NSString *CellIdentifier = @"Cell";
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
 	if( indexPath.row < self.currentPage * 10 ) {
 
@@ -123,9 +124,30 @@
 			[cell.contentView addSubview:thirdLabel];
 			[cell.contentView addSubview:fourthLabel];
 			
+			UIButton *voteUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
+			voteUpButton.frame = CGRectMake(5.0, 2.0, 24.0, 24.0);									
+			voteUpButton.backgroundColor = [UIColor clearColor];
+			voteUpButton.tag = question.nuggetId;
+			[voteUpButton addTarget:self action:@selector(voteUpPressed:) forControlEvents:UIControlEventTouchUpInside];
+			[voteUpButton setImage:[UIImage imageNamed:@"arrow_up_24.png"] forState:UIControlStateNormal];
+			[voteUpButton setImage:[UIImage imageNamed:@"arrow_up_24_on.png"] forState:UIControlStateHighlighted];
+			[voteUpButton setImage:[UIImage imageNamed:@"arrow_up_24_on.png"] forState:UIControlStateSelected];
+			
+			UIButton *voteDownButton = [UIButton buttonWithType:UIButtonTypeCustom];
+			voteDownButton.frame = CGRectMake(5.0, 27, 24.0, 24.0);									
+			voteDownButton.backgroundColor = [UIColor clearColor];
+			voteDownButton.tag = question.nuggetId;
+			[voteDownButton addTarget:self action:@selector(voteDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+			[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24.png"] forState:UIControlStateNormal];
+			[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24_on.png"] forState:UIControlStateHighlighted];
+			[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24_on.png"] forState:UIControlStateSelected];
+			
+			[cell.contentView addSubview:voteUpButton];
+			[cell.contentView addSubview:voteDownButton];
+			
 			CGRect frame;
 			frame.size.width=50; frame.size.height=42;
-			frame.origin.x=5; frame.origin.y=3;
+			frame.origin.x=30.f; frame.origin.y=5;
 			AsyncImageView* asyncImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
 			[asyncImage loadImageFromURL:[NSURL URLWithString:@"http://c0030282.cdn.cloudfiles.rackspacecloud.com/empty-avatar-ml.png"]];
 			[cell.contentView addSubview:asyncImage];			
@@ -135,7 +157,6 @@
 		//cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
 		//cell.textLabel.text = [(Question *)[questions objectAtIndex:indexPath.row] subject];
 		
-		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 		UILabel *primary = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
 		UILabel *secondary = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
 		UILabel *third = (UILabel*)[cell.contentView.subviews objectAtIndex:2];	
@@ -144,13 +165,13 @@
 		CGRect contentRect = cell.contentView.bounds;
 		CGFloat boundsX = contentRect.origin.x;	
 		
-		CGRect frame = CGRectMake(boundsX+70 ,5, size.width, size.height);
+		CGRect frame = CGRectMake(boundsX+80 ,5, size.width, size.height);
 		primary.frame = frame;	
-		frame= CGRectMake(boundsX+70 ,frame.size.height + frame.origin.y, 500, 15);
+		frame= CGRectMake(boundsX+80 ,frame.size.height + frame.origin.y, 500, 15);
 		secondary.frame = frame;	
-		frame = CGRectMake(560, 10, 50, 40);
+		frame = CGRectMake(560, 5, 50, 35);
 		third.frame = frame;	
-		frame = CGRectMake(5, 43, 40, 20);
+		frame = CGRectMake(560, 40, 40, 20);
 		fourth.frame = frame;	
 		
 		primary.text = question.subject;
@@ -175,6 +196,42 @@
 	
     return cell;
 }
+
+-(void)voteUpPressed:(UIButton *)button {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=xml", UIAppDelegate.serverDataUrl, button.tag]];	
+	NSLog(@"Making a vote to Url: %@", url);
+	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	
+	NSString *post = [NSString stringWithFormat:@"nuggetID=%@&isup=TRUE", button.tag];  
+	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
+	
+	[request setHTTPMethod:@"POST"];
+	[request setHTTPBody: postData];
+	
+	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];
+	[button setSelected: YES];
+	
+}
+
+-(void)voteDownPressed:(UIButton *)button {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=xml", UIAppDelegate.serverDataUrl, button.tag]];	
+	NSLog(@"Making a vote to Url: %@", url);
+	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	
+	NSString *post = [NSString stringWithFormat:@"nuggetID=%@&isup=FALSE", button.tag];  
+	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
+	
+	[request setHTTPMethod:@"POST"];
+	[request setHTTPBody: postData];
+	
+	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];
+	[button setSelected: YES];
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return 60.f;
@@ -299,6 +356,10 @@
 			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];
 			question.nuggetOriginator.displayName = [nuggetOriginator objectForKey:@"DisplayName"];
 			question.nuggetOriginator.userReputationString = [nuggetOriginator objectForKey:@"UserReputationString"];	
+			
+			NSDictionary *votesDict = [objectInstance objectForKey:@"Votes"];
+			question.votes.upVotes = [votesDict objectForKey:@"UpVotes"];
+			question.votes.downVotes = [votesDict objectForKey:@"DownVotes"];
 			
 			[self.questions addObject: question];			
 		}
