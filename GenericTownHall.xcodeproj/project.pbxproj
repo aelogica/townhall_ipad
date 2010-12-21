@@ -26,7 +26,7 @@
 		63A3698112BA384D0028AC5B /* aelogica.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A3698012BA384D0028AC5B /* aelogica.png */; };
 		63A369F512BA44E70028AC5B /* pencil_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A369F412BA44E70028AC5B /* pencil_24.png */; };
 		63A369F712BA45550028AC5B /* comment_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A369F612BA45550028AC5B /* comment_24.png */; };
-		63A36A7D12BA51DD0028AC5B /* InputDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A36A7C12BA51DD0028AC5B /* InputDialog.m */; };
+		63A36A7D12BA51DD0028AC5B /* QuestionDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A36A7C12BA51DD0028AC5B /* QuestionDialog.m */; };
 		63A36D9212BB54580028AC5B /* key_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A36D9112BB54580028AC5B /* key_24.png */; };
 		63A36D9612BB549A0028AC5B /* LoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A36D9512BB549A0028AC5B /* LoginDialog.m */; };
 		63A36DEB12BB5F1E0028AC5B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A36DEA12BB5F1E0028AC5B /* QuartzCore.framework */; };
@@ -87,8 +87,8 @@
 		63A3698012BA384D0028AC5B /* aelogica.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aelogica.png; sourceTree = "<group>"; };
 		63A369F412BA44E70028AC5B /* pencil_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_24.png; sourceTree = "<group>"; };
 		63A369F612BA45550028AC5B /* comment_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_24.png; sourceTree = "<group>"; };
-		63A36A7B12BA51DD0028AC5B /* InputDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputDialog.h; sourceTree = "<group>"; };
-		63A36A7C12BA51DD0028AC5B /* InputDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputDialog.m; sourceTree = "<group>"; };
+		63A36A7B12BA51DD0028AC5B /* QuestionDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDialog.h; sourceTree = "<group>"; };
+		63A36A7C12BA51DD0028AC5B /* QuestionDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDialog.m; sourceTree = "<group>"; };
 		63A36D9112BB54580028AC5B /* key_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key_24.png; sourceTree = "<group>"; };
 		63A36D9412BB549A0028AC5B /* LoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDialog.h; sourceTree = "<group>"; };
 		63A36D9512BB549A0028AC5B /* LoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDialog.m; sourceTree = "<group>"; };
@@ -274,8 +274,8 @@
 		63A36D9312BB548C0028AC5B /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
-				63A36A7B12BA51DD0028AC5B /* InputDialog.h */,
-				63A36A7C12BA51DD0028AC5B /* InputDialog.m */,
+				63A36A7B12BA51DD0028AC5B /* QuestionDialog.h */,
+				63A36A7C12BA51DD0028AC5B /* QuestionDialog.m */,
 				63A36D9412BB549A0028AC5B /* LoginDialog.h */,
 				63A36D9512BB549A0028AC5B /* LoginDialog.m */,
 				63764A5E12BF8D4A00F380B5 /* ResponseDialog.h */,
@@ -441,7 +441,7 @@
 				63A44DAA12B77EBA0020FA06 /* Response.m in Sources */,
 				63A44DAD12B780600020FA06 /* Topic.m in Sources */,
 				63A363DA12B8C1B60028AC5B /* MBProgressHUD.m in Sources */,
-				63A36A7D12BA51DD0028AC5B /* InputDialog.m in Sources */,
+				63A36A7D12BA51DD0028AC5B /* QuestionDialog.m in Sources */,
 				63A36D9612BB549A0028AC5B /* LoginDialog.m in Sources */,
 				63C7D62612BB6E1000F18706 /* SplashViewController.m in Sources */,
 				63A56A2512BCDAC200BE6B67 /* Originator.m in Sources */,

@@ -17,7 +17,7 @@
 #import "Question.h"
 #import "globals.h"
 #import "GenericTownHallAppDelegate.h"
-#import "InputDialog.h"
+#import "QuestionDialog.h"
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
 
@@ -129,7 +129,9 @@ NSUInteger currentView;
 	// Dim the background
 	[self.view.window addSubview:dimmer];
 
-	InputDialog *dialog = [[InputDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+
+	QuestionDialog *dialog = [[QuestionDialog alloc] initWithFrameAndQuestion:CGRectMake(0.f, 0.f, 600.f, 400.f) category:(Category *)[categories objectAtIndex:indexPath.row]];
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
 	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
@@ -148,8 +150,10 @@ NSUInteger currentView;
 -(void)responseButtonPressed:(UIBarButtonItem *)button {
 	// Dim the background
 	[self.view.window addSubview:dimmer];
+
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 	
-	ResponseDialog *dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	ResponseDialog *dialog = [[ResponseDialog alloc] initWithFrameAndQuestion:CGRectMake(0.f, 0.f, 600.f, 250.f) question:(Question *)[currentItems objectAtIndex:indexPath.row]];
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
 	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];

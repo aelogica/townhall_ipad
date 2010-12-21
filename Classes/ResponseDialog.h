@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Question;
 
 @interface ResponseDialog : UIView {
-
+	Question *question;
 }
+
+@property(nonatomic, assign) Question *question;
+
+- (id)initWithFrameAndQuestion:(CGRect)frame question: (Question*)aQuestion;
 
 @end

@@ -9,16 +9,39 @@
 #import "ResponseDialog.h"
 #import "GenericTownHallAppDelegate.h"
 #import "GTMHTTPFetcher.h"
+#import "Question.h"
 
 @implementation ResponseDialog
 
+@synthesize question;
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrameAndQuestion:(CGRect)frame question:(Question*)aQuestion {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-		[self setBackgroundColor:UIColorFromRGB(0x87CEFA)];
+		question = aQuestion;
+		
+		[self setBackgroundColor:UIColorFromRGB(0x87CEFA)];		
 		//[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		float padding = 10.f;
+		float navbarHeight = 44.f;
+		
+		CGSize size = [question.body sizeWithFont:[UIFont systemFontOfSize:14.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
+		CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 20.f);
+		CGRect bodyFrame = CGRectMake(padding, navbarHeight + nameFrame.size.height + padding, self.frame.size.width - (padding * 2.f), size.height);
+		
+		UILabel *name = [[UILabel alloc] initWithFrame:nameFrame];
+		name.text = [NSString stringWithFormat:@"Adding response to: %@", question.subject];
+		name.font = [UIFont systemFontOfSize:14.f];		
+		[self addSubview:name];
+		[name release];
+		
+		UILabel *body = [[UILabel alloc] initWithFrame:bodyFrame];
+		body.numberOfLines = 0;
+		body.lineBreakMode = UILineBreakModeWordWrap;
+		body.text = question.body;
+		body.font = [UIFont systemFontOfSize:14.f];
+		[self addSubview:body];
+		[body release];		
 		
 		UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.f, 0.f, self.bounds.size.width, 44.f)];		
 		
@@ -33,7 +56,7 @@
 		[self addSubview:navBar];
 		
 		// Create textview and put right after the table view
-		UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, 44.f + padding, self.frame.size.width - (padding * 2.f), 100.f)];
+		UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, bodyFrame.origin.y + bodyFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 100.f)];
 		textView.backgroundColor = UIColorFromRGB(0x87CEFA);
 		textView.tag = 1;
 		[textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
@@ -50,11 +73,10 @@
 }
 
 - (void)sendButtonPressed: (id)sender {
-	NSString *slug = @"917";
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/responses/for/%@/create", UIAppDelegate.serverDataUrl, slug]];	
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/responses/for/%@/create", UIAppDelegate.serverDataUrl, question.nuggetId]];	
 	NSLog(@"Posting a response to Url: %@", url);
 	
-	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:1];
+	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:3];
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	

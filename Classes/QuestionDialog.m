@@ -6,20 +6,25 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "InputDialog.h"
+#import "QuestionDialog.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GenericTownHallAppDelegate.h"
 #import "GTMHTTPFetcher.h"
+#import "Category.h"
 
-@implementation InputDialog
+@implementation QuestionDialog
 
+@synthesize category;
 
-- (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
+- (id)initWithFrameAndQuestion:(CGRect)frame category: (Category*)aCategory {
+	if ((self = [super initWithFrame:frame])) {
         // Initialization code
+		category = aCategory;
+		
 		[self setBackgroundColor:UIColorFromRGB(0x87CEFA)];
 		//[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		float padding = 10.f;
+		float navbarHeight = 44.f;
 		
 		UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.f, 0.f, self.bounds.size.width, 44.f)];		
 		
@@ -32,9 +37,26 @@
 		[navItem release];
 		
 		[self addSubview:navBar];
+		CGSize size = [category.description sizeWithFont:[UIFont systemFontOfSize:14.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
+		CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 20.f);
+		CGRect bodyFrame = CGRectMake(padding, navbarHeight + nameFrame.size.height + padding, self.frame.size.width - (padding * 2.f), size.height);
+		
+		UILabel *name = [[UILabel alloc] initWithFrame:nameFrame];
+		name.text = [NSString stringWithFormat:@"Adding question to: %@", category.name];
+		name.font = [UIFont systemFontOfSize:14.f];		
+		[self addSubview:name];
+		[name release];
+		
+		UILabel *body = [[UILabel alloc] initWithFrame:bodyFrame];
+		body.numberOfLines = 0;
+		body.lineBreakMode = UILineBreakModeWordWrap;
+		body.text = category.description;
+		body.font = [UIFont systemFontOfSize:14.f];
+		[self addSubview:body];
+		[body release];
 		
 		// Create textview and put right after the table view
-		UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, 44.f + padding, self.frame.size.width - (padding * 2.f), 100.f)];
+		UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, bodyFrame.origin.y + bodyFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 100.f)];
 		textView.backgroundColor = UIColorFromRGB(0x87CEFA);
 		textView.tag = 1;
 		[textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
@@ -50,21 +72,21 @@
 		[textField setBorderStyle: UITextBorderStyleRoundedRect];
 		[textField setPlaceholder:@"Enter tags for this question"];
 		[self addSubview:textField];
+		[textField release];
     }
     return self;
 }
 
 - (void)sendButtonPressed: (id)sender {
-	NSString *slug = @"stem";
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, slug]];	
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, category.slug]];	
 	NSLog(@"Posting a question to Url: %@", url);
 	
-	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:1];
-	UITextField *textField = (UITextField*)[self.subviews objectAtIndex:2];	
+	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:3];
+	UITextField *textField = (UITextField*)[self.subviews objectAtIndex:4];	
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
-	NSString *post = [NSString stringWithFormat:@"body=%@&tags=%@&categorySlug=%@", [textView text], [textField text], @"stem"];  
+	NSString *post = [NSString stringWithFormat:@"body=%@&tags=%@&categorySlug=%@", [textView text], [textField text], category.slug];  
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
 	
 	[request setHTTPMethod:@"POST"];
