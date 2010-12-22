@@ -16,7 +16,7 @@
 
 @synthesize category, topic;
 
-- (id)initWithFrameAndQuestion:(CGRect)frame category: (Topic*)aTopic {
+- (id)initWithFrameAndTopic:(CGRect)frame topic: (Topic*)aTopic {
 	if ((self = [super initWithFrame:frame])) {
         // Initialization code
 		topic = aTopic;

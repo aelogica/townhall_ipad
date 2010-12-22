@@ -20,6 +20,6 @@
 @property(nonatomic, assign) Category *category;
 @property(nonatomic, assign) Topic *topic;
 
-- (id)initWithFrameAndQuestion:(CGRect)frame topic: (Topic*)aTopic;
+- (id)initWithFrameAndTopic:(CGRect)frame topic: (Topic*)aTopic;
 
 @end

@@ -126,7 +126,7 @@ NSUInteger currentView;
 
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
-	QuestionDialog *dialog = [[QuestionDialog alloc] initWithFrameAndQuestion:CGRectMake(0.f, 0.f, 600.f, 400.f) category:(Topic*)[currentItems objectAtIndex:indexPath.row]];
+	QuestionDialog *dialog = [[QuestionDialog alloc] initWithFrameAndTopic:CGRectMake(0.f, 0.f, 600.f, 400.f) topic:(Topic*)[currentItems objectAtIndex:indexPath.row]];
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
 	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
@@ -199,6 +199,7 @@ NSUInteger currentView;
 	NSMutableArray *items = [[detailViewController.toolbar items] mutableCopy];	
 	[items replaceObjectAtIndex:1 withObject:titleButton];
     [detailViewController.toolbar setItems:items animated:YES];
+	[titleButton release];
     [items release];
 }
 
@@ -215,6 +216,7 @@ NSUInteger currentView;
 	[self.tableView reloadData];
 
 	currentView = CategoriesView;	
+	[self changeDetailsTitle:@"Topics"];
 }
 
 -(void)changeToTopics:(NSNotification *)pUserInfo { 
@@ -229,6 +231,7 @@ NSUInteger currentView;
 	
 	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController setCurrentPage:1];
+	[questionsViewController.questions removeAllObjects];
 	[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:pass] slug]];
 	[detailViewController.view addSubview:questionsViewController.view];	
 } 
@@ -318,11 +321,8 @@ NSUInteger currentView;
 	if([obj class] == [Question class]) {
 		cell.textLabel.text = [(Question *)[currentItems objectAtIndex:indexPath.row] subject];
 	} else {
-		[self changeDetailsTitle:@"Topics"];	
 		cell.textLabel.text = [(Category *)[currentItems objectAtIndex:indexPath.row] name];
-	}
-	
-	
+	}	
 
     return cell;
 }
@@ -343,7 +343,14 @@ NSUInteger currentView;
 	// If you want to align the header text as centered
 	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
 	
-	headerLabel.text = @"Categories";
+	if(currentView == CategoriesView) {
+		headerLabel.text = @"Categories";
+	} else if( currentView == TopicsView) {
+		headerLabel.text = @"Topics";
+	}
+	else if( currentView == QuestionsView) {
+		headerLabel.text = @"Questions";
+	}
 	[customView addSubview:headerLabel];
 	
 	return customView;
@@ -412,6 +419,7 @@ NSUInteger currentView;
 		[questionsViewController setCurrentPage:1];
 		[detailViewController.view addSubview:topicsViewController.view];
 		[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
+		[self changeDetailsTitle:@"Topics"];
 		//[questionsViewController fetchQuestions: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];
 	} else if (currentView == TopicsView) {
 		[questionsViewController.questions removeAllObjects];
