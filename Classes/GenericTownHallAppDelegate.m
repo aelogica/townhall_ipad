@@ -49,7 +49,7 @@
 	[window addSubview:progressHUD];
 	progressHUD.center = CGPointMake(384,512);		
  
-	[NSTimer scheduledTimerWithTimeInterval:.5f target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
+	[NSTimer scheduledTimerWithTimeInterval:2.5f target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
 	

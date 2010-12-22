@@ -14,7 +14,7 @@
 
 @implementation QuestionsViewController
 
-@synthesize tableView, questions, currentPage, currentSlug;
+@synthesize tableView, questions, currentPage, currentSlug, currentQuestion;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -242,6 +242,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	currentQuestion = [questions objectAtIndex:indexPath.row];
+	
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"pass"];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
 }

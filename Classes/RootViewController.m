@@ -97,6 +97,7 @@ NSUInteger currentView;
 }
 
 -(void)homeButtonPressed:(UIBarButtonItem *)button {
+	[self changeToCategories:nil];
 }
 
 -(void)loginButtonPressed:(UIBarButtonItem *)button {
@@ -121,6 +122,9 @@ NSUInteger currentView;
 
 
 -(void)writeButtonPressed:(UIBarButtonItem *)button {
+	if(currentView != TopicsView){
+		return;
+	}
 	// Dim the background
 	[self.view.window addSubview:dimmer];
 
@@ -143,6 +147,10 @@ NSUInteger currentView;
 }
 
 -(void)responseButtonPressed:(UIBarButtonItem *)button {
+	if(currentView != QuestionsView){
+		return;
+	}
+	
 	// Dim the background
 	[self.view.window addSubview:dimmer];
 
@@ -175,12 +183,21 @@ NSUInteger currentView;
 	if (currentView == TopicsView) {
 		[self changeToCategories:nil];
 	} else if (currentView == QuestionsView) {
-		//[self changeToCategories:nil];
 		[self changeToTopics:nil];
 	}
 }
 
 -(void)refreshButtonPressed:(UIBarButtonItem *)button {
+	if(currentView == CategoriesView) {	
+		//[self changeToTopics:nil];
+	} else if( currentView == TopicsView) {
+		[questionsViewController setCurrentPage:1];
+		[questionsViewController.questions removeAllObjects];                                           
+		[questionsViewController fetchQuestions: questionsViewController.currentSlug];		
+	}
+	else if( currentView == QuestionsView) {
+		[responsesViewController fetchResponses:questionsViewController.currentQuestion];	
+	}
 }
 
 
@@ -204,8 +221,8 @@ NSUInteger currentView;
 }
 
 -(void)changeToCategories:(NSNotification *)pUserInfo { 
+	[responsesViewController.view removeFromSuperview];
 	[questionsViewController.view removeFromSuperview];
-	//[responsesViewController.view removeFromSuperview];
 	[detailViewController.view addSubview:topicsViewController.view];	
 	
 	//UITableView *newTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
@@ -226,8 +243,9 @@ NSUInteger currentView;
 	
 	currentView = TopicsView;
 	[self changeDetailsTitle:@"Questions"];
-	
+
 	[topicsViewController.view removeFromSuperview];
+	[responsesViewController.view removeFromSuperview];
 	
 	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController setCurrentPage:1];
