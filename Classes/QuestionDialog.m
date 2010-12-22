@@ -10,16 +10,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GenericTownHallAppDelegate.h"
 #import "GTMHTTPFetcher.h"
-#import "Category.h"
+#import "Topic.h"
 
 @implementation QuestionDialog
 
-@synthesize category;
+@synthesize category, topic;
 
-- (id)initWithFrameAndQuestion:(CGRect)frame category: (Category*)aCategory {
+- (id)initWithFrameAndQuestion:(CGRect)frame category: (Topic*)aTopic {
 	if ((self = [super initWithFrame:frame])) {
         // Initialization code
-		category = aCategory;
+		topic = aTopic;
 		
 		[self setBackgroundColor:UIColorFromRGB(0x87CEFA)];
 		//[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -37,12 +37,12 @@
 		[navItem release];
 		
 		[self addSubview:navBar];
-		CGSize size = [category.description sizeWithFont:[UIFont systemFontOfSize:14.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
+		CGSize size = [topic.description sizeWithFont:[UIFont systemFontOfSize:14.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 20.f);
 		CGRect bodyFrame = CGRectMake(padding, navbarHeight + nameFrame.size.height + padding, self.frame.size.width - (padding * 2.f), size.height);
 		
 		UILabel *name = [[UILabel alloc] initWithFrame:nameFrame];
-		name.text = [NSString stringWithFormat:@"Adding question to: %@", category.name];
+		name.text = [NSString stringWithFormat:@"Adding question to: %@", topic.name];
 		name.font = [UIFont systemFontOfSize:14.f];		
 		[self addSubview:name];
 		[name release];
@@ -50,7 +50,7 @@
 		UILabel *body = [[UILabel alloc] initWithFrame:bodyFrame];
 		body.numberOfLines = 0;
 		body.lineBreakMode = UILineBreakModeWordWrap;
-		body.text = category.description;
+		body.text = topic.description;
 		body.font = [UIFont systemFontOfSize:14.f];
 		[self addSubview:body];
 		[body release];
@@ -78,7 +78,7 @@
 }
 
 - (void)sendButtonPressed: (id)sender {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, category.slug]];	
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, topic.slug]];	
 	NSLog(@"Posting a question to Url: %@", url);
 	
 	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:3];
@@ -86,7 +86,7 @@
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
-	NSString *post = [NSString stringWithFormat:@"body=%@&tags=%@&categorySlug=%@", [textView text], [textField text], category.slug];  
+	NSString *post = [NSString stringWithFormat:@"body=%@&tags=%@&categorySlug=%@", [textView text], [textField text], topic.slug];  
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
 	
 	[request setHTTPMethod:@"POST"];

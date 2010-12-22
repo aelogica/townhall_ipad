@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>ServerBaseUrl</key>
-	<string>http://test.synt.socialrally.com</string>
+	<string>http://townhall2.cloudapp.net</string>
 	<key>ServerDataUrl</key>
-	<string>http://test.synt.socialrally.com/org/askarne/forum/askarne</string>
+	<string>http://townhall2.cloudapp.net</string>
 </dict>
 </plist>

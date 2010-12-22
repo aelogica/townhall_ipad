@@ -38,7 +38,7 @@
 	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
 	
 	// Create the UI for this view
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 768.f, 704.f) style:UITableViewStyleGrouped];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 703.f, 704.f) style:UITableViewStyleGrouped];
 	self.tableView.separatorColor = [UIColor clearColor];
 	[self.tableView setBackgroundView:nil];
 	[self.tableView setDataSource:self];
@@ -160,7 +160,9 @@
 		UILabel *primary = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
 		UILabel *secondary = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
 		UILabel *third = (UILabel*)[cell.contentView.subviews objectAtIndex:2];	
-		UILabel *fourth = (UILabel*)[cell.contentView.subviews objectAtIndex:3];		
+		UILabel *fourth = (UILabel*)[cell.contentView.subviews objectAtIndex:3];	
+		UIButton *voteUp = (UIButton*)[cell.contentView.subviews objectAtIndex:4];	
+		UIButton *voteDown = (UIButton*)[cell.contentView.subviews objectAtIndex:5];		
 		CGSize size = [question.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		CGRect contentRect = cell.contentView.bounds;
 		CGFloat boundsX = contentRect.origin.x;	
@@ -178,6 +180,8 @@
 		secondary.text = [NSString stringWithFormat:@"Posted by %@ at %@.", question.nuggetOriginator.displayName, @"December 18, 2010"];
 		third.text = [NSString stringWithFormat:@"%@", question.responseCount];
 		fourth.text = [NSString stringWithFormat:@"%@ pts", question.nuggetOriginator.userReputationString];
+		[voteUp setSelected: NO];
+		[voteDown setSelected: NO];
 		
 		if( [indexPath row] % 2)
 			[cell setBackgroundColor:[UIColor whiteColor]];

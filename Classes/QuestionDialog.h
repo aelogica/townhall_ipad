@@ -9,14 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class Category;
+@class Topic;
 
 @interface QuestionDialog : UIView {
 	Category *category;
+	Topic *topic;
 
 }
 
 @property(nonatomic, assign) Category *category;
+@property(nonatomic, assign) Topic *topic;
 
-- (id)initWithFrameAndQuestion:(CGRect)frame category: (Category*)aCategory;
+- (id)initWithFrameAndQuestion:(CGRect)frame topic: (Topic*)aTopic;
 
 @end

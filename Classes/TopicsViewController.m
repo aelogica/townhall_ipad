@@ -30,19 +30,19 @@
 - (void)viewDidLoad {	
     [super viewDidLoad];
 
+	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
-	[self.view setBackgroundColor:[UIColor orangeColor]];
 	
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 768.f, 126.f) style:UITableViewStyleGrouped];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 703.f, 704.f) style:UITableViewStyleGrouped];
+	//self.tableView.separatorColor = [UIColor clearColor];
 	[tableView setDataSource:self];
 	[tableView setDelegate:self];
-	[tableView setBackgroundColor:[UIColor purpleColor]];
+	[self.tableView setBackgroundView:nil];
 	[self.view addSubview:tableView];
 	
 	self.topics = [[NSMutableArray alloc] init];
-	[self.tableView.backgroundView setBackgroundColor: [UIColor purpleColor]];
-	
 
+	
 	UINavigationBar *navBar = 	[self.navigationController navigationBar];
 	//UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 768.f, 48.0f)];
 	

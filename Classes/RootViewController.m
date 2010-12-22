@@ -54,11 +54,6 @@ NSUInteger currentView;
 	questionsViewController = [[QuestionsViewController alloc]init];
 	responsesViewController = [[ResponsesViewController alloc]init];
 
-	[detailViewController.view addSubview:questionsViewController.view];
-	
-	UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Microsoft Town Hall Topics"];
-	navItem.hidesBackButton = YES;
-
 	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_left_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
@@ -131,7 +126,7 @@ NSUInteger currentView;
 
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
-	QuestionDialog *dialog = [[QuestionDialog alloc] initWithFrameAndQuestion:CGRectMake(0.f, 0.f, 600.f, 400.f) category:(Category *)[categories objectAtIndex:indexPath.row]];
+	QuestionDialog *dialog = [[QuestionDialog alloc] initWithFrameAndQuestion:CGRectMake(0.f, 0.f, 600.f, 400.f) category:(Topic*)[currentItems objectAtIndex:indexPath.row]];
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
 	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
@@ -178,10 +173,10 @@ NSUInteger currentView;
 
 - (void)backButtonPressed:(UIBarButtonItem *)button {
 	if (currentView == TopicsView) {
-		//[self changeToCategories:nil];
-	} else if (currentView == QuestionsView) {
 		[self changeToCategories:nil];
-		//[self changeToTopics:nil];
+	} else if (currentView == QuestionsView) {
+		//[self changeToCategories:nil];
+		[self changeToTopics:nil];
 	}
 }
 
@@ -208,9 +203,9 @@ NSUInteger currentView;
 }
 
 -(void)changeToCategories:(NSNotification *)pUserInfo { 
-	//[questionsViewController.view removeFromSuperview];
-	[self.responsesViewController.view removeFromSuperview];
-	[detailViewController.view addSubview:questionsViewController.view];	
+	[questionsViewController.view removeFromSuperview];
+	//[responsesViewController.view removeFromSuperview];
+	[detailViewController.view addSubview:topicsViewController.view];	
 	
 	//UITableView *newTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
     //self.tableView = newTableView;	
@@ -219,8 +214,7 @@ NSUInteger currentView;
 	[currentItems addObjectsFromArray:categories];
 	[self.tableView reloadData];
 
-	currentView = CategoriesView;
-	[self changeDetailsTitle:@"Questions"];	
+	currentView = CategoriesView;	
 }
 
 -(void)changeToTopics:(NSNotification *)pUserInfo { 
@@ -231,9 +225,10 @@ NSUInteger currentView;
 	currentView = TopicsView;
 	[self changeDetailsTitle:@"Questions"];
 	
-	[responsesViewController.view removeFromSuperview];
+	[topicsViewController.view removeFromSuperview];
 	
 	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
+	[questionsViewController setCurrentPage:1];
 	[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:pass] slug]];
 	[detailViewController.view addSubview:questionsViewController.view];	
 } 
@@ -323,6 +318,7 @@ NSUInteger currentView;
 	if([obj class] == [Question class]) {
 		cell.textLabel.text = [(Question *)[currentItems objectAtIndex:indexPath.row] subject];
 	} else {
+		[self changeDetailsTitle:@"Topics"];	
 		cell.textLabel.text = [(Category *)[currentItems objectAtIndex:indexPath.row] name];
 	}
 	
@@ -411,12 +407,15 @@ NSUInteger currentView;
 	//[categories removeObjectAtIndex:indexPath.row];
 	//[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
-	if(currentView == CategoriesView) {		
-		//[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
+	if(currentView == CategoriesView) {			
 		[questionsViewController.questions removeAllObjects];
 		[questionsViewController setCurrentPage:1];
-		[questionsViewController fetchQuestions: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];
+		[detailViewController.view addSubview:topicsViewController.view];
+		[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
+		//[questionsViewController fetchQuestions: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];
 	} else if (currentView == TopicsView) {
+		[questionsViewController.questions removeAllObjects];
+		[questionsViewController setCurrentPage:1];
 		[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:indexPath.row] slug]];
 	} else if (currentView == QuestionsView) {
 		[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
@@ -466,10 +465,11 @@ NSUInteger currentView;
 
 		// Create an array out of the returned json string
 		NSDictionary *results = [jsonString JSONValue];
-		NSArray *allCategories = [results objectForKey:@"CatListModel"];
-		NSLog(@"Fetch responses succeeded. Count: %d", [allCategories count]);
+		//NSArray *allCategories = [results objectForKey:@"CatListModel"];
+		NSLog(@"Fetch responses succeeded. Count: %d", [results count]);
 		
-		for (NSDictionary *objectInstance in allCategories) {
+		//for (NSDictionary *objectInstance in allCategories) {
+		for (NSDictionary *objectInstance in results) {	
 			Category *cat = [Category alloc];
 			cat.name = [objectInstance objectForKey:@"Name"];
 			cat.slug = [objectInstance objectForKey:@"Slug"];
