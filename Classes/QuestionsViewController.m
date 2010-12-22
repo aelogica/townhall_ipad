@@ -310,7 +310,7 @@
 -(void)fetchQuestions :(NSString *) slug {
 	currentSlug = slug;	
 	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json", UIAppDelegate.serverDataUrl, currentSlug, self.currentPage]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=date", UIAppDelegate.serverDataUrl, currentSlug, self.currentPage]];
 	NSLog(@"Fetching questions URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];

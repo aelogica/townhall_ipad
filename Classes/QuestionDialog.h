@@ -21,5 +21,6 @@
 @property(nonatomic, assign) Topic *topic;
 
 - (id)initWithFrameAndTopic:(CGRect)frame topic: (Topic*)aTopic;
+- (NSString *)urlEncodeValue:(NSString *)str;
 
 @end

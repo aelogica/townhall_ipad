@@ -77,6 +77,12 @@
     return self;
 }
 
+- (NSString *)urlEncodeValue:(NSString *)str {
+	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, CFSTR("?=&+"), kCFStringEncodingUTF8);
+	return [result autorelease];
+}
+
+
 - (void)sendButtonPressed: (id)sender {
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, topic.slug]];	
 	NSLog(@"Posting a question to Url: %@", url);
@@ -86,7 +92,7 @@
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
-	NSString *post = [NSString stringWithFormat:@"body=%@&tags=%@&categorySlug=%@", [textView text], [textField text], topic.slug];  
+	NSString *post = [NSString stringWithFormat:@"Body=%@&TagsCommaSeparated=%@&CategorySlug=%@&VideoEmbedUrl=na", [self urlEncodeValue:[textView text]], [self urlEncodeValue:[textField text]], topic.slug];  
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
 	
 	[request setHTTPMethod:@"POST"];

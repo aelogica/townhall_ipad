@@ -64,8 +64,8 @@
 	if( indexPath.row == 0 ) {
 		CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		CGSize bodyTextSize = [currentQuestion.body sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-		
-		return  subjectTextsize.height + bodyTextSize.height + 5.f;
+		NSLog(@"size on heightforRowIndexPath:%.2f", subjectTextsize.height + bodyTextSize.height + 25.f);
+		return subjectTextsize.height + bodyTextSize.height + 35.f;
 		
 	} else {
 		NSString *text = [(Response*)[self.responses objectAtIndex:indexPath.row-1] body];
@@ -130,7 +130,7 @@
 			[bodyLabel release];
 		}
 		UIView *customView = (UIView*)[cell.contentView.subviews objectAtIndex:0];
-		[customView setFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, subjectTextsize.height + 24.f)];
+		[customView setFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, subjectTextsize.height + bodyTextSize.height + 24.f)];
 		
 		UILabel *subject = (UILabel*)[customView.subviews objectAtIndex: 0];
 		UILabel *author = (UILabel*)[customView.subviews objectAtIndex:1];
@@ -140,13 +140,14 @@
 		subject.frame = frame;
 		frame = CGRectMake(15.f ,frame.size.height + frame.origin.y, tableView.frame.size.width, 20.f);
 		author.frame = frame;
-		frame = CGRectMake(10.f ,frame.size.height + frame.origin.y + 10.f, tableView.frame.size.width, bodyTextSize.height);
+		frame = CGRectMake(0.f ,frame.size.height + frame.origin.y + 10.f, tableView.frame.size.width, bodyTextSize.height);
 		body.frame = frame;
 		
 		author.text = [NSString stringWithFormat:@"Posted by %@ at %@ (%@ pts).", currentQuestion.nuggetOriginator.displayName, @"December 18, 2010", currentQuestion.nuggetOriginator.userReputationString];
 		subject.text = currentQuestion.subject;
 		body.text = currentQuestion.body;
 		
+		//[cell setFrame:CGRectMake(.0f, .0f, tableView.frame.size.width, subjectTextsize.height + bodyTextSize.height + 24.f)];
 		return cell;
 
 	} else {
