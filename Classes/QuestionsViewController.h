@@ -17,6 +17,8 @@
 	Question *currentQuestion;
 }
 
+-(void)switchTableViewStyle:(UITableViewStyle)style;
+
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray *questions;
 @property(nonatomic, assign) NSInteger currentPage;

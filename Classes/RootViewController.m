@@ -77,7 +77,8 @@ NSUInteger currentView;
 	self.navigationItem.leftBarButtonItem = homeButton;
 
 	UIImageView *logo = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"aelogica.png"]] autorelease];	
-	self.navigationItem.titleView = logo;	
+	self.navigationItem.title = @"";
+	//self.navigationItem.titleView = logo;	
 	
 	currentView = CategoriesView;
 	
@@ -248,6 +249,7 @@ NSUInteger currentView;
 	[responsesViewController.view removeFromSuperview];
 	
 	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
+	[questionsViewController switchTableViewStyle:UITableViewStyleGrouped];	
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
 	[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:pass] slug]];
@@ -261,7 +263,8 @@ NSUInteger currentView;
 	[currentItems addObjectsFromArray:questionsViewController.questions];
 	[self.tableView reloadData];	
 	
-	//[self.view addSubview:questionsViewController.view];
+	[questionsViewController switchTableViewStyle:UITableViewStylePlain];
+	[self.view addSubview:questionsViewController.view];
 	//oldTableView = self.tableView;
 	//self.tableView = questionsViewController.tableView;	
 	
@@ -273,7 +276,7 @@ NSUInteger currentView;
 	[responsesViewController fetchResponses: (Question*)[questionsViewController.questions objectAtIndex:pass]];	
 
 	// Show the response view controller
-	[questionsViewController.view removeFromSuperview];
+	//[questionsViewController.view removeFromSuperview];
 	[detailViewController.view addSubview:responsesViewController.view];	
 } 
 
