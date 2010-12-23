@@ -1,20 +1,21 @@
 //
-//  QuestionPlainCell.m
+//  QuestionGroupedCell.m
 //  GenericTownHall
 //
 //  Created by David Ang on 12/23/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "QuestionPlainCell.h"
+#import "QuestionGroupedCell.h"
 #import "Question.h"
 #import "AsynchImageView.h"
 #import "GenericTownHallAppDelegate.h"
 #import "GTMHTTPFetcher.h"
 
-@implementation QuestionPlainCell
+@implementation QuestionGroupedCell
 
 @synthesize subject, author, responseCount, userPoints, voteUpButton, voteDownButton, avatarImage;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -68,12 +69,12 @@
 		[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24_on.png"] forState:UIControlStateHighlighted];
 		[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24_on.png"] forState:UIControlStateSelected];
 		
-		//[self.contentView addSubview:voteUpButton];
-		//[self.contentView addSubview:voteDownButton];
+		[self.contentView addSubview:voteUpButton];
+		[self.contentView addSubview:voteDownButton];
 		
 		CGRect frame;
 		frame.size.width=50; frame.size.height=42;
-		frame.origin.x=1.f; frame.origin.y=5;
+		frame.origin.x=30.f; frame.origin.y=5;
 		avatarImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
 		[self.contentView addSubview:avatarImage];	
     }
@@ -124,17 +125,17 @@
 }
 
 -(void)updateCellWithQuestion:(Question*)aQuestion {
-	CGSize size = [aQuestion.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(220.f, MAXFLOAT)];
+	CGSize size = [aQuestion.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 	CGRect contentRect = self.contentView.bounds;
 	CGFloat boundsX = contentRect.origin.x;	
 	
-	CGRect frame = CGRectMake(boundsX+50 ,5, 220.f, size.height);
+	CGRect frame = CGRectMake(boundsX+80 ,5, size.width, size.height);
 	subject.frame = frame;	
-	frame= CGRectMake(boundsX+50 ,frame.size.height + frame.origin.y, 220.f, 15);
+	frame= CGRectMake(boundsX+80 ,frame.size.height + frame.origin.y, 500, 15);
 	author.frame = frame;	
-	frame = CGRectMake(260, 5, 50, 35);
+	frame = CGRectMake(560, 5, 50, 35);
 	responseCount.frame = frame;	
-	frame = CGRectMake(260, 40, 40, 20);
+	frame = CGRectMake(560, 40, 40, 20);
 	userPoints.frame = frame;	
 	
 	subject.text = aQuestion.subject;
@@ -147,7 +148,6 @@
 	[voteDownButton setSelected: NO];	
 	
 	[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
-
 }
 
 - (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {

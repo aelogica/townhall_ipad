@@ -84,7 +84,7 @@
 
 
 - (void)sendButtonPressed: (id)sender {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create", UIAppDelegate.serverDataUrl, topic.slug]];	
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/in/%@/create/post", UIAppDelegate.serverDataUrl, topic.slug]];	
 	NSLog(@"Posting a question to Url: %@", url);
 	
 	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:3];
@@ -94,7 +94,9 @@
 	
 	NSString *post = [NSString stringWithFormat:@"Body=%@&TagsCommaSeparated=%@&CategorySlug=%@&VideoEmbedUrl=na", [self urlEncodeValue:[textView text]], [self urlEncodeValue:[textField text]], topic.slug];  
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
+	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+
+	[request setValue:postLength forHTTPHeaderField:@"Content-length"];
 	[request setHTTPMethod:@"POST"];
 	[request setHTTPBody: postData];
 	

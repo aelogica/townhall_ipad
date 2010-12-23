@@ -10,6 +10,7 @@
 #import "Question.h"
 #import "GTMHTTPFetcher.h"
 #import "GenericTownHallAppDelegate.h"
+#import "QuestionGroupedCell.h"
 #import "QuestionPlainCell.h"
 #import "AsynchImageView.h"
 
@@ -94,54 +95,29 @@
 	
     static NSString *CellIdentifier = @"Cell";
 	
-    QuestionPlainCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
 	if( indexPath.row < self.currentPage * 10 ) {
 
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		
+			if(self.tableView.style == UITableViewStyleGrouped) {
+				cell = [[[QuestionGroupedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			} else {
+				cell = [[[QuestionPlainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			}
 				
 		}	
-		
-		// Set up the cell...
-		//cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-		//cell.textLabel.text = [(Question *)[questions objectAtIndex:indexPath.row] subject];
-		
-		UILabel *primary = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
-		UILabel *secondary = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
-		UILabel *third = (UILabel*)[cell.contentView.subviews objectAtIndex:2];	
-		UILabel *fourth = (UILabel*)[cell.contentView.subviews objectAtIndex:3];	
-		UIButton *voteUp = (UIButton*)[cell.contentView.subviews objectAtIndex:4];	
-		UIButton *voteDown = (UIButton*)[cell.contentView.subviews objectAtIndex:5];		
-		CGSize size = [question.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-		CGRect contentRect = cell.contentView.bounds;
-		CGFloat boundsX = contentRect.origin.x;	
-		
-		CGRect frame = CGRectMake(boundsX+80 ,5, size.width, size.height);
-		primary.frame = frame;	
-		frame= CGRectMake(boundsX+80 ,frame.size.height + frame.origin.y, 500, 15);
-		secondary.frame = frame;	
-		frame = CGRectMake(560, 5, 50, 35);
-		third.frame = frame;	
-		frame = CGRectMake(560, 40, 40, 20);
-		fourth.frame = frame;	
-		
-		primary.text = question.subject;
-		secondary.text = [NSString stringWithFormat:@"Posted by %@ at %@.", question.nuggetOriginator.displayName, @"December 18, 2010"];
-		third.text = [NSString stringWithFormat:@"%@", question.responseCount];
-		fourth.text = [NSString stringWithFormat:@"%@ pts", question.nuggetOriginator.userReputationString];
-		[voteUp setSelected: NO];
-		[voteDown setSelected: NO];
+
+		[cell updateCellWithQuestion:question];
 		
 		if( [indexPath row] % 2)
 			[cell setBackgroundColor:[UIColor whiteColor]];
 		else
-			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];
-		
+			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];		
 	}
 	
+	/*
 	if( indexPath.row == self.currentPage * 10 ) {		
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
@@ -149,45 +125,10 @@
 		
 		cell.accessoryType = UITableViewCellAccessoryNone;
 	}
+	 */
 	
     return cell;
 }
-
--(void)voteUpPressed:(UIButton *)button {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=xml", UIAppDelegate.serverDataUrl, button.tag]];	
-	NSLog(@"Making a vote to Url: %@", url);
-	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	
-	NSString *post = [NSString stringWithFormat:@"nuggetID=%@&isup=TRUE", button.tag];  
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody: postData];
-	
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];
-	[button setSelected: YES];
-	
-}
-
--(void)voteDownPressed:(UIButton *)button {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=xml", UIAppDelegate.serverDataUrl, button.tag]];	
-	NSLog(@"Making a vote to Url: %@", url);
-	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	
-	NSString *post = [NSString stringWithFormat:@"nuggetID=%@&isup=FALSE", button.tag];  
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody: postData];
-	
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];
-	[button setSelected: YES];
-}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return 60.f;
@@ -207,7 +148,11 @@
  	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	
 	//the button should be as big as a table view cell
-	[button setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 6, 200, 30)];
+	if(tableView.style == UITableViewStyleGrouped) {
+		[button setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 6.f, 200.f, 30.f)];
+	} else {
+		[button setFrame:CGRectMake(20.f, 6.f, 200.f, 30.f)];
+	}
 	
 	//set title, font size and font color
 	[button setTitle:@"Show next 10 questions" forState:UIControlStateNormal];
@@ -274,8 +219,7 @@
 	[appDelegate.progressHUD showUsingAnimation:YES];
 }
 
-- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
-}
+
 
 - (void)myFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -312,8 +256,10 @@
 			
 
 			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];
+			question.nuggetOriginator.userId = [nuggetOriginator objectForKey:@"UserID"];
 			question.nuggetOriginator.displayName = [nuggetOriginator objectForKey:@"DisplayName"];
 			question.nuggetOriginator.userReputationString = [nuggetOriginator objectForKey:@"UserReputationString"];	
+			question.nuggetOriginator.avatar = [nuggetOriginator objectForKey:@"Avatar"];	
 			
 			NSDictionary *votesDict = [objectInstance objectForKey:@"Votes"];
 			question.votes.upVotes = [votesDict objectForKey:@"UpVotes"];

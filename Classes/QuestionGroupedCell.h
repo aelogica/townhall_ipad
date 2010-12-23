@@ -1,5 +1,5 @@
 //
-//  QuestionPlainCell.h
+//  QuestionGroupedCell.h
 //  GenericTownHall
 //
 //  Created by David Ang on 12/23/10.
@@ -11,7 +11,7 @@
 @class Question;
 @class AsyncImageView;
 
-@interface QuestionPlainCell : UITableViewCell {
+@interface QuestionGroupedCell : UITableViewCell {
 	UILabel *subject;
 	UILabel *author;
 	UILabel *userPoints;
@@ -19,7 +19,6 @@
 	UIButton *voteUpButton;
 	UIButton *voteDownButton;
 	AsyncImageView* avatarImage;
-	
 }
 
 -(void)updateCellWithQuestion:(Question*)aQuestion;
