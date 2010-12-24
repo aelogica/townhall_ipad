@@ -117,6 +117,7 @@
 			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];		
 	}
 	
+	
 	/*
 	if( indexPath.row == self.currentPage * 10 ) {		
 		if (cell == nil) {
