@@ -1,0 +1,250 @@
+    //
+//  CategoriesViewController.m
+//  GenericTownHall
+//
+//  Created by David Ang on 12/28/10.
+//  Copyright 2010 n/a. All rights reserved.
+//
+
+#import "CategoriesViewController.h"
+#import "GTMHTTPFetcher.h"
+#import "Category.h"
+#import "GenericTownHallAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
+@implementation CategoriesViewController
+
+@synthesize categories, tableView;
+
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+/*
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization.
+    }
+    return self;
+}
+*/
+
+
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView {
+	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, 768.f, 1004.f)];
+	[self.view setBackgroundColor:[UIColor clearColor]];	
+	
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, 768.f, 704.f) style:UITableViewStyleGrouped];
+	[tableView setDataSource:self];
+	[tableView setDelegate:self];
+	[tableView setBackgroundView:nil];
+	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+	//[tableView setAlpha:0.5f];
+	//tableView.backgroundColor = [UIColor blackColor];
+	//tableView.opaque = NO;	
+	
+	[self.view addSubview:tableView];
+	
+	categories = [[NSMutableArray alloc] init];
+	
+	
+	UINavigationBar *navBar = 	[self.navigationController navigationBar];
+	//UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 768.f, 48.0f)];
+	
+	UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Microsoft Town Hall Topics"];
+	navItem.hidesBackButton = YES;
+	[navBar pushNavigationItem:navItem animated:NO];
+	[navItem release];
+	
+	[self.view addSubview: navBar];			
+	
+	// Listen to orientaton changes
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
+	
+	UIImage *stepsImage = [UIImage imageNamed:@"steps.png"];
+	UIImageView *stepsImageView = [[UIImageView alloc] initWithImage:stepsImage];
+	[stepsImageView setFrame:CGRectMake(0, 834.f, 768.0, 128.0)];
+	[self.view addSubview:stepsImageView];
+
+	
+	[self fetchCategories];
+	
+}
+
+-(void)orientationChange:(NSNotification *)orientation { 
+	NSString *o = (NSString *)[orientation object];
+	
+	CGRect f = tableView.frame;
+	if(o == @"Portrait") {		
+		f.size.width = 768.f;		
+	} else {		
+		f.size.width = 703.f;
+	}
+	tableView.frame = f;		
+}
+
+#pragma mark Table view methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return [categories count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 100.f;
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+    static NSString *CellIdentifier = @"Cell";
+	
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		
+		UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+		//backView.backgroundColor = [UIColor blackColor];
+		//backView.alpha = 0.5f;		
+		//backView.layer.cornerRadius = 10.f;
+		//cell.backgroundView = backView;
+		cell.backgroundColor = [UIColor blackColor];
+		cell.alpha = 0.5f;
+
+		//cell.opaque = FALSE;
+		
+		// Set cell to transparent background
+		cell.textLabel.backgroundColor = [UIColor clearColor];
+		cell.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:.8];
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		UILabel *box1 = [[UILabel alloc] init];
+		[box1 setFrame:CGRectMake(250.f, 0.f, 200.f, 100.f)];
+		[box1 setBackgroundColor:[UIColor clearColor]];
+		[box1 setTextColor:[UIColor redColor]];
+		box1.font = [UIFont systemFontOfSize:22];	
+		//[box1 setOpaque:FALSE];
+		//[box1 setAlpha:0.5f];
+		box1.text =[(Category *)[categories objectAtIndex:indexPath.row] name];
+		[[cell contentView] addSubview:box1];
+		[box1 release];
+		
+		UILabel *secondLabel = [[UILabel alloc] init];
+		[secondLabel setFrame:CGRectMake(480.f, 0.f, 100.f, 100.f)];
+		[secondLabel setBackgroundColor:[UIColor clearColor]];
+		[secondLabel setTextColor:[UIColor greenColor]];
+		secondLabel.font = [UIFont systemFontOfSize:15];	
+		//[box1 setOpaque:FALSE];
+		//[box1 setAlpha:0.5f];
+		secondLabel.text =@"View Topics";
+		[[cell contentView] addSubview:secondLabel];
+		[secondLabel release];
+
+		UIImage *placeHolderImage = [UIImage imageNamed:@"placeholder.png"];
+		UIImageView *placeHolderImageView = [[UIImageView alloc] initWithImage:placeHolderImage];
+		placeHolderImageView.alpha = 0.8f;
+		[placeHolderImageView setFrame:CGRectMake(40.f, 10, 180.0, 76.0)];
+		[cell.contentView addSubview:placeHolderImageView];
+		
+		UIImage *accessoryImage = [UIImage imageNamed:@"icon.png"];
+		UIImageView *accImageView = [[UIImageView alloc] initWithImage:accessoryImage];
+		//accImageView.userInteractionEnabled = YES;
+		[accImageView setFrame:CGRectMake(0, 0, 133.0, 102.0)];
+		cell.accessoryView = accImageView;
+		[accImageView release];
+    }
+	
+    // Set up the cell...
+     //cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+	 //cell.textLabel.text = [(Category *)[categories objectAtIndex:indexPath.row] name];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"pass"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToCategories" object:nil userInfo:userInfo];
+}
+
+
+/*
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+*/
+
+/*
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations.
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+*/
+
+- (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc. that aren't in use.
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+
+- (void)dealloc {
+    [super dealloc];
+}
+
+
+-(void)fetchCategories{
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/categories/all?format=json", UIAppDelegate.serverDataUrl]];
+	NSLog(@"Fetching top categories URL: %@", url);
+	
+	NSURLRequest *request = [NSURLRequest requestWithURL:url];
+	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(myFetcher:finishedWithData:error:)];	
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	[appDelegate.progressHUD showUsingAnimation:YES];
+}
+
+
+
+- (void)myFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
+	if (error != nil) {
+		// failed; either an NSURLConnection error occurred, or the server returned
+		// a status value of at least 300
+		//
+		// the NSError domain string for server status errors is kGTMHTTPFetcherStatusDomain
+		int status = [error code];
+		NSLog(@"Fetch failed");
+	} else {
+		// Store incoming data into a string
+		NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];
+		
+		// Create an array out of the returned json string
+		NSDictionary *results = [jsonString JSONValue];
+		//NSArray *allCategories = [results objectForKey:@"CatListModel"];
+		NSLog(@"Fetch responses succeeded. Count: %d", [results count]);
+		
+		//for (NSDictionary *objectInstance in allCategories) {
+		for (NSDictionary *objectInstance in results) {	
+			Category *cat = [Category alloc];
+			cat.name = [objectInstance objectForKey:@"Name"];
+			cat.slug = [objectInstance objectForKey:@"Slug"];
+			cat.description = [objectInstance objectForKey:@"Description"];
+			
+			[categories addObject: cat];
+		}
+		[self.tableView reloadData];
+	}
+}
+
+
+@end
