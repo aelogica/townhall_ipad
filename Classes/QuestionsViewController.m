@@ -93,40 +93,42 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Cell1";
+    static NSString *CellIdentifier2 = @"Cell2";
 	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	UITableViewCell *cell = nil;
 	Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
-	if( indexPath.row < self.currentPage * 10 ) {
+	// Depending on the current view, if the questions are showing up on the left side it will be using UITableViewStylePlain
+	if(self.tableView.style == UITableViewStyleGrouped) {
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];	
+		if (cell == nil) {					
+			cell = [[[QuestionGroupedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+			
+	} else {
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];	
 
-		if (cell == nil) {
-			if(self.tableView.style == UITableViewStyleGrouped) {
-				cell = [[[QuestionGroupedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-			} else {
-				cell = [[[QuestionPlainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-			}
-				
-		}	
-
-		[cell updateCellWithQuestion:question];
-		
-		if( [indexPath row] % 2)
-			[cell setBackgroundColor:[UIColor whiteColor]];
-		else
-			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];		
-	}
-	
-	
-	/*
-	if( indexPath.row == self.currentPage * 10 ) {		
-		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		if (cell == nil) {					
+			cell = [[[QuestionPlainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
 		}
 		
-		cell.accessoryType = UITableViewCellAccessoryNone;
 	}
-	 */
+	/*
+	if( indexPath.row < self.currentPage * 10 ) {
+	} else {
+	}
+	*/
+
+	[cell updateCellWithQuestion:question];
+
+	if( [indexPath row] % 2) {
+		[cell setBackgroundColor:[UIColor whiteColor]];
+	} else {
+		[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];		
+	}
+
+	cell.accessoryType = UITableViewCellAccessoryNone;
 	
     return cell;
 }
@@ -252,8 +254,8 @@
 			question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
 			question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
 			question.dateCreated = (NSString*)[objectInstance objectForKey:@"DateCreated"];
-			NSDate *now = [NSDate date];
-			NSLog(@"dated created %@ and now %@", question.dateCreated, now);
+			//NSDate *now = [NSDate date];
+			//NSLog(@"dated created %@ and now %@", question.dateCreated, now);
 			
 
 			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];

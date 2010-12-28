@@ -23,7 +23,7 @@
         // Initialization code.
 		subject = [[UILabel alloc]init];
 		subject.textAlignment = UITextAlignmentLeft;
-		subject.font = [UIFont systemFontOfSize:12];
+		subject.font = [UIFont systemFontOfSize:11];
 		
 		subject.numberOfLines = 0;
 		subject.lineBreakMode = UILineBreakModeWordWrap;
@@ -68,8 +68,8 @@
 		[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24_on.png"] forState:UIControlStateHighlighted];
 		[voteDownButton setImage:[UIImage imageNamed:@"arrow_down_24_on.png"] forState:UIControlStateSelected];
 		
-		//[self.contentView addSubview:voteUpButton];
-		//[self.contentView addSubview:voteDownButton];
+		[self.contentView addSubview:voteUpButton];
+		[self.contentView addSubview:voteDownButton];
 		
 		CGRect frame;
 		frame.size.width=50; frame.size.height=42;
@@ -124,13 +124,13 @@
 }
 
 -(void)updateCellWithQuestion:(Question*)aQuestion {
-	CGSize size = [aQuestion.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(220.f, MAXFLOAT)];
+	CGSize size = [aQuestion.subject sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(180.f, 50.f)];
 	CGRect contentRect = self.contentView.bounds;
 	CGFloat boundsX = contentRect.origin.x;	
 	
-	CGRect frame = CGRectMake(boundsX+50 ,5, 220.f, size.height);
+	CGRect frame = CGRectMake(boundsX+50, 0, 220.f, size.height);
 	subject.frame = frame;	
-	frame= CGRectMake(boundsX+50 ,frame.size.height + frame.origin.y, 220.f, 15);
+	frame = CGRectMake(boundsX+50 ,frame.size.height + frame.origin.y, 220.f, 15);
 	author.frame = frame;	
 	frame = CGRectMake(260, 5, 50, 35);
 	responseCount.frame = frame;	
@@ -141,10 +141,10 @@
 	author.text = [NSString stringWithFormat:@"Posted by %@ at %@.", aQuestion.nuggetOriginator.displayName, @"December 18, 2010"];
 	responseCount.text = [NSString stringWithFormat:@"%@", aQuestion.responseCount];
 	userPoints.text = [NSString stringWithFormat:@"%@ pts", aQuestion.nuggetOriginator.userReputationString];
-	voteUpButton.tag = aQuestion.nuggetId;
-	voteDownButton.tag = aQuestion.nu ggetId;
-	[voteUpButton setSelected: NO];
-	[voteDownButton setSelected: NO];	
+	//voteUpButton.tag = (int)aQuestion.nuggetId;
+	//voteDownButton.tag = (int)aQuestion.nuggetId;
+	//[voteUpButton setSelected: NO];
+	//[voteDownButton setSelected: NO];	
 	
 	[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
 

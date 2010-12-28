@@ -92,11 +92,13 @@
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
-	NSString *post = [NSString stringWithFormat:@"Body=%@&TagsCommaSeparated=%@&CategorySlug=%@&VideoEmbedUrl=na", [self urlEncodeValue:[textView text]], [self urlEncodeValue:[textField text]], topic.slug];  
+	NSString *post = [NSString stringWithFormat:@"Body=%@&TagsCommaSeparated=%@&CategorySlug=%@", [self urlEncodeValue:[textView text]], [self urlEncodeValue:[textField text]], topic.slug];  
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
 
 	[request setValue:postLength forHTTPHeaderField:@"Content-length"];
+	[request setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+	
 	[request setHTTPMethod:@"POST"];
 	[request setHTTPBody: postData];
 	

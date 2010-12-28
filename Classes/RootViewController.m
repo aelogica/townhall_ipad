@@ -277,7 +277,7 @@ NSUInteger currentView;
 	[self.tableView reloadData];	
 	
 	[questionsViewController switchTableViewStyle:UITableViewStylePlain];
-	[self.view addSubview:questionsViewController.view];
+	[self.view addSubview:questionsViewController.view];	
 	//oldTableView = self.tableView;
 	//self.tableView = questionsViewController.tableView;	
 	
