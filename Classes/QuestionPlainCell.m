@@ -142,7 +142,7 @@
 	responseCount.text = [NSString stringWithFormat:@"%@", aQuestion.responseCount];
 	userPoints.text = [NSString stringWithFormat:@"%@ pts", aQuestion.nuggetOriginator.userReputationString];
 	voteUpButton.tag = aQuestion.nuggetId;
-	voteDownButton.tag = aQuestion.nuggetId;
+	voteDownButton.tag = aQuestion.nu ggetId;
 	[voteUpButton setSelected: NO];
 	[voteDownButton setSelected: NO];	
 	
