@@ -154,6 +154,15 @@
 }
 
 - (void)dealloc {
+	/*
+	[subject dealloc];
+	[author dealloc];
+	[responseCount dealloc];
+	[userPoints dealloc];
+	[voteUpButton dealloc];
+	[voteDownButton dealloc];
+	[avatarImage dealloc];	
+	 */
     [super dealloc];
 }
 

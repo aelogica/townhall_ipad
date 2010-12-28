@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class DetailViewController;
+@class CategoriesViewController;
 @class TopicsViewController;
 @class QuestionsViewController;
 @class ResponsesViewController;
 
 @interface RootViewController : UITableViewController {
     DetailViewController *detailViewController;
-	TopicsViewController *topicsViewController;
+	CategoriesViewController *categoriesViewController;
+	TopicsViewController *topicsViewController;	
 	QuestionsViewController *questionsViewController;
 	ResponsesViewController *responsesViewController;
 	
@@ -27,6 +29,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, retain) IBOutlet CategoriesViewController *categoriesViewController;
 @property (nonatomic, retain) IBOutlet TopicsViewController *topicsViewController;
 @property (nonatomic, retain) IBOutlet QuestionsViewController *questionsViewController;
 @property (nonatomic, retain) IBOutlet ResponsesViewController *responsesViewController;

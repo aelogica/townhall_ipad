@@ -51,8 +51,7 @@
 	[navBar pushNavigationItem:navItem animated:NO];
 	[navItem release];
 
-	[self.view addSubview: navBar];	
-	
+	[self.view addSubview: navBar];		
 	
 	
 	// Listen to orientaton changes

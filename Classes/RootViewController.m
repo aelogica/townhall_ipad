@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "DetailViewController.h"
+#import "CategoriesViewController.h"
 #import "TopicsViewController.h"
 #import "QuestionsViewController.h"
 #import "ResponsesViewController.h"
@@ -24,6 +25,7 @@
 @implementation RootViewController
 
 @synthesize detailViewController;
+@synthesize categoriesViewController;
 @synthesize topicsViewController;
 @synthesize questionsViewController, responsesViewController;
 @synthesize categories, currentItems;
@@ -50,6 +52,7 @@ NSUInteger currentView;
 	categories = [[NSMutableArray alloc] init];
 	currentItems = [[NSMutableArray alloc] init];
 
+    categoriesViewController = [[CategoriesViewController alloc]init];
     topicsViewController = [[TopicsViewController alloc]init];
 	questionsViewController = [[QuestionsViewController alloc]init];
 	responsesViewController = [[ResponsesViewController alloc]init];
@@ -65,6 +68,8 @@ NSUInteger currentView;
 	
 	backButton.enabled = YES;
     //forwardButton.enabled = NO;
+	
+	/* experimental */
 	
 	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, writeButton, loginButton, responseButton, nil]];
 	
@@ -88,13 +93,17 @@ NSUInteger currentView;
 	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1024.f)];
 	[dimmer setBackgroundColor:[UIColor blackColor]];
 	[dimmer setAlpha:0.f];
-	
+	/*
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/categories/all?format=json", UIAppDelegate.serverDataUrl]];
 	NSLog(@"Fetching top categories URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
 	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(myFetcher:finishedWithData:error:)];
+	 */
+	
+	[detailViewController.view addSubview:categoriesViewController.view];
+	
 }
 
 -(void)homeButtonPressed:(UIBarButtonItem *)button {
@@ -222,19 +231,23 @@ NSUInteger currentView;
 }
 
 -(void)changeToCategories:(NSNotification *)pUserInfo { 
+	[categoriesViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
 	[questionsViewController.view removeFromSuperview];
-	[detailViewController.view addSubview:topicsViewController.view];	
 	
 	//UITableView *newTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
     //self.tableView = newTableView;	
 	
 	[currentItems removeAllObjects];
-	[currentItems addObjectsFromArray:categories];
+	[currentItems addObjectsFromArray:categoriesViewController.categories];
 	[self.tableView reloadData];
 
 	currentView = CategoriesView;	
 	[self changeDetailsTitle:@"Topics"];
+
+	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue]	;
+	[topicsViewController fetchTopics: [(Category*)[categoriesViewController.categories objectAtIndex:pass] slug]];		
+	[detailViewController.view addSubview:topicsViewController.view];	
 }
 
 -(void)changeToTopics:(NSNotification *)pUserInfo { 
@@ -436,12 +449,7 @@ NSUInteger currentView;
 	//[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
 	if(currentView == CategoriesView) {			
-		[questionsViewController.questions removeAllObjects];
-		[questionsViewController setCurrentPage:1];
-		[detailViewController.view addSubview:topicsViewController.view];
 		[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
-		[self changeDetailsTitle:@"Topics"];
-		//[questionsViewController fetchQuestions: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];
 	} else if (currentView == TopicsView) {
 		[questionsViewController.questions removeAllObjects];
 		[questionsViewController setCurrentPage:1];
@@ -479,39 +487,6 @@ NSUInteger currentView;
 	[responsesViewController release];
     [super dealloc];
 }
-
-- (void)myFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
-	if (error != nil) {
-		// failed; either an NSURLConnection error occurred, or the server returned
-		// a status value of at least 300
-		//
-		// the NSError domain string for server status errors is kGTMHTTPFetcherStatusDomain
-		int status = [error code];
-		NSLog(@"Fetch failed");
-	} else {
-		// Store incoming data into a string
-		NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];
-
-		// Create an array out of the returned json string
-		NSDictionary *results = [jsonString JSONValue];
-		//NSArray *allCategories = [results objectForKey:@"CatListModel"];
-		NSLog(@"Fetch responses succeeded. Count: %d", [results count]);
-		
-		//for (NSDictionary *objectInstance in allCategories) {
-		for (NSDictionary *objectInstance in results) {	
-			Category *cat = [Category alloc];
-			cat.name = [objectInstance objectForKey:@"Name"];
-			cat.slug = [objectInstance objectForKey:@"Slug"];
-			cat.description = [objectInstance objectForKey:@"Description"];
-
-			[categories addObject: cat];
-		}
-		[currentItems addObjectsFromArray:categories];
-		[self.tableView reloadData];
-	}
-}
-
-
 
 
 @end

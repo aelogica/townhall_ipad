@@ -106,6 +106,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.view setBackgroundColor:UIColorFromRGB(0x8DB6CD)];
+	
+	UIImageView* background = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]] autorelease];
+	[background setFrame:CGRectMake(0, 44.f, 768.0, 960.0)];
+	[self.view addSubview:background];
 }
 
 
