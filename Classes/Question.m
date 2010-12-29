@@ -35,6 +35,7 @@
     return self;
 }
 
+// does not work 12/29/10
 -(NSString*)dateStringFromString:(NSString*)sourceString
 					  sourceFormat:(NSString *)sourceFormat
 				 destinationFormat:(NSString *)destinationFormat

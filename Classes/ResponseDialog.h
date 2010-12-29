@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseDialog.h"
 
 @class Question;
 
-@interface ResponseDialog : UIView {
+@interface ResponseDialog : BaseDialog {
 	Question *question;
 }
 

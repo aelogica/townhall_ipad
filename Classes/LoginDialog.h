@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseDialog.h"
 
-
-@interface LoginDialog : UIView {
+@interface LoginDialog : BaseDialog {
 
 }
 

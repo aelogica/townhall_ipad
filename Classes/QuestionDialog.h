@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseDialog.h"
 
 @class Category;
 @class Topic;
 
-@interface QuestionDialog : UIView {
+@interface QuestionDialog : BaseDialog {
 	Category *category;
 	Topic *topic;
 

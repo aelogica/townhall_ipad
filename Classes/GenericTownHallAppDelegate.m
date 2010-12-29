@@ -122,6 +122,11 @@
     [super dealloc];
 }
 
+CGFloat DegreesToRadians(CGFloat degrees)
+{
+	return degrees * M_PI / 180;
+};
+
 
 @end
 

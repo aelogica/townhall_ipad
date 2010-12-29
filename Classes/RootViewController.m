@@ -19,6 +19,7 @@
 #import "Question.h"
 #import "globals.h"
 #import "GenericTownHallAppDelegate.h"
+#import "BaseDialog.h"
 #import "QuestionDialog.h"
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
@@ -123,6 +124,7 @@ NSUInteger currentView;
 	[self.view.window addSubview:dimmer];
 	
 	LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	[dialog setupView:nil];
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
 	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
@@ -138,10 +140,6 @@ NSUInteger currentView;
 	[dialog release];
 }
 
-CGFloat DegreesToRadians(CGFloat degrees)
-{
-	return degrees * M_PI / 180;
-};
 
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
@@ -153,13 +151,16 @@ CGFloat DegreesToRadians(CGFloat degrees)
 	[self.view.window addSubview:dimmer];
 	
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
-	UIView *dialog = nil;
+	BaseDialog *dialog = nil;
 	
 	if(currentView == TopicsView){
-		dialog = [[QuestionDialog alloc] initWithFrameAndTopic:CGRectMake(0.f, 0.f, 600.f, 400.f) topic:(Topic*)[currentItems objectAtIndex:indexPath.row]];
+		dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
+		[dialog setupView:(Topic*)[currentItems objectAtIndex:indexPath.row]];
 	} else if (currentView == QuestionsView) {
-		dialog = [[ResponseDialog alloc] initWithFrameAndQuestion:CGRectMake(0.f, 0.f, 600.f, 250.f) question:(Question *)[currentItems objectAtIndex:indexPath.row]];
+		dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+		[dialog setupView:(Question*)[currentItems objectAtIndex:indexPath.row]];
 	}
+	
 
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
@@ -167,18 +168,14 @@ CGFloat DegreesToRadians(CGFloat degrees)
     switch (detailViewController.currentOrientation) {
         case UIInterfaceOrientationPortrait:		
 			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
-			NSLog(@"portrait");
 			break;
         case UIInterfaceOrientationPortraitUpsideDown:
-						NSLog(@"portrait upside down");
 			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
 			break;
 		case UIInterfaceOrientationLandscapeLeft:
-						NSLog(@"landscape left");
 			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
 			break;
 		case UIInterfaceOrientationLandscapeRight:
-						NSLog(@"landscape right");
 			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
             break;
     }

@@ -13,6 +13,7 @@
 #import "QuestionGroupedCell.h"
 #import "QuestionPlainCell.h"
 #import "AsynchImageView.h"
+#import "DetailQuestionCell.h"
 
 @implementation QuestionsViewController
 
@@ -39,14 +40,83 @@
 	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
 	
+	
+	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 100.f)];
+	[headerView setBackgroundColor:[UIColor blackColor]];
+	
+	UILabel *categoryName = [[UILabel alloc] initWithFrame:CGRectMake(270.f, 10.f, 200.f, 25.f)];
+	categoryName.text = @"Motorcycle Category";
+	categoryName.font = [UIFont systemFontOfSize:20];
+	categoryName.backgroundColor = [UIColor clearColor];
+	categoryName.textColor = [UIColor redColor];
+	
+	UIImageView *placeholder1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder_topic_bw.png"]];
+	placeholder1.frame = CGRectMake(40.f, 10.f, 171.0, 77.0);									
+
+	UIImageView *placeholder2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder2.png"]];
+	placeholder2.frame = CGRectMake(540.f, 10.f, 180.0, 76.0);									
+
+	[headerView addSubview:categoryName];
+	[headerView addSubview:placeholder1];
+	[headerView addSubview:placeholder2];
+	[self.view addSubview:headerView];
+	
+	// add toolbar
+	UIToolbar *toolbar = [UIToolbar new];
+	[toolbar setBarStyle:UIBarStyleBlack];
+	[toolbar sizeToFit];
+	[toolbar setFrame: CGRectMake(0, 100.f, 768.f, 50.f)];
+	
+	//Add buttons
+	UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+																				 target:self
+																				 action:@selector(pressButton1:)];
+	
+	UIBarButtonItem *systemItem2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+																				 target:self
+																				 action:@selector(pressButton2:)];
+	
+	UIBarButtonItem *systemItem3 = [[UIBarButtonItem alloc]
+									initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
+									target:self action:@selector(pressButton3:)];
+	
+	//Use this to put space in between your toolbox buttons
+	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																			  target:nil
+																			  action:nil];
+	
+	//Add buttons to the array
+	NSArray *items = [NSArray arrayWithObjects: flexItem, systemItem1, systemItem2, systemItem3, flexItem, nil];
+	
+	//release buttons
+	[systemItem1 release];
+	[systemItem2 release];
+	[systemItem3 release];
+	[flexItem release];
+	
+	//add array of buttons to toolbar
+	[toolbar setItems:items animated:NO];
+	[self.view addSubview:toolbar];
+	
+	
 	// Create the UI for this view
-	[self switchTableViewStyle:UITableViewStyleGrouped];	
+	//[self switchTableViewStyle:UITableViewStylePlain];	
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, 768.f, 804.f) style:UITableViewStylePlain];
+	self.tableView.separatorColor = [UIColor clearColor];
+	//[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
+	[tableView setBackgroundView:nil];
+	[tableView setDataSource:self];
+	[tableView setDelegate:self];	
+	[self.view addSubview:self.tableView];		
+
 	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
 	 
 -(void)switchTableViewStyle:(UITableViewStyle)style {
+	/*
 	[self.tableView removeFromSuperview];
 	[self.tableView release];
 
@@ -56,6 +126,7 @@
 	[self.tableView setDataSource:self];
 	[self.tableView setDelegate:self];	
 	[self.view addSubview:self.tableView];		
+	 */
 }
 
 -(void)orientationChange:(NSNotification *)orientation { 
@@ -96,10 +167,11 @@
     static NSString *CellIdentifier = @"Cell1";
     static NSString *CellIdentifier2 = @"Cell2";
 	
-	UITableViewCell *cell = nil;
+	BaseQuestionCell *cell = nil;
 	Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
 	// Depending on the current view, if the questions are showing up on the left side it will be using UITableViewStylePlain
+	/*
 	if(self.tableView.style == UITableViewStyleGrouped) {
 		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];	
 		if (cell == nil) {					
@@ -113,7 +185,13 @@
 			cell = [[[QuestionPlainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
 		}
 		
+	}*/
+	
+	if (cell == nil) {					
+		cell = [[[DetailQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 	}
+	
+	
 	/*
 	if( indexPath.row < self.currentPage * 10 ) {
 	} else {
@@ -134,7 +212,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 60.f;
+	NSString *text = [(Question*)[self.questions objectAtIndex:indexPath.row] subject];
+	
+	CGSize constraint = CGSizeMake(500.f, MAXFLOAT);
+	
+	CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+	
+	CGFloat height = MAX(size.height, 55.0f);
+	
+	return 105.f;
+	
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -262,11 +349,14 @@
 			question.nuggetOriginator.userId = [nuggetOriginator objectForKey:@"UserID"];
 			question.nuggetOriginator.displayName = [nuggetOriginator objectForKey:@"DisplayName"];
 			question.nuggetOriginator.userReputationString = [nuggetOriginator objectForKey:@"UserReputationString"];	
-			question.nuggetOriginator.avatar = [nuggetOriginator objectForKey:@"Avatar"];	
+			question.nuggetOriginator.avatar = [nuggetOriginator objectForKey:@"Avatar"];			
 			
 			NSDictionary *votesDict = [objectInstance objectForKey:@"Votes"];
-			question.votes.upVotes = [votesDict objectForKey:@"UpVotes"];
-			question.votes.downVotes = [votesDict objectForKey:@"DownVotes"];
+			question.votes.upVotes = [(NSNumber*)[votesDict objectForKey:@"UpVotes"] stringValue];	
+			question.votes.upPercentage = [(NSNumber*)[votesDict objectForKey:@"UpPercentage"] stringValue];	
+			NSLog(question.votes.upPercentage);
+			question.votes.downVotes = [(NSNumber*)[votesDict objectForKey:@"downVotes"] stringValue];	
+			question.votes.downPercentage = [(NSNumber*)[votesDict objectForKey:@"DownPercentage"] stringValue];	
 			
 			[self.questions addObject: question];			
 		}
