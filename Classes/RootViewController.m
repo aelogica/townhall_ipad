@@ -12,6 +12,7 @@
 #import "TopicsViewController.h"
 #import "QuestionsViewController.h"
 #import "ResponsesViewController.h"
+#import "ProfileViewController.h"
 #import "GTMHTTPFetcher.h"
 #import "Category.h"
 #import "Topic.h"
@@ -27,7 +28,7 @@
 @synthesize detailViewController;
 @synthesize categoriesViewController;
 @synthesize topicsViewController;
-@synthesize questionsViewController, responsesViewController;
+@synthesize questionsViewController, responsesViewController, profileViewController;
 @synthesize categories, currentItems;
 @synthesize dimmer;
 @synthesize oldTableView;
@@ -56,20 +57,15 @@ NSUInteger currentView;
     topicsViewController = [[TopicsViewController alloc]init];
 	questionsViewController = [[QuestionsViewController alloc]init];
 	responsesViewController = [[ResponsesViewController alloc]init];
+	profileViewController = [[ProfileViewController alloc]init];
 
 	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_left_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_circle_right_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshButtonPressed:)];
-	//UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_right_24.png"] style:UIBarButtonItemStylePlain target:nil action:nil];
 	UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"comment_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(postButtonPressed:)];
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
 	UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"man_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(profileButtonPressed:)];
-	
-	backButton.enabled = YES;
-    //forwardButton.enabled = NO;
-	
-	/* experimental */
 	
 	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, postButton, loginButton, profileButton, nil]];
 	
@@ -93,16 +89,28 @@ NSUInteger currentView;
 	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1024.f)];
 	[dimmer setBackgroundColor:[UIColor blackColor]];
 	[dimmer setAlpha:0.f];
-	/*
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/categories/all?format=json", UIAppDelegate.serverDataUrl]];
-	NSLog(@"Fetching top categories URL: %@", url);
 	
-	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(myFetcher:finishedWithData:error:)];
-	 */
-	
+	// Set to categories view on launch app
 	[detailViewController.view addSubview:categoriesViewController.view];
+	
+	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+	switch (orientation) {
+        case UIInterfaceOrientationPortrait:		
+			NSLog(@"UIInterfaceOrientationPortrait");
+			break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+			NSLog(@"UIInterfaceOrientationPortraitUpsideDown");
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			NSLog(@"UIInterfaceOrientationLandscapeLeft");		
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			NSLog(@"UIInterfaceOrientationLandscapeRight");          
+			break;
+		default:
+			NSLog(@"Orientation not detected");
+			break;
+    }
 	
 }
 
@@ -130,6 +138,11 @@ NSUInteger currentView;
 	[dialog release];
 }
 
+CGFloat DegreesToRadians(CGFloat degrees)
+{
+	return degrees * M_PI / 180;
+};
+
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
 	if(currentView != TopicsView && currentView != QuestionsView) {
@@ -150,7 +163,26 @@ NSUInteger currentView;
 
 	[dialog setCenter:self.view.window.center];
 	[dialog setAlpha:0.f];
-	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
+	
+    switch (detailViewController.currentOrientation) {
+        case UIInterfaceOrientationPortrait:		
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
+			NSLog(@"portrait");
+			break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+						NSLog(@"portrait upside down");
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+						NSLog(@"landscape left");
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+						NSLog(@"landscape right");
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
+            break;
+    }
+	
 	
 	[self.view.window addSubview:dialog];
 		
@@ -158,12 +190,29 @@ NSUInteger currentView;
 	[UIView setAnimationDuration:.7f];
 	[dimmer setAlpha:0.5f];	
 	[dialog setAlpha:1.f];
-	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(1.57))];
+	switch (detailViewController.currentOrientation) {
+        case UIInterfaceOrientationPortrait:		
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
+			break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+				[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
+            break;
+    }
+
 	[UIView commitAnimations];
 	[dialog release];
 }
 
 -(void)profileButtonPressed:(UIBarButtonItem *)button {
+	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Sorry feature unavaialble yet." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
+    [alert show];
+	//[detailViewController.view addSubview:profileViewController.view];
 }
 
 -(void)dialogClose:(NSNotification *)pUserInfo { 

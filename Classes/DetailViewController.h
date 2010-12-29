@@ -14,10 +14,13 @@
     UIToolbar *toolbar;
     
     id detailItem;
+
+	UIInterfaceOrientation currentOrientation;
 }
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 @property (nonatomic, retain) id detailItem;
+@property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
 
 @end

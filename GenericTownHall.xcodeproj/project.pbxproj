@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		194D356012CB101F00E3111B /* man_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 194D355F12CB101F00E3111B /* man_24.png */; };
+		194D357612CB15C500E3111B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D357512CB15C500E3111B /* ProfileViewController.m */; };
 		19AB49CC12C9C62500441D37 /* backround.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AB49CB12C9C62500441D37 /* backround.png */; };
 		19AB49ED12C9C77700441D37 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AB49EC12C9C77700441D37 /* CategoriesViewController.m */; };
 		19AB4B0512C9D36A00441D37 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AB4B0412C9D36A00441D37 /* icon.png */; };
@@ -74,6 +75,8 @@
 
 /* Begin PBXFileReference section */
 		194D355F12CB101F00E3111B /* man_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man_24.png; sourceTree = "<group>"; };
+		194D357412CB15C500E3111B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		194D357512CB15C500E3111B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		19AB49CB12C9C62500441D37 /* backround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backround.png; path = DESIGN/backround.png; sourceTree = "<group>"; };
 		19AB49EB12C9C77700441D37 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
 		19AB49EC12C9C77700441D37 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				63A44D5312B7778B0020FA06 /* ResponsesViewController.xib */,
 				63C7D62412BB6E1000F18706 /* SplashViewController.h */,
 				63C7D62512BB6E1000F18706 /* SplashViewController.m */,
+				194D357412CB15C500E3111B /* ProfileViewController.h */,
+				194D357512CB15C500E3111B /* ProfileViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -514,6 +519,7 @@
 				6398741212C3539300CB5944 /* QuestionPlainCell.m in Sources */,
 				6398747E12C368FD00CB5944 /* QuestionGroupedCell.m in Sources */,
 				19AB49ED12C9C77700441D37 /* CategoriesViewController.m in Sources */,
+				194D357612CB15C500E3111B /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

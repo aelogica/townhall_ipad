@@ -51,7 +51,7 @@
  
 	[NSTimer scheduledTimerWithTimeInterval:2.5f target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];	
 	
     return YES;
 }

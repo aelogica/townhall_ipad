@@ -19,7 +19,7 @@
 
 @implementation DetailViewController
 
-@synthesize toolbar, popoverController, detailItem;
+@synthesize toolbar, popoverController, detailItem, currentOrientation;
 
 #pragma mark -
 #pragma mark Managing the detail item
@@ -89,6 +89,8 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"OrientationChange" object:@"Landscape" userInfo:nil];
 		NSLog(@"Details view width: %.2f height: %.2f", self.view.frame.size.width, self.view.frame.size.height);
     }
+	
+	currentOrientation = toInterfaceOrientation;
 }
 
 

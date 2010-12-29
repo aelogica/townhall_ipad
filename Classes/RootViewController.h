@@ -13,6 +13,7 @@
 @class TopicsViewController;
 @class QuestionsViewController;
 @class ResponsesViewController;
+@class ProfileViewController;
 
 @interface RootViewController : UITableViewController {
     DetailViewController *detailViewController;
@@ -20,6 +21,7 @@
 	TopicsViewController *topicsViewController;	
 	QuestionsViewController *questionsViewController;
 	ResponsesViewController *responsesViewController;
+	ProfileViewController *profileViewController;
 	
 	UIView *dimmer;
 	UITableView *oldTableView;
@@ -33,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet TopicsViewController *topicsViewController;
 @property (nonatomic, retain) IBOutlet QuestionsViewController *questionsViewController;
 @property (nonatomic, retain) IBOutlet ResponsesViewController *responsesViewController;
+@property (nonatomic, retain) IBOutlet ProfileViewController *profileViewController;
 @property (nonatomic, retain) NSMutableArray *currentItems;
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic, retain) UIView *dimmer;
