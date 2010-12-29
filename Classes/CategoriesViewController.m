@@ -106,39 +106,35 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		
 		UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-		//backView.backgroundColor = [UIColor blackColor];
-		//backView.alpha = 0.5f;		
+		backView.backgroundColor = [UIColor blackColor];
+		backView.alpha = 0.3f;	
+		backView.opaque = NO;
 		//backView.layer.cornerRadius = 10.f;
 		//cell.backgroundView = backView;
-		cell.backgroundColor = [UIColor blackColor];
+		cell.backgroundColor = [UIColor blackColor];		
 		cell.alpha = 0.5f;
-
-		//cell.opaque = FALSE;
+		cell.selectedBackgroundView = backView;
 		
 		// Set cell to transparent background
 		cell.textLabel.backgroundColor = [UIColor clearColor];
 		cell.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:.8];
 		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		
-		UILabel *box1 = [[UILabel alloc] init];
-		[box1 setFrame:CGRectMake(250.f, 0.f, 200.f, 100.f)];
-		[box1 setBackgroundColor:[UIColor clearColor]];
-		[box1 setTextColor:[UIColor redColor]];
-		box1.font = [UIFont systemFontOfSize:22];	
-		//[box1 setOpaque:FALSE];
-		//[box1 setAlpha:0.5f];
-		box1.text =[(Category *)[categories objectAtIndex:indexPath.row] name];
-		[[cell contentView] addSubview:box1];
-		[box1 release];
+		UILabel *firstLabel = [[UILabel alloc] init];
+		[firstLabel setFrame:CGRectMake(250.f, 0.f, 200.f, 100.f)];
+		[firstLabel setBackgroundColor:[UIColor clearColor]];
+		[firstLabel setTextColor:[UIColor redColor]];
+		firstLabel.font = [UIFont systemFontOfSize:22];	
+		firstLabel.text =[(Category *)[categories objectAtIndex:indexPath.row] name];
+		[[cell contentView] addSubview:firstLabel];
+		[firstLabel release];
 		
 		UILabel *secondLabel = [[UILabel alloc] init];
 		[secondLabel setFrame:CGRectMake(480.f, 0.f, 100.f, 100.f)];
 		[secondLabel setBackgroundColor:[UIColor clearColor]];
 		[secondLabel setTextColor:[UIColor greenColor]];
 		secondLabel.font = [UIFont systemFontOfSize:15];	
-		//[box1 setOpaque:FALSE];
-		//[box1 setAlpha:0.5f];
-		secondLabel.text =@"View Topics";
+		secondLabel.text = @"View Topics";
 		[[cell contentView] addSubview:secondLabel];
 		[secondLabel release];
 
