@@ -29,30 +29,19 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {	
     [super viewDidLoad];
-
+	
 	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
 	
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 703.f, 704.f) style:UITableViewStyleGrouped];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, 768.f, 1004.f) style:UITableViewStyleGrouped];
 	//self.tableView.separatorColor = [UIColor clearColor];
+	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[tableView setDataSource:self];
 	[tableView setDelegate:self];
-	[self.tableView setBackgroundView:nil];
+	[tableView setBackgroundView:nil];
 	[self.view addSubview:tableView];
 	
 	self.topics = [[NSMutableArray alloc] init];
-
-	
-	UINavigationBar *navBar = 	[self.navigationController navigationBar];
-	//UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 768.f, 48.0f)];
-	
-	UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Microsoft Town Hall Topics"];
-	navItem.hidesBackButton = YES;
-	[navBar pushNavigationItem:navItem animated:NO];
-	[navItem release];
-
-	[self.view addSubview: navBar];		
-	
 	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
@@ -82,19 +71,72 @@
 	return [topics count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 100.f;
+}
+
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     static NSString *CellIdentifier = @"Cell";
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	Topic *topic = (Topic *)[topics objectAtIndex:indexPath.row];
+	
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		
+		UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+		backView.backgroundColor = [UIColor blackColor];
+		backView.alpha = 0.3f;	
+		backView.opaque = NO;
+		//backView.layer.cornerRadius = 10.f;
+		//cell.backgroundView = backView;
+		cell.backgroundColor = [UIColor blackColor];		
+		cell.alpha = 0.5f;
+		cell.selectedBackgroundView = backView;
+		
+		// Set cell to transparent background
+		cell.textLabel.backgroundColor = [UIColor clearColor];
+		cell.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:.8];
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		UILabel *firstLabel = [[UILabel alloc] init];
+		[firstLabel setFrame:CGRectMake(250.f, 0.f, 300.f, 100.f)];
+		[firstLabel setBackgroundColor:[UIColor clearColor]];
+		[firstLabel setTextColor:[UIColor redColor]];
+		firstLabel.font = [UIFont systemFontOfSize:22];	
+		firstLabel.text = topic.name;
+		[[cell contentView] addSubview:firstLabel];
+		[firstLabel release];
+		
+		UILabel *secondLabel = [[UILabel alloc] init];
+		[secondLabel setFrame:CGRectMake(400.f, 0.f, 100.f, 100.f)];
+		[secondLabel setBackgroundColor:[UIColor clearColor]];
+		[secondLabel setTextColor:[UIColor greenColor]];
+		secondLabel.font = [UIFont systemFontOfSize:15];	
+		secondLabel.text = @"View Questions";
+		//[[cell contentView] addSubview:secondLabel];
+		[secondLabel release];
+		
+		UIImage *placeHolderImage = [UIImage imageNamed:@"placeholder.png"];
+		UIImageView *placeHolderImageView = [[UIImageView alloc] initWithImage:placeHolderImage];
+		placeHolderImageView.alpha = 0.8f;
+		[placeHolderImageView setFrame:CGRectMake(40.f, 10, 180.0, 76.0)];
+		[cell.contentView addSubview:placeHolderImageView];
+		
+		UIImage *accessoryImage = [UIImage imageNamed:@"icon.png"];
+		UIImageView *accImageView = [[UIImageView alloc] initWithImage:accessoryImage];
+		//accImageView.userInteractionEnabled = YES;
+		[accImageView setFrame:CGRectMake(0, 0, 133.0, 102.0)];
+		cell.accessoryView = accImageView;
+		[accImageView release];
     }
 	
-    // Set up the cell...
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-	cell.textLabel.text = [(Topic *)[topics objectAtIndex:indexPath.row] name];
+	UILabel *name = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
+	[name setFrame:CGRectMake(250.f, 0.f, 300.f, 100.f)];
+	name.text = topic.name;
+	
     return cell;
 }
 
@@ -179,7 +221,7 @@
 			
 		}
 		[self.tableView reloadData];
-		
+		/*
 		[tableView layoutIfNeeded];
 		
 		CGRect f = tableView.frame;
@@ -195,7 +237,7 @@
 		f = button.frame;		
 		f.origin.y = textView.frame.size.height + textView.frame.origin.y + 1.f;
 		button.frame = f;
-		
+		*/
 		
 	}
 }

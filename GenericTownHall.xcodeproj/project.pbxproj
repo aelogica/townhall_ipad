@@ -20,6 +20,7 @@
 		194D38E912CB811200E3111B /* placeholder_topic_bw.png in Resources */ = {isa = PBXBuildFile; fileRef = 194D38E712CB811200E3111B /* placeholder_topic_bw.png */; };
 		194D38EA12CB811200E3111B /* placeholder2.png in Resources */ = {isa = PBXBuildFile; fileRef = 194D38E812CB811200E3111B /* placeholder2.png */; };
 		1995F8C212CC607600C557BF /* ResponseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995F8C112CC607600C557BF /* ResponseCell.m */; };
+		1995F97E12CC818D00C557BF /* bg-tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 1995F97D12CC818D00C557BF /* bg-tile.png */; };
 		19AB49CC12C9C62500441D37 /* backround.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AB49CB12C9C62500441D37 /* backround.png */; };
 		19AB49ED12C9C77700441D37 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AB49EC12C9C77700441D37 /* CategoriesViewController.m */; };
 		19AB4B0512C9D36A00441D37 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AB4B0412C9D36A00441D37 /* icon.png */; };
@@ -107,6 +108,7 @@
 		194D38E812CB811200E3111B /* placeholder2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder2.png; path = DESIGN/placeholder2.png; sourceTree = "<group>"; };
 		1995F8C012CC607600C557BF /* ResponseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseCell.h; sourceTree = "<group>"; };
 		1995F8C112CC607600C557BF /* ResponseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseCell.m; sourceTree = "<group>"; };
+		1995F97D12CC818D00C557BF /* bg-tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg-tile.png"; path = "DESIGN/bg-tile.png"; sourceTree = "<group>"; };
 		19AB49CB12C9C62500441D37 /* backround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backround.png; path = DESIGN/backround.png; sourceTree = "<group>"; };
 		19AB49EB12C9C77700441D37 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
 		19AB49EC12C9C77700441D37 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1995F97D12CC818D00C557BF /* bg-tile.png */,
 				19AB4B9912C9DD4E00441D37 /* background.png */,
 				19AB4B6612C9DA2D00441D37 /* steps.png */,
 				19AB4B2D12C9D71200441D37 /* placeholder.png */,
@@ -539,6 +542,7 @@
 				19EC53FD12CC46D000C307EC /* icon-mostrecent-off.png in Resources */,
 				19EC53FE12CC46D000C307EC /* icon-totalvotes-off.png in Resources */,
 				19EC53FF12CC46D000C307EC /* icon-withresponses-off.png in Resources */,
+				1995F97E12CC818D00C557BF /* bg-tile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -47,10 +47,18 @@ NSUInteger currentView;
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-
-	UITableView *categoriesTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
+	
+	//UIView *backgroundView = [[UIView alloc] initWithFrame: self.view.frame];
+	//backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
+	//[self.view addSubview:backgroundView];
+	//[backgroundView release];
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
+	
+	UITableView *categoriesTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, 300.f, 1000.f) style:UITableViewStyleGrouped] autorelease];
+	categoriesTableView.backgroundColor = [UIColor clearColor];
     self.tableView = categoriesTableView;	
 	
+	[self.tableView setSeparatorColor:[UIColor clearColor]];
 	categories = [[NSMutableArray alloc] init];
 	currentItems = [[NSMutableArray alloc] init];
 
@@ -264,11 +272,16 @@ NSUInteger currentView;
 
 -(void)changeToHome {
 	[currentItems removeAllObjects];
+	[self.tableView reloadData];
 	
+	// remove all view controllers except the categories view controller
 	[responsesViewController.view removeFromSuperview];
 	[questionsViewController.view removeFromSuperview];
 	[topicsViewController.view removeFromSuperview];
+	[profileViewController.view removeFromSuperview];
 	
+	[self changeDetailsTitle:@""];
+
 	[detailViewController.view addSubview:categoriesViewController.view];
 }
 
@@ -419,7 +432,7 @@ NSUInteger currentView;
 	// If you want to align the header text as centered
 	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
 	
-	if(currentView == CategoriesView) {
+	if(currentView == CategoriesView && [currentItems count] > 0) {
 		headerLabel.text = @"Categories";
 	} else if( currentView == TopicsView) {
 		headerLabel.text = @"Topics";

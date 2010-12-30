@@ -45,7 +45,7 @@
 	
 	categories = [[NSMutableArray alloc] init];
 	
-	
+	/*
 	UINavigationBar *navBar = 	[self.navigationController navigationBar];
 	//UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 768.f, 48.0f)];
 	
@@ -54,7 +54,8 @@
 	[navBar pushNavigationItem:navItem animated:NO];
 	[navItem release];
 	
-	[self.view addSubview: navBar];			
+	[self.view addSubview: navBar];	
+	 */
 	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
