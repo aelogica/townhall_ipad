@@ -21,7 +21,8 @@
 	UIImageView *voteUpMeter;
 	UIImageView *voteDownMeter;
 	UIView *voteUpMeterDimmer;
-	UIView *voteDownMeterDimmer;	
+	UIView *voteDownMeterDimmer;
+    UIView *authorBackgroundView;
 	AsyncImageView* avatarImage;
 }
 

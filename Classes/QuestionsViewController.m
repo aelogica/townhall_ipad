@@ -68,17 +68,22 @@
 	[toolbar setFrame: CGRectMake(0, 100.f, 768.f, 50.f)];
 	
 	//Add buttons
-	UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-																				 target:self
-																				 action:@selector(pressButton1:)];
+	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] 
+																	style:UIBarButtonItemStylePlain target:self 
+																   action: nil];
+
+	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] 
+																	style:UIBarButtonItemStylePlain target:self 
+																   action: nil];
+
+	UIBarButtonItem *button3 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-totalvotes-off.png"] 
+																	style:UIBarButtonItemStylePlain target:self 
+																   action: nil];
+
+	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] 
+																	style:UIBarButtonItemStylePlain target:self 
+																   action: nil];
 	
-	UIBarButtonItem *systemItem2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-																				 target:self
-																				 action:@selector(pressButton2:)];
-	
-	UIBarButtonItem *systemItem3 = [[UIBarButtonItem alloc]
-									initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
-									target:self action:@selector(pressButton3:)];
 	
 	//Use this to put space in between your toolbox buttons
 	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -86,12 +91,13 @@
 																			  action:nil];
 	
 	//Add buttons to the array
-	NSArray *items = [NSArray arrayWithObjects: flexItem, systemItem1, systemItem2, systemItem3, flexItem, nil];
+	NSArray *items = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, nil];
 	
 	//release buttons
-	[systemItem1 release];
-	[systemItem2 release];
-	[systemItem3 release];
+	[button1 release];
+	[button2 release];
+	[button3 release];
+	[button4 release];
 	[flexItem release];
 	
 	//add array of buttons to toolbar
@@ -151,14 +157,13 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-/*	NSInteger count = [questions count];
+	// show an extra row at the bottom for the pagination
+	NSInteger count = [questions count];
 	if( count < self.currentPage * 10 ) {
 		return count;
 	} else {
 		return count + 1;
 	}
- */
-	return [self.questions count];
 }
 
 // Customize the appearance of table view cells.
@@ -168,7 +173,6 @@
     static NSString *CellIdentifier2 = @"Cell2";
 	
 	BaseQuestionCell *cell = nil;
-	Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
 	// Depending on the current view, if the questions are showing up on the left side it will be using UITableViewStylePlain
 	/*
@@ -187,23 +191,29 @@
 		
 	}*/
 	
-	if (cell == nil) {					
-		cell = [[[DetailQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-	}
-	
-	
-	/*
 	if( indexPath.row < self.currentPage * 10 ) {
-	} else {
-	}
-	*/
+		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
-	[cell updateCellWithQuestion:question];
+		if (cell == nil) {					
+			cell = [[[DetailQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}		
 
-	if( [indexPath row] % 2) {
-		[cell setBackgroundColor:[UIColor whiteColor]];
+		[cell updateCellWithQuestion:question];
 	} else {
-		[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];		
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
+	
+		UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 60.f)];
+		[backgroundView setBackgroundColor:[UIColor blackColor]];
+		cell.backgroundView = backgroundView;
+		
+		UILabel *label = [[UILabel alloc] init];
+		[label setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 12.f, 200.f, 30.f)];
+		[label setFont:[UIFont systemFontOfSize:16]];
+		[label setTextColor:[UIColor whiteColor]];
+		[label setBackgroundColor:[UIColor clearColor]];
+		[label setText:@"Load more"];
+		[backgroundView addSubview:label];
+		[label release];		
 	}
 
 	cell.accessoryType = UITableViewCellAccessoryNone;
@@ -212,6 +222,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if( indexPath.row < self.currentPage * 10 ) {
 	NSString *text = [(Question*)[self.questions objectAtIndex:indexPath.row] subject];
 	
 	CGSize constraint = CGSizeMake(500.f, MAXFLOAT);
@@ -221,16 +232,25 @@
 	CGFloat height = MAX(size.height, 55.0f);
 	
 	return 105.f;
+	} else {
+		return 60.f;
+	}
 	
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	currentQuestion = [questions objectAtIndex:indexPath.row];
-	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"pass"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
-}
+	if( indexPath.row < self.currentPage * 10 ) {
 
+		currentQuestion = [questions objectAtIndex:indexPath.row];
+		
+		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"pass"];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
+	} else {
+		self.currentPage++;
+		[self fetchQuestions: currentSlug];
+	}
+}
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	// create the parent view that will hold header Label
 	UIView* customView = [[[UIView alloc] init] autorelease];
@@ -261,6 +281,7 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
 	return 40.0;
 }
+*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Overriden to allow any orientation.
@@ -309,7 +330,17 @@
 	[appDelegate.progressHUD showUsingAnimation:YES];
 }
 
-
+- (NSDate*) getDateFromJSON:(NSString *)dateString
+{
+    // Expect date in this format "/Date(1268123281843)/"
+    int startPos = [dateString rangeOfString:@"("].location+1;
+    int endPos = [dateString rangeOfString:@")"].location;
+    NSRange range = NSMakeRange(startPos,endPos-startPos);
+    unsigned long long milliseconds = [[dateString substringWithRange:range] longLongValue];
+    NSLog(@"%llu",milliseconds);
+    NSTimeInterval interval = milliseconds/1000;
+    return [NSDate dateWithTimeIntervalSince1970:interval];
+}
 
 - (void)myFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -340,9 +371,9 @@
 			question.body = [objectInstance objectForKey:@"Body"];
 			question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
 			question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
-			question.dateCreated = (NSString*)[objectInstance objectForKey:@"DateCreated"];
+			question.dateCreated = [self getDateFromJSON:[objectInstance objectForKey:@"DateCreated"]];
 			//NSDate *now = [NSDate date];
-			//NSLog(@"dated created %@ and now %@", question.dateCreated, now);
+			NSLog(@"dated created %@", question.dateCreated);
 			
 
 			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];

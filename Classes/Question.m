@@ -50,18 +50,10 @@
 }
 
 -(NSString*)dateCreatedFormatted {
-	
-	
-   //NSString *inputDateString = @"2007-08-11T19:30:00Z";
-//     NSString *inputDateString = @"2010-10-01T18:27:40.077";
-
-	NSString *outputDateString = [self dateStringFromString:self.dateCreated
-											   sourceFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"
-										  destinationFormat:@"h:mm:ssa 'on' MMMM d, yyyy"];
-    
-	return self.dateCreated;
-
- }
+	NSDateFormatter *format = [[NSDateFormatter alloc] init];
+	[format setDateFormat:@"MMM dd, yyyy h:mm a"];
+	return [format stringFromDate:self.dateCreated];
+}
  
 
 -(void)dealloc{

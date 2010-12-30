@@ -24,7 +24,10 @@
         // Initialization code.
 		UIView *backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 		backgroundView.backgroundColor = UIColorFromRGB(0x77a236);		
-		self.backgroundView = backgroundView;
+		self.backgroundView = backgroundView;		
+		
+		authorBackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];		
+		authorBackgroundView.backgroundColor = UIColorFromRGB(0x54811c);			
 		
 		subject = [[UILabel alloc]init];
 		subject.textAlignment = UITextAlignmentLeft;
@@ -37,7 +40,7 @@
 		author = [[UILabel alloc]init];
 		author.textAlignment = UITextAlignmentLeft;
 		author.font = [UIFont systemFontOfSize:16];
-		author.backgroundColor = UIColorFromRGB(0x54811c);;	
+		author.backgroundColor = [UIColor clearColor];
 		
 		responseCount = [[UILabel alloc]init];
 		responseCount.textAlignment = UITextAlignmentCenter;
@@ -52,6 +55,7 @@
 		userPoints.backgroundColor = [UIColor clearColor];
 		
 		[self.contentView addSubview:subject];
+		[self.contentView addSubview:authorBackgroundView];
 		[self.contentView addSubview:author];
 		//[self.contentView addSubview:userPoints];
 		//[self.contentView addSubview:responseCount];
@@ -157,9 +161,14 @@
 	CGRect contentRect = self.bounds;
 	CGFloat boundsX = contentRect.origin.x;	
 	
-	CGRect frame = CGRectMake(0, 0, 500.f, 80.f);
+	CGRect frame = CGRectMake(10.f, 0, 500.f, 80.f);
 	subject.frame = frame;	
-	frame = CGRectMake(0 ,frame.size.height + frame.origin.y, 768.f, 25.f);
+	
+	CGFloat authorOriginY = frame.size.height + frame.origin.y;
+	
+	frame = CGRectMake(0.f, authorOriginY, 768.f, 25.f);
+	authorBackgroundView.frame = frame;
+	frame = CGRectMake(10.f, authorOriginY, 768.f, 25.f);
 	author.frame = frame;	
 	frame = CGRectMake(260, 5, 50, 35);
 	responseCount.frame = frame;	
@@ -167,7 +176,7 @@
 	userPoints.frame = frame;	
 	
 	subject.text = aQuestion.subject;
-	author.text = [NSString stringWithFormat:@"Posted by %@ at %@.", aQuestion.nuggetOriginator.displayName, @"December 18, 2010"];
+	author.text = [NSString stringWithFormat:@"Posted by %@ at %@", aQuestion.nuggetOriginator.displayName, aQuestion.dateCreatedFormatted];
 	responseCount.text = [NSString stringWithFormat:@"%@", aQuestion.responseCount];
 	userPoints.text = [NSString stringWithFormat:@"%@ pts", aQuestion.nuggetOriginator.userReputationString];
 	//voteUpButton.tag = (int)aQuestion.nuggetId;
