@@ -147,6 +147,7 @@
 	[voteUpButton setSelected: NO];
 	[voteDownButton setSelected: NO];	
 	
+	
 	[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
 }
 

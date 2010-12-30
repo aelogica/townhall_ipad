@@ -1,15 +1,15 @@
 //
-//  DetailQuestionCell.m
+//  RootViewQuestionCell.m
 //  GenericTownHall
 //
 //  Created by David Ang on 12/29/10.
 //  Copyright 2010 n/a. All rights reserved.
 //
 
-#import "DetailQuestionCell.h"
+#import "RootViewQuestionCell.h"
 
 
-@implementation DetailQuestionCell
+@implementation RootViewQuestionCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     

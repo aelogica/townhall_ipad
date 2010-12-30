@@ -89,7 +89,6 @@
 	[toolbar setItems:items animated:NO];
 	[self.view addSubview:toolbar];
 	
-	
 	// Create the UI for this view
 	//[self switchTableViewStyle:UITableViewStylePlain];	
 	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStylePlain];

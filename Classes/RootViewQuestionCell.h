@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseQuestionCell.h"
 
-@interface DetailQuestionCell : BaseQuestionCell {
+@interface RootViewQuestionCell : BaseQuestionCell {
 
 }
 

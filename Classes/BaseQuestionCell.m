@@ -208,14 +208,15 @@
 	
 	CGRect voteDownFrame;
 	voteDownFrame.size.width=voteDownMeter.frame.size.width - downVoteBarHeight;
-	voteDownFrame.size.height=31.f;
+	voteDownFrame.size.height = 31.f;
 	voteDownFrame.origin.x = voteBarStartX;
 	voteDownFrame.origin.y = voteBarStartY + 33.f;
 	
 	voteUpMeterDimmer.frame = voteUpFrame;
 	voteDownMeterDimmer.frame = voteDownFrame;
 	
-	
+	NSLog(@"cell superview widht: %.2f", self.superview.superview.frame.size.width);
+
 	[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
 	
 }

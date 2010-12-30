@@ -17,7 +17,7 @@
 
 @implementation QuestionsViewController
 
-@synthesize tableView, questions, currentPage, currentSlug, currentQuestion;
+@synthesize tableView, questions, currentPage, currentSlug, currentQuestion, headerView, toolbar;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -43,7 +43,7 @@
 	[self.view setFrame:CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	
 	
-	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 100.f)];
+	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, appDelegate.appWidth, 100.f)];
 	[headerView setBackgroundColor:[UIColor blackColor]];
 	
 	UILabel *categoryName = [[UILabel alloc] initWithFrame:CGRectMake(270.f, 10.f, 200.f, 25.f)];
@@ -64,10 +64,10 @@
 	[self.view addSubview:headerView];
 	
 	// add toolbar
-	UIToolbar *toolbar = [UIToolbar new];
+	toolbar = [UIToolbar new];
 	[toolbar setBarStyle:UIBarStyleBlack];
 	[toolbar sizeToFit];
-	[toolbar setFrame: CGRectMake(0, 100.f, 768.f, 50.f)];
+	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
 	
 	//Add buttons
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] 
@@ -121,6 +121,23 @@
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+	if(rootViewWidth < 400.f) {
+		[headerView setHidden:YES];
+		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
+		[tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, appDelegate.appHeight - 95.f)];
+		
+	}
+	else {
+		[headerView setHidden:NO];
+		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
+		[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f)];
+	}
+}
 	 
 -(void)switchTableViewStyle:(UITableViewStyle)style {
 	/*
@@ -145,6 +162,10 @@
 	f.size.width = appDelegate.appWidth;
 	f.size.height = appDelegate.appHeight - 149.f;	
 	tableView.frame = f;		
+	
+	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 150.f)];
+	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
+	
 
 	[tableView reloadData];
 }
@@ -202,12 +223,12 @@
 	} else {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
 	
-		UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 60.f)];
+		UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 50.f)];
 		[backgroundView setBackgroundColor:[UIColor blackColor]];
 		cell.backgroundView = backgroundView;
 		
 		UILabel *label = [[UILabel alloc] init];
-		[label setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 12.f, 200.f, 30.f)];
+		[label setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 12.f, 200.f, 25.f)];
 		[label setFont:[UIFont systemFontOfSize:16]];
 		[label setTextColor:[UIColor whiteColor]];
 		[label setBackgroundColor:[UIColor clearColor]];

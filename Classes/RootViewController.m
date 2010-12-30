@@ -117,7 +117,7 @@ NSUInteger currentView;
 	currentView = CategoriesView;
 	
 	//self.navigationController.navigationBar.topItem.title = @"Categories";	
-	
+
 	// Initialize our dimmer view
 	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1024.f)];
 	[dimmer setBackgroundColor:[UIColor blackColor]];
@@ -328,7 +328,10 @@ NSUInteger currentView;
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
 	[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:pass] slug]];
+	
 	[detailViewController.view addSubview:questionsViewController.view];	
+	[questionsViewController viewDidAppear:NO];
+
 } 
 
 
@@ -340,6 +343,8 @@ NSUInteger currentView;
 	
 	[questionsViewController switchTableViewStyle:UITableViewStylePlain];
 	[self.view addSubview:questionsViewController.view];	
+	[questionsViewController viewDidAppear:NO];
+
 	//oldTableView = self.tableView;
 	//self.tableView = questionsViewController.tableView;	
 	

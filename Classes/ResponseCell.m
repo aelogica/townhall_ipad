@@ -55,7 +55,7 @@
 	CGSize size = [response.body sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 	
 	
-	CGRect frame = CGRectMake(10.f, 0, 500.f, 80.f);
+	CGRect frame = CGRectMake(10.f, 0, 600.f, 80.f);
 	body.frame = frame;	
 	
 	CGFloat authorOriginY = frame.size.height + frame.origin.y;

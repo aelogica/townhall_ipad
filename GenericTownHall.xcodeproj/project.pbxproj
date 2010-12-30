@@ -10,7 +10,7 @@
 		194D356012CB101F00E3111B /* man_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 194D355F12CB101F00E3111B /* man_24.png */; };
 		194D357612CB15C500E3111B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D357512CB15C500E3111B /* ProfileViewController.m */; };
 		194D365C12CB4FBC00E3111B /* BaseDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D365B12CB4FBC00E3111B /* BaseDialog.m */; };
-		194D375C12CB683100E3111B /* DetailQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D375B12CB683100E3111B /* DetailQuestionCell.m */; };
+		194D375C12CB683100E3111B /* RootViewQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D375B12CB683100E3111B /* RootViewQuestionCell.m */; };
 		194D375F12CB688000E3111B /* BaseQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D375E12CB688000E3111B /* BaseQuestionCell.m */; };
 		194D37F112CB736A00E3111B /* meter_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 194D37ED12CB736A00E3111B /* meter_green.png */; };
 		194D37F212CB736A00E3111B /* meter_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 194D37EE12CB736A00E3111B /* meter_red.png */; };
@@ -96,8 +96,8 @@
 		194D357512CB15C500E3111B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		194D365A12CB4FBC00E3111B /* BaseDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDialog.h; sourceTree = "<group>"; };
 		194D365B12CB4FBC00E3111B /* BaseDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDialog.m; sourceTree = "<group>"; };
-		194D375A12CB683100E3111B /* DetailQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailQuestionCell.h; sourceTree = "<group>"; };
-		194D375B12CB683100E3111B /* DetailQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailQuestionCell.m; sourceTree = "<group>"; };
+		194D375A12CB683100E3111B /* RootViewQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewQuestionCell.h; sourceTree = "<group>"; };
+		194D375B12CB683100E3111B /* RootViewQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewQuestionCell.m; sourceTree = "<group>"; };
 		194D375D12CB688000E3111B /* BaseQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseQuestionCell.h; sourceTree = "<group>"; };
 		194D375E12CB688000E3111B /* BaseQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseQuestionCell.m; sourceTree = "<group>"; };
 		194D37ED12CB736A00E3111B /* meter_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meter_green.png; path = DESIGN/meter_green.png; sourceTree = "<group>"; };
@@ -335,8 +335,8 @@
 				6398741112C3539300CB5944 /* QuestionPlainCell.m */,
 				6398747C12C368FD00CB5944 /* QuestionGroupedCell.h */,
 				6398747D12C368FD00CB5944 /* QuestionGroupedCell.m */,
-				194D375A12CB683100E3111B /* DetailQuestionCell.h */,
-				194D375B12CB683100E3111B /* DetailQuestionCell.m */,
+				194D375A12CB683100E3111B /* RootViewQuestionCell.h */,
+				194D375B12CB683100E3111B /* RootViewQuestionCell.m */,
 				194D375D12CB688000E3111B /* BaseQuestionCell.h */,
 				194D375E12CB688000E3111B /* BaseQuestionCell.m */,
 				1995F8C012CC607600C557BF /* ResponseCell.h */,
@@ -594,7 +594,7 @@
 				19AB49ED12C9C77700441D37 /* CategoriesViewController.m in Sources */,
 				194D357612CB15C500E3111B /* ProfileViewController.m in Sources */,
 				194D365C12CB4FBC00E3111B /* BaseDialog.m in Sources */,
-				194D375C12CB683100E3111B /* DetailQuestionCell.m in Sources */,
+				194D375C12CB683100E3111B /* RootViewQuestionCell.m in Sources */,
 				194D375F12CB688000E3111B /* BaseQuestionCell.m in Sources */,
 				1995F8C212CC607600C557BF /* ResponseCell.m in Sources */,
 				1995FA3112CC8DF300C557BF /* TopicCell.m in Sources */,

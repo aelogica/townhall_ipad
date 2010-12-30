@@ -15,12 +15,17 @@
 	NSInteger currentPage;
 	NSString *currentSlug;
 	Question *currentQuestion;
+	
+	UIView *headerView;
+	UIToolbar *toolbar;
 }
 
 -(void)switchTableViewStyle:(UITableViewStyle)style;
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray *questions;
+@property(nonatomic, retain) UIView *headerView;
+@property(nonatomic, retain) UIToolbar *toolbar;
 @property(nonatomic, assign) NSInteger currentPage;
 @property(nonatomic, assign) NSString *currentSlug;
 @property(nonatomic, assign) Question *currentQuestion;
