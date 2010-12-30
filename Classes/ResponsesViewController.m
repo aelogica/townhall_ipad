@@ -10,7 +10,9 @@
 #import "GTMHTTPFetcher.h"
 #import "GenericTownHallAppDelegate.h"
 #import "Question.h"
+#import "ResponseCell.h"
 #import "Response.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ResponsesViewController
 @synthesize tableView, responses, currentQuestion;
@@ -34,13 +36,68 @@
 	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
 	
+	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 100.f)];
+	[headerView setBackgroundColor:UIColorFromRGB(0xd5d8de)];
+	
+	UILabel *subjectLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.0, 600.f, 50.f)];
+	subjectLabel.backgroundColor = [UIColor clearColor];
+	subjectLabel.numberOfLines = 0;
+	subjectLabel.lineBreakMode = UILineBreakModeWordWrap;
+	subjectLabel.textColor = [UIColor blackColor];
+	subjectLabel.font = [UIFont systemFontOfSize:15];
+	
+	UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 60.f, 600.f, 30.f)];
+	authorLabel.backgroundColor = UIColorFromRGB(0xbdbfc5);
+	authorLabel.textColor = UIColorFromRGB(0x000000);
+	authorLabel.font = [UIFont systemFontOfSize:14];
+	authorLabel.layer.cornerRadius = 4.f;
+	
+	[headerView addSubview:subjectLabel];
+	[headerView addSubview:authorLabel];
+	[self.view addSubview:headerView];
+	
+	// add toolbar
+	UIToolbar *toolbar = [UIToolbar new];
+	[toolbar setBarStyle:UIBarStyleBlack];
+	[toolbar sizeToFit];
+	[toolbar setFrame: CGRectMake(0, 100.f, 768.f, 50.f)];
+	
+	//Add buttons
+	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithTitle:@"Responses" 
+																style:UIBarButtonItemStylePlain target:nil action:nil];
+	
+	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithTitle:@"Post response" 
+																style:UIBarButtonItemStyleBordered target:self action:nil];
+	
+	
+	
+	//Use this to put space in between your toolbox buttons
+	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																			  target:nil
+																			  action:nil];
+	
+	//Add buttons to the array
+	NSArray *items = [NSArray arrayWithObjects: button1, flexItem, button2, nil];
+	
+	//release buttons
+	[button1 release];
+	[button2 release];
+	[flexItem release];
+	
+	//add array of buttons to toolbar
+	[toolbar setItems:items animated:NO];
+	[self.view addSubview:toolbar];
+	
+	
 	// Create the UI for this view
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 703.f, 704.f) style:UITableViewStylePlain];
-	[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-	[self.tableView setBackgroundView:nil];
-	[self.tableView setDataSource:self];
-	[self.tableView setDelegate:self];
-	[self.view addSubview:tableView];	
+	//[self switchTableViewStyle:UITableViewStylePlain];	
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, 768.f, 804.f) style:UITableViewStylePlain];
+	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
+	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
+	[tableView setBackgroundView:nil];
+	[tableView setDataSource:self];
+	[tableView setDelegate:self];	
+	[self.view addSubview:tableView];		
 }
 
 #pragma mark Event listener methods
@@ -57,10 +114,11 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [self.responses count] + 1; // +1 for the header row
+	return [self.responses count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath; {
+	/*
 	if( indexPath.row == 0 ) {
 		CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
 		CGSize bodyTextSize = [currentQuestion.body sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
@@ -68,7 +126,8 @@
 		return subjectTextsize.height + bodyTextSize.height + 35.f;
 		
 	} else {
-		NSString *text = [(Response*)[self.responses objectAtIndex:indexPath.row-1] body];
+		 */
+		NSString *text = [(Response*)[self.responses objectAtIndex:indexPath.row] body];
 		
 		CGSize constraint = CGSizeMake(500.f, MAXFLOAT);
 		
@@ -76,8 +135,8 @@
 		
 		CGFloat height = MAX(size.height, 44.0f);
 		
-		return height + 25.f;
-	}
+		return 105.f;
+	//}
 }
 
 // Customize the appearance of table view cells.
@@ -85,7 +144,7 @@
 	
     static NSString *CellIdentifier = @"Cell";
 	static NSString *CellIdentifier2 = @"Cell2";
-	
+	/*
 	if( indexPath.row == 0 ) {
 		// Construct the header
 		CGSize subjectTextsize = [currentQuestion.subject sizeWithFont:[UIFont systemFontOfSize:15.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
@@ -151,42 +210,16 @@
 		return cell;
 
 	} else {
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	 */
+		ResponseCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell = [[[ResponseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 			
-			UILabel *primaryLabel = [[UILabel alloc]init];
-			primaryLabel.textAlignment = UITextAlignmentLeft;
-			primaryLabel.font = [UIFont systemFontOfSize:12];
-			
-			primaryLabel.numberOfLines = 0;
-			primaryLabel.lineBreakMode = UILineBreakModeWordWrap;
-			primaryLabel.backgroundColor = [UIColor clearColor];
-			
-			UILabel *secondaryLabel = [[UILabel alloc]init];
-			secondaryLabel.textAlignment = UITextAlignmentLeft;
-			secondaryLabel.font = [UIFont systemFontOfSize:9];
-			secondaryLabel.backgroundColor = [UIColor clearColor];	
-			secondaryLabel.textColor = UIColorFromRGB(0xdd0000);
-			
-			[cell.contentView addSubview:primaryLabel];
-			[cell.contentView addSubview:secondaryLabel];
-			[cell.contentView addSubview:[[[UILabel alloc] init] autorelease]];
-			
-		}		
-		Response *response = (Response *)[self.responses objectAtIndex:indexPath.row - 1];
-		UILabel *body = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
-		UILabel *author = (UILabel*)[cell.contentView.subviews objectAtIndex:1];
-		CGSize size = [response.body sizeWithFont:[UIFont systemFontOfSize:12.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-		
-		CGRect frame = CGRectMake(10.f, 0.f, tableView.frame.size.width, 20.f);
-		author.frame = frame;
-		frame = CGRectMake(10.f, frame.origin.y + 20.f, 684.f, size.height);
-		body.frame = frame;	
-		
-		body.text = response.body;
-		author.text = [NSString stringWithFormat:@"Posted by %@ (%@ pts).", response.originator.displayName, response.originator.userReputationString];
+		}	
+	
+		Response *response = (Response *)[self.responses objectAtIndex:indexPath.row];
+		[cell updateCellWithModel:response];		
 		
 
 		if( [indexPath row] % 2)
@@ -195,7 +228,7 @@
 			[cell setBackgroundColor:UIColorFromRGB(0xEDEDED)];
 		
 		return cell;
-	}	
+	//}	
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,6 +261,13 @@
 
 -(void)fetchResponses :(Question *) question {
 	currentQuestion = question;
+	
+	UIView *headerView = (UIView*)[self.view.subviews objectAtIndex:0];
+	UILabel *subject = (UILabel*)[headerView.subviews objectAtIndex:0];
+	UILabel *author = (UILabel*)[headerView.subviews objectAtIndex:1];
+	subject.text = currentQuestion.body;
+	author.text = [NSString stringWithFormat:@"    Posted by %@ at %@ (%@ pts).", currentQuestion.nuggetOriginator.displayName, currentQuestion.dateCreatedFormatted, currentQuestion.nuggetOriginator.userReputationString];
+	
 	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/questions/%@?format=json", UIAppDelegate.serverDataUrl, currentQuestion.nuggetId]];
 	NSLog(@"Fetching responses URL: %@", url);

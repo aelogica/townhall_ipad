@@ -39,7 +39,7 @@
 		
 		author = [[UILabel alloc]init];
 		author.textAlignment = UITextAlignmentLeft;
-		author.font = [UIFont systemFontOfSize:16];
+		author.font = [UIFont systemFontOfSize:14];
 		author.backgroundColor = [UIColor clearColor];
 		
 		responseCount = [[UILabel alloc]init];

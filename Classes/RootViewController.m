@@ -116,7 +116,7 @@ NSUInteger currentView;
 }
 
 -(void)homeButtonPressed:(UIBarButtonItem *)button {
-	[self changeToCategories:nil];
+	[self changeToHome];
 }
 
 -(void)loginButtonPressed:(UIBarButtonItem *)button {
@@ -220,7 +220,9 @@ NSUInteger currentView;
 }
 
 - (void)backButtonPressed:(UIBarButtonItem *)button {
-	if (currentView == TopicsView) {
+	if(currentView == CategoriesView) {
+		[self changeToHome];
+	} else if (currentView == TopicsView) {
 		[self changeToCategories:nil];
 	} else if (currentView == QuestionsView) {
 		[self changeToTopics:nil];
@@ -258,6 +260,16 @@ NSUInteger currentView;
     [detailViewController.toolbar setItems:items animated:YES];
 	[titleButton release];
     [items release];
+}
+
+-(void)changeToHome {
+	[currentItems removeAllObjects];
+	
+	[responsesViewController.view removeFromSuperview];
+	[questionsViewController.view removeFromSuperview];
+	[topicsViewController.view removeFromSuperview];
+	
+	[detailViewController.view addSubview:categoriesViewController.view];
 }
 
 -(void)changeToCategories:(NSNotification *)pUserInfo { 

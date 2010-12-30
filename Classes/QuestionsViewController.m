@@ -108,8 +108,7 @@
 	// Create the UI for this view
 	//[self switchTableViewStyle:UITableViewStylePlain];	
 	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, 768.f, 804.f) style:UITableViewStylePlain];
-	self.tableView.separatorColor = [UIColor clearColor];
-	//[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
 	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
 	[tableView setBackgroundView:nil];
 	[tableView setDataSource:self];
