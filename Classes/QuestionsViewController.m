@@ -336,7 +336,7 @@
     int endPos = [dateString rangeOfString:@")"].location;
     NSRange range = NSMakeRange(startPos,endPos-startPos);
     unsigned long long milliseconds = [[dateString substringWithRange:range] longLongValue];
-    NSLog(@"%llu",milliseconds);
+    //NSLog(@"%llu",milliseconds);
     NSTimeInterval interval = milliseconds/1000;
     return [NSDate dateWithTimeIntervalSince1970:interval];
 }

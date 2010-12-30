@@ -59,12 +59,12 @@ NSUInteger currentView;
 	switch (orientation) {
         case UIInterfaceOrientationPortrait:		
         case UIInterfaceOrientationPortraitUpsideDown:
-			appDelegate.appWidth = 703.f;
+			appDelegate.appWidth = 768.f;
 			appDelegate.appHeight = 1004.f;
 			break;
 		case UIInterfaceOrientationLandscapeLeft:
 		case UIInterfaceOrientationLandscapeRight:
-			appDelegate.appWidth = 768.f;
+			appDelegate.appWidth = 703.f;
 			appDelegate.appHeight = 748.f;
 			break;
 		default:

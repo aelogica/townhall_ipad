@@ -81,15 +81,21 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	
     if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown){
+		appDelegate.appWidth = 768.f;
+		appDelegate.appHeight = 1004.f;
  		[[NSNotificationCenter defaultCenter] postNotificationName:@"OrientationChange" object:@"Portrait" userInfo:nil];
-		NSLog(@"Details view width: %.2f height: %.2f", self.view.frame.size.width, self.view.frame.size.height);		
+		NSLog(@"toPortrait Details view width: %.2f height: %.2f", self.view.frame.size.width, self.view.frame.size.height);		
     }
     else if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft){
+		appDelegate.appWidth = 703.f;
+		appDelegate.appHeight = 704.f;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"OrientationChange" object:@"Landscape" userInfo:nil];
-		NSLog(@"Details view width: %.2f height: %.2f", self.view.frame.size.width, self.view.frame.size.height);
+		NSLog(@"toLandscape Details view width: %.2f height: %.2f", self.view.frame.size.width, self.view.frame.size.height);
     }
-	
+	appDelegate.currentOrientation = toInterfaceOrientation;
 	currentOrientation = toInterfaceOrientation;
 }
 

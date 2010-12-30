@@ -31,10 +31,13 @@
 - (void)viewDidLoad {	
     [super viewDidLoad];
 	
-	[self.view setBackgroundColor:[UIColor clearColor]];
-	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, 768.f, 1004.f) style:UITableViewStyleGrouped];
+	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
+	[self.view setBackgroundColor:[UIColor clearColor]];	
+	
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStyleGrouped];
+	NSLog(@"appwidth:%.2f", appDelegate.appWidth);
 	//self.tableView.separatorColor = [UIColor clearColor];
 	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[tableView setDataSource:self];
@@ -50,14 +53,10 @@
 
 
 -(void)orientationChange:(NSNotification *)orientation { 
-	NSString *o = (NSString *)[orientation object];
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
 	CGRect f = tableView.frame;
-	if(o == @"Portrait") {		
-		f.size.width = 768.f;		
-	} else {		
-		f.size.width = 703.f;
-	}
+	f.size.width = appDelegate.appWidth;
 	tableView.frame = f;		
 }
 
