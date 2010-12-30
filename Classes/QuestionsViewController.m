@@ -19,7 +19,7 @@
 
 @implementation QuestionsViewController
 
-@synthesize tableView, questions, currentPage, currentSlug, currentQuestion, headerView, toolbar, currentTopic;
+@synthesize tableView, questions, currentPage, currentQuestion, headerView, toolbar, currentTopic;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -84,7 +84,7 @@
 	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] 
 																	style:UIBarButtonItemStylePlain target:self action: nil];
 	
-	UIBarButtonItem *button5 = [[UIBarButtonItem alloc] initWithTitle:@"Post question" 
+	postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post question" 
 																style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
 	
 	
@@ -95,14 +95,14 @@
 																			  action:nil];
 	
 	//Add buttons to the array
-	NSArray *items = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, button5, nil];
+	NSArray *items = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, postButton, nil];
 	
 	//release buttons
 	[button1 release];
 	[button2 release];
 	[button3 release];
 	[button4 release];
-	[button5 release];
+	//[button5 release];
 	[flexItem release];
 	
 	//add array of buttons to toolbar
@@ -133,11 +133,21 @@
 		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
 		[tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, appDelegate.appHeight - 95.f)];
 		
+		NSMutableArray * items = [NSMutableArray arrayWithArray:toolbar.items];
+		if([items count] == 7) {
+			[items removeObjectAtIndex:6];
+			[toolbar setItems:items];
+		}
 	}
 	else {
 		[headerView setHidden:NO];
 		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
 		[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f)];
+		NSMutableArray * items = [NSMutableArray arrayWithArray:toolbar.items];
+		if([items count] == 6) {
+			[items insertObject:postButton atIndex:6];
+			[toolbar setItems:items];
+		}
 	}
 	
 	[tableView reloadData];
@@ -297,7 +307,7 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
 	} else {
 		self.currentPage++;
-		[self fetchQuestions: currentSlug];
+		[self fetchQuestions: currentTopic.slug];
 	}
 }
 /*
@@ -360,7 +370,7 @@
 
 -(void)showMorePressed:(UIButton *)button {
 	self.currentPage++;
-	[self fetchQuestions: currentSlug];
+	[self fetchQuestions: currentTopic];
 }
 
 

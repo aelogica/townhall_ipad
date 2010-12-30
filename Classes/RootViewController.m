@@ -96,11 +96,11 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_left_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_circle_right_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshButtonPressed:)];
-	UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"comment_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(postButtonPressed:)];
+	//UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"comment_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(postButtonPressed:)];
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
 	UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"man_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(profileButtonPressed:)];
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, postButton, loginButton, profileButton, nil]];
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, loginButton, profileButton, nil]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
@@ -205,7 +205,7 @@ NSUInteger currentView;
 	} else if( currentView == TopicsView) {
 		[questionsViewController setCurrentPage:1];
 		[questionsViewController.questions removeAllObjects];                                           
-		[questionsViewController fetchQuestions: questionsViewController.currentSlug];		
+		[questionsViewController fetchQuestions: questionsViewController.currentTopic];		
 	}
 	else if( currentView == QuestionsView) {
 		[responsesViewController fetchResponses:questionsViewController.currentQuestion];	
@@ -469,14 +469,14 @@ NSUInteger currentView;
 	//detailViewController.detailItem = 	[NSString stringWithFormat:@"%@", [categories objectAtIndex:indexPath.row]];
    
 	//[categories removeObjectAtIndex:indexPath.row];
-	//[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+	//[self.tableView deleteRowsAtInd exPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
 	if(currentView == CategoriesView) {			
 		[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
 	} else if (currentView == TopicsView) {
 		[questionsViewController.questions removeAllObjects];
 		[questionsViewController setCurrentPage:1];
-		[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:indexPath.row] slug]];
+		[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:indexPath.row]];
 	} else if (currentView == QuestionsView) {
 		[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
 	}

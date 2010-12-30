@@ -14,12 +14,12 @@
 @interface QuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	NSMutableArray *questions;
 	NSInteger currentPage;
-	NSString *currentSlug;
 	Question *currentQuestion;
 	Topic *currrentTopic;
 	
 	UIView *headerView;
 	UIToolbar *toolbar;
+	UIBarButtonItem *postButton;
 }
 
 -(void)switchTableViewStyle:(UITableViewStyle)style;
@@ -29,7 +29,6 @@
 @property(nonatomic, retain) UIView *headerView;
 @property(nonatomic, retain) UIToolbar *toolbar;
 @property(nonatomic, assign) NSInteger currentPage;
-@property(nonatomic, assign) NSString *currentSlug;
 @property(nonatomic, assign) Topic *currentTopic;
 @property(nonatomic, assign) Question *currentQuestion;
 
