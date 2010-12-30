@@ -14,9 +14,14 @@
 	NSMutableArray *responses;
 	
 	Question *currentQuestion;
+	UIView *headerView;
+	UIToolbar *toolbar;
+
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
+@property(nonatomic, retain) UIView *headerView;
+@property(nonatomic, retain) UIToolbar *toolbar;
 @property(nonatomic, retain) NSMutableArray *responses;
 @property(nonatomic, retain) Question *currentQuestion;
 

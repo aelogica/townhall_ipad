@@ -20,7 +20,9 @@
         // Initialization code.
 		UIView *backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 		backgroundView.backgroundColor = UIColorFromRGB(0x77a236);		
-		self.backgroundView = backgroundView;		
+		self.backgroundView = backgroundView;	
+		
+		[self setSelectionStyle: UITableViewCellSelectionStyleNone];
 		
 		UIView *authorBackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];		
 		authorBackgroundView.backgroundColor = UIColorFromRGB(0x54811c);			

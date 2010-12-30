@@ -45,7 +45,7 @@
 	CGRect contentRect = self.bounds;
 	CGFloat boundsX = contentRect.origin.x;	
 	
-	CGRect frame = CGRectMake(10.f, 0, 315.f, 80.f);
+	CGRect frame = CGRectMake(10.f, 0, 310.f, 80.f);
 	subject.frame = frame;	
 	
 	CGFloat authorOriginY = frame.size.height + frame.origin.y;

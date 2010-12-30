@@ -16,12 +16,13 @@
 	id *model;
 	UINavigationBar *navBar;
 	UINavigationItem *navItem;
-	
+	UIView *dimmer;
 }
 
 
 - (void)rightButtonPressed: (id)sender;
 - (void)leftButtonPressed: (id)sender;
+- (void)doAppearAnimation: (UIWindow*)aWindow;
 - (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error;
 
 -(NSString *)getRequestParameters;

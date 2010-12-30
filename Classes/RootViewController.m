@@ -118,10 +118,6 @@ NSUInteger currentView;
 	
 	//self.navigationController.navigationBar.topItem.title = @"Categories";	
 
-	// Initialize our dimmer view
-	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1024.f)];
-	[dimmer setBackgroundColor:[UIColor blackColor]];
-	[dimmer setAlpha:0.f];
 	
 	// Set to categories view on launch app
 	[detailViewController.view addSubview:categoriesViewController.view];
@@ -162,9 +158,6 @@ NSUInteger currentView;
 		return;
 	}
 
-	// Dim the background
-	[self.view.window addSubview:dimmer];
-	
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
 	BaseDialog *dialog = nil;
 	
@@ -176,48 +169,10 @@ NSUInteger currentView;
 		[dialog setupView:(Question*)[currentItems objectAtIndex:indexPath.row]];
 	}
 	
-
-	[dialog setCenter:self.view.window.center];
-	[dialog setAlpha:0.f];
-	
-    switch (detailViewController.currentOrientation) {
-        case UIInterfaceOrientationPortrait:		
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
-			break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
-			break;
-		case UIInterfaceOrientationLandscapeLeft:
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
-			break;
-		case UIInterfaceOrientationLandscapeRight:
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
-            break;
-    }
-	
-	
+	[dialog doAppearAnimation: self.view.window];	
 	[self.view.window addSubview:dialog];
-		
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.7f];
-	[dimmer setAlpha:0.5f];	
-	[dialog setAlpha:1.f];
-	switch (detailViewController.currentOrientation) {
-        case UIInterfaceOrientationPortrait:		
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
-			break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
-			break;
-		case UIInterfaceOrientationLandscapeLeft:
-			[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
-			break;
-		case UIInterfaceOrientationLandscapeRight:
-				[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
-            break;
-    }
 
-	[UIView commitAnimations];
+
 	[dialog release];
 }
 
@@ -327,7 +282,7 @@ NSUInteger currentView;
 	[questionsViewController switchTableViewStyle:UITableViewStyleGrouped];	
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
-	[questionsViewController fetchQuestions: [(Topic*)[currentItems objectAtIndex:pass] slug]];
+	[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:pass]];
 	
 	[detailViewController.view addSubview:questionsViewController.view];	
 	[questionsViewController viewDidAppear:NO];
@@ -358,6 +313,7 @@ NSUInteger currentView;
 	// Show the response view controller
 	//[questionsViewController.view removeFromSuperview];
 	[detailViewController.view addSubview:responsesViewController.view];	
+	[responsesViewController viewDidAppear:NO];
 } 
 
 /*

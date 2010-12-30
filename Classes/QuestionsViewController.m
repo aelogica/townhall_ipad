@@ -14,10 +14,12 @@
 #import "QuestionPlainCell.h"
 #import "AsynchImageView.h"
 #import "RootViewQuestionCell.h"
+#import "Topic.h"
+#import "QuestionDialog.h"
 
 @implementation QuestionsViewController
 
-@synthesize tableView, questions, currentPage, currentSlug, currentQuestion, headerView, toolbar;
+@synthesize tableView, questions, currentPage, currentSlug, currentQuestion, headerView, toolbar, currentTopic;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -56,7 +58,7 @@
 	placeholder1.frame = CGRectMake(40.f, 10.f, 171.0, 77.0);									
 
 	UIImageView *placeholder2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder2.png"]];
-	placeholder2.frame = CGRectMake(540.f, 10.f, 180.0, 76.0);									
+	placeholder2.frame = CGRectMake(500.f, 10.f, 180.0, 76.0);									
 
 	[headerView addSubview:categoryName];
 	[headerView addSubview:placeholder1];
@@ -71,20 +73,20 @@
 	
 	//Add buttons
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self 
-																   action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: nil];
 
 	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self 
-																   action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: nil];
 
 	UIBarButtonItem *button3 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-totalvotes-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self 
-																   action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: nil];
 
 	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self 
-																   action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: nil];
+	
+	UIBarButtonItem *button5 = [[UIBarButtonItem alloc] initWithTitle:@"Post question" 
+																style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
+	
 	
 	
 	//Use this to put space in between your toolbox buttons
@@ -93,13 +95,14 @@
 																			  action:nil];
 	
 	//Add buttons to the array
-	NSArray *items = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, nil];
+	NSArray *items = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, button5, nil];
 	
 	//release buttons
 	[button1 release];
 	[button2 release];
 	[button3 release];
 	[button4 release];
+	[button5 release];
 	[flexItem release];
 	
 	//add array of buttons to toolbar
@@ -169,6 +172,20 @@
 	
 
 	[tableView reloadData];
+}
+
+-(void)postButtonPressed:(UIBarButtonItem *)button {
+	
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
+	
+	QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
+	[dialog setupView:currentTopic];
+	
+	[dialog doAppearAnimation: self.view.window];	
+	[self.view.window addSubview:dialog];
+	
+	
+	[dialog release];
 }
 
 #pragma mark Table view methods
@@ -348,10 +365,10 @@
 
 
 
--(void)fetchQuestions :(NSString *) slug {
-	currentSlug = slug;	
+-(void)fetchQuestions :(Topic *) aTopic {
+	currentTopic = aTopic;
 	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=date", UIAppDelegate.serverDataUrl, currentSlug, self.currentPage]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=date", UIAppDelegate.serverDataUrl, currentTopic.slug, self.currentPage]];
 	NSLog(@"Fetching questions URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];

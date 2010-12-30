@@ -50,6 +50,58 @@ CGFloat DegreesToRadians2(CGFloat degrees)
     return self;
 }
 
+- (void)doAppearAnimation: (UIWindow*)aWindow {
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+	// Initialize our dimmer view
+	dimmer = [[UIView alloc] initWithFrame:CGRectMake(.0f,0.f,768.f,1024.f)];
+	[dimmer setBackgroundColor:[UIColor blackColor]];
+	[dimmer setAlpha:0.f];
+	[aWindow addSubview:dimmer];
+	
+	[self setCenter:aWindow.center];
+	[self setAlpha:0.f];
+	
+	switch (appDelegate.currentOrientation) {
+        case UIInterfaceOrientationPortrait:		
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
+			break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
+            break;
+    }
+	
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:.7f];
+	[dimmer setAlpha:0.5f];	
+	[self setAlpha:1.f];
+	switch (appDelegate.currentOrientation) {
+        case UIInterfaceOrientationPortrait:		
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(360)))];
+			break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(180)))];
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
+            break;
+    }
+	
+	[UIView commitAnimations];
+	
+	[dimmer release];
+	
+}
+
 -(void)orientationChange:(NSNotification *)orientation { 
 	NSString *o = (NSString *)[orientation object];
 	
@@ -105,7 +157,10 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 - (void)cancelAnimationDidStop:(NSString*) animationID finished:(NSNumber*) finished context:(void*) context {
    [self removeFromSuperview];
    
-   [[NSNotificationCenter defaultCenter] postNotificationName:@"DialogClose" object:nil userInfo:nil];
+   	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:.3f];
+	[dimmer setAlpha:.0f];	
+	[UIView commitAnimations];	
 }
 
 - (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {

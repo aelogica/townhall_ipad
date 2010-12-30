@@ -12,10 +12,11 @@
 #import "Question.h"
 #import "ResponseCell.h"
 #import "Response.h"
+#import "ResponseDialog.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ResponsesViewController
-@synthesize tableView, responses, currentQuestion;
+@synthesize tableView, responses, currentQuestion, toolbar, headerView;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -37,7 +38,7 @@
 	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	
-	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 100.f)];
+	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, appDelegate.appWidth, 100.f)];
 	[headerView setBackgroundColor:UIColorFromRGB(0xd5d8de)];
 	
 	UILabel *subjectLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.0, 600.f, 50.f)];
@@ -58,7 +59,7 @@
 	[self.view addSubview:headerView];
 	
 	// add toolbar
-	UIToolbar *toolbar = [UIToolbar new];
+	toolbar = [[UIToolbar alloc] init];
 	[toolbar setBarStyle:UIBarStyleBlack];
 	[toolbar sizeToFit];
 	[toolbar setFrame: CGRectMake(0, 100.f, 768.f, 50.f)];
@@ -68,7 +69,7 @@
 																style:UIBarButtonItemStylePlain target:nil action:nil];
 	
 	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithTitle:@"Post response" 
-																style:UIBarButtonItemStyleBordered target:self action:nil];
+																style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
 	
 	
 	
@@ -103,14 +104,41 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 100.f)];
+	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
+	[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f)];	
+	[tableView reloadData];
+}
+
 -(void)orientationChange:(NSNotification *)orientation { 
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
 	CGRect f = tableView.frame;
 	f.size.width = appDelegate.appWidth;
+	f.size.height = appDelegate.appHeight - 149.f;	
 	tableView.frame = f;		
 	
+	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 150.f)];
+	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
+	
 	[tableView reloadData];
+}
+
+-(void)postButtonPressed:(UIBarButtonItem *)button {
+	
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
+	
+	ResponseDialog * dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
+	[dialog setupView:currentQuestion];
+	
+	[dialog doAppearAnimation: self.view.window];	
+	[self.view.window addSubview:dialog];
+	
+	
+	[dialog release];
 }
 
 #pragma mark Event listener methods
