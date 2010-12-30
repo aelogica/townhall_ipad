@@ -10,6 +10,7 @@
 #import "Topic.h"
 #import "GTMHTTPFetcher.h"
 #import "GenericTownHallAppDelegate.h"
+#import "TopicCell.h"
 
 @implementation TopicsViewController
 
@@ -80,62 +81,13 @@
 	
     static NSString *CellIdentifier = @"Cell";
 	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TopicCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	Topic *topic = (Topic *)[topics objectAtIndex:indexPath.row];
 	
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		
-		UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-		backView.backgroundColor = [UIColor blackColor];
-		backView.alpha = 0.3f;	
-		backView.opaque = NO;
-		//backView.layer.cornerRadius = 10.f;
-		//cell.backgroundView = backView;
-		cell.backgroundColor = [UIColor blackColor];		
-		cell.alpha = 0.5f;
-		cell.selectedBackgroundView = backView;
-		
-		// Set cell to transparent background
-		cell.textLabel.backgroundColor = [UIColor clearColor];
-		cell.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:.8];
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		
-		UILabel *firstLabel = [[UILabel alloc] init];
-		[firstLabel setFrame:CGRectMake(250.f, 0.f, 300.f, 100.f)];
-		[firstLabel setBackgroundColor:[UIColor clearColor]];
-		[firstLabel setTextColor:[UIColor redColor]];
-		firstLabel.font = [UIFont systemFontOfSize:22];	
-		firstLabel.text = topic.name;
-		[[cell contentView] addSubview:firstLabel];
-		[firstLabel release];
-		
-		UILabel *secondLabel = [[UILabel alloc] init];
-		[secondLabel setFrame:CGRectMake(400.f, 0.f, 100.f, 100.f)];
-		[secondLabel setBackgroundColor:[UIColor clearColor]];
-		[secondLabel setTextColor:[UIColor greenColor]];
-		secondLabel.font = [UIFont systemFontOfSize:15];	
-		secondLabel.text = @"View Questions";
-		//[[cell contentView] addSubview:secondLabel];
-		[secondLabel release];
-		
-		UIImage *placeHolderImage = [UIImage imageNamed:@"placeholder.png"];
-		UIImageView *placeHolderImageView = [[UIImageView alloc] initWithImage:placeHolderImage];
-		placeHolderImageView.alpha = 0.8f;
-		[placeHolderImageView setFrame:CGRectMake(40.f, 10, 180.0, 76.0)];
-		[cell.contentView addSubview:placeHolderImageView];
-		
-		UIImage *accessoryImage = [UIImage imageNamed:@"icon.png"];
-		UIImageView *accImageView = [[UIImageView alloc] initWithImage:accessoryImage];
-		//accImageView.userInteractionEnabled = YES;
-		[accImageView setFrame:CGRectMake(0, 0, 133.0, 102.0)];
-		cell.accessoryView = accImageView;
-		[accImageView release];
+        cell = [[[TopicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-	
-	UILabel *name = (UILabel*)[cell.contentView.subviews objectAtIndex:0];
-	[name setFrame:CGRectMake(250.f, 0.f, 300.f, 100.f)];
-	name.text = topic.name;
+	[cell updateCellWithModel:topic];
 	
     return cell;
 }
