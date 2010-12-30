@@ -25,7 +25,7 @@ CGFloat DegreesToRadians2(CGFloat degrees)
     
     self = [super initWithFrame:frame];
     if (self) {
-		[self setBackgroundColor:UIColorFromRGB(0x87CEFA)];
+		[self setBackgroundColor:UIColorFromRGB(0xEEEEEE)];
 		//[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		
         // Initialization code.

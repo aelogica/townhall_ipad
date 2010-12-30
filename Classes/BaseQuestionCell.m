@@ -24,7 +24,13 @@
         // Initialization code.
 		UIView *backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 		backgroundView.backgroundColor = UIColorFromRGB(0x77a236);		
-		self.backgroundView = backgroundView;		
+		self.backgroundView = backgroundView;	
+		
+		UIView *selectedBackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+		selectedBackgroundView.backgroundColor = UIColorFromRGB(0x93c843);
+		selectedBackgroundView.alpha = 0.3f;	
+		selectedBackgroundView.opaque = NO;
+		//self.selectedBackgroundView = selectedBackgroundView;
 		
 		authorBackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];		
 		authorBackgroundView.backgroundColor = UIColorFromRGB(0x54811c);			
