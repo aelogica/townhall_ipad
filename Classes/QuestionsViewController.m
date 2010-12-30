@@ -371,9 +371,6 @@
 			question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
 			question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
 			question.dateCreated = [self getDateFromJSON:[objectInstance objectForKey:@"DateCreated"]];
-			//NSDate *now = [NSDate date];
-			NSLog(@"dated created %@", question.dateCreated);
-			
 
 			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];
 			question.nuggetOriginator.userId = [nuggetOriginator objectForKey:@"UserID"];
@@ -384,7 +381,6 @@
 			NSDictionary *votesDict = [objectInstance objectForKey:@"Votes"];
 			question.votes.upVotes = [(NSNumber*)[votesDict objectForKey:@"UpVotes"] stringValue];	
 			question.votes.upPercentage = [(NSNumber*)[votesDict objectForKey:@"UpPercentage"] stringValue];	
-			NSLog(question.votes.upPercentage);
 			question.votes.downVotes = [(NSNumber*)[votesDict objectForKey:@"downVotes"] stringValue];	
 			question.votes.downPercentage = [(NSNumber*)[votesDict objectForKey:@"DownPercentage"] stringValue];	
 			

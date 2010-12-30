@@ -29,10 +29,13 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
-	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, 768.f, 1004.f)];
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	
+	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	[self.view setBackgroundColor:[UIColor clearColor]];	
 	
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, 768.f, 704.f) style:UITableViewStyleGrouped];
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStyleGrouped];
 	[tableView setDataSource:self];
 	[tableView setDelegate:self];
 	[tableView setBackgroundView:nil];

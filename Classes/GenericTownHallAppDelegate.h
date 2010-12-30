@@ -36,11 +36,14 @@ CGFloat DegreesToRadians(CGFloat degrees);
 	// Some "global" variables - if list becomes large, then it can be taken out and move to a singleton class or move it to a global file
 	MBProgressHUD *progressHUD;
 	NSString *serverBaseUrl;
-	NSString *serverDataUrl;	
+	NSString *serverDataUrl;
+	UIInterfaceOrientation currentOrientation;
+	CGFloat appWidth;
+	CGFloat appHeight;
+
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
 @property (nonatomic, retain) SplashViewController *splashViewController;
 @property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
 @property (nonatomic, retain) IBOutlet RootViewController *rootViewController;
@@ -48,5 +51,8 @@ CGFloat DegreesToRadians(CGFloat degrees);
 @property (readwrite, retain) MBProgressHUD * progressHUD;
 @property (readwrite, retain) NSString * serverBaseUrl;
 @property (readwrite, retain) NSString * serverDataUrl;
+@property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
+@property (nonatomic, assign) CGFloat appWidth;
+@property (nonatomic, assign) CGFloat appHeight;
 
 @end

@@ -48,6 +48,30 @@ NSUInteger currentView;
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
 	
+	[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeLeft];
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.currentOrientation = [[UIDevice currentDevice] orientation];
+	
+	[appDelegate.progressHUD hideUsingAnimation:YES];
+	
+	
+	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+	switch (orientation) {
+        case UIInterfaceOrientationPortrait:		
+        case UIInterfaceOrientationPortraitUpsideDown:
+			appDelegate.appWidth = 703.f;
+			appDelegate.appHeight = 1004.f;
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+		case UIInterfaceOrientationLandscapeRight:
+			appDelegate.appWidth = 768.f;
+			appDelegate.appHeight = 748.f;
+			break;
+		default:
+			NSLog(@"Orientation not detected");
+			break;
+    }
+	
 	//UIView *backgroundView = [[UIView alloc] initWithFrame: self.view.frame];
 	//backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
 	//[self.view addSubview:backgroundView];
@@ -102,24 +126,7 @@ NSUInteger currentView;
 	// Set to categories view on launch app
 	[detailViewController.view addSubview:categoriesViewController.view];
 	
-	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
-	switch (orientation) {
-        case UIInterfaceOrientationPortrait:		
-			NSLog(@"UIInterfaceOrientationPortrait");
-			break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-			NSLog(@"UIInterfaceOrientationPortraitUpsideDown");
-			break;
-		case UIInterfaceOrientationLandscapeLeft:
-			NSLog(@"UIInterfaceOrientationLandscapeLeft");		
-			break;
-		case UIInterfaceOrientationLandscapeRight:
-			NSLog(@"UIInterfaceOrientationLandscapeRight");          
-			break;
-		default:
-			NSLog(@"Orientation not detected");
-			break;
-    }
+
 	
 }
 
