@@ -125,7 +125,6 @@
 - (void)viewDidAppear:(BOOL)animated {
 	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-
 	if(rootViewWidth < 400.f) {
 		[headerView setHidden:YES];
 		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
