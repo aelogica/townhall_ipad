@@ -13,7 +13,7 @@
 #import "QuestionGroupedCell.h"
 #import "QuestionPlainCell.h"
 #import "AsynchImageView.h"
-#import "DetailQuestionCell.h"
+#import "RootViewQuestionCell.h"
 
 @implementation QuestionsViewController
 
@@ -137,6 +137,8 @@
 		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
 		[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f)];
 	}
+	
+	[tableView reloadData];
 }
 	 
 -(void)switchTableViewStyle:(UITableViewStyle)style {
@@ -192,6 +194,7 @@
 	
     static NSString *CellIdentifier = @"Cell1";
     static NSString *CellIdentifier2 = @"Cell2";
+	static NSString *CellIdentifier3 = @"Cell3";
 	
 	BaseQuestionCell *cell = nil;
 
@@ -212,16 +215,26 @@
 		
 	}*/
 	
+	CGFloat superViewWidth = self.view.superview.frame.size.width;	
+
 	if( indexPath.row < self.currentPage * 10 ) {
 		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
-		if (cell == nil) {					
-			cell = [[[DetailQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		}		
+		if (superViewWidth > 400.f) {
+			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];	
+			if (cell == nil) {					
+				cell = [[[BaseQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			}	
+		} else {
+			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];	
+			if (cell == nil) {					
+				cell = [[[RootViewQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
+			}
+		}				
 
 		[cell updateCellWithQuestion:question];
 	} else {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier3] autorelease];
 	
 		UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 50.f)];
 		[backgroundView setBackgroundColor:[UIColor blackColor]];

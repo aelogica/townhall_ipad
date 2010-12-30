@@ -64,8 +64,7 @@
 		[self.contentView addSubview:authorBackgroundView];
 		[self.contentView addSubview:author];
 		//[self.contentView addSubview:userPoints];
-		//[self.contentView addSubview:responseCount];
-		
+		//[self.contentView addSubview:responseCount];		
 		
 		voteUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		voteUpButton.backgroundColor = [UIColor clearColor];
@@ -180,8 +179,6 @@
 	//voteDownButton.tag = (int)aQuestion.nuggetId;
 	//[voteUpButton setSelected: NO];
 	//[voteDownButton setSelected: NO];	
-
-	
 	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	CGFloat voteBarStartX = 600.f;
@@ -213,9 +210,7 @@
 	voteDownFrame.origin.y = voteBarStartY + 33.f;
 	
 	voteUpMeterDimmer.frame = voteUpFrame;
-	voteDownMeterDimmer.frame = voteDownFrame;
-	
-	NSLog(@"cell superview widht: %.2f", self.superview.superview.frame.size.width);
+	voteDownMeterDimmer.frame = voteDownFrame;	
 
 	[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
 	

@@ -7,7 +7,7 @@
 //
 
 #import "RootViewQuestionCell.h"
-
+#import "GenericTownHallAppDelegate.h"
 
 @implementation RootViewQuestionCell
 
@@ -16,10 +16,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code.
+		self.backgroundView.backgroundColor = UIColorFromRGB(0xdedede);		
+		//selectedBackgroundView.backgroundColor = UIColorFromRGB(0x93c843);
+		[voteUpMeter setHidden:YES];
+		[voteDownMeter setHidden:YES];
+		[voteUpButton setHidden:YES];
+		[voteDownButton setHidden:YES];
+		[voteBox setHidden:YES];
+		[authorBackgroundView setBackgroundColor:UIColorFromRGB(0xababab)];
     }
     return self;
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     
