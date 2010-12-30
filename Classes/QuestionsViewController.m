@@ -37,8 +37,10 @@
 	self.questions = [[NSMutableArray alloc] init];
 	self.currentPage = 1;
 
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	
 	[self.view setBackgroundColor:[UIColor clearColor]];
-	[self.view setFrame:CGRectMake(.0f, 44.f, 768.f, 1004.f)];
+	[self.view setFrame:CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	
 	
 	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 768.f, 100.f)];
@@ -107,7 +109,7 @@
 	
 	// Create the UI for this view
 	//[self switchTableViewStyle:UITableViewStylePlain];	
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, 768.f, 804.f) style:UITableViewStylePlain];
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStylePlain];
 	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
 	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
 	[tableView setBackgroundView:nil];
@@ -115,7 +117,6 @@
 	[tableView setDelegate:self];	
 	[self.view addSubview:self.tableView];		
 
-	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
@@ -135,17 +136,13 @@
 }
 
 -(void)orientationChange:(NSNotification *)orientation { 
-	NSString *o = (NSString *)[orientation object];
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
 	CGRect f = tableView.frame;
-	if(o == @"Portrait") {		
-		f.size.width = 768.f;		
-		f.size.height = 960.f;
-	} else {		
-		f.size.width = 703.f;
-		f.size.height = 704.f;
-	}
+	f.size.width = appDelegate.appWidth;
 	tableView.frame = f;		
+	
+	[tableView reloadData];
 }
 
 #pragma mark Table view methods

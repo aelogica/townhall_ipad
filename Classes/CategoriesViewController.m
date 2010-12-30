@@ -34,7 +34,7 @@
 	
 	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	[self.view setBackgroundColor:[UIColor clearColor]];	
-		NSLog(@"appwidth:%.2f", appDelegate.appWidth);
+	
 	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStyleGrouped];
 	[tableView setDataSource:self];
 	[tableView setDelegate:self];
@@ -79,6 +79,8 @@
 	CGRect f = tableView.frame;
 	f.size.width = appDelegate.appWidth;
 	tableView.frame = f;		
+	
+	[tableView reloadData];
 }
 
 #pragma mark Table view methods
@@ -134,7 +136,8 @@
 		[secondLabel setTextColor:[UIColor greenColor]];
 		secondLabel.font = [UIFont systemFontOfSize:15];	
 		secondLabel.text = @"View Topics";
-		//[[cell contentView] addSubview:secondLabel];
+		secondLabel.tag = 1;
+		[[cell contentView] addSubview:secondLabel];
 		[secondLabel release];
 
 		UIImage *placeHolderImage = [UIImage imageNamed:@"placeholder.png"];
@@ -151,6 +154,17 @@
 		[accImageView release];
     }
 	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	UILabel *secondLabel = (UILabel*)[cell.contentView viewWithTag:1];
+    if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+		secondLabel.frame = CGRectMake(480.f, 0.f, 100.f, 100.f);
+	} else {
+		secondLabel.frame = CGRectMake(515.f, 35.f, 100.f, 100.f);
+	}
+	
+    // Set up the cell...
+     //cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+	 //cell.textLabel.text = [(Category *)[categories objectAtIndex:indexPath.row] name];
     return cell;
 }
 

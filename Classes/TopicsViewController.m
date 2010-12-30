@@ -37,7 +37,6 @@
 	[self.view setBackgroundColor:[UIColor clearColor]];	
 	
 	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStyleGrouped];
-	NSLog(@"appwidth:%.2f", appDelegate.appWidth);
 	//self.tableView.separatorColor = [UIColor clearColor];
 	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[tableView setDataSource:self];
@@ -58,6 +57,8 @@
 	CGRect f = tableView.frame;
 	f.size.width = appDelegate.appWidth;
 	tableView.frame = f;		
+	
+	[tableView reloadData];
 }
 
 #pragma mark Table view methods
