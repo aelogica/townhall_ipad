@@ -14,7 +14,7 @@
 
 @implementation BaseQuestionCell
 
-@synthesize subject, author, responseCount, userPoints, voteUpButton, voteDownButton, avatarImage, voteUpMeter, voteDownMeter;
+@synthesize subject, author, responseCount, userPoints, voteUpButton, voteDownButton, avatarImage, voteBox, voteUpMeter, voteDownMeter;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -67,11 +67,7 @@
 		//[self.contentView addSubview:responseCount];
 		
 		
-		CGFloat voteBarStartX = 600.f;
-		CGFloat voteBarStartY = 5.f;
-		
 		voteUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
-		voteUpButton.frame = CGRectMake(voteBarStartX + 102.f, voteBarStartY, 32.0, 31.0);									
 		voteUpButton.backgroundColor = [UIColor clearColor];
 		
 		[voteUpButton addTarget:self action:@selector(voteUpPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -80,7 +76,6 @@
 		[voteUpButton setImage:[UIImage imageNamed:@"vote_up.png"] forState:UIControlStateSelected];
 
 		voteDownButton = [UIButton buttonWithType:UIButtonTypeCustom];
-		voteDownButton.frame = CGRectMake(voteBarStartX + 102.f, voteBarStartY + 33.f, 32.0, 31.0);									
 		voteDownButton.backgroundColor = [UIColor clearColor];
 		[voteDownButton addTarget:self action:@selector(voteDownPressed:) forControlEvents:UIControlEventTouchUpInside];
 		[voteDownButton setImage:[UIImage imageNamed:@"vote_down.png"] forState:UIControlStateNormal];
@@ -88,24 +83,20 @@
 		[voteDownButton setImage:[UIImage imageNamed:@"vote_down.png"] forState:UIControlStateSelected];
 		
 		voteUpMeter = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"meter_green.png"]];
-		voteUpMeter.frame = CGRectMake(voteBarStartX, voteBarStartY, 100.0, 31.0);																 
-		voteUpMeterDimmer = [[UIView alloc] initWithFrame:CGRectMake(voteBarStartX, voteBarStartY, 0.0, 31.0)];
+		voteUpMeterDimmer = [[UIView alloc] initWithFrame:CGRectZero]; 
 		[voteUpMeterDimmer setBackgroundColor:[UIColor blackColor]];
 		
 		voteDownMeter = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"meter_red.png"]];
-		voteDownMeter.frame = CGRectMake(voteBarStartX, voteBarStartY + 33.f, 100.0, 31.0);									
-		voteDownMeterDimmer = [[UIView alloc] initWithFrame:CGRectMake(voteBarStartX, voteBarStartY + 33.f, 50.0, 31.0)];
+		voteDownMeterDimmer = [[UIView alloc] initWithFrame:CGRectZero];
 		[voteDownMeterDimmer setBackgroundColor:[UIColor blackColor]];
 		
-		UIImageView *voteBox = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vote_box.png"]];
-		voteBox.frame = CGRectMake(voteBarStartX - 3.f, voteBarStartY - 2.f, 139.0, 68.0);									
+		voteBox = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vote_box.png"]];
 
 		[self.contentView addSubview:voteBox];
 		[self.contentView addSubview:voteUpMeter];
 		[self.contentView addSubview:voteDownMeter];
-		[self.contentView addSubview:voteDownMeterDimmer];
 		[self.contentView addSubview:voteUpMeterDimmer];
-
+		[self.contentView addSubview:voteDownMeterDimmer];
 		
 		[self.contentView addSubview:voteUpButton];
 		[self.contentView addSubview:voteDownButton];
@@ -189,22 +180,37 @@
 	//voteDownButton.tag = (int)aQuestion.nuggetId;
 	//[voteUpButton setSelected: NO];
 	//[voteDownButton setSelected: NO];	
+
+	
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	CGFloat voteBarStartX = 600.f;
+	CGFloat voteBarStartY = 5.f;
+
+    if(appDelegate.currentOrientation == UIInterfaceOrientationLandscapeLeft || appDelegate.currentOrientation == UIInterfaceOrientationLandscapeRight) {
+		voteBarStartX = 540.f;
+	} 
+	voteBox.frame = CGRectMake(voteBarStartX - 3.f, voteBarStartY - 2.f, 139.0, 68.0);											
+	voteUpButton.frame = CGRectMake(voteBarStartX + 102.f, voteBarStartY, 32.0, 31.0);									
+	voteDownButton.frame = CGRectMake(voteBarStartX + 102.f, voteBarStartY + 33.f, 32.0, 31.0);									
+	voteUpMeter.frame = CGRectMake(voteBarStartX, voteBarStartY, 100.0, 31.0);																 
+	voteDownMeter.frame = CGRectMake(voteBarStartX, voteBarStartY + 33.f, 100.0, 31.0);									
 	
 	float  upVoteBarHeight = [aQuestion.votes.upPercentage floatValue]/100;
 	float  downVoteBarHeight = [aQuestion.votes.downPercentage floatValue]/100;
 	upVoteBarHeight = upVoteBarHeight * 50;
 	downVoteBarHeight = downVoteBarHeight *50;
 	CGRect voteUpFrame;
-	voteUpFrame.size.width=voteUpMeter.frame.size.width - upVoteBarHeight;
-	voteUpFrame.size.height=voteUpMeterDimmer.frame.size.height;
-	voteUpFrame.origin.x=voteUpMeterDimmer.frame.origin.x;
-	voteUpFrame.origin.y=voteUpMeterDimmer.frame.origin.y;
+	voteUpFrame.size.width = voteUpMeter.frame.size.width - upVoteBarHeight;
+	voteUpFrame.size.height = 31.f;
+	voteUpFrame.origin.x = voteBarStartX;
+	voteUpFrame.origin.y = voteBarStartY;
 	
 	CGRect voteDownFrame;
 	voteDownFrame.size.width=voteDownMeter.frame.size.width - downVoteBarHeight;
-	voteDownFrame.size.height=voteDownMeterDimmer.frame.size.height;
-	voteDownFrame.origin.x=voteDownMeterDimmer.frame.origin.x;
-	voteDownFrame.origin.y=voteDownMeterDimmer.frame.origin.y;
+	voteDownFrame.size.height=31.f;
+	voteDownFrame.origin.x = voteBarStartX;
+	voteDownFrame.origin.y = voteBarStartY + 33.f;
 	
 	voteUpMeterDimmer.frame = voteUpFrame;
 	voteDownMeterDimmer.frame = voteDownFrame;

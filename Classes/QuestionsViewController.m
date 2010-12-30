@@ -109,7 +109,7 @@
 	
 	// Create the UI for this view
 	//[self switchTableViewStyle:UITableViewStylePlain];	
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStylePlain];
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f) style:UITableViewStylePlain];
 	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
 	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
 	[tableView setBackgroundView:nil];
@@ -117,6 +117,7 @@
 	[tableView setDelegate:self];	
 	[self.view addSubview:self.tableView];		
 
+	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
@@ -136,12 +137,15 @@
 }
 
 -(void)orientationChange:(NSNotification *)orientation { 
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	NSString *o = (NSString *)[orientation object];
 	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
 	CGRect f = tableView.frame;
 	f.size.width = appDelegate.appWidth;
+	f.size.height = appDelegate.appHeight - 149.f;	
 	tableView.frame = f;		
-	
+
 	[tableView reloadData];
 }
 

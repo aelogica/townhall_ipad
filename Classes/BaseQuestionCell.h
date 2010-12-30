@@ -18,6 +18,7 @@
 	UILabel *responseCount;
 	UIButton *voteUpButton;
 	UIButton *voteDownButton;
+	UIImageView *voteBox;
 	UIImageView *voteUpMeter;
 	UIImageView *voteDownMeter;
 	UIView *voteUpMeterDimmer;
@@ -36,6 +37,7 @@
 @property(nonatomic, retain) UIButton *voteDownButton;
 @property(nonatomic, retain) AsyncImageView *avatarImage;
 @property(nonatomic, retain) UIImageView *voteUpMeter;
+@property(nonatomic, retain) UIImageView *voteBox;
 @property(nonatomic, retain) UIImageView *voteDownMeter;
 
 @end
