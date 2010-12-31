@@ -217,6 +217,8 @@
 }
 
 - (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
+	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Thank you for voting." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
+	[alert show];
 }
 
 - (void)dealloc {
