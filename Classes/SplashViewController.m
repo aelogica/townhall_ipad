@@ -27,37 +27,34 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-	UIView *view = [[UIView alloc] initWithFrame: CGRectMake(0,0,767,1004)];
-	
-	//view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+	UIView *view = [[UIView alloc] initWithFrame: CGRectMake(0,0,768,1024)];
 	self.view = view;
 	[view release];	
 
-	splashImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash.png"]];
-	splashImageView.frame = CGRectMake(0, 0, 767, 1034);
-	[self.view addSubview: splashImageView];
-	[splashImageView release];
-	
+	NSString *splashImageName  = @"splash-portrait.png";
+	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
-
+		
     switch (orientation) {
         case UIInterfaceOrientationPortrait:		
-			view.transform = CGAffineTransformMakeRotation(6.28f);
 			break;
         case UIInterfaceOrientationPortraitUpsideDown:
 			view.transform = CGAffineTransformMakeRotation(3.14f);
 			break;
 		case UIInterfaceOrientationLandscapeLeft:
-			view.transform = CGAffineTransformMakeRotation(4.71f);
-			splashImageView.frame = CGRectMake(0, 0, 1034, 778);
-			view.frame = CGRectMake(0,0,1034,778);
+			splashImageName = @"splash-landscape.png";
+			//view.transform = CGAffineTransformMakeRotation(4.71f);
 			break;
 		case UIInterfaceOrientationLandscapeRight:
+			splashImageName = @"splash-landscape.png";
 			view.transform = CGAffineTransformMakeRotation(1.57f);
-			splashImageView.frame = CGRectMake(0, 0, 1034, 778);
-			view.frame = CGRectMake(0,0,1034,778);
             break;
     }
+	
+	splashImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:splashImageName]];
+	splashImageView.frame = CGRectMake(0, 0, 768, 1024);
+	[self.view addSubview: splashImageView];
+	[splashImageView release];
 	
 	
 	//splitViewController = [[UISplitViewController alloc] initWithNibName:@"MainWindow" bundle:[NSBundle mainBundle]];

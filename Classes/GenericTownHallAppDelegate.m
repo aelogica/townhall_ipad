@@ -34,7 +34,6 @@
 	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
-	
 	NSBundle *bundle = [NSBundle mainBundle];
 	NSString *plistPath = [bundle pathForResource:@"configs" ofType:@"plist"];
 	NSDictionary *plistData = [[NSDictionary dictionaryWithContentsOfFile:plistPath] retain];

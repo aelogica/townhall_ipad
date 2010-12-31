@@ -72,11 +72,11 @@ NSUInteger currentView;
 			break;
     }
 	
-	//UIView *backgroundView = [[UIView alloc] initWithFrame: self.view.frame];
-	//backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
-	//[self.view addSubview:backgroundView];
-	//[backgroundView release];
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
+	UIView *backgroundView = [[UIView alloc] initWithFrame: self.view.frame];
+	backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
+	[self.view addSubview:backgroundView];
+	[backgroundView release];
+	//self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-tile.png"]];
 	
 	UITableView *categoriesTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, 300.f, 1000.f) style:UITableViewStyleGrouped] autorelease];
 	categoriesTableView.backgroundColor = [UIColor clearColor];
@@ -110,9 +110,7 @@ NSUInteger currentView;
 	UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(homeButtonPressed:)];          	
 	self.navigationItem.leftBarButtonItem = homeButton;
 
-	UIImageView *logo = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"aelogica.png"]] autorelease];	
 	self.navigationItem.title = @"";
-	//self.navigationItem.titleView = logo;	
 	
 	currentView = CategoriesView;
 	
