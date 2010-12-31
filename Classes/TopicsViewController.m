@@ -152,6 +152,8 @@
 		// the NSError domain string for server status errors is kGTMHTTPFetcherStatusDomain
 		int status = [error code];
 		NSLog(@"Fetch topics failed");
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"There were no topics under the category you selected." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
+		[alert show];
 	} else {
 		[topics removeAllObjects];
 		

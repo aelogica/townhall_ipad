@@ -215,7 +215,6 @@
 		63C7D62412BB6E1000F18706 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		63C7D62512BB6E1000F18706 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GenericTownHall-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GenericTownHall-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		AA05683312CD8323007E1651 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		AA05683612CD83EF007E1651 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = DESIGN/icon.png; sourceTree = "<group>"; };
 		AA99105212CDCEEC00F0621C /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = DESIGN/splash.png; sourceTree = "<group>"; };
 		AA99105312CDCEEC00F0621C /* top-bar-splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "top-bar-splash.png"; path = "DESIGN/top-bar-splash.png"; sourceTree = "<group>"; };
