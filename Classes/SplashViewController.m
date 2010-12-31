@@ -27,14 +27,14 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-	UIView *view = [[UIView alloc] initWithFrame: CGRectMake(0,0,778,1034)];
+	UIView *view = [[UIView alloc] initWithFrame: CGRectMake(0,0,767,1004)];
 	
 	//view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
 	self.view = view;
 	[view release];	
 
-	splashImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash.jpg"]];
-	splashImageView.frame = CGRectMake(0, 0, 778, 1034);
+	splashImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash.png"]];
+	splashImageView.frame = CGRectMake(0, 0, 767, 1034);
 	[self.view addSubview: splashImageView];
 	[splashImageView release];
 	
