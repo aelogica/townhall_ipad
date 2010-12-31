@@ -57,7 +57,7 @@
 		[placeHolderImageView setFrame:CGRectMake(40.f, 10, 180.0, 76.0)];
 		[self.contentView addSubview:placeHolderImageView];
 		
-		UIImage *accessoryImage = [UIImage imageNamed:@"icon.png"];
+		UIImage *accessoryImage = [UIImage imageNamed:@"icon2.png"];
 		UIImageView *accImageView = [[UIImageView alloc] initWithImage:accessoryImage];
 		//accImageView.userInteractionEnabled = YES;
 		[accImageView setFrame:CGRectMake(0, 0, 133.0, 102.0)];
