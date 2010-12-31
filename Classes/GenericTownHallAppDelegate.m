@@ -34,6 +34,22 @@
 	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+	switch (orientation) {
+        case UIInterfaceOrientationPortrait:		
+        case UIInterfaceOrientationPortraitUpsideDown:
+			appWidth = 768.f;
+			appHeight = 1004.f;
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+		case UIInterfaceOrientationLandscapeRight:
+			appWidth = 703.f;
+			appHeight = 748.f;
+			break;
+		default:
+			NSLog(@"Orientation not detected");
+			break;
+    }
+	
 	NSBundle *bundle = [NSBundle mainBundle];
 	NSString *plistPath = [bundle pathForResource:@"configs" ofType:@"plist"];
 	NSDictionary *plistData = [[NSDictionary dictionaryWithContentsOfFile:plistPath] retain];
@@ -47,7 +63,7 @@
 	splashViewController.view.center = window.center;
 	//splitViewController.view.alpha = 0.0;
     [window addSubview:splitViewController.view];
-	[window addSubview:splashViewController.view];
+	//[window addSubview:splashViewController.view];
     [window makeKeyAndVisible];
 	
 	progressHUD = [[MBProgressHUD alloc] initWithWindow: window];
@@ -55,9 +71,9 @@
 	[window addSubview:progressHUD];
 	progressHUD.center = CGPointMake(384,512);		
  
-	[NSTimer scheduledTimerWithTimeInterval:2.5f target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
+	//[NSTimer scheduledTimerWithTimeInterval:2.5f target: self selector:@selector(fadeScreen) userInfo: nil repeats: NO];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];	
+	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];	
 	
     return YES;
 }
