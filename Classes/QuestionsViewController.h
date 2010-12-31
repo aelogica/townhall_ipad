@@ -14,6 +14,7 @@
 @interface QuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	NSMutableArray *questions;
 	NSInteger currentPage;
+	NSString *currentSortColumn;
 	Question *currentQuestion;
 	Topic *currrentTopic;
 	

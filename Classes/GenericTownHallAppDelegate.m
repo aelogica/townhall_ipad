@@ -27,7 +27,13 @@
     
     // Override point for customization after app launch.
 	NSLog(@"Application started.");
+	
+	// Set to default landscape width/height
+	appWidth = 703.f;
+	appHeight = 748.f;	
+	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
 	
 	NSBundle *bundle = [NSBundle mainBundle];
 	NSString *plistPath = [bundle pathForResource:@"configs" ofType:@"plist"];

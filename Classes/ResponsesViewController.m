@@ -275,6 +275,32 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	
+	// create the parent view that will hold Label
+	UIView* customView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,0.f, appDelegate.appWidth, 50.f)] autorelease];
+	[customView setBackgroundColor:[UIColor blackColor]];
+	
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(appDelegate.appWidth / 2.f - 50.f, 15.f, 100.f, 35.f)];
+	[label setText:@"No entries"];
+	[label setFont:[UIFont systemFontOfSize:20]];
+	[label setTextColor:[UIColor whiteColor]];
+	[label setBackgroundColor:[UIColor clearColor]];
+	
+	//add the button to the view
+	[customView addSubview:label];
+	
+	if ([responses count] == 0) {
+		return customView;
+	}
+	return nil;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	return 50.0;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Overriden to allow any orientation.
     return YES;

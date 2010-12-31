@@ -36,8 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	self.questions = [[NSMutableArray alloc] init];
-	self.currentPage = 1;
+	questions = [[NSMutableArray alloc] init];
+	currentPage = 1;
+	currentSortColumn = @"date";
+	
 
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
@@ -72,17 +74,21 @@
 	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
 	
 	//Add buttons
-	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: nil];
+	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"]  
+																style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
+	button1.tag = @"interest";
 
 	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
+	button2.tag = @"date";
 
 	UIBarButtonItem *button3 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-totalvotes-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
+	button3.tag = @"votes";
 
 	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: nil];
+																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
+	button4.tag = @"responses";
 	
 	postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post question" 
 																style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
@@ -152,7 +158,7 @@
 	
 	[tableView reloadData];
 }
-	 
+
 -(void)switchTableViewStyle:(UITableViewStyle)style {
 	/*
 	[self.tableView removeFromSuperview];
@@ -182,6 +188,14 @@
 	
 
 	[tableView reloadData];
+}
+
+-(void)sortButtonPressed:(UIBarButtonItem *)button {
+	currentSortColumn = (NSString*)button.tag;
+	[self setCurrentPage:1];
+	[questions removeAllObjects];                                           
+	[self fetchQuestions: currentTopic];		
+	
 }
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
@@ -224,28 +238,12 @@
 	
 	BaseQuestionCell *cell = nil;
 
-	// Depending on the current view, if the questions are showing up on the left side it will be using UITableViewStylePlain
-	/*
-	if(self.tableView.style == UITableViewStyleGrouped) {
-		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];	
-		if (cell == nil) {					
-			cell = [[[QuestionGroupedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		}
-			
-	} else {
-		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];	
-
-		if (cell == nil) {					
-			cell = [[[QuestionPlainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2] autorelease];
-		}
-		
-	}*/
-	
 	CGFloat superViewWidth = self.view.superview.frame.size.width;	
 
 	if( indexPath.row < self.currentPage * 10 ) {
 		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
+		// Depending on the current view, if the questions are showing up on the detail pane it will have larger width
 		if (superViewWidth > 400.f) {
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];	
 			if (cell == nil) {					
@@ -310,38 +308,33 @@
 		[self fetchQuestions: currentTopic.slug];
 	}
 }
-/*
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	// create the parent view that will hold header Label
-	UIView* customView = [[[UIView alloc] init] autorelease];
-	
- 	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	
-	//the button should be as big as a table view cell
-	if(tableView.style == UITableViewStyleGrouped) {
-		[button setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 6.f, 200.f, 30.f)];
-	} else {
-		[button setFrame:CGRectMake(20.f, 6.f, 200.f, 30.f)];
-	}
-	
-	//set title, font size and font color
-	[button setTitle:@"Show next 10 questions" forState:UIControlStateNormal];
-	[button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-	[button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-	
-	//set action of the button
-	[button addTarget:self action:@selector(showMorePressed:) forControlEvents:UIControlEventTouchUpInside];
-	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+	// create the parent view that will hold Label
+	UIView* customView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,0.f, appDelegate.appWidth, 50.f)] autorelease];
+	[customView setBackgroundColor:[UIColor blackColor]];
+
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(appDelegate.appWidth / 2.f - 50.f, 15.f, 100.f, 35.f)];
+	[label setText:@"No entries"];
+	[label setFont:[UIFont systemFontOfSize:20]];
+	[label setTextColor:[UIColor whiteColor]];
+	[label setBackgroundColor:[UIColor clearColor]];
+
 	//add the button to the view
-	[customView addSubview:button];
+	[customView addSubview:label];
 	
-	return customView;
+	if ([questions count] == 0) {
+		return customView;
+	}
+	return nil;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return 40.0;
+	return 50.0;
 }
-*/
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Overriden to allow any orientation.
@@ -377,8 +370,9 @@
 
 -(void)fetchQuestions :(Topic *) aTopic {
 	currentTopic = aTopic;
-	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=date", UIAppDelegate.serverDataUrl, currentTopic.slug, self.currentPage]];
+
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=%@", 
+						UIAppDelegate.serverDataUrl, currentTopic.slug, currentPage, currentSortColumn]];
 	NSLog(@"Fetching questions URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];

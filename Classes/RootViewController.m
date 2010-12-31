@@ -48,7 +48,7 @@ NSUInteger currentView;
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
 	
-	[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeLeft];
+	//[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeLeft];
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	appDelegate.currentOrientation = [[UIDevice currentDevice] orientation];
 	
