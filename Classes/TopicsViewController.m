@@ -36,7 +36,7 @@
 	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	[self.view setBackgroundColor:[UIColor clearColor]];	
 	
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStyleGrouped];
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight - 100.f) style:UITableViewStyleGrouped];
 	//self.tableView.separatorColor = [UIColor clearColor];
 	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[tableView setDataSource:self];

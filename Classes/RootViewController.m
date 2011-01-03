@@ -61,13 +61,18 @@ NSUInteger currentView;
         case UIInterfaceOrientationPortraitUpsideDown:
 			appDelegate.appWidth = 768.f;
 			appDelegate.appHeight = 1004.f;
+			NSLog(@"Orientation is portrait");
 			break;
 		case UIInterfaceOrientationLandscapeLeft:
 		case UIInterfaceOrientationLandscapeRight:
 			appDelegate.appWidth = 703.f;
 			appDelegate.appHeight = 748.f;
+			NSLog(@"Orientation is landscape");
 			break;
 		default:
+			appDelegate.appWidth = 768.f;
+			appDelegate.appHeight = 1004.f;
+			appDelegate.currentOrientation = UIInterfaceOrientationPortrait;
 			NSLog(@"Orientation not detected");
 			break;
     }

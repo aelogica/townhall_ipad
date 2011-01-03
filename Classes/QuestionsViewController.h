@@ -24,8 +24,6 @@
 	UILabel *topicName;
 }
 
--(void)switchTableViewStyle:(UITableViewStyle)style;
-
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray *questions;
 @property(nonatomic, retain) UIView *headerView;

@@ -45,7 +45,6 @@
 	[self.view setBackgroundColor:[UIColor clearColor]];
 	[self.view setFrame:CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	
-	
 	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, appDelegate.appWidth, 100.f)];
 	[headerView setBackgroundColor:[UIColor blackColor]];
 	
@@ -116,7 +115,7 @@
 	
 	// Create the UI for this view
 	//[self switchTableViewStyle:UITableViewStylePlain];	
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f) style:UITableViewStylePlain];
+	tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
 	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
 	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
 	[tableView setBackgroundView:nil];
@@ -131,14 +130,16 @@
 
 // Adjust the frame sizes of the various UI controls
 - (void)viewDidAppear:(BOOL)animated {
+	NSLog(@"viewdidappear");
 	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	// See if this view controller is showing up on the root view pane
 	if(rootViewWidth < 400.f) {
 		[headerView setHidden:YES];
 		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
-		[tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, appDelegate.appHeight - 95.f)];
+		[tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, appDelegate.appHeight - 93.f)];
 		
+		// remove post question button
 		NSMutableArray * items = [NSMutableArray arrayWithArray:toolbar.items];
 		if([items count] == 7) {
 			[items removeObjectAtIndex:6];
@@ -149,7 +150,11 @@
 	else {
 		[headerView setHidden:NO];
 		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
-		[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f)];
+		if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+			[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 200.f)];
+		} else {
+			[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 150.f)];
+		}
 		NSMutableArray * items = [NSMutableArray arrayWithArray:toolbar.items];
 		if([items count] == 6) {
 			[items insertObject:postButton atIndex:6];
@@ -160,20 +165,6 @@
 	[tableView reloadData];
 }
 
--(void)switchTableViewStyle:(UITableViewStyle)style {
-	/*
-	[self.tableView removeFromSuperview];
-	[self.tableView release];
-
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 0.f, 703.f, 704.f) style:style];
-	self.tableView.separatorColor = [UIColor clearColor];
-	[self.tableView setBackgroundView:nil];
-	[self.tableView setDataSource:self];
-	[self.tableView setDelegate:self];	
-	[self.view addSubview:self.tableView];		
-	 */
-}
-
 -(void)orientationChange:(NSNotification *)orientation { 
 	NSString *o = (NSString *)[orientation object];
 	
@@ -181,7 +172,14 @@
 
 	CGRect f = tableView.frame;
 	f.size.width = appDelegate.appWidth;
-	f.size.height = appDelegate.appHeight - 149.f;	
+
+	if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+		f.size.height = appDelegate.appHeight - 150.f;	
+	} else {
+		f.size.height = appDelegate.appHeight - 200.f;	
+	}
+	
+	
 	tableView.frame = f;		
 	
 	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 150.f)];
@@ -309,7 +307,7 @@
 	
 	return 105.f;
 	} else {
-		return 60.f;
+		return 105.f;
 	}
 	
 }
