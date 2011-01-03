@@ -324,7 +324,7 @@
 
 - (void)dealloc {
 	NSLog(@"ResponsesViewController dealloc");
-		  
+	[[NSNotificationCenter defaultCenter] removeObserver:self];	  
     [super dealloc];
 }
 

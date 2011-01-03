@@ -205,7 +205,7 @@
 
 - (void)dealloc {
 	NSLog(@"CategoriesViewController dealloc");
-		  
+	[[NSNotificationCenter defaultCenter] removeObserver:self];	  
     [super dealloc];
 }
 

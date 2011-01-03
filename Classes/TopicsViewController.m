@@ -120,7 +120,8 @@
 
 - (void)dealloc {
 	NSLog(@"TopicsViewController dealloc");
-		  
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];		  
 	[topics dealloc];
     [super dealloc];
 }

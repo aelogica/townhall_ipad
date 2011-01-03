@@ -283,7 +283,6 @@ NSUInteger currentView;
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 	
 	//int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
-	[questionsViewController switchTableViewStyle:UITableViewStyleGrouped];	
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
 	[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:indexPath.row]];
@@ -303,10 +302,10 @@ NSUInteger currentView;
 	[questionsViewController switchTableViewStyle:UITableViewStylePlain];
 	[self.view addSubview:questionsViewController.view];	
 	[questionsViewController viewDidAppear:NO];
-
+/*
 	NSIndexPath *indexPath = [questionsViewController.tableView indexPathForSelectedRow];
 	[questionsViewController.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-	
+*/	
 	// Set current root view to questions
 	currentView = QuestionsView;
 	[self changeDetailsTitle:@"Responses"];

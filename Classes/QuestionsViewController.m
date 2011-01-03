@@ -129,9 +129,11 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
 
+// Adjust the frame sizes of the various UI controls
 - (void)viewDidAppear:(BOOL)animated {
 	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	// See if this view controller is showing up on the root view pane
 	if(rootViewWidth < 400.f) {
 		[headerView setHidden:YES];
 		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
@@ -143,6 +145,7 @@
 			[toolbar setItems:items];
 		}
 	}
+	// Otherwise set correct frame size for the details pane
 	else {
 		[headerView setHidden:NO];
 		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
@@ -374,7 +377,7 @@
 
 - (void)dealloc {
 	NSLog(@"QuestionsViewController dealloc");
-		  
+	[[NSNotificationCenter defaultCenter] removeObserver:self];	  
     [super dealloc];
 }
 
