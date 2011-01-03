@@ -256,6 +256,9 @@ NSUInteger currentView;
 	[currentItems removeAllObjects];
 	[currentItems addObjectsFromArray:categoriesViewController.categories];
 	[self.tableView reloadData];
+	
+	NSIndexPath *indexPath = [categoriesViewController.tableView indexPathForSelectedRow];
+	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 
 	currentView = CategoriesView;	
 	[self changeDetailsTitle:@"Topics"];
@@ -277,6 +280,7 @@ NSUInteger currentView;
 	[responsesViewController.view removeFromSuperview];
 	
 	NSIndexPath *indexPath = [topicsViewController.tableView indexPathForSelectedRow];
+	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 	
 	//int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController switchTableViewStyle:UITableViewStyleGrouped];	
@@ -300,8 +304,8 @@ NSUInteger currentView;
 	[self.view addSubview:questionsViewController.view];	
 	[questionsViewController viewDidAppear:NO];
 
-	//oldTableView = self.tableView;
-	//self.tableView = questionsViewController.tableView;	
+	NSIndexPath *indexPath = [questionsViewController.tableView indexPathForSelectedRow];
+	[questionsViewController.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 	
 	// Set current root view to questions
 	currentView = QuestionsView;
