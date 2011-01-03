@@ -276,11 +276,13 @@ NSUInteger currentView;
 	[topicsViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
 	
-	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
+	NSIndexPath *indexPath = [topicsViewController.tableView indexPathForSelectedRow];
+	
+	//int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController switchTableViewStyle:UITableViewStyleGrouped];	
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
-	[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:pass]];
+	[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:indexPath.row]];
 	
 	[detailViewController.view addSubview:questionsViewController.view];	
 	[questionsViewController viewDidAppear:NO];
