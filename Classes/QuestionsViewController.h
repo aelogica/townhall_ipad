@@ -12,6 +12,7 @@
 @class Topic;
 
 @interface QuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+	UITableView* tableView;
 	NSMutableArray *questions;
 	NSInteger currentPage;
 	NSString *currentSortColumn;
@@ -24,7 +25,7 @@
 	UILabel *topicName;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView* tableView;
+@property (nonatomic, retain) UITableView* tableView;
 @property(nonatomic, retain) NSMutableArray *questions;
 @property(nonatomic, retain) UIView *headerView;
 @property(nonatomic, retain) UIToolbar *toolbar;

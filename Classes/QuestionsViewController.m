@@ -10,10 +10,9 @@
 #import "Question.h"
 #import "GTMHTTPFetcher.h"
 #import "GenericTownHallAppDelegate.h"
-#import "QuestionGroupedCell.h"
-#import "QuestionPlainCell.h"
 #import "AsynchImageView.h"
 #import "RootViewQuestionCell.h"
+#import "DetailViewQuestionCell.h"
 #import "Topic.h"
 #import "QuestionDialog.h"
 
@@ -73,7 +72,7 @@
 	//Add buttons
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"]  
 																style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
-	button1.tag = @"interest";
+	button1.tag = (NSString*)@"interest";
 
 	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] 
 																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
@@ -115,7 +114,7 @@
 	
 	// Create the UI for this view
 	//[self switchTableViewStyle:UITableViewStylePlain];	
-	tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
 	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
 	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
 	[tableView setBackgroundView:nil];
@@ -130,7 +129,6 @@
 
 // Adjust the frame sizes of the various UI controls
 - (void)viewDidAppear:(BOOL)animated {
-	NSLog(@"viewdidappear");
 	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	// See if this view controller is showing up on the root view pane
@@ -198,9 +196,7 @@
 }
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
-	
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
-	
+
 	QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
 	[dialog setupView:currentTopic];
 	
@@ -246,7 +242,7 @@
 		if (superViewWidth > 400.f) {
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];	
 			if (cell == nil) {					
-				cell = [[[BaseQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[[DetailViewQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 			}	
 		} else {
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];	
@@ -307,7 +303,7 @@
 	
 	return 105.f;
 	} else {
-		return 105.f;
+		return 50.f;
 	}
 	
 }

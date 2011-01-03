@@ -42,8 +42,8 @@
 	
 	// Create textview and put right after the table view
 	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, bodyFrame.origin.y + bodyFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 100.f)];
-	textView.backgroundColor = UIColorFromRGB(0x87CEFA);
-	textView.tag = 1;
+	[textView setBackgroundColor: UIColorFromRGB(0x87CEFA)];
+	[textView setFont:[UIFont systemFontOfSize:16]];
 	[textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
 	[textView.layer setBorderColor: [[UIColor grayColor] CGColor]];
 	[textView.layer setBorderWidth: 1.f];

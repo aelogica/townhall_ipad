@@ -20,11 +20,13 @@
 	[loginField setBorderStyle: UITextBorderStyleRoundedRect];
 	[loginField setPlaceholder:@"Enter your username"];
 	[self addSubview:loginField];		
+	[loginField release];
 	
 	UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(padding, loginField.frame.size.height + loginField.frame.origin.y + padding, self.frame.size.width - (padding * 2.f), 30.f)];
 	[passwordField setBorderStyle: UITextBorderStyleRoundedRect];
 	[passwordField setPlaceholder:@"Enter your password"];
 	[self addSubview:passwordField];		
+	[passwordField release];
 	
 }
 

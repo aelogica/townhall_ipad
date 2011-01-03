@@ -41,6 +41,8 @@
 @property (nonatomic, retain) UIView *dimmer;
 @property (nonatomic, retain) UITableView *oldTableView;
 
+-(void)changeToHome;
+-(void)changeToTopics:(NSNotification *)pUserInfo;
 -(void)changeDetailsTitle:(NSString*)newTitle;
 -(void)changeToCategories:(NSNotification *)pUserInfo;
 

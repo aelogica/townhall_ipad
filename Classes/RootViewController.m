@@ -101,8 +101,7 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_left_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_circle_right_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshButtonPressed:)];
-	//UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"comment_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(postButtonPressed:)];
-	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
+                                                                                                                                                                                                                                                                 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
 	UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"man_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(profileButtonPressed:)];
 	
 	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, loginButton, profileButton, nil]];
@@ -134,48 +133,10 @@ NSUInteger currentView;
 }
 
 -(void)loginButtonPressed:(UIBarButtonItem *)button {
-	// Dim the background
-	[self.view.window addSubview:dimmer];
-	
 	LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
 	[dialog setupView:nil];
-	[dialog setCenter:self.view.window.center];
-	[dialog setAlpha:0.f];
-	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(.2f, .2f), CGAffineTransformMakeRotation(4.71))];
-	
-	[self.view.window addSubview:dialog];
-	
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.7f];
-	[dimmer setAlpha:0.5f];	
-	[dialog setAlpha:1.f];
-	[dialog setTransform: CGAffineTransformConcat(CGAffineTransformMakeScale(1.f, 1.f), CGAffineTransformMakeRotation(1.57))];
-	[UIView commitAnimations];
-	[dialog release];
-}
-
-
-
--(void)postButtonPressed:(UIBarButtonItem *)button {
-	if(currentView != TopicsView && currentView != QuestionsView) {
-		return;
-	}
-
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
-	BaseDialog *dialog = nil;
-	
-	if(currentView == TopicsView){
-		dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
-		[dialog setupView:(Topic*)[currentItems objectAtIndex:indexPath.row]];
-	} else if (currentView == QuestionsView) {
-		dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
-		[dialog setupView:(Question*)[currentItems objectAtIndex:indexPath.row]];
-	}
-	
 	[dialog doAppearAnimation: self.view.window];	
 	[self.view.window addSubview:dialog];
-
-
 	[dialog release];
 }
 
@@ -304,7 +265,6 @@ NSUInteger currentView;
 	[currentItems addObjectsFromArray:questionsViewController.questions];
 	[self.tableView reloadData];	
 	
-	[questionsViewController switchTableViewStyle:UITableViewStylePlain];
 	[self.view addSubview:questionsViewController.view];	
 	[questionsViewController viewDidAppear:NO];
 /*
