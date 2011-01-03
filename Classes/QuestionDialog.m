@@ -86,6 +86,7 @@
 */
 
 - (void)dealloc {
+	NSLog(@"QustionDialog dealloc");
     [super dealloc];
 }
 

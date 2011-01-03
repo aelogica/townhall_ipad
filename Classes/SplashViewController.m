@@ -114,6 +114,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"SplashViewController dealloc");
+		  
     [super dealloc];
 }
 

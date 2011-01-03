@@ -204,6 +204,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"CategoriesViewController dealloc");
+		  
     [super dealloc];
 }
 

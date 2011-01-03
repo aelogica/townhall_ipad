@@ -60,6 +60,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"ProfileViewController dealloc");
+		  
     [super dealloc];
 }
 

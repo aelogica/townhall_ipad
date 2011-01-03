@@ -119,6 +119,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"TopicsViewController dealloc");
+		  
 	[topics dealloc];
     [super dealloc];
 }

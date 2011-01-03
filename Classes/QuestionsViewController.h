@@ -21,6 +21,7 @@
 	UIView *headerView;
 	UIToolbar *toolbar;
 	UIBarButtonItem *postButton;
+	UILabel *topicName;
 }
 
 -(void)switchTableViewStyle:(UITableViewStyle)style;

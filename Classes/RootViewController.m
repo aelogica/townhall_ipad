@@ -499,6 +499,8 @@ NSUInteger currentView;
 
 
 - (void)dealloc {
+	NSLog(@"RootViewController dealloc");
+		  
 	[currentItems release];	
 	[categories release];
 	[dimmer release];

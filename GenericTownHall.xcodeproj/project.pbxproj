@@ -110,6 +110,7 @@
 		194D385812CB78F800E3111B /* vote_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vote_box.png; path = DESIGN/vote_box.png; sourceTree = "<group>"; };
 		194D38E712CB811200E3111B /* placeholder_topic_bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder_topic_bw.png; path = DESIGN/placeholder_topic_bw.png; sourceTree = "<group>"; };
 		194D38E812CB811200E3111B /* placeholder2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder2.png; path = DESIGN/placeholder2.png; sourceTree = "<group>"; };
+		1958D62D12D1D71200EDF7B3 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		197A85E512CDDB180044216C /* splash-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splash-landscape.png"; path = "DESIGN/splash-landscape.png"; sourceTree = "<group>"; };
 		197A85E612CDDB180044216C /* splash-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splash-portrait.png"; path = "DESIGN/splash-portrait.png"; sourceTree = "<group>"; };
 		1995F8C012CC607600C557BF /* ResponseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseCell.h; sourceTree = "<group>"; };
@@ -269,6 +270,7 @@
 				63C7D62512BB6E1000F18706 /* SplashViewController.m */,
 				194D357412CB15C500E3111B /* ProfileViewController.h */,
 				194D357512CB15C500E3111B /* ProfileViewController.m */,
+				1958D62D12D1D71200EDF7B3 /* Entitlements.plist */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -620,13 +622,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AELOGICA LLC";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4C2C3A58-4DDC-47A7-A768-8A1070C9C416";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -636,6 +638,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Documents/townhall_ipad/Classes/Entitlements.plist";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -651,7 +654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/Development/townhall_ipad/Classes/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "~/Documents/townhall_ipad/Classes/Entitlements.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -666,7 +669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/Development/townhall_ipad/Classes/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "~/Documents/townhall_ipad/Classes/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GenericTownHall_Prefix.pch;
@@ -680,12 +683,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Steven Smith (2WYY3533D4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Ang (4P88X5APUD)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5225CE7F-F17C-4924-840F-EEBBB5AF7C6E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F0AB623-E60F-4EA2-B893-70E8AF0B5D0D";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};

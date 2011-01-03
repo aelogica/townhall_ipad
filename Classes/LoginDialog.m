@@ -55,6 +55,7 @@
 */
 
 - (void)dealloc {
+	NSLog(@"LoginDialog dealloc");
     [super dealloc];
 }
 

@@ -162,6 +162,7 @@
 */
 
 - (void)dealloc {
+	NSLog(@"DetailsViewController dealloc");
     [popoverController release];
     [toolbar release];
     

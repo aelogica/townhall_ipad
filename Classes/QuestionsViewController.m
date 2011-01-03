@@ -38,8 +38,7 @@
 
 	questions = [[NSMutableArray alloc] init];
 	currentPage = 1;
-	currentSortColumn = @"date";
-	
+	currentSortColumn = @"date";	
 
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
@@ -50,11 +49,10 @@
 	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, appDelegate.appWidth, 100.f)];
 	[headerView setBackgroundColor:[UIColor blackColor]];
 	
-	UILabel *categoryName = [[UILabel alloc] initWithFrame:CGRectMake(270.f, 10.f, 200.f, 25.f)];
-	categoryName.text = @"Motorcycle Category";
-	categoryName.font = [UIFont systemFontOfSize:20];
-	categoryName.backgroundColor = [UIColor clearColor];
-	categoryName.textColor = [UIColor redColor];
+	topicName = [[UILabel alloc] initWithFrame:CGRectMake(270.f, 10.f, 200.f, 25.f)];
+	topicName.font = [UIFont systemFontOfSize:20];
+	topicName.backgroundColor = [UIColor clearColor];
+	topicName.textColor = [UIColor redColor];
 	
 	UIImageView *placeholder1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder_topic_bw.png"]];
 	placeholder1.frame = CGRectMake(40.f, 10.f, 171.0, 77.0);									
@@ -62,7 +60,7 @@
 	UIImageView *placeholder2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder2.png"]];
 	placeholder2.frame = CGRectMake(500.f, 10.f, 180.0, 76.0);									
 
-	[headerView addSubview:categoryName];
+	[headerView addSubview:topicName];
 	[headerView addSubview:placeholder1];
 	[headerView addSubview:placeholder2];
 	[self.view addSubview:headerView];
@@ -264,14 +262,31 @@
 		[backgroundView setBackgroundColor:[UIColor blackColor]];
 		cell.backgroundView = backgroundView;
 		
+		UIView *selectedBackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+		selectedBackgroundView.backgroundColor = UIColorFromRGB(0x93c843);
+		selectedBackgroundView.alpha = 0.3f;	
+		selectedBackgroundView.opaque = NO;
+		cell.selectedBackgroundView = selectedBackgroundView;		
+		
+		CGRect labelFrame = CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 12.f, 200.f, 25.f);
 		UILabel *label = [[UILabel alloc] init];
-		[label setFrame:CGRectMake(self.tableView.frame.size.width/2.f - 100.f, 12.f, 200.f, 25.f)];
+		[label setFrame:labelFrame];
 		[label setFont:[UIFont systemFontOfSize:16]];
 		[label setTextColor:[UIColor whiteColor]];
 		[label setBackgroundColor:[UIColor clearColor]];
 		[label setText:@"Load more"];
 		[backgroundView addSubview:label];
 		[label release];		
+		
+		UILabel *selectedBackgroundLabel = [[UILabel alloc] init];
+		[selectedBackgroundLabel setFrame:labelFrame];
+		[selectedBackgroundLabel setFont:[UIFont systemFontOfSize:16]];
+		[selectedBackgroundLabel setTextColor:[UIColor whiteColor]];
+		[selectedBackgroundLabel setBackgroundColor:[UIColor clearColor]];
+		[selectedBackgroundLabel setText:@"Load more"];
+		[selectedBackgroundView addSubview:selectedBackgroundLabel];
+		[selectedBackgroundLabel release];		
+		
 	}
 
 	cell.accessoryType = UITableViewCellAccessoryNone;
@@ -305,7 +320,7 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
 	} else {
 		self.currentPage++;
-		[self fetchQuestions: currentTopic.slug];
+		[self fetchQuestions: currentTopic];
 	}
 }
 
@@ -358,6 +373,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"QuestionsViewController dealloc");
+		  
     [super dealloc];
 }
 
@@ -370,6 +387,7 @@
 
 -(void)fetchQuestions :(Topic *) aTopic {
 	currentTopic = aTopic;
+	topicName.text = currentTopic.name;
 
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=%@", 
 						UIAppDelegate.serverDataUrl, currentTopic.slug, currentPage, currentSortColumn]];

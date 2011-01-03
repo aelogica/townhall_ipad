@@ -103,7 +103,7 @@
 		CGRect frame;
 		frame.size.width=50; frame.size.height=42;
 		frame.origin.x=1.f; frame.origin.y=5;
-		avatarImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
+		//avatarImage = [[[AsyncImageView alloc] initWithFrame:frame] autorelease];
 		//[self.contentView addSubview:avatarImage];	
     }
     return self;
@@ -212,7 +212,7 @@
 	voteUpMeterDimmer.frame = voteUpFrame;
 	voteDownMeterDimmer.frame = voteDownFrame;	
 
-	[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
+	//[avatarImage loadImageFromURL:[NSURL URLWithString:aQuestion.nuggetOriginator.avatar]];
 	
 }
 

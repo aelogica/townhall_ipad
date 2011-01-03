@@ -323,6 +323,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"ResponsesViewController dealloc");
+		  
     [super dealloc];
 }
 

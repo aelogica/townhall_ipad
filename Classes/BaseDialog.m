@@ -196,6 +196,7 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 */
 
 - (void)dealloc {
+	NSLog(@"BaseDialog dealloc");
     [super dealloc];
 }
 
