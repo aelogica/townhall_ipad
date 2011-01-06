@@ -52,10 +52,10 @@
 	author.text = [NSString stringWithFormat:@"Posted by %@ at %@", aQuestion.nuggetOriginator.displayName, aQuestion.dateCreatedFormatted];
 	responseCount.text = [NSString stringWithFormat:@"%@", aQuestion.responseCount];
 	userPoints.text = [NSString stringWithFormat:@"%@ pts", aQuestion.nuggetOriginator.userReputationString];
-	//voteUpButton.tag = (int)aQuestion.nuggetId;
-	//voteDownButton.tag = (int)aQuestion.nuggetId;
-	//[voteUpButton setSelected: NO];
-	//[voteDownButton setSelected: NO];	
+	voteUpButton.tag = (int)aQuestion.nuggetId;
+	voteDownButton.tag = (int)aQuestion.nuggetId;
+	[voteUpButton setSelected: NO];
+	[voteDownButton setSelected: NO];	
 	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	CGFloat voteBarStartX = 600.f;

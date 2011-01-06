@@ -23,12 +23,13 @@
 	float navbarHeight = 44.f;
 	
 	CGSize size = [question.body sizeWithFont:[UIFont systemFontOfSize:14.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-	CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 20.f);
+	CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 40.f);
 	CGRect bodyFrame = CGRectMake(padding, navbarHeight + nameFrame.size.height + padding, self.frame.size.width - (padding * 2.f), size.height);
 	
 	UILabel *name = [[UILabel alloc] initWithFrame:nameFrame];
 	name.text = [NSString stringWithFormat:@"Adding response to: %@", question.subject];
-	name.font = [UIFont systemFontOfSize:14.f];		
+	name.font = [UIFont systemFontOfSize:24.f];		
+	[name setBackgroundColor:[UIColor clearColor]];
 	[self addSubview:name];
 	[name release];
 	
@@ -36,14 +37,14 @@
 	body.numberOfLines = 0;
 	body.lineBreakMode = UILineBreakModeWordWrap;
 	body.text = question.body;
-	body.font = [UIFont systemFontOfSize:14.f];
-	[self addSubview:body];
+	body.font = [UIFont systemFontOfSize:18.f];
+	//[self addSubview:body];
 	[body release];		
 	
 	// Create textview and put right after the table view
-	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, bodyFrame.origin.y + bodyFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 100.f)];
+	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, nameFrame.origin.y + nameFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 140.f)];
 	[textView setBackgroundColor: UIColorFromRGB(0x87CEFA)];
-	[textView setFont:[UIFont systemFontOfSize:16]];
+	[textView setFont:[UIFont systemFontOfSize:22.f]];
 	[textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
 	[textView.layer setBorderColor: [[UIColor grayColor] CGColor]];
 	[textView.layer setBorderWidth: 1.f];

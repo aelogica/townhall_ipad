@@ -131,7 +131,7 @@
 	
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
 	
-	ResponseDialog * dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
+	ResponseDialog * dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
 	[dialog setupView:currentQuestion];
 	
 	[dialog doAppearAnimation: self.view.window];	

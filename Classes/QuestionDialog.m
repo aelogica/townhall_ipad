@@ -23,12 +23,13 @@
 	float navbarHeight = 44.f;
 	
 	CGSize size = [topic.description sizeWithFont:[UIFont systemFontOfSize:14.f] constrainedToSize:CGSizeMake(500.f, MAXFLOAT)];
-	CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 20.f);
+	CGRect nameFrame = CGRectMake(padding, navbarHeight + padding, self.frame.size.width - (padding * 2.f), 30.f);
 	CGRect bodyFrame = CGRectMake(padding, navbarHeight + nameFrame.size.height + padding, self.frame.size.width - (padding * 2.f), size.height);
 	
 	UILabel *name = [[UILabel alloc] initWithFrame:nameFrame];
 	name.text = [NSString stringWithFormat:@"Adding question to: %@", topic.name];
-	name.font = [UIFont systemFontOfSize:14.f];		
+	name.font = [UIFont systemFontOfSize:22.f];
+	[name setBackgroundColor:[UIColor clearColor]];	
 	[self addSubview:name];
 	[name release];
 	
@@ -36,14 +37,15 @@
 	body.numberOfLines = 0;
 	body.lineBreakMode = UILineBreakModeWordWrap;
 	body.text = topic.description;
-	body.font = [UIFont systemFontOfSize:14.f];
-	[self addSubview:body];
+	body.font = [UIFont systemFontOfSize:22.f];
+	[body setBackgroundColor:[UIColor clearColor]];
+	//[self addSubview:body];
 	[body release];
 	
 	// Create textview and put right after the table view
-	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, bodyFrame.origin.y + bodyFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 100.f)];
+	UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(padding, bodyFrame.origin.y + bodyFrame.size.height + padding, self.frame.size.width - (padding * 2.f), 140.f)];
 	[textView setBackgroundColor: UIColorFromRGB(0x87CEFA)];
-	[textView setFont:[UIFont systemFontOfSize:16]];
+	[textView setFont:[UIFont systemFontOfSize:20]];
 	[textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
 	[textView.layer setBorderColor: [[UIColor grayColor] CGColor]];
 	[textView.layer setBorderWidth: 1.f];
@@ -53,7 +55,8 @@
 	[self addSubview:textView];
 	[textView release];
 	
-	UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(padding, textView.frame.size.height + textView.frame.origin.y + padding, self.frame.size.width - (padding * 2.f), 30.f)];
+	UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(padding, textView.frame.size.height + textView.frame.origin.y + padding, self.frame.size.width - (padding * 2.f), 35.f)];
+	[textField setFont:[UIFont systemFontOfSize:20]];
 	[textField setBorderStyle: UITextBorderStyleRoundedRect];
 	[textField setPlaceholder:@"Enter tags for this question"];
 	[self addSubview:textField];

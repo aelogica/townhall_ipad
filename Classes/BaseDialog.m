@@ -45,6 +45,14 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 		
 		// Listen to orientaton changes
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWillShow:)
+													 name:UIKeyboardWillShowNotification object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWillHide:)
+													 name:UIKeyboardWillHideNotification object:nil];
+		
 
     }
     return self;
@@ -183,8 +191,39 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 -(NSString *)getLeftButtonTitle {
 	return @"Cancel";
 }
-				   
-				   
+		
+- (void)keyboardWillShow:(NSNotification*)aNotification
+{
+	[UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5]; // if you want to slide up the view
+	
+	UIDeviceOrientation aorientation = [[UIDevice currentDevice] orientation];
+    switch (aorientation) {
+		case UIInterfaceOrientationLandscapeLeft:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeTranslation(0.f, -150.f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeTranslation(0.f, -150.f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
+            break;
+    }	
+    [UIView commitAnimations];
+}
+
+- (void) keyboardWillHide:(NSNotification*)aNotification {
+	[UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5]; // if you want to slide up the view
+
+	UIDeviceOrientation aorientation = [[UIDevice currentDevice] orientation];
+    switch (aorientation) {
+		case UIInterfaceOrientationLandscapeLeft:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeTranslation(0.f, 0.f), CGAffineTransformMakeRotation(DegreesToRadians(270)))];
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			[self setTransform: CGAffineTransformConcat(CGAffineTransformMakeTranslation(0.f, 0.f), CGAffineTransformMakeRotation(DegreesToRadians(90)))];
+            break;
+    }	
+    [UIView commitAnimations];
+}
 				   
 				   
 /*

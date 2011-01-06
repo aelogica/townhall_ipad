@@ -70,24 +70,19 @@
 	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
 	
 	//Add buttons
-	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"]  
-																style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
+	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
 	button1.tag = (NSString*)@"interest";
 
-	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
+	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
 	button2.tag = @"date";
 
-	UIBarButtonItem *button3 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-totalvotes-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
+	UIBarButtonItem *button3 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-totalvotes-off.png"] style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
 	button3.tag = @"votes";
 
-	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] 
-																	style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
+	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
 	button4.tag = @"responses";
 	
-	postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post question" 
-																style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
+	postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post question" style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
 	
 	
 	
@@ -197,7 +192,7 @@
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
 
-	QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 400.f)];
+	QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
 	[dialog setupView:currentTopic];
 	
 	[dialog doAppearAnimation: self.view.window];	
@@ -372,6 +367,10 @@
 - (void)dealloc {
 	NSLog(@"QuestionsViewController dealloc");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];	  
+	[tableView dealloc];
+	[toolbar dealloc];
+	[postButton dealloc];
+	[topicName dealloc];
     [super dealloc];
 }
 

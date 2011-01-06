@@ -101,10 +101,13 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_left_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_circle_right_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshButtonPressed:)];
-                                                                                                                                                                                                                                                                 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
+
+	loginButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"key_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonPressed:)];
+	logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutButtonPressed:)];
+	
 	UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"man_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(profileButtonPressed:)];
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, loginButton, profileButton, nil]];
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, loginButton, nil]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
@@ -123,9 +126,10 @@ NSUInteger currentView;
 	
 	// Set to categories view on launch app
 	[detailViewController.view addSubview:categoriesViewController.view];
-	
-
-	
+	[flexibleSpace release];
+	[backButton release];
+	[refreshButton release];
+	[profileButton release];	
 }
 
 -(void)homeButtonPressed:(UIBarButtonItem *)button {
@@ -133,7 +137,7 @@ NSUInteger currentView;
 }
 
 -(void)loginButtonPressed:(UIBarButtonItem *)button {
-	LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 250.f)];
+	LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 20.f, 600.f, 250.f)];
 	[dialog setupView:nil];
 	[dialog doAppearAnimation: self.view.window];	
 	[self.view.window addSubview:dialog];
@@ -470,7 +474,8 @@ NSUInteger currentView;
 
 - (void)dealloc {
 	NSLog(@"RootViewController dealloc");
-		  
+	[loginButton release];
+	[logoutButton release];
 	[currentItems release];	
 	[categories release];
 	[dimmer release];

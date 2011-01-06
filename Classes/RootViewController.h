@@ -25,6 +25,8 @@
 	
 	UIView *dimmer;
 	UITableView *oldTableView;
+	UIBarButtonItem *loginButton;
+	UIBarButtonItem *logoutButton; 
 
 	NSMutableArray *categories;
 	NSMutableArray *currentItems;
@@ -40,6 +42,8 @@
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic, retain) UIView *dimmer;
 @property (nonatomic, retain) UITableView *oldTableView;
+@property (nonatomic, retain) UIBarButtonItem *loginButton;
+@property (nonatomic, retain) UIBarButtonItem *logoutButton;
 
 -(void)changeToHome;
 -(void)changeToTopics:(NSNotification *)pUserInfo;

@@ -16,14 +16,19 @@
 -(void) setupView:(id*)aModel {
 	float padding = 10.f;
 	
-	UITextField *loginField = [[UITextField alloc] initWithFrame:CGRectMake(padding, 44.f + padding, self.frame.size.width - (padding * 2.f), 30.f)];
+	UITextField *loginField = [[UITextField alloc] initWithFrame:CGRectMake(padding, 44.f + padding, self.frame.size.width - (padding * 2.f), 55.f)];
 	[loginField setBorderStyle: UITextBorderStyleRoundedRect];
+	[loginField setFont:[UIFont systemFontOfSize:40]];
+	[loginField setAutocorrectionType:UITextAutocorrectionTypeNo];
+	[loginField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 	[loginField setPlaceholder:@"Enter your username"];
 	[self addSubview:loginField];		
 	[loginField release];
 	
-	UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(padding, loginField.frame.size.height + loginField.frame.origin.y + padding, self.frame.size.width - (padding * 2.f), 30.f)];
+	UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(padding, loginField.frame.size.height + loginField.frame.origin.y + padding, self.frame.size.width - (padding * 2.f), 55.f)];
 	[passwordField setBorderStyle: UITextBorderStyleRoundedRect];
+	[passwordField setFont:[UIFont systemFontOfSize:40]];
+	[passwordField setSecureTextEntry:YES];
 	[passwordField setPlaceholder:@"Enter your password"];
 	[self addSubview:passwordField];		
 	[passwordField release];
@@ -46,6 +51,10 @@
 }
 -(NSString *)getRightButtonTitle {
 	return @"Login";
+}
+
+- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
+	[super postRequestHandler:fetcher finishedWithData:retrievedData error:error];
 }
 
 /*
