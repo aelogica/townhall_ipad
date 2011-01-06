@@ -129,16 +129,22 @@
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
 	
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
-	
-	ResponseDialog * dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
-	[dialog setupView:currentQuestion];
-	
-	[dialog doAppearAnimation: self.view.window];	
-	[self.view.window addSubview:dialog];
-	
-	
-	[dialog release];
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	if(appDelegate.isLogin == NO) {
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Please login before you post a response." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
+		[alert show];
+	} else {
+		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
+		
+		ResponseDialog * dialog = [[ResponseDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
+		[dialog setupView:currentQuestion];
+		
+		[dialog doAppearAnimation: self.view.window];	
+		[self.view.window addSubview:dialog];
+		
+		
+		[dialog release];
+	}
 }
 
 #pragma mark Event listener methods

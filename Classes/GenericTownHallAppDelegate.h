@@ -40,6 +40,7 @@ CGFloat DegreesToRadians(CGFloat degrees);
 	UIInterfaceOrientation currentOrientation;
 	CGFloat appWidth;
 	CGFloat appHeight;
+	BOOL isLogin;
 
 }
 
@@ -54,5 +55,6 @@ CGFloat DegreesToRadians(CGFloat degrees);
 @property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
 @property (nonatomic, assign) CGFloat appWidth;
 @property (nonatomic, assign) CGFloat appHeight;
+@property (nonatomic, assign) BOOL isLogin;
 
 @end

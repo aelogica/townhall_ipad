@@ -18,7 +18,7 @@
 @implementation GenericTownHallAppDelegate
 
 @synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, splashViewController;
-@synthesize currentOrientation, appWidth, appHeight;
+@synthesize currentOrientation, appWidth, appHeight, isLogin;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -31,6 +31,7 @@
 	// Set to default landscape width/height
 	appWidth = 703.f;
 	appHeight = 748.f;	
+	isLogin = NO;
 	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];

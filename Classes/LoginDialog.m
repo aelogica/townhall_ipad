@@ -36,7 +36,7 @@
 }
 
 -(NSString *)getRequestUrl {
-	return [NSString stringWithFormat:@"%@/account/authenticate?format=xml", UIAppDelegate.serverBaseUrl];
+	return [NSString stringWithFormat:@"%@/account/authenticate?format=json", UIAppDelegate.serverBaseUrl];
 }
 
 -(NSString *)getRequestParameters { 
@@ -55,6 +55,18 @@
 
 - (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
 	[super postRequestHandler:fetcher finishedWithData:retrievedData error:error];
+	
+	// Store incoming data into a string
+	NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];
+	
+	// Create an array out of the returned json string
+	NSArray *results = [jsonString JSONValue];
+	if ([results count] > 10) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoginSuccess" object:nil userInfo:nil];
+	} else {
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Invalid login credentials. Please try logging in again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
+		[alert show];
+	}
 }
 
 /*

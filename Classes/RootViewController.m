@@ -113,6 +113,7 @@ NSUInteger currentView;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToQuestions:) name:@"ChangeToQuestions" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dialogClose:) name:@"DialogClose" object:nil]; 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginSuccess:) name:@"UserLoginSuccess" object:nil]; 	
 	
 	UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(homeButtonPressed:)];          	
 	self.navigationItem.leftBarButtonItem = homeButton;
@@ -143,6 +144,26 @@ NSUInteger currentView;
 	[self.view.window addSubview:dialog];
 	[dialog release];
 }
+
+-(void)logoutButtonPressed:(UIBarButtonItem *)button {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/account/logoff", UIAppDelegate.serverDataUrl]];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	
+	[request setHTTPMethod:@"GET"];
+	
+	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
+	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(logoutRequestHandler:finishedWithData:error:)];	   	
+}
+
+- (void)logoutRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
+	NSMutableArray * items = [NSMutableArray arrayWithArray:detailViewController.toolbar.items];
+	[items replaceObjectAtIndex:5  withObject:loginButton];
+	[detailViewController.toolbar setItems:items];
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.isLogin = NO;	
+}
+
 
 -(void)profileButtonPressed:(UIBarButtonItem *)button {
 	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Sorry feature unavaialble yet." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
@@ -178,6 +199,17 @@ NSUInteger currentView;
 	else if( currentView == QuestionsView) {
 		[responsesViewController fetchResponses:questionsViewController.currentQuestion];	
 	}
+}
+
+-(void)userLoginSuccess:(NSNotification *)pUserInfo { 
+	NSLog(@"success");
+	
+	NSMutableArray * items = [NSMutableArray arrayWithArray:detailViewController.toolbar.items];
+	[items replaceObjectAtIndex:5  withObject:logoutButton];
+	[detailViewController.toolbar setItems:items];
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.isLogin = YES;
 }
 
 
