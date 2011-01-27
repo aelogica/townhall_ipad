@@ -22,6 +22,7 @@
 	[loginField setAutocorrectionType:UITextAutocorrectionTypeNo];
 	[loginField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 	[loginField setPlaceholder:@"Enter your username"];
+	[loginField setDelegate:self];
 	[self addSubview:loginField];		
 	[loginField release];
 	
@@ -30,9 +31,17 @@
 	[passwordField setFont:[UIFont systemFontOfSize:40]];
 	[passwordField setSecureTextEntry:YES];
 	[passwordField setPlaceholder:@"Enter your password"];
+	[passwordField setDelegate:self];
 	[self addSubview:passwordField];		
 	[passwordField release];
 	
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	NSLog(@"textFieldShouldReturn");
+	
+	[super rightButtonPressed:nil];
+    return NO;
 }
 
 -(NSString *)getRequestUrl {

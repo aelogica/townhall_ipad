@@ -33,6 +33,7 @@
 @synthesize categories, currentItems;
 @synthesize dimmer;
 @synthesize oldTableView;
+@synthesize loginButton, logoutButton;
 
 enum {
 	CategoriesView, TopicsView, QuestionsView, ResponsesView
@@ -52,7 +53,7 @@ NSUInteger currentView;
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	appDelegate.currentOrientation = [[UIDevice currentDevice] orientation];
 	
-	[appDelegate.progressHUD hideUsingAnimation:YES];
+	//[appDelegate.progressHUD hideUsingAnimation:YES];
 	
 	
 	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
@@ -107,7 +108,7 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"man_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(profileButtonPressed:)];
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, loginButton, nil]];
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, nil]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
@@ -157,7 +158,8 @@ NSUInteger currentView;
 
 - (void)logoutRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
 	NSMutableArray * items = [NSMutableArray arrayWithArray:detailViewController.toolbar.items];
-	[items replaceObjectAtIndex:5  withObject:loginButton];
+	[items removeLastObject];
+	//[items replaceObjectAtIndex:5  withObject:loginButton];
 	[detailViewController.toolbar setItems:items];
 	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -202,10 +204,9 @@ NSUInteger currentView;
 }
 
 -(void)userLoginSuccess:(NSNotification *)pUserInfo { 
-	NSLog(@"success");
-	
 	NSMutableArray * items = [NSMutableArray arrayWithArray:detailViewController.toolbar.items];
-	[items replaceObjectAtIndex:5  withObject:logoutButton];
+	//[items replaceObjectAtIndex:5  withObject:logoutButton];
+	[items addObject:logoutButton];
 	[detailViewController.toolbar setItems:items];
 	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -213,6 +214,17 @@ NSUInteger currentView;
 }
 
 
+-(void)changeDetailsRootButtonTitle:(NSString *)newTitle {
+	UIToolbar *toolbar = [detailViewController toolbar];
+	NSMutableArray *items = [[toolbar items] mutableCopy];
+	UIBarButtonItem *barButtonItem = [items objectAtIndex:0];
+	[barButtonItem setTitle:newTitle];
+    [items replaceObjectAtIndex:0 withObject:barButtonItem];
+    [toolbar setItems:items animated:YES];
+    [items release];	
+}
+
+	
 -(void)changeDetailsTitle:(NSString *)newTitle {
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120.f, 44.f)];	
 	label.textAlignment = UITextAlignmentCenter;
@@ -259,15 +271,18 @@ NSUInteger currentView;
 	[currentItems addObjectsFromArray:categoriesViewController.categories];
 	[self.tableView reloadData];
 	
+	// Make sure the selected row stays highlighted
 	NSIndexPath *indexPath = [categoriesViewController.tableView indexPathForSelectedRow];
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+	
+	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
+	Category *category = (Category*)[categoriesViewController.categories objectAtIndex:index];
+	[topicsViewController fetchTopics: [category slug]];		
+	[detailViewController.view addSubview:topicsViewController.view];	
 
 	currentView = CategoriesView;	
 	[self changeDetailsTitle:@"Topics"];
-
-	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue]	;
-	[topicsViewController fetchTopics: [(Category*)[categoriesViewController.categories objectAtIndex:pass] slug]];		
-	[detailViewController.view addSubview:topicsViewController.view];	
+	[self changeDetailsRootButtonTitle:[category name]];
 }
 
 -(void)changeToTopics:(NSNotification *)pUserInfo { 
@@ -277,6 +292,7 @@ NSUInteger currentView;
 	
 	currentView = TopicsView;
 	[self changeDetailsTitle:@"Questions"];
+	[self changeDetailsRootButtonTitle:@"Topics"];
 
 	[topicsViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
@@ -310,9 +326,10 @@ NSUInteger currentView;
 	// Set current root view to questions
 	currentView = QuestionsView;
 	[self changeDetailsTitle:@"Responses"];
+	[self changeDetailsRootButtonTitle:@"Questions"];
 	
-	int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue]	;
-	[responsesViewController fetchResponses: (Question*)[questionsViewController.questions objectAtIndex:pass]];	
+	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue]	;
+	[responsesViewController fetchResponses: (Question*)[questionsViewController.questions objectAtIndex:index];	
 
 	// Show the response view controller
 	//[questionsViewController.view removeFromSuperview];

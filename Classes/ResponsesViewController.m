@@ -12,6 +12,7 @@
 #import "Question.h"
 #import "ResponseCell.h"
 #import "Response.h"
+#import "LoginDialog.h"
 #import "ResponseDialog.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -131,8 +132,11 @@
 	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	if(appDelegate.isLogin == NO) {
-		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Please login before you post a response." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
-		[alert show];
+		LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 20.f, 600.f, 250.f)];
+		[dialog setupView:nil];
+		[dialog doAppearAnimation: self.view.window];	
+		[self.view.window addSubview:dialog];
+		[dialog release];
 	} else {
 		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];	
 		

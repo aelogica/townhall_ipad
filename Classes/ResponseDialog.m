@@ -60,7 +60,7 @@
 }
 
 -(NSString *)getRequestParameters { 
-	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:3];
+	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:2];
 	
 	return [NSString stringWithFormat:@"body=%@", [textView text]];
 }

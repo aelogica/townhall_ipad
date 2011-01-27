@@ -14,6 +14,7 @@
 #import "RootViewQuestionCell.h"
 #import "DetailViewQuestionCell.h"
 #import "Topic.h"
+#import "LoginDialog.h"
 #import "QuestionDialog.h"
 
 @implementation QuestionsViewController
@@ -194,8 +195,11 @@
 
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	if(appDelegate.isLogin == NO) {
-		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Please login before you post a question." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
-		[alert show];
+		LoginDialog *dialog = [[LoginDialog alloc] initWithFrame:CGRectMake(0.f, 20.f, 600.f, 250.f)];
+		[dialog setupView:nil];
+		[dialog doAppearAnimation: self.view.window];	
+		[self.view.window addSubview:dialog];
+		[dialog release];
 	} else {
 		QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
 		[dialog setupView:currentTopic];
@@ -315,7 +319,7 @@
 
 		currentQuestion = [questions objectAtIndex:indexPath.row];
 		
-		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"pass"];
+		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"index"];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
 	} else {
 		self.currentPage++;

@@ -73,8 +73,8 @@
 }
 
 -(NSString *)getRequestParameters { 
-	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:3];
-	UITextField *textField = (UITextField*)[self.subviews objectAtIndex:4];	
+	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:2];
+	UITextField *textField = (UITextField*)[self.subviews objectAtIndex:3];	
 
 	return [NSString stringWithFormat:@"Body=%@&TagsCommaSeparated=%@&CategorySlug=%@", [self urlEncodeValue:[textView text]], [self urlEncodeValue:[textField text]], topic.slug];
 }
