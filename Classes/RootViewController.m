@@ -290,29 +290,41 @@ NSUInteger currentView;
 }
 
 -(void)changeToTopics:(NSNotification *)pUserInfo { 
+	// clear out all items from the root list
 	[currentItems removeAllObjects];
+	// then fill it up with the topic items
 	[currentItems addObjectsFromArray:topicsViewController.topics];
+	// reload the data to reflect the new items
 	[self.tableView reloadData];
 
+	// set the root view to topics
 	currentView = TopicsView;
+	// change the title of the details view pane 
 	[self changeDetailsTitle:@"Questions"];
 	
+	// remove both topics and response view controller
+	// user may be coming from the response view hence its included
 	[topicsViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
 	
+	// highlight the selected row on the root list
 	NSIndexPath *indexPath = [topicsViewController.tableView indexPathForSelectedRow];
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 
-	//int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
+	// set the question view back to page 1
 	[questionsViewController setCurrentPage:1];
-	[questionsViewController.questions removeAllObjects];
+
+	// clear out the questions, we're starting from page 1
+	[questionsViewController.questions removeAllObjects];	
 	Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
+	// now fetch the new questions
 	[questionsViewController fetchQuestions: topic];
 
-	
+	// and then we add the question view to the detail view
 	[detailViewController.view addSubview:questionsViewController.view];	
 	[questionsViewController viewDidAppear:NO];
 	
+	// and go ahead and change the root button bar title
 	[self changeDetailsRootButtonTitle:[topic name]];
 } 
 
