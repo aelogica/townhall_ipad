@@ -293,25 +293,26 @@ NSUInteger currentView;
 	[currentItems removeAllObjects];
 	[currentItems addObjectsFromArray:topicsViewController.topics];
 	[self.tableView reloadData];
+
+	currentView = TopicsView;
+	[self changeDetailsTitle:@"Questions"];
 	
 	[topicsViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
 	
-	[detailViewController.view addSubview:questionsViewController.view];	
-	[questionsViewController viewDidAppear:NO];
-	
 	NSIndexPath *indexPath = [topicsViewController.tableView indexPathForSelectedRow];
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-	
+
 	//int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
-
 	Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
 	[questionsViewController fetchQuestions: topic];
 
-	currentView = TopicsView;
-	[self changeDetailsTitle:@"Questions"];
+	
+	[detailViewController.view addSubview:questionsViewController.view];	
+	[questionsViewController viewDidAppear:NO];
+	
 	[self changeDetailsRootButtonTitle:[topic name]];
 } 
 
@@ -503,6 +504,7 @@ NSUInteger currentView;
 	//[categories removeObjectAtIndex:indexPath.row];
 	//[self.tableView deleteRowsAtInd exPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
+	NSLog(@"root didSelectrowAtIndexPath");
 	if(currentView == CategoriesView) {			
 		Category *category = (Category*)[currentItems objectAtIndex:indexPath.row];
 		[topicsViewController fetchTopics: [category slug]];		
