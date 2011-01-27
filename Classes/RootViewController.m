@@ -307,9 +307,8 @@ NSUInteger currentView;
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
 
-	Topic *topic = (Topic*)[topicsViewController.topics objectAtIndex:indexPath.row];
+	Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
 	[questionsViewController fetchQuestions: topic];
-	
 
 	currentView = TopicsView;
 	[self changeDetailsTitle:@"Questions"];
@@ -330,7 +329,7 @@ NSUInteger currentView;
 	[questionsViewController.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 */	
 	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
-	Question *question = (Question*)[questionsViewController.questions objectAtIndex:index];
+	Question *question = (Question*)[currentItems objectAtIndex:index];
 	[responsesViewController fetchResponses: question];	
 
 	// Show the response view controller
@@ -505,11 +504,15 @@ NSUInteger currentView;
 	//[self.tableView deleteRowsAtInd exPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
 	if(currentView == CategoriesView) {			
-		[topicsViewController fetchTopics: [(Category*)[currentItems objectAtIndex:indexPath.row] slug]];		
+		Category *category = (Category*)[currentItems objectAtIndex:indexPath.row];
+		[topicsViewController fetchTopics: [category slug]];		
+		[self changeDetailsRootButtonTitle:[category name]];
 	} else if (currentView == TopicsView) {
 		[questionsViewController.questions removeAllObjects];
 		[questionsViewController setCurrentPage:1];
-		[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:indexPath.row]];
+		Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
+		[questionsViewController fetchQuestions: topic];
+		[self changeDetailsRootButtonTitle:[topic name]];
 	} else if (currentView == QuestionsView) {
 		[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
 	}
