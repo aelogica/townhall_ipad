@@ -294,12 +294,11 @@ NSUInteger currentView;
 	[currentItems addObjectsFromArray:topicsViewController.topics];
 	[self.tableView reloadData];
 	
-	currentView = TopicsView;
-	[self changeDetailsTitle:@"Questions"];
-	[self changeDetailsRootButtonTitle:@"Topics"];
-
 	[topicsViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
+	
+	[detailViewController.view addSubview:questionsViewController.view];	
+	[questionsViewController viewDidAppear:NO];
 	
 	NSIndexPath *indexPath = [topicsViewController.tableView indexPathForSelectedRow];
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -307,11 +306,14 @@ NSUInteger currentView;
 	//int pass = [[[pUserInfo userInfo] valueForKey:@"pass"] intValue];
 	[questionsViewController setCurrentPage:1];
 	[questionsViewController.questions removeAllObjects];
-	[questionsViewController fetchQuestions: (Topic*)[currentItems objectAtIndex:indexPath.row]];
-	
-	[detailViewController.view addSubview:questionsViewController.view];	
-	[questionsViewController viewDidAppear:NO];
 
+	Topic *topic = (Topic*)[topicsViewController.topics objectAtIndex:indexPath.row];
+	[questionsViewController fetchQuestions: topic];
+	
+
+	currentView = TopicsView;
+	[self changeDetailsTitle:@"Questions"];
+	[self changeDetailsRootButtonTitle:[topic name]];
 } 
 
 
@@ -327,18 +329,24 @@ NSUInteger currentView;
 	NSIndexPath *indexPath = [questionsViewController.tableView indexPathForSelectedRow];
 	[questionsViewController.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 */	
-	// Set current root view to questions
-	currentView = QuestionsView;
-	[self changeDetailsTitle:@"Responses"];
-	[self changeDetailsRootButtonTitle:@"Questions"];
-	
-	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue]	;
-	[responsesViewController fetchResponses: (Question*)[questionsViewController.questions objectAtIndex:index];	
+	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
+	Question *question = (Question*)[questionsViewController.questions objectAtIndex:index];
+	[responsesViewController fetchResponses: question];	
 
 	// Show the response view controller
 	//[questionsViewController.view removeFromSuperview];
 	[detailViewController.view addSubview:responsesViewController.view];	
 	[responsesViewController viewDidAppear:NO];
+	
+	// Set current root view to questions
+	currentView = QuestionsView;
+	[self changeDetailsTitle:@"Responses"];
+	if ([[question subject] length] > 20 ) {
+		[self changeDetailsRootButtonTitle: [NSString stringWithFormat:@"%@...", [[question subject] substringWithRange:NSMakeRange(0, 20)]]];
+	} else {
+		[self changeDetailsRootButtonTitle:[question subject]];
+	}
+
 } 
 
 /*
