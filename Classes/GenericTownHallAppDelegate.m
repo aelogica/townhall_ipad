@@ -22,7 +22,7 @@
 @implementation GenericTownHallAppDelegate
 
 @synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, splashViewController;
-@synthesize currentOrientation, appWidth, appHeight, isLogin;
+@synthesize currentOrientation, appWidth, appHeight, isLogin, currentView, currentBarButtonTitle;
 
 #pragma mark -
 #pragma mark Application lifecycle

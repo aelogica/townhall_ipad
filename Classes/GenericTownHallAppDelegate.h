@@ -22,6 +22,10 @@
 
 CGFloat DegreesToRadians(CGFloat degrees);
 
+enum {
+	CategoriesView, TopicsView, QuestionsView, ResponsesView
+};
+
 @class MBProgressHUD;
 @class SplashViewController;
 @class RootViewController;
@@ -45,7 +49,8 @@ CGFloat DegreesToRadians(CGFloat degrees);
 	CGFloat appWidth;
 	CGFloat appHeight;
 	BOOL isLogin;
-
+	NSUInteger currentView;
+	NSString *currentBarButtonTitle;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -60,5 +65,7 @@ CGFloat DegreesToRadians(CGFloat degrees);
 @property (nonatomic, assign) CGFloat appWidth;
 @property (nonatomic, assign) CGFloat appHeight;
 @property (nonatomic, assign) BOOL isLogin;
+@property (nonatomic, assign) NSUInteger currentView;
+@property (nonatomic, assign) NSString *currentBarButtonTitle;
 
 @end

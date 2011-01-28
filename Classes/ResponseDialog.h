@@ -21,6 +21,5 @@
 
 @property(nonatomic, assign) Question *question;
 
-- (id)initWithFrameAndQuestion:(CGRect)frame question: (Question*)aQuestion;
 
 @end

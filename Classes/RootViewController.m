@@ -39,11 +39,6 @@
 @synthesize oldTableView;
 @synthesize loginButton, logoutButton;
 
-enum {
-	CategoriesView, TopicsView, QuestionsView, ResponsesView
-};
-
-NSUInteger currentView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -112,7 +107,19 @@ NSUInteger currentView;
 	
 	UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"man_24.png"] style:UIBarButtonItemStylePlain target:self action:@selector(profileButtonPressed:)];
 	
-	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, flexibleSpace, flexibleSpace, backButton, refreshButton, nil]];
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120.f, 44.f)];	
+	label.textAlignment = UITextAlignmentCenter;
+	label.backgroundColor = [UIColor clearColor];
+	label.shadowColor = UIColorFromRGB(0xe5e7eb);
+	label.shadowOffset = CGSizeMake(0, 1);
+	label.textColor = UIColorFromRGB(0x717880);
+	label.font = [UIFont boldSystemFontOfSize:20.0];
+	label.text = @"Categories";
+	UIBarButtonItem *titleButton = [[UIBarButtonItem alloc] initWithCustomView:label];
+	[label release];
+	
+	[detailViewController.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, titleButton, flexibleSpace, backButton, refreshButton, nil]];
+	[titleButton release];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToCategories:) name:@"ChangeToCategories" object:nil]; 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToTopics:) name:@"ChangeToTopics" object:nil]; 
@@ -125,7 +132,7 @@ NSUInteger currentView;
 
 	self.navigationItem.title = @"";
 	
-	currentView = CategoriesView;
+	appDelegate.currentView = CategoriesView;
 	
 	//self.navigationController.navigationBar.topItem.title = @"Categories";	
 
@@ -185,24 +192,27 @@ NSUInteger currentView;
 }
 
 - (void)backButtonPressed:(UIBarButtonItem *)button {
-	if(currentView == CategoriesView) {
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+	if(appDelegate.currentView == CategoriesView) {
 		[self changeToHome];
-	} else if (currentView == TopicsView) {
+	} else if (appDelegate.currentView == TopicsView) {
 		[self changeToCategories:nil];
-	} else if (currentView == QuestionsView) {
+	} else if (appDelegate.currentView == QuestionsView) {
 		[self changeToTopics:nil];
 	}
 }
 
 -(void)refreshButtonPressed:(UIBarButtonItem *)button {
-	if(currentView == CategoriesView) {	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	if(appDelegate.currentView == CategoriesView) {	
 		//[self changeToTopics:nil];
-	} else if( currentView == TopicsView) {
+	} else if( appDelegate.currentView == TopicsView) {
 		[questionsViewController setCurrentPage:1];
 		[questionsViewController.questions removeAllObjects];                                           
 		[questionsViewController fetchQuestions: questionsViewController.currentTopic];		
 	}
-	else if( currentView == QuestionsView) {
+	else if( appDelegate.currentView == QuestionsView) {
 		[responsesViewController fetchResponses:questionsViewController.currentQuestion];	
 	}
 }
@@ -226,26 +236,30 @@ NSUInteger currentView;
     [items replaceObjectAtIndex:0 withObject:barButtonItem];
     [toolbar setItems:items animated:YES];
     [items release];	
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.currentBarButtonTitle = newTitle;	
 }
 
 	
 -(void)changeDetailsTitle:(NSString *)newTitle {
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120.f, 44.f)];	
-	label.textAlignment = UITextAlignmentCenter;
-	label.backgroundColor = [UIColor clearColor];
-	label.shadowColor = UIColorFromRGB(0xe5e7eb);
-	label.shadowOffset = CGSizeMake(0, 1);
-	label.textColor = UIColorFromRGB(0x717880);
-	label.font = [UIFont boldSystemFontOfSize:20.0];
-	label.text = newTitle;
-	UIBarButtonItem *titleButton = [[UIBarButtonItem alloc] initWithCustomView:label];
-	[label release];
-	
+
 	NSMutableArray *items = [[detailViewController.toolbar items] mutableCopy];	
-	[items replaceObjectAtIndex:1 withObject:titleButton];
+	
+	int index = 1;
+	if(items.count == 6) {
+		index = 2;
+	}
+	
+	UIBarButtonItem *barButtonItem = [items objectAtIndex:index];
+	UILabel *customView = (UILabel*)[barButtonItem customView];
+	[customView setText:newTitle];
+	[barButtonItem setCustomView:customView];
+	[items replaceObjectAtIndex:index withObject:barButtonItem];			
     [detailViewController.toolbar setItems:items animated:YES];
-	[titleButton release];
+
     [items release];
+	
 }
 
 -(void)changeToHome {
@@ -258,7 +272,7 @@ NSUInteger currentView;
 	[topicsViewController.view removeFromSuperview];
 	[profileViewController.view removeFromSuperview];
 	
-	[self changeDetailsTitle:@""];
+	[self changeDetailsTitle:@"Categories"];
 
 	[detailViewController.view addSubview:categoriesViewController.view];
 }
@@ -284,7 +298,8 @@ NSUInteger currentView;
 	[topicsViewController fetchTopics: [category slug]];		
 	[detailViewController.view addSubview:topicsViewController.view];	
 
-	currentView = CategoriesView;	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.currentView = CategoriesView;	
 	[self changeDetailsTitle:@"Topics"];
 	[self changeDetailsRootButtonTitle:[category name]];
 }
@@ -298,7 +313,8 @@ NSUInteger currentView;
 	[self.tableView reloadData];
 
 	// set the root view to topics
-	currentView = TopicsView;
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.currentView = TopicsView;
 	// change the title of the details view pane 
 	[self changeDetailsTitle:@"Questions"];
 	
@@ -351,7 +367,8 @@ NSUInteger currentView;
 	[responsesViewController viewDidAppear:NO];
 	
 	// Set current root view to questions
-	currentView = QuestionsView;
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	appDelegate.currentView = QuestionsView;
 	[self changeDetailsTitle:@"Responses"];
 	if ([[question subject] length] > 20 ) {
 		[self changeDetailsRootButtonTitle: [NSString stringWithFormat:@"%@...", [[question subject] substringWithRange:NSMakeRange(0, 20)]]];
@@ -445,12 +462,13 @@ NSUInteger currentView;
 	// If you want to align the header text as centered
 	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
 	
-	if(currentView == CategoriesView && [currentItems count] > 0) {
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	if(appDelegate.currentView == CategoriesView && [currentItems count] > 0) {
 		headerLabel.text = @"Categories";
-	} else if( currentView == TopicsView) {
+	} else if( appDelegate.currentView == TopicsView) {
 		headerLabel.text = @"Topics";
 	}
-	else if( currentView == QuestionsView) {
+	else if( appDelegate.currentView == QuestionsView) {
 		headerLabel.text = @"Questions";
 	}
 	[customView addSubview:headerLabel];
@@ -516,18 +534,18 @@ NSUInteger currentView;
 	//[categories removeObjectAtIndex:indexPath.row];
 	//[self.tableView deleteRowsAtInd exPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
-	NSLog(@"root didSelectrowAtIndexPath");
-	if(currentView == CategoriesView) {			
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	if(appDelegate.currentView == CategoriesView) {			
 		Category *category = (Category*)[currentItems objectAtIndex:indexPath.row];
 		[topicsViewController fetchTopics: [category slug]];		
 		[self changeDetailsRootButtonTitle:[category name]];
-	} else if (currentView == TopicsView) {
+	} else if (appDelegate.currentView == TopicsView) {
 		[questionsViewController.questions removeAllObjects];
 		[questionsViewController setCurrentPage:1];
 		Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
 		[questionsViewController fetchQuestions: topic];
 		[self changeDetailsRootButtonTitle:[topic name]];
-	} else if (currentView == QuestionsView) {
+	} else if (appDelegate.currentView == QuestionsView) {
 		[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
 	}
 		

@@ -246,7 +246,6 @@
 	CGFloat superViewWidth = self.view.superview.frame.size.width;	
 	
 	if( indexPath.row < self.currentPage * 10 ) {
-		NSLog(@"Q count: %d", questions.count);
 		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
 
 		// Depending on the current view, if the questions are showing up on the detail pane it will have larger width
