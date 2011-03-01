@@ -28,6 +28,15 @@
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
 
+#import "FBConnect/FBConnect.h"
+
+static NSString* kApiKey = @"e3cd33ba4895950aecffc276b4e2bed3";
+
+// Enter either your API secret or a callback URL (as described in documentation):
+static NSString* kApiSecret = @"2562d7a9cb8ba2aa1d16ba365e399e92"; // @"<YOUR SECRET KEY>";
+static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
+
+
 @implementation RootViewController
 
 @synthesize detailViewController;
@@ -143,6 +152,8 @@
 	[backButton release];
 	[refreshButton release];
 	[profileButton release];	
+	
+   fbSession = [[FBSession sessionForApplication:kApiKey secret:kApiSecret delegate:self] retain];
 }
 
 -(void)homeButtonPressed:(UIBarButtonItem *)button {
@@ -377,6 +388,42 @@
 	}
 
 } 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// FBDialogDelegate
+
+- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError*)error {
+	NSLog([NSString stringWithFormat:@"Error(%d) %@", error.code, error.localizedDescription]);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// FBSessionDelegate
+
+- (void)session:(FBSession*)session didLogin:(FBUID)uid {
+	
+	NSString* fql = [NSString stringWithFormat:
+					 @"select uid,name from user where uid == %lld", session.uid];
+	
+	NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
+	[[FBRequest requestWithDelegate:self] call:@"facebook.fql.query" params:params];
+}
+
+- (void)sessionDidLogout:(FBSession*)session {
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// FBRequestDelegate
+
+- (void)request:(FBRequest*)request didLoad:(id)result {
+	NSArray* users = result;
+	NSDictionary* user = [users objectAtIndex:0];
+	NSString* name = [user objectForKey:@"name"];
+	NSLog(@"Logged in as %@", name);
+}
+
+- (void)request:(FBRequest*)request didFailWithError:(NSError*)error {
+	NSLog([NSString stringWithFormat:@"Error(%d) %@", error.code, error.localizedDescription]);
+}
 
 /*
 - (void)viewWillAppear:(BOOL)animated {

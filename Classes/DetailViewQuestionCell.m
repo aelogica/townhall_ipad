@@ -54,7 +54,7 @@
 	
 	subject.text = aQuestion.subject;
 	author.text = [NSString stringWithFormat:@"Posted by %@ at %@", aQuestion.nuggetOriginator.displayName, aQuestion.dateCreatedFormatted];
-	responseCount.text = [NSString stringWithFormat:@"%@", aQuestion.responseCount];
+	//responseCount.text = [NSString stringWithFormat:@"%@", aQuestion.responseCount];
 	userPoints.text = [NSString stringWithFormat:@"%@ pts", aQuestion.nuggetOriginator.userReputationString];
 	voteUpButton.tag = (int)aQuestion.nuggetId;
 	voteDownButton.tag = (int)aQuestion.nuggetId;

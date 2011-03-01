@@ -13,6 +13,7 @@
 #import "LoginDialog.h"
 #import "GenericTownHallAppDelegate.h"
 #import "GTMHTTPFetcher.h"
+#import "FBLoginButton.h"
 
 @implementation LoginDialog
 
@@ -39,6 +40,8 @@
 	[self addSubview:passwordField];		
 	[passwordField release];
 	
+	FBLoginButton* fbButton = [[[FBLoginButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 100, passwordField.frame.size.height + passwordField.frame.origin.y + padding, 0 , 55.f)] autorelease];
+	[self addSubview:fbButton];	
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
