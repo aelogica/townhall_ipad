@@ -3,8 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>ServerBaseUrl</key>
-	<string>http://townhall2.cloudapp.net</string>
+	<string>https://townhall2.cloudapp.net</string>
 	<key>ServerDataUrl</key>
-	<string>http://townhall2.cloudapp.net</string>
+	<string>https://townhall2.cloudapp.net</string>
+	<key>ApiKey</key>
+	<string>6ad50a5a9b42848f65b63cc375ee3e92</string>
 </dict>
 </plist>

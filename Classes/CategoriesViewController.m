@@ -15,6 +15,8 @@
 #import "Category.h"
 #import "GenericTownHallAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ASIHTTPRequest.h"
+
 @implementation CategoriesViewController
 
 @synthesize categories, tableView;
@@ -215,7 +217,7 @@
 
 
 -(void)fetchCategories{
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/categories/all?format=json", UIAppDelegate.serverDataUrl]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/categories/all?format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl]];
 	NSLog(@"Fetching top categories URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
