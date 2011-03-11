@@ -27,6 +27,8 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
+	NSLog(@"BaseViewController %@: %@", NSStringFromSelector(_cmd), self);
+	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	items = [[NSMutableArray alloc] init];
 	
@@ -77,9 +79,15 @@
 	[request setDelegate:self];	
 	[request setValidatesSecureCertificate:NO];
 	[request startAsynchronous];
+	
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	[appDelegate.progressHUD showUsingAnimation:YES];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+	[appDelegate.progressHUD hideUsingAnimation:YES];
+	
 	// Use when fetching text data
 	NSString *responseString = [request responseString];
 	
@@ -224,9 +232,12 @@
  return 100.0f;
 }
 
-
-
 - (void)dealloc {
+	NSLog(@"BaseViewController %@: %@", NSStringFromSelector(_cmd), self);
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];		  
+	[items dealloc];
+	
     [super dealloc];
 }
 

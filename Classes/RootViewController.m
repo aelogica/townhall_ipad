@@ -306,7 +306,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	
 	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
 	Category *category = (Category*)[categoriesViewController.items objectAtIndex:index];
-	[topicsViewController fetchTopics: [category slug]];		
+	//[topicsViewController fetchTopics: [category slug]];		
 	[detailViewController.view addSubview:topicsViewController.view];	
 
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -319,7 +319,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	// clear out all items from the root list
 	[currentItems removeAllObjects];
 	// then fill it up with the topic items
-	[currentItems addObjectsFromArray:topicsViewController.topics];
+	[currentItems addObjectsFromArray:topicsViewController.items];
 	// reload the data to reflect the new items
 	[self.tableView reloadData];
 

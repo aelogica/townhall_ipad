@@ -119,7 +119,6 @@
 	// Create an array out of the returned json string
 	NSDictionary *results = [responseString JSONValue];
 	//NSArray *allCategories = [results objectForKey:@"CatListModel"];
-	NSLog(@"Fetch responses succeeded. Count: %d", [results count]);
 	
 	//for (NSDictionary *objectInstance in allCategories) {
 	for (NSDictionary *objectInstance in results) {	

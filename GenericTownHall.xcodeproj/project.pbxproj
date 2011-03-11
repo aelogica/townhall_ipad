@@ -430,10 +430,10 @@
 			children = (
 				197ABC23132A630800BD1D69 /* BaseViewController.h */,
 				197ABC24132A630800BD1D69 /* BaseViewController.m */,
-				19AB49EB12C9C77700441D37 /* CategoriesViewController.h */,
-				19AB49EC12C9C77700441D37 /* CategoriesViewController.m */,
 				28042007108E984D000629CD /* RootViewController.h */,
 				28042008108E984D000629CD /* RootViewController.m */,
+				19AB49EB12C9C77700441D37 /* CategoriesViewController.h */,
+				19AB49EC12C9C77700441D37 /* CategoriesViewController.m */,
 				28042009108E984D000629CD /* DetailViewController.h */,
 				2804200A108E984D000629CD /* DetailViewController.m */,
 				63A4487212B6490B0020FA06 /* TopicsViewController.h */,

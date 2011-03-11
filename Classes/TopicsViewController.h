@@ -9,17 +9,12 @@
 //  Please see the LICENSE file for details
 //
 
+#import "BaseViewController.h"
 
-#import <UIKit/UIKit.h>
 
-
-@interface TopicsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-	NSMutableArray *topics;
+@interface TopicsViewController : BaseViewController {
 }
 
-@property (nonatomic, retain) IBOutlet UITableView* tableView;
-@property(nonatomic, retain) NSMutableArray *topics;
 
--(void)fetchTopics:(NSString *) slug;
 
 @end
