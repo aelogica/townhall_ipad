@@ -10,16 +10,12 @@
 //
 
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class Category;
 
-@interface CategoriesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-	NSMutableArray *categories;
-	UITableView *tableView;
+@interface CategoriesViewController : BaseViewController {
 }
 
-@property (nonatomic, retain) UITableView* tableView;
-@property(nonatomic, retain) NSMutableArray *categories;
 
 @end

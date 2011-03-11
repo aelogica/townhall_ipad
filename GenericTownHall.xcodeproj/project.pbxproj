@@ -51,6 +51,7 @@
 		197ABBB1132A5BF500BD1D69 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 197ABBB0132A5BF500BD1D69 /* MobileCoreServices.framework */; };
 		197ABBB9132A5C5B00BD1D69 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 197ABBB8132A5C5B00BD1D69 /* SystemConfiguration.framework */; };
 		197ABBF1132A5CB200BD1D69 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 197ABBF0132A5CB200BD1D69 /* libz.dylib */; };
+		197ABC25132A630800BD1D69 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197ABC24132A630800BD1D69 /* BaseViewController.m */; };
 		1995F8C212CC607600C557BF /* ResponseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995F8C112CC607600C557BF /* ResponseCell.m */; };
 		1995F97E12CC818D00C557BF /* bg-tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 1995F97D12CC818D00C557BF /* bg-tile.png */; };
 		1995FA3112CC8DF300C557BF /* TopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995FA3012CC8DF300C557BF /* TopicCell.m */; };
@@ -199,6 +200,8 @@
 		197ABBB0132A5BF500BD1D69 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		197ABBB8132A5C5B00BD1D69 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		197ABBF0132A5CB200BD1D69 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		197ABC23132A630800BD1D69 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		197ABC24132A630800BD1D69 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		1995F8C012CC607600C557BF /* ResponseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseCell.h; sourceTree = "<group>"; };
 		1995F8C112CC607600C557BF /* ResponseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseCell.m; sourceTree = "<group>"; };
 		1995F97D12CC818D00C557BF /* bg-tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg-tile.png"; path = "DESIGN/bg-tile.png"; sourceTree = "<group>"; };
@@ -330,27 +333,9 @@
 				63A363D512B8C18D0028AC5B /* Extras */,
 				63A44DA112B77E520020FA06 /* Models */,
 				63A4472612B611CB0020FA06 /* GTMHttpFetcher */,
+				197ABC18132A626600BD1D69 /* ViewControllers */,
 				1D3623240D0F684500981E51 /* GenericTownHallAppDelegate.h */,
 				1D3623250D0F684500981E51 /* GenericTownHallAppDelegate.m */,
-				28042007108E984D000629CD /* RootViewController.h */,
-				28042008108E984D000629CD /* RootViewController.m */,
-				28042009108E984D000629CD /* DetailViewController.h */,
-				2804200A108E984D000629CD /* DetailViewController.m */,
-				63A4487212B6490B0020FA06 /* TopicsViewController.h */,
-				63A4487312B6490B0020FA06 /* TopicsViewController.m */,
-				63A4487412B6490B0020FA06 /* TopicsViewController.xib */,
-				63A44CF912B76EBF0020FA06 /* QuestionsViewController.h */,
-				63A44CFA12B76EBF0020FA06 /* QuestionsViewController.m */,
-				63A44CFB12B76EBF0020FA06 /* QuestionsViewController.xib */,
-				63A44D5112B7778B0020FA06 /* ResponsesViewController.h */,
-				63A44D5212B7778B0020FA06 /* ResponsesViewController.m */,
-				19AB49EB12C9C77700441D37 /* CategoriesViewController.h */,
-				19AB49EC12C9C77700441D37 /* CategoriesViewController.m */,
-				63A44D5312B7778B0020FA06 /* ResponsesViewController.xib */,
-				63C7D62412BB6E1000F18706 /* SplashViewController.h */,
-				63C7D62512BB6E1000F18706 /* SplashViewController.m */,
-				194D357412CB15C500E3111B /* ProfileViewController.h */,
-				194D357512CB15C500E3111B /* ProfileViewController.m */,
 				1958D62D12D1D71200EDF7B3 /* Entitlements.plist */,
 			);
 			path = Classes;
@@ -438,6 +423,34 @@
 				197ABB3C132A5AF300BD1D69 /* Reachability.m */,
 			);
 			name = Reachability;
+			sourceTree = "<group>";
+		};
+		197ABC18132A626600BD1D69 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				197ABC23132A630800BD1D69 /* BaseViewController.h */,
+				197ABC24132A630800BD1D69 /* BaseViewController.m */,
+				19AB49EB12C9C77700441D37 /* CategoriesViewController.h */,
+				19AB49EC12C9C77700441D37 /* CategoriesViewController.m */,
+				28042007108E984D000629CD /* RootViewController.h */,
+				28042008108E984D000629CD /* RootViewController.m */,
+				28042009108E984D000629CD /* DetailViewController.h */,
+				2804200A108E984D000629CD /* DetailViewController.m */,
+				63A4487212B6490B0020FA06 /* TopicsViewController.h */,
+				63A4487312B6490B0020FA06 /* TopicsViewController.m */,
+				63A4487412B6490B0020FA06 /* TopicsViewController.xib */,
+				63A44CF912B76EBF0020FA06 /* QuestionsViewController.h */,
+				63A44CFA12B76EBF0020FA06 /* QuestionsViewController.m */,
+				63A44CFB12B76EBF0020FA06 /* QuestionsViewController.xib */,
+				63A44D5112B7778B0020FA06 /* ResponsesViewController.h */,
+				63A44D5212B7778B0020FA06 /* ResponsesViewController.m */,
+				63A44D5312B7778B0020FA06 /* ResponsesViewController.xib */,
+				63C7D62412BB6E1000F18706 /* SplashViewController.h */,
+				63C7D62512BB6E1000F18706 /* SplashViewController.m */,
+				194D357412CB15C500E3111B /* ProfileViewController.h */,
+				194D357512CB15C500E3111B /* ProfileViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -786,6 +799,7 @@
 				197ABB28132A5A1E00BD1D69 /* ASIInputStream.m in Sources */,
 				197ABB29132A5A1E00BD1D69 /* ASINetworkQueue.m in Sources */,
 				197ABB3D132A5AF300BD1D69 /* Reachability.m in Sources */,
+				197ABC25132A630800BD1D69 /* BaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

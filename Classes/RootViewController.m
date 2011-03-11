@@ -297,7 +297,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
     //self.tableView = newTableView;	
 	
 	[currentItems removeAllObjects];
-	[currentItems addObjectsFromArray:categoriesViewController.categories];
+	[currentItems addObjectsFromArray:categoriesViewController.items];
 	[self.tableView reloadData];
 	
 	// Make sure the selected row stays highlighted
@@ -305,7 +305,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 	
 	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
-	Category *category = (Category*)[categoriesViewController.categories objectAtIndex:index];
+	Category *category = (Category*)[categoriesViewController.items objectAtIndex:index];
 	[topicsViewController fetchTopics: [category slug]];		
 	[detailViewController.view addSubview:topicsViewController.view];	
 
