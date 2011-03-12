@@ -10,24 +10,21 @@
 //
 
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class Question;
 
-@interface ResponsesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-	NSMutableArray *responses;
-	
-	Question *currentQuestion;
+@interface ResponsesViewController : BaseViewController {
+
+	Question *curQuestion;
 	UIView *headerView;
 	UIToolbar *toolbar;
 
 }
 
-@property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property(nonatomic, retain) UIView *headerView;
 @property(nonatomic, retain) UIToolbar *toolbar;
-@property(nonatomic, retain) NSMutableArray *responses;
-@property(nonatomic, retain) Question *currentQuestion;
+@property(nonatomic, retain) Question *curQuestion;
 
 -(void)fetchResponses:(Question *) question;
 

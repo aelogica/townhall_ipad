@@ -8,15 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 @interface Topic : NSObject {
-	NSInteger * _topicId;
-	NSString * _name;
-	NSString * _slug;
-	NSString * _description;
-	NSString * _firstSubcategorySlug;
-	NSString * _imagePath;
+	NSInteger * topicId;
+	NSString * name;
+	NSString * slug;
+	NSString * description;
+	NSString * firstSubcategorySlug;
+	NSString * imagePath;
 }
 
 @property(nonatomic, assign) NSInteger * topicId;

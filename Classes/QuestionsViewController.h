@@ -10,18 +10,17 @@
 //
 
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@class Question;
-@class Topic;
+#import "Question.h"
+#import "Topic.h"
 
-@interface QuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-	UITableView* tableView;
-	NSMutableArray *questions;
+@interface QuestionsViewController : BaseViewController {
+	Topic *curTopic;	
+	Question *currentQuestion;
+	
 	NSInteger currentPage;
 	NSString *currentSortColumn;
-	Question *currentQuestion;
-	Topic *currrentTopic;
 	
 	UIView *headerView;
 	UIToolbar *toolbar;
@@ -29,14 +28,14 @@
 	UILabel *topicName;
 }
 
-@property (nonatomic, retain) UITableView* tableView;
-@property(nonatomic, retain) NSMutableArray *questions;
 @property(nonatomic, retain) UIView *headerView;
 @property(nonatomic, retain) UIToolbar *toolbar;
+@property(nonatomic, retain) UILabel *topicName;
 @property(nonatomic, assign) NSInteger currentPage;
-@property(nonatomic, assign) Topic *currentTopic;
-@property(nonatomic, assign) Question *currentQuestion;
 
--(void)fetchQuestions:(Topic *) aTopic;
+@property(nonatomic, assign) Question *currentQuestion;
+@property(nonatomic, assign) Topic *curTopic;
+//
+//-(void)fetchQuestions:(Topic *) aTopic;
 
 @end

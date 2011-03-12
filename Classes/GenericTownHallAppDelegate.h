@@ -51,6 +51,8 @@ enum {
 	BOOL isLogin;
 	NSUInteger currentView;
 	NSString *currentBarButtonTitle;
+	
+	NSString *currentSlug;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -67,5 +69,7 @@ enum {
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, assign) NSUInteger currentView;
 @property (nonatomic, assign) NSString *currentBarButtonTitle;
+
+@property (nonatomic, assign) NSString *currentSlug;
 
 @end

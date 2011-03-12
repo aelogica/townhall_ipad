@@ -24,11 +24,11 @@
 #pragma mark Table view methods
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     static NSString *CellIdentifier = @"Cell";
 	
-    TopicCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TopicCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	Topic *topic = (Topic *)[items objectAtIndex:indexPath.row];
 	
     if (cell == nil) {
@@ -46,7 +46,7 @@
 
 - (NSString*)getServiceUrl {
 	NSString *slug = @"parent-category-1";
-	return [NSString stringWithFormat:@"topics/in/%@", slug];
+	return [NSString stringWithFormat:@"topics/in/%@", UIAppDelegate.currentSlug];
 }
 
 - (void)handleHttpResponse:(NSString*)responseString {
@@ -63,9 +63,7 @@
 }
 
 - (void)dealloc {
-	 NSLog(@"TopicsViewController dealloc");
-	
-
+	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
 
     [super dealloc];
 }

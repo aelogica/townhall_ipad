@@ -67,7 +67,7 @@
 	[tableView reloadData];
 }
 
--(void)makeHttpRequest {
+-(void)makeHttpRequest{
 	NSString *serviceUrl = [self getServiceUrl];
 	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl, serviceUrl]];
@@ -92,17 +92,34 @@
 	NSString *responseString = [request responseString];
 	
 	// Create an array out of the returned json string
-	NSDictionary *results = [responseString JSONValue];
-	NSLog(@"Http request succeeded. Count: %d", [results count]);
+	id *results = [responseString JSONValue];
 	
-	[self handleHttpResponse:responseString];
-	
-	[tableView reloadData];	
+	if ([results isKindOfClass:[NSArray class]] || [results isKindOfClass:[NSDictionary class]])  { 
+		
+		//NSLog(@"Http request succeeded: %@ Count: %d", responseString, [results count]);
+
+		[items removeAllObjects];
+		
+		[self handleHttpResponse:responseString];
+		
+		[tableView reloadData];			
+	} else {
+		//NSLog(@"Http request result bad data: %@", responseString);
+	    
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+		[alert show];
+		[alert release];
+	}
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
+- (void)requestFailed:(ASIHTTPRequest *)request {
 	NSError *error = [request error];
+
+	NSLog(@"Http request failed: %@ Count: %d", error);
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+	[alert show];
+	[alert release];	
 }
 
 
@@ -230,6 +247,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
  return 100.0f;
+}
+
+#pragma mark Helper methods
+
+- (NSDate*) getDateFromJSON:(NSString *)dateString
+{
+    // Expect date in this format "/Date(1268123281843)/"
+    int startPos = [dateString rangeOfString:@"("].location+1;
+    int endPos = [dateString rangeOfString:@")"].location;
+    NSRange range = NSMakeRange(startPos,endPos-startPos);
+    unsigned long long milliseconds = [[dateString substringWithRange:range] longLongValue];
+    //NSLog(@"%llu",milliseconds);
+    NSTimeInterval interval = milliseconds/1000;
+    return [NSDate dateWithTimeIntervalSince1970:interval];
 }
 
 - (void)dealloc {

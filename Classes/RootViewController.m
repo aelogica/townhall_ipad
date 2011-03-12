@@ -220,11 +220,16 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 		//[self changeToTopics:nil];
 	} else if( appDelegate.currentView == TopicsView) {
 		[questionsViewController setCurrentPage:1];
-		[questionsViewController.questions removeAllObjects];                                           
-		[questionsViewController fetchQuestions: questionsViewController.currentTopic];		
+		[questionsViewController.items removeAllObjects];                                           
+		//[questionsViewController fetchQuestions: questionsViewController.currentTopic];		
+		UIAppDelegate.currentSlug = questionsViewController.curTopic;
+		[questionsViewController makeHttpRequest];
 	}
 	else if( appDelegate.currentView == QuestionsView) {
-		[responsesViewController fetchResponses:questionsViewController.currentQuestion];	
+		//[responsesViewController fetchResponses:questionsViewController.currentQuestion];	
+		responsesViewController.curQuestion = questionsViewController.currentQuestion;	
+		[responsesViewController makeHttpRequest];
+
 	}
 }
 
@@ -291,7 +296,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 -(void)changeToCategories:(NSNotification *)pUserInfo { 
 	[categoriesViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
-	[questionsViewController.view removeFromSuperview];
+	//[questionsViewController.view removeFromSuperview];
 	
 	//UITableView *newTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
     //self.tableView = newTableView;	
@@ -303,13 +308,16 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	// Make sure the selected row stays highlighted
 	NSIndexPath *indexPath = [categoriesViewController.tableView indexPathForSelectedRow];
 	[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+
+	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	
 	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
 	Category *category = (Category*)[categoriesViewController.items objectAtIndex:index];
-	//[topicsViewController fetchTopics: [category slug]];		
+	appDelegate.currentSlug = [category slug];
+	[topicsViewController makeHttpRequest];
 	[detailViewController.view addSubview:topicsViewController.view];	
 
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
 	appDelegate.currentView = CategoriesView;	
 	[self changeDetailsTitle:@"Topics"];
 	[self changeDetailsRootButtonTitle:[category name]];
@@ -342,10 +350,12 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	[questionsViewController setCurrentPage:1];
 
 	// clear out the questions, we're starting from page 1
-	[questionsViewController.questions removeAllObjects];	
+	[questionsViewController.items removeAllObjects];	
 	Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
 	// now fetch the new questions
-	[questionsViewController fetchQuestions: topic];
+	questionsViewController.curTopic = topic;
+	[questionsViewController makeHttpRequest];
+	//[questionsViewController fetchQuestions: topic];
 
 	// and then we add the question view to the detail view
 	[detailViewController.view addSubview:questionsViewController.view];	
@@ -359,7 +369,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 -(void)changeToQuestions:(NSNotification *)pUserInfo { 
 	// Remove all items and replace it with those from the questions
 	[currentItems removeAllObjects];
-	[currentItems addObjectsFromArray:questionsViewController.questions];
+	[currentItems addObjectsFromArray:questionsViewController.items];
 	[self.tableView reloadData];	
 	
 	[self.view addSubview:questionsViewController.view];	
@@ -370,7 +380,9 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 */	
 	int index = [[[pUserInfo userInfo] valueForKey:@"index"] intValue];
 	Question *question = (Question*)[currentItems objectAtIndex:index];
-	[responsesViewController fetchResponses: question];	
+	responsesViewController.curQuestion = question;
+	[responsesViewController makeHttpRequest];
+	//[responsesViewController fetchResponses: question];	
 
 	// Show the response view controller
 	//[questionsViewController.view removeFromSuperview];
@@ -584,16 +596,21 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	if(appDelegate.currentView == CategoriesView) {			
 		Category *category = (Category*)[currentItems objectAtIndex:indexPath.row];
-		[topicsViewController fetchTopics: [category slug]];		
+		appDelegate.currentSlug = category.slug;
+		[topicsViewController makeHttpRequest];
 		[self changeDetailsRootButtonTitle:[category name]];
 	} else if (appDelegate.currentView == TopicsView) {
-		[questionsViewController.questions removeAllObjects];
+		[questionsViewController.items removeAllObjects];
 		[questionsViewController setCurrentPage:1];
 		Topic *topic = (Topic*)[currentItems objectAtIndex:indexPath.row];
-		[questionsViewController fetchQuestions: topic];
+		//[questionsViewController fetchQuestions: topic];
+		questionsViewController.curTopic = topic;
+		[questionsViewController makeHttpRequest];
 		[self changeDetailsRootButtonTitle:[topic name]];
 	} else if (appDelegate.currentView == QuestionsView) {
-		[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
+		//[responsesViewController fetchResponses: (Question*)[currentItems objectAtIndex:indexPath.row]];	
+		responsesViewController.curQuestion = (Question*)[currentItems objectAtIndex:indexPath.row];	
+		[responsesViewController makeHttpRequest];
 	}
 		
 }	
@@ -616,7 +633,8 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 
 
 - (void)dealloc {
-	NSLog(@"RootViewController dealloc");
+	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
 	[loginButton release];
 	[logoutButton release];
 	[currentItems release];	

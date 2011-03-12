@@ -11,45 +11,30 @@
 
 
 #import "QuestionsViewController.h"
-#import "Question.h"
-#import "GTMHTTPFetcher.h"
-#import "GenericTownHallAppDelegate.h"
+
 #import "AsynchImageView.h"
 #import "RootViewQuestionCell.h"
 #import "DetailViewQuestionCell.h"
-#import "Topic.h"
 #import "LoginDialog.h"
 #import "QuestionDialog.h"
 
 @implementation QuestionsViewController
 
-@synthesize tableView, questions, currentPage, currentQuestion, headerView, toolbar, currentTopic;
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
+@synthesize currentPage, headerView, toolbar;
+@synthesize curTopic;
+@synthesize currentQuestion;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-	questions = [[NSMutableArray alloc] init];
+- (void)loadView {
+	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
 	currentPage = 1;
 	currentSortColumn = @"date";	
+	
+    [super loadView];
 
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	
-	[self.view setBackgroundColor:[UIColor clearColor]];
-	[self.view setFrame:CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
-	
-	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, appDelegate.appWidth, 100.f)];
+
+	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, UIAppDelegate.appWidth, 100.f)];
 	[headerView setBackgroundColor:[UIColor blackColor]];
 	
 	topicName = [[UILabel alloc] initWithFrame:CGRectMake(270.f, 10.f, 200.f, 25.f)];
@@ -72,7 +57,7 @@
 	toolbar = [UIToolbar new];
 	[toolbar setBarStyle:UIBarStyleBlack];
 	[toolbar sizeToFit];
-	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
+	[toolbar setFrame: CGRectMake(0, 100.f, UIAppDelegate.appWidth, 50.f)];
 	
 	//Add buttons
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
@@ -97,7 +82,7 @@
 																			  action:nil];
 	
 	//Add buttons to the array
-	NSArray *items = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, postButton, nil];
+	NSArray *toolBarItems = [NSArray arrayWithObjects: flexItem, button1, button2, button3, button4, flexItem, postButton, nil];
 	
 	//release buttons
 	[button1 release];
@@ -108,24 +93,44 @@
 	[flexItem release];
 	
 	//add array of buttons to toolbar
-	[toolbar setItems:items animated:NO];
+	[toolbar setItems:toolBarItems animated:NO];
 	[self.view addSubview:toolbar];
-	
-	
-	// Create the UI for this view
-	//[self switchTableViewStyle:UITableViewStylePlain];	
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-	[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
-	[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
-	[tableView setBackgroundView:nil];
-	[tableView setDataSource:self];
-	[tableView setDelegate:self];	
-	[self.view addSubview:self.tableView];		
-
-	
-	// Listen to orientaton changes
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 }
+
+- (NSString*)getServiceUrl {
+	//NSString *url = [NSString stringWithFormat:@"browse/questions/in/%@/page/%d/sortKey/%@", curTopic.slug, currentPage, currentSortColumn];
+	NSString *url = [NSString stringWithFormat:@"browse/questions/in/%@/page/%d", curTopic.slug, currentPage];
+	return url;
+}
+
+- (void)handleHttpResponse:(NSString*)responseString {
+	// Create an array out of the returned json string
+	NSArray *results = [responseString JSONValue];
+
+	for (NSDictionary *objectInstance in results) {
+		
+		Question *question = [[Question alloc] init];
+		question.subject = [objectInstance objectForKey:@"Subject"];
+		question.body = [objectInstance objectForKey:@"Body"];
+		question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
+		question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
+		question.dateCreated = [self getDateFromJSON:[objectInstance objectForKey:@"DateCreated"]];
+		
+		NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];
+		question.nuggetOriginator.userId = [nuggetOriginator objectForKey:@"UserID"];
+		question.nuggetOriginator.displayName = [nuggetOriginator objectForKey:@"DisplayName"];
+		question.nuggetOriginator.userReputationString = [nuggetOriginator objectForKey:@"UserReputationString"];	
+		question.nuggetOriginator.avatar = [nuggetOriginator objectForKey:@"Avatar"];			
+		
+		NSDictionary *votesDict = [objectInstance objectForKey:@"Votes"];
+		question.votes.upVotes = [(NSNumber*)[votesDict objectForKey:@"UpVotes"] stringValue];	
+		question.votes.upPercentage = [(NSNumber*)[votesDict objectForKey:@"UpPercentage"] stringValue];	
+		question.votes.downVotes = [(NSNumber*)[votesDict objectForKey:@"downVotes"] stringValue];	
+		question.votes.downPercentage = [(NSNumber*)[votesDict objectForKey:@"DownPercentage"] stringValue];	
+		
+		[items addObject: question];			
+	}
+}	
 
 // Adjust the frame sizes of the various UI controls
 - (void)viewDidAppear:(BOOL)animated {
@@ -135,13 +140,13 @@
 	if(rootViewWidth < 400.f) {
 		[headerView setHidden:YES];
 		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
-		[tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, appDelegate.appHeight - 93.f)];
+		[self.tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, UIAppDelegate.appHeight - 93.f)];
 		
 		// remove post question button
-		NSMutableArray * items = [NSMutableArray arrayWithArray:toolbar.items];
-		if([items count] == 7) {
-			[items removeObjectAtIndex:6];
-			[toolbar setItems:items];
+		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
+		if([toolBarItems count] == 7) {
+			[toolBarItems removeObjectAtIndex:6];
+			[toolbar setItems:toolBarItems];
 		}
 	}
 	// Otherwise set correct frame size for the details pane
@@ -149,14 +154,14 @@
 		[headerView setHidden:NO];
 		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
 		if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-			[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 200.f)];
+			[self.tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 200.f)];
 		} else {
-			[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 150.f)];
+			[self.tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 150.f)];
 		}
-		NSMutableArray * items = [NSMutableArray arrayWithArray:toolbar.items];
-		if([items count] == 6) {
-			[items insertObject:postButton atIndex:6];
-			[toolbar setItems:items];
+		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
+		if([toolBarItems count] == 6) {
+			[toolBarItems insertObject:postButton atIndex:6];
+			[toolbar setItems:toolBarItems];
 		}
 	}
 	
@@ -168,7 +173,7 @@
 	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 
-	CGRect f = tableView.frame;
+	CGRect f = self.tableView.frame;
 	f.size.width = appDelegate.appWidth;
 
 	if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
@@ -190,9 +195,8 @@
 -(void)sortButtonPressed:(UIBarButtonItem *)button {
 	currentSortColumn = (NSString*)button.tag;
 	[self setCurrentPage:1];
-	[questions removeAllObjects];                                           
-	[self fetchQuestions: currentTopic];		
-	
+	[items removeAllObjects];                                           
+	[self fetchQuestions: curTopic];		
 }
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
@@ -206,7 +210,7 @@
 		[dialog release];
 	} else {
 		QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
-		[dialog setupView:currentTopic];
+		[dialog setupView:curTopic];
 		
 		[dialog doAppearAnimation: self.view.window];	
 		[self.view.window addSubview:dialog];
@@ -219,14 +223,10 @@
 
 #pragma mark Table view methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	// show an extra row at the bottom for the pagination
-	NSInteger count = [questions count];
+	NSInteger count = [items count];
 	if( count < self.currentPage * 10 ) {
 		return count;
 	} else {
@@ -246,7 +246,7 @@
 	CGFloat superViewWidth = self.view.superview.frame.size.width;	
 	
 	if( indexPath.row < self.currentPage * 10 ) {
-		Question *question = (Question *)[questions objectAtIndex:indexPath.row];
+		Question *question = (Question *)[items objectAtIndex:indexPath.row];
 
 		// Depending on the current view, if the questions are showing up on the detail pane it will have larger width
 		if (superViewWidth > 400.f) {
@@ -303,7 +303,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if( indexPath.row < self.currentPage * 10 ) {
-	NSString *text = [(Question*)[self.questions objectAtIndex:indexPath.row] subject];
+	NSString *text = [(Question*)[items objectAtIndex:indexPath.row] subject];
 	
 	CGSize constraint = CGSizeMake(500.f, MAXFLOAT);
 	
@@ -321,13 +321,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if( indexPath.row < self.currentPage * 10 ) {
 
-		currentQuestion = [questions objectAtIndex:indexPath.row];
+		currentQuestion = [items objectAtIndex:indexPath.row];
 		
 		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:indexPath.row] forKey:@"index"];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
 	} else {
-		self.currentPage++;
-		[self fetchQuestions: currentTopic];
+		currentPage++;
+		[self fetchQuestions: curTopic];
 	}
 }
 
@@ -347,7 +347,7 @@
 	//add the button to the view
 	[customView addSubview:label];
 	
-	if ([questions count] == 0) {
+	if ([items count] == 0) {
 		return customView;
 	}
 	return nil;
@@ -357,32 +357,10 @@
 	return 50.0;
 }
 
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Overriden to allow any orientation.
-    return YES;
-}
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
 - (void)dealloc {
-	NSLog(@"QuestionsViewController dealloc");
+	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];	  
-	[tableView dealloc];
 	[toolbar dealloc];
 	[postButton dealloc];
 	[topicName dealloc];
@@ -391,17 +369,15 @@
 
 -(void)showMorePressed:(UIButton *)button {
 	self.currentPage++;
-	[self fetchQuestions: currentTopic];
+	[self fetchQuestions: curTopic];
 }
 
-
-
 -(void)fetchQuestions :(Topic *) aTopic {
-	currentTopic = aTopic;
-	topicName.text = currentTopic.name;
+	curTopic = aTopic;
+	topicName.text = curTopic.name;
 
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=%@", 
-						UIAppDelegate.serverDataUrl, currentTopic.slug, currentPage, currentSortColumn]];
+						UIAppDelegate.serverDataUrl, curTopic.slug, currentPage, currentSortColumn]];
 	NSLog(@"Fetching questions URL: %@", url);
 	
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -413,17 +389,7 @@
 	[appDelegate.progressHUD showUsingAnimation:YES];
 }
 
-- (NSDate*) getDateFromJSON:(NSString *)dateString
-{
-    // Expect date in this format "/Date(1268123281843)/"
-    int startPos = [dateString rangeOfString:@"("].location+1;
-    int endPos = [dateString rangeOfString:@")"].location;
-    NSRange range = NSMakeRange(startPos,endPos-startPos);
-    unsigned long long milliseconds = [[dateString substringWithRange:range] longLongValue];
-    //NSLog(@"%llu",milliseconds);
-    NSTimeInterval interval = milliseconds/1000;
-    return [NSDate dateWithTimeIntervalSince1970:interval];
-}
+
 
 - (void)myFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -468,9 +434,9 @@
 			question.votes.downVotes = [(NSNumber*)[votesDict objectForKey:@"downVotes"] stringValue];	
 			question.votes.downPercentage = [(NSNumber*)[votesDict objectForKey:@"DownPercentage"] stringValue];	
 			
-			[self.questions addObject: question];			
+			[items addObject: question];			
 		}
-		[self.tableView reloadData];		
+		[tableView reloadData];		
 	}
 }
 

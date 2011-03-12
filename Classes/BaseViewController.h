@@ -18,12 +18,14 @@
 	UITableView *tableView;
 }
 
-@property(nonatomic, retain)UITableView *tableView;
-@property(nonatomic, retain)NSMutableArray *items;
+- (void) makeHttpRequest;
 
-
+// Polymorphic methods
 - (NSString*)getServiceUrl;
 - (void)handleHttpResponse:(NSString*)responseString;
+
+@property(nonatomic, retain) UITableView *tableView;
+@property(nonatomic, retain)  NSMutableArray *items;
 
 
 @end
