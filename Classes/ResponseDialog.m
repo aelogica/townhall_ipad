@@ -63,10 +63,12 @@
 	return [NSString stringWithFormat:@"%@/responses/for/%@/create", UIAppDelegate.serverDataUrl, question.nuggetId];
 }
 
--(NSString *)getRequestParameters { 
+-(NSDictionary *)getRequestParameters { 
 	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:2];
-	
-	return [NSString stringWithFormat:@"body=%@", [textView text]];
+
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+							[textView text], @"body", nil];
+	return params;
 }
 
 -(NSString *)getDialogTitle {

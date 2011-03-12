@@ -12,7 +12,7 @@
 
 #import "BaseDialog.h"
 #import "GenericTownHallAppDelegate.h"
-#import <QuartzCore/QuartzCore.h>
+
 #import "GTMHTTPFetcher.h"
 
 @implementation BaseDialog
@@ -136,24 +136,71 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 
 				   
 - (void)rightButtonPressed: (id)sender {
-   NSURL *url = [NSURL URLWithString: [self getRequestUrl]];	
-   NSLog(@"Posting to Url: %@", url);
-   
-   
-   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-   
-   NSString *post = [self getRequestParameters];  
-   NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-   NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-   
-   [request setValue:postLength forHTTPHeaderField:@"Content-length"];
-   [request setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
-   
-   [request setHTTPMethod:@"POST"];
-   [request setHTTPBody: postData];
-   
-   GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-   [myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];	   
+	NSDictionary *postData = [self getRequestParameters];  ;	
+	NSURL *url = [NSURL URLWithString:[self getRequestUrl]];
+	NSLog(@"Making HTTP request: %@", url);	
+
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+
+	NSEnumerator *enumerator = [postData keyEnumerator];
+	id key;
+	while (key = [enumerator nextObject]) {
+		NSString *value = [postData objectForKey:key];	
+		[request setPostValue:value forKey:key];
+	}	
+
+	//[request setPostLength:[postData length]];
+	
+	[request setDelegate:self];		
+	[request setValidatesSecureCertificate:NO];
+	[request startAsynchronous];
+	
+//	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//	[appDelegate.progressHUD showUsingAnimation:YES];   
+}
+
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	// Use when fetching text data
+	NSString *responseString = [request responseString];
+	
+	// Create an array out of the returned json string
+	id *results = [responseString JSONValue];
+	
+	if ([results isKindOfClass:[NSArray class]] || [results isKindOfClass:[NSDictionary class]])  { 
+		
+		NSLog(@"Http request succeeded: %@ Count: %d", responseString, [results count]);	
+		
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector: @selector(cancelAnimationDidStop:finished:context:)];
+		[UIView setAnimationDuration:.7f];	
+		[self setAlpha:0.f];
+		[UIView commitAnimations];
+		
+		[self handleHttpResponse:responseString];
+
+	} else {
+		NSLog(@"Http request result bad data: %@", responseString);
+	    
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+		[alert show];
+		[alert release];
+	}
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+	NSError *error = [request error];
+	
+	NSLog(@"Http request failed: %@ Count: %d", error);
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+	[alert show];
+	[alert release];	
+}
+
+- (void)handleHttpResponse:(NSString*)responseString {
+	// Do nothing let implementation child classes handle this case
 }
 				   
 				   
@@ -174,18 +221,8 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 	[dimmer setAlpha:.0f];	
 	[UIView commitAnimations];	
 }
-
-- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
-   [UIView beginAnimations:nil context:nil];
-   [UIView setAnimationDelegate:self];
-   [UIView setAnimationDidStopSelector: @selector(cancelAnimationDidStop:finished:context:)];
-   [UIView setAnimationDuration:.7f];	
-   [self setAlpha:0.f];
-   [UIView commitAnimations];
-}
 				   
 // defaults
-
 -(NSString *)getDialogTitle {
 	return @"Add your question";
 }

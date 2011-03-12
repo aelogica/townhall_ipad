@@ -52,14 +52,17 @@
 }
 
 -(NSString *)getRequestUrl {
-	return [NSString stringWithFormat:@"%@/account/authenticate?format=json", UIAppDelegate.serverBaseUrl];
+	return [NSString stringWithFormat:@"%@/account/authenticate?format=json&ApiKey=%@", UIAppDelegate.serverBaseUrl, UIAppDelegate.serverApiKey];
 }
 
--(NSString *)getRequestParameters { 
+-(NSDictionary *)getRequestParameters { 
 	UITextField *loginField = (UITextField*)[self.subviews objectAtIndex:1];	
 	UITextField *passwordField = (UITextField*)[self.subviews objectAtIndex:2];	
 	
-	return [NSString stringWithFormat:@"username=%@&password=%@", [loginField text], [passwordField text]];
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+							[loginField text], @"username",
+							[passwordField text], @"password", nil];
+	return params;
 }
 
 -(NSString *)getDialogTitle {
@@ -69,14 +72,9 @@
 	return @"Login";
 }
 
-- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
-	[super postRequestHandler:fetcher finishedWithData:retrievedData error:error];
-	
-	// Store incoming data into a string
-	NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];
-	
+- (void)handleHttpResponse:(NSString*)responseString {
 	// Create an array out of the returned json string
-	NSArray *results = [jsonString JSONValue];
+	NSArray *results = [responseString JSONValue];
 	if ([results count] > 10) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoginSuccess" object:nil userInfo:nil];
 	} else {
@@ -84,6 +82,13 @@
 		[alert show];
 	}
 }
+
+//- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
+//	[super postRequestHandler:fetcher finishedWithData:retrievedData error:error];
+//	
+//	// Store incoming data into a string
+//	NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];	
+//}
 
 /*
 // Only override drawRect: if you perform custom drawing.

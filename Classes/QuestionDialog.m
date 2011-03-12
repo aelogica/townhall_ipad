@@ -76,13 +76,18 @@
 	return [NSString stringWithFormat:@"%@/questions/in/%@/create/post", UIAppDelegate.serverDataUrl, topic.slug];
 }
 
--(NSString *)getRequestParameters { 
+-(NSDictionary *)getRequestParameters { 
 	UITextView *textView = (UITextView*)[self.subviews objectAtIndex:2];
 	UITextField *textField = (UITextField*)[self.subviews objectAtIndex:3];	
 
-	return [NSString stringWithFormat:@"Body=%@&TagsCommaSeparated=%@&CategorySlug=%@", [self urlEncodeValue:[textView text]], [self urlEncodeValue:[textField text]], topic.slug];
+	
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+							[self urlEncodeValue:[textView text]], @"body", 
+							[self urlEncodeValue:[textField text]], @"TagsCommaSeparated", 
+							topic.slug, @"CategorySlug", 
+							nil];
+	return params;
 }
-
 	
 /*
 // Only override drawRect: if you perform custom drawing.

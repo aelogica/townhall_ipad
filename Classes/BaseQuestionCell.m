@@ -15,6 +15,7 @@
 #import "AsynchImageView.h"
 #import "GenericTownHallAppDelegate.h"
 #import "GTMHTTPFetcher.h"
+#import "ASIFormDataRequest.h"
 
 @implementation BaseQuestionCell
 
@@ -112,54 +113,75 @@
     return self;
 }
 
+-(void)voteUpPressed:(UIButton *)button {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, button.tag, UIAppDelegate.serverApiKey]];	
+	NSLog(@"Making a vote to Url: %@", url);
+	
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+	[request setPostValue:button.tag forKey:@"nuggetID"];
+	[request setPostValue:@"TRUE" forKey:@"isup"];	
+	[request setDelegate:self];		
+	[request setValidatesSecureCertificate:NO];
+	[request startAsynchronous];	
+	
+	[button setSelected: YES];
+	
+}
+
+-(void)voteDownPressed:(UIButton *)button {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, button.tag, UIAppDelegate.serverApiKey]];	
+	NSLog(@"Making a vote to Url: %@", url);
+	
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+	[request setPostValue:button.tag forKey:@"nuggetID"];
+	[request setPostValue:@"FALSE" forKey:@"isup"];	
+	[request setDelegate:self];		
+	[request setValidatesSecureCertificate:NO];
+	[request startAsynchronous];
+	
+	[button setSelected: YES];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	// Use when fetching text data
+	NSString *responseString = [request responseString];
+	
+	// Create an array out of the returned json string
+	id *results = [responseString JSONValue];
+	
+	if ([results isKindOfClass:[NSArray class]] || [results isKindOfClass:[NSDictionary class]])  { 
+		
+		NSLog(@"Http request succeeded: %@ Count: %d", responseString, [results count]);	
+	} else {
+		NSLog(@"Http request result bad data: %@", responseString);
+	    
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+		[alert show];
+		[alert release];
+	}
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+	NSError *error = [request error];
+	
+	NSLog(@"Http request failed: %@ Count: %d", error);
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+	[alert show];
+	[alert release];	
+}
+
+
+- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
+	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Thank you for voting." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
+	[alert show];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state.
-}
-
--(void)voteUpPressed:(UIButton *)button {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=xml", UIAppDelegate.serverDataUrl, button.tag]];	
-	NSLog(@"Making a vote to Url: %@", url);
-	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	
-	NSString *post = [NSString stringWithFormat:@"nuggetID=%@&isup=TRUE", button.tag];  
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody: postData];
-	
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];
-	[button setSelected: YES];
-	
-}
-
--(void)voteDownPressed:(UIButton *)button {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=xml", UIAppDelegate.serverDataUrl, button.tag]];	
-	NSLog(@"Making a vote to Url: %@", url);
-	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	
-	NSString *post = [NSString stringWithFormat:@"nuggetID=%@&isup=FALSE", button.tag];  
-	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];	
-	
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody: postData];
-	
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self didFinishSelector:@selector(postRequestHandler:finishedWithData:error:)];
-	[button setSelected: YES];
-}
-
-
-
-- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
-	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Thank you for voting." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease];
-	[alert show];
 }
 
 - (void)dealloc {

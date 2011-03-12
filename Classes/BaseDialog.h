@@ -11,6 +11,10 @@
 
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @class GTMHTTPFetcher;
 
@@ -27,9 +31,9 @@
 - (void)rightButtonPressed: (id)sender;
 - (void)leftButtonPressed: (id)sender;
 - (void)doAppearAnimation: (UIWindow*)aWindow;
-- (void)postRequestHandler:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error;
+- (void)handleHttpResponse:(NSString*)responseString;
 
--(NSString *)getRequestParameters;
+-(NSDictionary *)getRequestParameters;
 -(NSString *)getRequestUrl;
 -(NSString *)getDialogTitle;
 -(NSString *)getRightButtonTitle;

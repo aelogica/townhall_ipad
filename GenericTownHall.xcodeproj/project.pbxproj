@@ -576,14 +576,14 @@
 		63A36D9312BB548C0028AC5B /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
+				194D365A12CB4FBC00E3111B /* BaseDialog.h */,
+				194D365B12CB4FBC00E3111B /* BaseDialog.m */,
 				63A36A7B12BA51DD0028AC5B /* QuestionDialog.h */,
 				63A36A7C12BA51DD0028AC5B /* QuestionDialog.m */,
 				63A36D9412BB549A0028AC5B /* LoginDialog.h */,
 				63A36D9512BB549A0028AC5B /* LoginDialog.m */,
 				63764A5E12BF8D4A00F380B5 /* ResponseDialog.h */,
 				63764A5F12BF8D4A00F380B5 /* ResponseDialog.m */,
-				194D365A12CB4FBC00E3111B /* BaseDialog.h */,
-				194D365B12CB4FBC00E3111B /* BaseDialog.m */,
 			);
 			name = Dialogs;
 			sourceTree = "<group>";
