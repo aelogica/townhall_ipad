@@ -18,7 +18,15 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
+	
 	[super loadView];
+	
+	[super addTableView:UITableViewStyleGrouped];	
+	
+	UIImage *stepsImage = [UIImage imageNamed:@"steps.png"];
+	UIImageView *stepsImageView = [[UIImageView alloc] initWithImage:stepsImage];
+	[stepsImageView setFrame:CGRectMake(0, 834.f, 768.0, 128.0)];
+	[self.view addSubview:stepsImageView]; 	
 	
 	/*
 	UINavigationBar *navBar = 	[self.navigationController navigationBar];

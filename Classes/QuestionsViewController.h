@@ -22,14 +22,10 @@
 	NSInteger currentPage;
 	NSString *currentSortColumn;
 	
-	UIView *headerView;
-	UIToolbar *toolbar;
 	UIBarButtonItem *postButton;
 	UILabel *topicName;
 }
 
-@property(nonatomic, retain) UIView *headerView;
-@property(nonatomic, retain) UIToolbar *toolbar;
 @property(nonatomic, retain) UILabel *topicName;
 @property(nonatomic, assign) NSInteger currentPage;
 

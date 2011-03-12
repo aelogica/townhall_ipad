@@ -15,15 +15,9 @@
 @class Question;
 
 @interface ResponsesViewController : BaseViewController {
-
 	Question *curQuestion;
-	UIView *headerView;
-	UIToolbar *toolbar;
-
 }
 
-@property(nonatomic, retain) UIView *headerView;
-@property(nonatomic, retain) UIToolbar *toolbar;
 @property(nonatomic, retain) Question *curQuestion;
 
 -(void)fetchResponses:(Question *) question;

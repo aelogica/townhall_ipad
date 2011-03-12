@@ -11,6 +11,8 @@
 
 @implementation BaseViewController
 
+@synthesize headerView;
+@synthesize toolbar;
 @synthesize tableView;
 @synthesize items;
 
@@ -34,48 +36,89 @@
 	
 	self.view = [[UIView alloc] initWithFrame: CGRectMake(.0f, 44.f, appDelegate.appWidth, appDelegate.appHeight)];
 	[self.view setBackgroundColor:[UIColor clearColor]];	
-	
-	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, appDelegate.appWidth, appDelegate.appHeight) style:UITableViewStyleGrouped];
-	[tableView setDataSource:self];
-	[tableView setDelegate:self];
-	[tableView setBackgroundView:nil];
-	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-	//[tableView setAlpha:0.5f];
-	//tableView.backgroundColor = [UIColor blackColor];
-	//tableView.opaque = NO;	
-	
-	[self.view addSubview:tableView];
+
 	
 	// Listen to orientaton changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange:) name:@"OrientationChange" object:nil]; 
 	
-	UIImage *stepsImage = [UIImage imageNamed:@"steps.png"];
-	UIImageView *stepsImageView = [[UIImageView alloc] initWithImage:stepsImage];
-	[stepsImageView setFrame:CGRectMake(0, 834.f, 768.0, 128.0)];
-	[self.view addSubview:stepsImageView]; 	
-	
 	[self makeHttpRequest];
 }
 
+- (void) addHeader {
+	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, UIAppDelegate.appWidth, 100.f)];
+	[headerView setBackgroundColor:[UIColor blackColor]];
+	
+	// add toolbar
+	toolbar = [UIToolbar new];
+	[toolbar setBarStyle:UIBarStyleBlack];
+	[toolbar sizeToFit];
+	[toolbar setFrame: CGRectMake(0, 100.f, UIAppDelegate.appWidth, 50.f)];	
+	
+	[self.view addSubview:headerView];
+	[self.view addSubview:toolbar];
+}
+
+- (void) addTableView:(UITableViewStyle)aStyle {
+	
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(.0f, 100.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight) style:aStyle];
+
+	[tableView setDataSource:self];
+	[tableView setDelegate:self];
+	[tableView setBackgroundView:nil];
+	[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+	
+	//[tableView setAlpha:0.5f];
+	//tableView.backgroundColor = [UIColor blackColor];
+	//tableView.opaque = NO;	
+	
+	if (aStyle == UITableViewStylePlain) {
+		[tableView setSeparatorColor: UIColorFromRGB(0x3e5021)];
+		[tableView setBackgroundColor:UIColorFromRGB(0x3e5021)];
+	}       	
+	
+	[self.view addSubview:tableView];
+}
+
+
 -(void)orientationChange:(NSNotification *)orientation { 
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	
 	CGRect f = tableView.frame;
-	f.size.width = appDelegate.appWidth;
+	f.size.width = UIAppDelegate.appWidth;
+
+	// Adjust the table view height if we're on a plain style
+	if (tableView.style == UITableViewStylePlain) {
+		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+			f.size.height = UIAppDelegate.appHeight - 150.f;	
+		} else {
+			f.size.height = UIAppDelegate.appHeight - 200.f;	
+		}
+	}
 	tableView.frame = f;		
-	
 	[tableView reloadData];
+	
+	// Also adjust the header if its set
+	if (headerView != nil) {
+		[headerView setFrame: CGRectMake(0, 0.f, UIAppDelegate.appWidth, 150.f)];
+		[toolbar setFrame: CGRectMake(0, 100.f, UIAppDelegate.appWidth, 50.f)];		
+	}		
 }
 
 -(void)makeHttpRequest{
 	NSString *serviceUrl = [self getServiceUrl];
+	NSString *extraParams = [self getExtraParams];
+	NSString *url = nil;
 	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@?format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl, serviceUrl]];
-	NSLog(@"Making HTTP request: %@", url);	
+	if (extraParams) {
+		url = [NSString stringWithFormat:@"%@/%@?%@&format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl, serviceUrl, extraParams];
+	} else {
+		url = [NSString stringWithFormat:@"%@/%@?format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl, serviceUrl];
+	}
+	
+	NSURL *nsUrl = [NSURL URLWithString: url];
+	NSLog(@"Making HTTP request: %@", nsUrl);	
 	
 	// Create a request
 	// You don't normally need to retain a synchronous request, but we need to in this case because we'll need it later if we reload the table data
-	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:nsUrl];
 	[request setDelegate:self];	
 	[request setValidatesSecureCertificate:NO];
 	[request startAsynchronous];
@@ -123,6 +166,45 @@
 }
 
 
+// Adjust the frame sizes of the various UI controls
+- (void)viewDidAppear:(BOOL)animated {
+	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
+	
+	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
+	
+	// See if this view controller is showing up on the root view pane
+	if(rootViewWidth < 400.f) {
+		[headerView setHidden:YES];
+		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
+		[self.tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, UIAppDelegate.appHeight - 93.f)];
+		
+		// remove post question button
+		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
+		if([toolBarItems count] == 7) {
+			[toolBarItems removeObjectAtIndex:6];
+			[toolbar setItems:toolBarItems];
+		}
+	}
+	// Otherwise set correct frame size for the details pane
+	else {
+		[headerView setHidden:NO];
+		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
+		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
+		} else {
+			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 150.f)];
+		}
+		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
+		if([toolBarItems count] == 6) {
+			//[toolBarItems insertObject:postButton atIndex:6];
+			[toolbar setItems:toolBarItems];
+		}
+	}
+	
+	//[tableView reloadData];
+}
+
+
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -154,6 +236,10 @@
 
 #pragma mark Polymorphic methods
 - (NSString*) getServiceUrl {
+	return nil;
+}
+
+- (NSString*) getExtraParams {
 	return nil;
 }
 

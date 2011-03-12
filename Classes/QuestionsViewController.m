@@ -20,7 +20,7 @@
 
 @implementation QuestionsViewController
 
-@synthesize currentPage, headerView, toolbar;
+@synthesize currentPage;
 @synthesize curTopic;
 @synthesize currentQuestion;
 
@@ -32,11 +32,10 @@
 	currentSortColumn = @"date";	
 	
     [super loadView];
-
-
-	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, UIAppDelegate.appWidth, 100.f)];
-	[headerView setBackgroundColor:[UIColor blackColor]];
+	[super addTableView:UITableViewStylePlain];	
+	[super addHeader];
 	
+	// UI for the header view
 	topicName = [[UILabel alloc] initWithFrame:CGRectMake(270.f, 10.f, 200.f, 25.f)];
 	topicName.font = [UIFont systemFontOfSize:20];
 	topicName.backgroundColor = [UIColor clearColor];
@@ -50,14 +49,7 @@
 
 	[headerView addSubview:topicName];
 	[headerView addSubview:placeholder1];
-	[headerView addSubview:placeholder2];
-	[self.view addSubview:headerView];
-	
-	// add toolbar
-	toolbar = [UIToolbar new];
-	[toolbar setBarStyle:UIBarStyleBlack];
-	[toolbar sizeToFit];
-	[toolbar setFrame: CGRectMake(0, 100.f, UIAppDelegate.appWidth, 50.f)];
+	[headerView addSubview:placeholder2];	
 	
 	//Add buttons
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
@@ -94,7 +86,6 @@
 	
 	//add array of buttons to toolbar
 	[toolbar setItems:toolBarItems animated:NO];
-	[self.view addSubview:toolbar];
 }
 
 - (NSString*)getServiceUrl {
@@ -103,7 +94,14 @@
 	return url;
 }
 
+- (NSString*)getExtraParams {
+	return [NSString stringWithFormat:@"sortKey=%@", currentSortColumn];
+}
+
+
 - (void)handleHttpResponse:(NSString*)responseString {
+	topicName.text = curTopic.name;
+	
 	// Create an array out of the returned json string
 	NSArray *results = [responseString JSONValue];
 
@@ -133,70 +131,49 @@
 }	
 
 // Adjust the frame sizes of the various UI controls
-- (void)viewDidAppear:(BOOL)animated {
-	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	// See if this view controller is showing up on the root view pane
-	if(rootViewWidth < 400.f) {
-		[headerView setHidden:YES];
-		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
-		[self.tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, UIAppDelegate.appHeight - 93.f)];
-		
-		// remove post question button
-		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
-		if([toolBarItems count] == 7) {
-			[toolBarItems removeObjectAtIndex:6];
-			[toolbar setItems:toolBarItems];
-		}
-	}
-	// Otherwise set correct frame size for the details pane
-	else {
-		[headerView setHidden:NO];
-		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
-		if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-			[self.tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 200.f)];
-		} else {
-			[self.tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 150.f)];
-		}
-		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
-		if([toolBarItems count] == 6) {
-			[toolBarItems insertObject:postButton atIndex:6];
-			[toolbar setItems:toolBarItems];
-		}
-	}
-	
-	[tableView reloadData];
-}
-
--(void)orientationChange:(NSNotification *)orientation { 
-	NSString *o = (NSString *)[orientation object];
-	
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-
-	CGRect f = self.tableView.frame;
-	f.size.width = appDelegate.appWidth;
-
-	if(appDelegate.currentOrientation == UIInterfaceOrientationPortrait || appDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-		f.size.height = appDelegate.appHeight - 150.f;	
-	} else {
-		f.size.height = appDelegate.appHeight - 200.f;	
-	}
-	
-	
-	tableView.frame = f;		
-	
-	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 150.f)];
-	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
-	
-
-	[tableView reloadData];
-}
+//- (void)viewDidAppear:(BOOL)animated {
+//	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
+//	
+//	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
+//	
+//	// See if this view controller is showing up on the root view pane
+//	if(rootViewWidth < 400.f) {
+//		[headerView setHidden:YES];
+//		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
+//		[self.tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, UIAppDelegate.appHeight - 93.f)];
+//		
+//		// remove post question button
+//		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
+//		if([toolBarItems count] == 7) {
+//			[toolBarItems removeObjectAtIndex:6];
+//			[toolbar setItems:toolBarItems];
+//		}
+//	}
+//	// Otherwise set correct frame size for the details pane
+//	else {
+//		[headerView setHidden:NO];
+//		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
+//		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+//			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
+//		} else {
+//			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 150.f)];
+//		}
+//		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
+//		if([toolBarItems count] == 6) {
+//			[toolBarItems insertObject:postButton atIndex:6];
+//			[toolbar setItems:toolBarItems];
+//		}
+//	}
+//	
+//	[tableView reloadData];
+//}
+//
 
 -(void)sortButtonPressed:(UIBarButtonItem *)button {
 	currentSortColumn = (NSString*)button.tag;
 	[self setCurrentPage:1];
-	[items removeAllObjects];                                           
-	[self fetchQuestions: curTopic];		
+	[items removeAllObjects];  
+	[self makeHttpRequest];
 }
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
@@ -327,34 +304,9 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToQuestions" object:nil userInfo:userInfo];
 	} else {
 		currentPage++;
-		[self fetchQuestions: curTopic];
+
+		[self makeHttpRequest];
 	}
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-
-	// create the parent view that will hold Label
-	UIView* customView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,0.f, appDelegate.appWidth, 50.f)] autorelease];
-	[customView setBackgroundColor:[UIColor blackColor]];
-
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(appDelegate.appWidth / 2.f - 50.f, 15.f, 100.f, 35.f)];
-	[label setText:@"No entries"];
-	[label setFont:[UIFont systemFontOfSize:20]];
-	[label setTextColor:[UIColor whiteColor]];
-	[label setBackgroundColor:[UIColor clearColor]];
-
-	//add the button to the view
-	[customView addSubview:label];
-	
-	if ([items count] == 0) {
-		return customView;
-	}
-	return nil;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return 50.0;
 }
 
 - (void)dealloc {
@@ -365,79 +317,6 @@
 	[postButton dealloc];
 	[topicName dealloc];
     [super dealloc];
-}
-
--(void)showMorePressed:(UIButton *)button {
-	self.currentPage++;
-	[self fetchQuestions: curTopic];
-}
-
--(void)fetchQuestions :(Topic *) aTopic {
-	curTopic = aTopic;
-	topicName.text = curTopic.name;
-
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/browse/questions/in/%@/page/%d?format=json&sortKey=%@", 
-						UIAppDelegate.serverDataUrl, curTopic.slug, currentPage, currentSortColumn]];
-	NSLog(@"Fetching questions URL: %@", url);
-	
-	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-	GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:request];
-	[myFetcher beginFetchWithDelegate:self
-					didFinishSelector:@selector(myFetcher:finishedWithData:error:)];	
-	
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	[appDelegate.progressHUD showUsingAnimation:YES];
-}
-
-
-
-- (void)myFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)retrievedData error:(NSError *)error {
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	[appDelegate.progressHUD hideUsingAnimation:YES];
-	
-	if (error != nil) {
-		// failed; either an NSURLConnection error occurred, or the server returned
-		// a status value of at least 300
-		//
-		// the NSError domain string for server status errors is kGTMHTTPFetcherStatusDomain
-		int status = [error code];
-		NSLog(@"Fetch questions failed");
-	} else {
-		//[questions removeAllObjects];
-		
-		// Store incoming data into a string
-		NSString *jsonString = [[NSString alloc] initWithData:retrievedData encoding:NSUTF8StringEncoding];
-		
-		// Create an array out of the returned json string
-	    NSArray *results = [jsonString JSONValue];
-		
-		NSLog(@"Fetch questions succeeded. Count: %d", [results count]);
-		
-		for (NSDictionary *objectInstance in results) {
-			
-			Question *question = [[Question alloc] init];
-			question.subject = [objectInstance objectForKey:@"Subject"];
-			question.body = [objectInstance objectForKey:@"Body"];
-			question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
-			question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
-			question.dateCreated = [self getDateFromJSON:[objectInstance objectForKey:@"DateCreated"]];
-
-			NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];
-			question.nuggetOriginator.userId = [nuggetOriginator objectForKey:@"UserID"];
-			question.nuggetOriginator.displayName = [nuggetOriginator objectForKey:@"DisplayName"];
-			question.nuggetOriginator.userReputationString = [nuggetOriginator objectForKey:@"UserReputationString"];	
-			question.nuggetOriginator.avatar = [nuggetOriginator objectForKey:@"Avatar"];			
-			
-			NSDictionary *votesDict = [objectInstance objectForKey:@"Votes"];
-			question.votes.upVotes = [(NSNumber*)[votesDict objectForKey:@"UpVotes"] stringValue];	
-			question.votes.upPercentage = [(NSNumber*)[votesDict objectForKey:@"UpPercentage"] stringValue];	
-			question.votes.downVotes = [(NSNumber*)[votesDict objectForKey:@"downVotes"] stringValue];	
-			question.votes.downPercentage = [(NSNumber*)[votesDict objectForKey:@"DownPercentage"] stringValue];	
-			
-			[items addObject: question];			
-		}
-		[tableView reloadData];		
-	}
 }
 
 @end

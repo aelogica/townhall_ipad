@@ -21,16 +21,16 @@
 
 @implementation ResponsesViewController
 
-@synthesize curQuestion, toolbar, headerView;
+@synthesize curQuestion;
 
 - (void) loadView {
 	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
 	
     [super loadView];
+	[super addTableView:UITableViewStylePlain];	
+	[super addHeader];
 	
-	headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, UIAppDelegate.appWidth, 100.f)];
-	[headerView setBackgroundColor:UIColorFromRGB(0xd5d8de)];
-	
+	// UI for headerView
 	UILabel *subjectLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.0, 600.f, 50.f)];
 	subjectLabel.backgroundColor = [UIColor clearColor];
 	subjectLabel.numberOfLines = 0;
@@ -46,15 +46,8 @@
 	
 	[headerView addSubview:subjectLabel];
 	[headerView addSubview:authorLabel];
-	[self.view addSubview:headerView];
 	
-	// add toolbar
-	toolbar = [[UIToolbar alloc] init];
-	[toolbar setBarStyle:UIBarStyleBlack];
-	[toolbar sizeToFit];
-	[toolbar setFrame: CGRectMake(0, 100.f, 768.f, 50.f)];
-	
-	//Add buttons
+	// Add buttons to toolbar
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithTitle:@"Responses" 
 																style:UIBarButtonItemStylePlain target:nil action:nil];
 	
@@ -76,9 +69,8 @@
 	[button2 release];
 	[flexItem release];
 	
-	//add array of buttons to toolbar
+	// Add array of buttons to toolbar
 	[toolbar setItems:items animated:NO];
-	[self.view addSubview:toolbar];	
 }
 
 - (NSString*)getServiceUrl {
@@ -120,29 +112,6 @@
 		[response release];		
 	}
 
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-
-	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 100.f)];
-	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
-	[tableView setFrame:CGRectMake(.0f, 150.f, appDelegate.appWidth, appDelegate.appHeight - 149.f)];	
-	[tableView reloadData];
-}
-
--(void)orientationChange:(NSNotification *)orientation { 
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	
-	CGRect f = tableView.frame;
-	f.size.width = appDelegate.appWidth;
-	f.size.height = appDelegate.appHeight - 149.f;	
-	tableView.frame = f;		
-	
-	[headerView setFrame: CGRectMake(0, 0.f, appDelegate.appWidth, 150.f)];
-	[toolbar setFrame: CGRectMake(0, 100.f, appDelegate.appWidth, 50.f)];
-	
-	[tableView reloadData];
 }
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
@@ -192,7 +161,6 @@
 	Response *response = (Response *)[items objectAtIndex:indexPath.row];
 	[cell updateCellWithModel:response];		
 	
-
 	if( [indexPath row] % 2)
 		[cell setBackgroundColor:[UIColor whiteColor]];
 	else
@@ -201,36 +169,6 @@
 	return cell;
 	
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	
-	// create the parent view that will hold Label
-	UIView* customView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,0.f, appDelegate.appWidth, 50.f)] autorelease];
-	[customView setBackgroundColor:[UIColor blackColor]];
-	
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(appDelegate.appWidth / 2.f - 50.f, 15.f, 100.f, 35.f)];
-	[label setText:@"No entries"];
-	[label setFont:[UIFont systemFontOfSize:20]];
-	[label setTextColor:[UIColor whiteColor]];
-	[label setBackgroundColor:[UIColor clearColor]];
-	
-	//add the button to the view
-	[customView addSubview:label];
-	
-	if ([items count] == 0) {
-		return customView;
-	}
-	return nil;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return 50.0;
-}
-
 - (void)dealloc {
 	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
 
