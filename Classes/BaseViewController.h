@@ -19,6 +19,8 @@
 	
 	UIView *headerView;
 	UIToolbar *toolbar;
+	
+	NSInteger currentPage;
 }
 
 
@@ -33,11 +35,14 @@
 - (NSString*)getExtraParams;
 - (void)handleHttpResponse:(NSString*)responseString;
 
+// Helper methods
+- (NSDate*) getDateFromJSON:(NSString *)dateString;
+
 
 @property(nonatomic, retain) UIView *headerView;
 @property(nonatomic, retain) UIToolbar *toolbar;
 @property(nonatomic, retain) UITableView *tableView;
 @property(nonatomic, retain)  NSMutableArray *items;
-
+@property(nonatomic, assign) NSInteger currentPage;
 
 @end

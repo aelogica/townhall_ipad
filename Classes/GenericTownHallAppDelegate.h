@@ -45,6 +45,7 @@ enum {
 	MBProgressHUD *progressHUD;
 	NSString *serverBaseUrl;
 	NSString *serverDataUrl;
+	NSString *serverApiKey;	
 	UIInterfaceOrientation currentOrientation;
 	CGFloat appWidth;
 	CGFloat appHeight;
@@ -63,6 +64,7 @@ enum {
 @property (readwrite, retain) MBProgressHUD * progressHUD;
 @property (readwrite, retain) NSString * serverBaseUrl;
 @property (readwrite, retain) NSString * serverDataUrl;
+@property (readwrite, retain) NSString * serverApiKey;
 @property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
 @property (nonatomic, assign) CGFloat appWidth;
 @property (nonatomic, assign) CGFloat appHeight;

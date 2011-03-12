@@ -21,7 +21,7 @@
 
 @implementation GenericTownHallAppDelegate
 
-@synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, splashViewController;
+@synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, serverApiKey, splashViewController;
 @synthesize currentOrientation, appWidth, appHeight, isLogin, currentView, currentBarButtonTitle, currentSlug;
 
 #pragma mark -
@@ -61,6 +61,7 @@
 	
 	serverBaseUrl = [plistData objectForKey:@"ServerBaseUrl"];
 	serverDataUrl = [plistData objectForKey:@"ServerDataUrl"];
+	serverApiKey = [plistData objectForKey:@"ServerApiKey"];	
 	NSLog(@"Server Base URL set to: %@ Data URL set to: %@", serverBaseUrl, serverDataUrl);
     
     // Add the split view controller's view to the window and display.

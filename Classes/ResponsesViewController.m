@@ -29,6 +29,7 @@
     [super loadView];
 	[super addTableView:UITableViewStylePlain];	
 	[super addHeader];
+	[headerView setBackgroundColor:UIColorFromRGB(0xd5d8de)];
 	
 	// UI for headerView
 	UILabel *subjectLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.0, 600.f, 50.f)];
@@ -149,13 +150,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     static NSString *CellIdentifier = @"Cell";
-	static NSString *CellIdentifier2 = @"Cell2";
 
 	ResponseCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
 	if (cell == nil) {
 		cell = [[[ResponseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		
 	}	
 
 	Response *response = (Response *)[items objectAtIndex:indexPath.row];

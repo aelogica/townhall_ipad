@@ -20,7 +20,6 @@
 
 @implementation QuestionsViewController
 
-@synthesize currentPage;
 @synthesize curTopic;
 @synthesize currentQuestion;
 
@@ -31,7 +30,7 @@
 	currentPage = 1;
 	currentSortColumn = @"date";	
 	
-    [super loadView];
+    [super loadView];	
 	[super addTableView:UITableViewStylePlain];	
 	[super addHeader];
 	
@@ -53,16 +52,16 @@
 	
 	//Add buttons
 	UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostinterest-off.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonPressed:)];
-	button1.tag = (NSString*)@"interest";
+	button1.tag = 0;
 
 	UIBarButtonItem *button2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-mostrecent-off.png"] style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
-	button2.tag = @"date";
+	button2.tag = 1;
 
 	UIBarButtonItem *button3 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-totalvotes-off.png"] style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
-	button3.tag = @"votes";
+	button3.tag = 2;
 
 	UIBarButtonItem *button4 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-withresponses-off.png"] style:UIBarButtonItemStylePlain target:self action: @selector(sortButtonPressed:)];
-	button4.tag = @"responses";
+	button4.tag = 3;
 	
 	postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post question" style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed:)];
 	
@@ -130,47 +129,24 @@
 	}
 }	
 
-// Adjust the frame sizes of the various UI controls
-//- (void)viewDidAppear:(BOOL)animated {
-//	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
-//	
-//	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
-//	
-//	// See if this view controller is showing up on the root view pane
-//	if(rootViewWidth < 400.f) {
-//		[headerView setHidden:YES];
-//		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
-//		[self.tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, UIAppDelegate.appHeight - 93.f)];
-//		
-//		// remove post question button
-//		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
-//		if([toolBarItems count] == 7) {
-//			[toolBarItems removeObjectAtIndex:6];
-//			[toolbar setItems:toolBarItems];
-//		}
-//	}
-//	// Otherwise set correct frame size for the details pane
-//	else {
-//		[headerView setHidden:NO];
-//		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
-//		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-//			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
-//		} else {
-//			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 150.f)];
-//		}
-//		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
-//		if([toolBarItems count] == 6) {
-//			[toolBarItems insertObject:postButton atIndex:6];
-//			[toolbar setItems:toolBarItems];
-//		}
-//	}
-//	
-//	[tableView reloadData];
-//}
-//
-
 -(void)sortButtonPressed:(UIBarButtonItem *)button {
-	currentSortColumn = (NSString*)button.tag;
+	switch (button.tag) {
+		case 0:
+			currentSortColumn = @"interest";
+			break;
+		case 1:
+			currentSortColumn = @"date";
+			break;
+		case 2:
+			currentSortColumn = @"votes";
+			break;
+		case 3:
+			currentSortColumn = @"responses";
+			break;			
+		default:
+			break;
+	}	
+
 	[self setCurrentPage:1];
 	[items removeAllObjects];  
 	[self makeHttpRequest];
@@ -187,7 +163,7 @@
 		[dialog release];
 	} else {
 		QuestionDialog * dialog = [[QuestionDialog alloc] initWithFrame:CGRectMake(0.f, 0.f, 600.f, 300.f)];
-		[dialog setupView:curTopic];
+		[dialog setupView:(id*)curTopic];
 		
 		[dialog doAppearAnimation: self.view.window];	
 		[self.view.window addSubview:dialog];
@@ -199,17 +175,6 @@
 }
 
 #pragma mark Table view methods
-
-// Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	// show an extra row at the bottom for the pagination
-	NSInteger count = [items count];
-	if( count < self.currentPage * 10 ) {
-		return count;
-	} else {
-		return count + 1;
-	}
-}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

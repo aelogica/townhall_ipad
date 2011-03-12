@@ -6,7 +6,7 @@
 	<string>https://townhall2.cloudapp.net</string>
 	<key>ServerDataUrl</key>
 	<string>https://townhall2.cloudapp.net</string>
-	<key>ApiKey</key>
+	<key>ServerApiKey</key>
 	<string>6ad50a5a9b42848f65b63cc375ee3e92</string>
 </dict>
 </plist>

@@ -19,7 +19,6 @@
 	Topic *curTopic;	
 	Question *currentQuestion;
 	
-	NSInteger currentPage;
 	NSString *currentSortColumn;
 	
 	UIBarButtonItem *postButton;
@@ -27,8 +26,6 @@
 }
 
 @property(nonatomic, retain) UILabel *topicName;
-@property(nonatomic, assign) NSInteger currentPage;
-
 @property(nonatomic, assign) Question *currentQuestion;
 @property(nonatomic, assign) Topic *curTopic;
 //

@@ -205,6 +205,9 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 - (void)backButtonPressed:(UIBarButtonItem *)button {
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 
+	NSLog(@"%@", detailViewController.view);
+	
+	
 	if(appDelegate.currentView == CategoriesView) {
 		[self changeToHome];
 	} else if (appDelegate.currentView == TopicsView) {
@@ -296,7 +299,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 -(void)changeToCategories:(NSNotification *)pUserInfo { 
 	[categoriesViewController.view removeFromSuperview];
 	[responsesViewController.view removeFromSuperview];
-	//[questionsViewController.view removeFromSuperview];
+	[questionsViewController.view removeFromSuperview];
 	
 	//UITableView *newTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
     //self.tableView = newTableView;	

@@ -79,8 +79,6 @@
 		63764BB312C0973900F380B5 /* arrow_up_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 63764BB112C0973900F380B5 /* arrow_up_24.png */; };
 		63764C1D12C0A9AD00F380B5 /* arrow_down_24_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 63764C1B12C0A9AD00F380B5 /* arrow_down_24_on.png */; };
 		63764C1E12C0A9AD00F380B5 /* arrow_up_24_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 63764C1C12C0A9AD00F380B5 /* arrow_up_24_on.png */; };
-		6398741212C3539300CB5944 /* QuestionPlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398741112C3539300CB5944 /* QuestionPlainCell.m */; };
-		6398747E12C368FD00CB5944 /* QuestionGroupedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398747D12C368FD00CB5944 /* QuestionGroupedCell.m */; };
 		63A363DA12B8C1B60028AC5B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A363D912B8C1B60028AC5B /* MBProgressHUD.m */; };
 		63A366FD12BA09EF0028AC5B /* configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63A366FC12BA09EF0028AC5B /* configs.plist */; };
 		63A3686C12BA26B90028AC5B /* arrow_left_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A3686B12BA26B90028AC5B /* arrow_left_24.png */; };
@@ -238,10 +236,6 @@
 		63764BB112C0973900F380B5 /* arrow_up_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_up_24.png; sourceTree = "<group>"; };
 		63764C1B12C0A9AD00F380B5 /* arrow_down_24_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down_24_on.png; sourceTree = "<group>"; };
 		63764C1C12C0A9AD00F380B5 /* arrow_up_24_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_up_24_on.png; sourceTree = "<group>"; };
-		6398741012C3539300CB5944 /* QuestionPlainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionPlainCell.h; sourceTree = "<group>"; };
-		6398741112C3539300CB5944 /* QuestionPlainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionPlainCell.m; sourceTree = "<group>"; };
-		6398747C12C368FD00CB5944 /* QuestionGroupedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionGroupedCell.h; sourceTree = "<group>"; };
-		6398747D12C368FD00CB5944 /* QuestionGroupedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionGroupedCell.m; sourceTree = "<group>"; };
 		63A363D812B8C1B60028AC5B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		63A363D912B8C1B60028AC5B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		63A366FC12BA09EF0028AC5B /* configs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs.plist; sourceTree = "<group>"; };
@@ -428,10 +422,10 @@
 		197ABC18132A626600BD1D69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				197ABC23132A630800BD1D69 /* BaseViewController.h */,
-				197ABC24132A630800BD1D69 /* BaseViewController.m */,
 				28042007108E984D000629CD /* RootViewController.h */,
 				28042008108E984D000629CD /* RootViewController.m */,
+				197ABC23132A630800BD1D69 /* BaseViewController.h */,
+				197ABC24132A630800BD1D69 /* BaseViewController.m */,
 				19AB49EB12C9C77700441D37 /* CategoriesViewController.h */,
 				19AB49EC12C9C77700441D37 /* CategoriesViewController.m */,
 				28042009108E984D000629CD /* DetailViewController.h */,
@@ -524,16 +518,12 @@
 		6398740F12C34F8D00CB5944 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				1958D76C12D207F000EDF7B3 /* DetailViewQuestionCell.h */,
-				1958D76D12D207F000EDF7B3 /* DetailViewQuestionCell.m */,
-				6398741012C3539300CB5944 /* QuestionPlainCell.h */,
 				194D375D12CB688000E3111B /* BaseQuestionCell.h */,
 				194D375E12CB688000E3111B /* BaseQuestionCell.m */,
-				6398741112C3539300CB5944 /* QuestionPlainCell.m */,
-				6398747C12C368FD00CB5944 /* QuestionGroupedCell.h */,
-				6398747D12C368FD00CB5944 /* QuestionGroupedCell.m */,
 				194D375A12CB683100E3111B /* RootViewQuestionCell.h */,
 				194D375B12CB683100E3111B /* RootViewQuestionCell.m */,
+				1958D76C12D207F000EDF7B3 /* DetailViewQuestionCell.h */,
+				1958D76D12D207F000EDF7B3 /* DetailViewQuestionCell.m */,
 				1995F8C012CC607600C557BF /* ResponseCell.h */,
 				1995F8C112CC607600C557BF /* ResponseCell.m */,
 				1995FA2F12CC8DF300C557BF /* TopicCell.h */,
@@ -765,8 +755,6 @@
 				63A56A2612BCDAC200BE6B67 /* Votes.m in Sources */,
 				63A56D4212BD716900BE6B67 /* AsynchImageView.m in Sources */,
 				63764A6012BF8D4A00F380B5 /* ResponseDialog.m in Sources */,
-				6398741212C3539300CB5944 /* QuestionPlainCell.m in Sources */,
-				6398747E12C368FD00CB5944 /* QuestionGroupedCell.m in Sources */,
 				19AB49ED12C9C77700441D37 /* CategoriesViewController.m in Sources */,
 				194D357612CB15C500E3111B /* ProfileViewController.m in Sources */,
 				194D365C12CB4FBC00E3111B /* BaseDialog.m in Sources */,

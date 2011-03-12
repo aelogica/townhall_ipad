@@ -15,6 +15,7 @@
 @synthesize toolbar;
 @synthesize tableView;
 @synthesize items;
+@synthesize currentPage;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -81,18 +82,18 @@
 
 
 -(void)orientationChange:(NSNotification *)orientation { 
-	CGRect f = tableView.frame;
-	f.size.width = UIAppDelegate.appWidth;
+	CGRect tableViewFrame = tableView.frame;
+	tableViewFrame.size.width = UIAppDelegate.appWidth;
 
 	// Adjust the table view height if we're on a plain style
 	if (tableView.style == UITableViewStylePlain) {
 		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-			f.size.height = UIAppDelegate.appHeight - 150.f;	
+			tableViewFrame.size.height = UIAppDelegate.appHeight - 150.f;	
 		} else {
-			f.size.height = UIAppDelegate.appHeight - 200.f;	
+			tableViewFrame.size.height = UIAppDelegate.appHeight - 200.f;	
 		}
 	}
-	tableView.frame = f;		
+	tableView.frame = tableViewFrame;		
 	[tableView reloadData];
 	
 	// Also adjust the header if its set
@@ -149,9 +150,9 @@
 	} else {
 		//NSLog(@"Http request result bad data: %@", responseString);
 	    
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
-		[alert show];
-		[alert release];
+//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+//		[alert show];
+//		[alert release];
 	}
 }
 
@@ -170,41 +171,31 @@
 - (void)viewDidAppear:(BOOL)animated {
 	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
 	
-	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
-	
-	// See if this view controller is showing up on the root view pane
-	if(rootViewWidth < 400.f) {
-		[headerView setHidden:YES];
-		[toolbar setFrame: CGRectMake(0, 0.f, self.view.superview.frame.size.width, 50.f)];
-		[self.tableView setFrame:CGRectMake(0.f, 50.f, rootViewWidth, UIAppDelegate.appHeight - 93.f)];
+	if (headerView != nil) {
+		CGFloat rootViewWidth = self.view.superview.frame.size.width;	
 		
-		// remove post question button
-		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
-		if([toolBarItems count] == 7) {
-			[toolBarItems removeObjectAtIndex:6];
-			[toolbar setItems:toolBarItems];
+		// See if this view controller is showing up on the root view pane
+		if(rootViewWidth < 400.f) {
+			[headerView setHidden:YES];
+			[toolbar setHidden:YES];
+
+			[tableView setFrame:CGRectMake(0.f, 0.f, rootViewWidth, UIAppDelegate.appHeight - 50.f)];
 		}
-	}
-	// Otherwise set correct frame size for the details pane
-	else {
-		[headerView setHidden:NO];
-		[toolbar setFrame: CGRectMake(0, 100.f, self.view.superview.frame.size.width, 50.f)];
-		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
-		} else {
-			[self.tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 150.f)];
-		}
-		NSMutableArray * toolBarItems = [NSMutableArray arrayWithArray:toolbar.items];
-		if([toolBarItems count] == 6) {
-			//[toolBarItems insertObject:postButton atIndex:6];
-			[toolbar setItems:toolBarItems];
+		// Otherwise set correct frame size for the details pane
+		else {
+			[headerView setHidden:NO];
+			[toolbar setHidden:NO];
+
+			if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+				[tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
+			} else {
+				[tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 150.f)];
+			}
 		}
 	}
 	
-	//[tableView reloadData];
+	[tableView reloadData];
 }
-
-
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -246,20 +237,28 @@
 - (void)handleHttpResponse:(NSString*)responseString {	
 }
 
-#pragma mark -
-#pragma mark Table view data source
+#pragma mark Table view data source (override on child classes if need)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
 }
 
-
+// Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [items count];
-}
+	if (currentPage != 0) {
+		// show an extra row at the bottom for the pagination
+		NSInteger count = [items count];
+		if( count < currentPage * 10 ) {
+			return count;
+		} else {
+			return count + 1;
+		}
+	} else {
+		return [items count];
+	}
 
+}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)aTableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -276,11 +275,44 @@
     return cell;
 }
 
+// Show no entries
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {   
+   
+	if (tableView.style == UITableViewStyleGrouped) {
+		return nil;
+	}
+	
+	// create the parent view that will hold Label
+	UIView* customView = [[[UIView alloc] initWithFrame:CGRectMake(0.f,0.f, UIAppDelegate.appWidth, 50.f)] autorelease];
+	[customView setBackgroundColor:[UIColor blackColor]];
+
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(UIAppDelegate.appWidth / 2.f - 50.f, 15.f, 100.f, 35.f)];
+	[label setText:@"No entries"];
+	[label setFont:[UIFont systemFontOfSize:20]];
+	[label setTextColor:[UIColor whiteColor]];
+	[label setBackgroundColor:[UIColor clearColor]];
+
+	//add the button to the view
+	[customView addSubview:label];
+
+	if ([items count] == 0) {
+		return customView;
+	}
+
+	return nil;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+   return 50.0;
+}
+
+
+
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
+	// Return NO if you do not want the specified item to be editable.
+	return YES;
  }
  */
 
@@ -291,7 +323,7 @@
  
  if (editingStyle == UITableViewCellEditingStyleDelete) {
  // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
  }   
  else if (editingStyle == UITableViewCellEditingStyleInsert) {
  // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

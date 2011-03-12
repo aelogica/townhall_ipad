@@ -20,7 +20,6 @@
 
 @synthesize subject, author, responseCount, userPoints, voteUpButton, voteDownButton, avatarImage, voteBox, voteUpMeter, voteDownMeter;
 
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
