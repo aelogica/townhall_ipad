@@ -113,6 +113,8 @@
 		63A56D4212BD716900BE6B67 /* AsynchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A56D4112BD716900BE6B67 /* AsynchImageView.m */; };
 		63C7D62612BB6E1000F18706 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C7D62512BB6E1000F18706 /* SplashViewController.m */; };
 		AA05683712CD83EF007E1651 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AA05683612CD83EF007E1651 /* icon.png */; };
+		AA7482C8132D1B49006CA5C4 /* icon-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7482C7132D1B49006CA5C4 /* icon-twitter.png */; };
+		AA7482D6132D1EE4006CA5C4 /* icon-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7482D5132D1EE4006CA5C4 /* icon-facebook.png */; };
 		AA99105412CDCEEC00F0621C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = AA99105212CDCEEC00F0621C /* splash.png */; };
 		AA99105512CDCEEC00F0621C /* top-bar-splash.png in Resources */ = {isa = PBXBuildFile; fileRef = AA99105312CDCEEC00F0621C /* top-bar-splash.png */; };
 /* End PBXBuildFile section */
@@ -293,6 +295,8 @@
 		63C7D62512BB6E1000F18706 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GenericTownHall-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GenericTownHall-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		AA05683612CD83EF007E1651 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = DESIGN/icon.png; sourceTree = "<group>"; };
+		AA7482C7132D1B49006CA5C4 /* icon-twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-twitter.png"; path = "DESIGN/icon-twitter.png"; sourceTree = "<group>"; };
+		AA7482D5132D1EE4006CA5C4 /* icon-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-facebook.png"; path = "DESIGN/icon-facebook.png"; sourceTree = "<group>"; };
 		AA99105212CDCEEC00F0621C /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = DESIGN/splash.png; sourceTree = "<group>"; };
 		AA99105312CDCEEC00F0621C /* top-bar-splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "top-bar-splash.png"; path = "DESIGN/top-bar-splash.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -546,6 +550,8 @@
 		63A3686812BA269F0028AC5B /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				AA7482D5132D1EE4006CA5C4 /* icon-facebook.png */,
+				AA7482C7132D1B49006CA5C4 /* icon-twitter.png */,
 				19EC53F812CC46D000C307EC /* icon-mostinterest-off.png */,
 				19EC53F912CC46D000C307EC /* icon-mostrecent-off.png */,
 				19EC53FA12CC46D000C307EC /* icon-totalvotes-off.png */,
@@ -719,6 +725,8 @@
 				197A85E712CDDB180044216C /* splash-landscape.png in Resources */,
 				197A85E812CDDB180044216C /* splash-portrait.png in Resources */,
 				19319A63131CEC5500621CDF /* FBConnect.bundle in Resources */,
+				AA7482C8132D1B49006CA5C4 /* icon-twitter.png in Resources */,
+				AA7482D6132D1EE4006CA5C4 /* icon-facebook.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
