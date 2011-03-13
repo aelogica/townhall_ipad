@@ -30,10 +30,10 @@
 
 #import "FBConnect/FBConnect.h"
 
-static NSString* kApiKey = @"e3cd33ba4895950aecffc276b4e2bed3";
+static NSString* kApiKey = @"2a9311b8e2dfbacdc6a80ec54c1d4891";
 
 // Enter either your API secret or a callback URL (as described in documentation):
-static NSString* kApiSecret = @"2562d7a9cb8ba2aa1d16ba365e399e92"; // @"<YOUR SECRET KEY>";
+static NSString* kApiSecret = @"45a76b7c2d6871947008ed8f2f1ee9b8"; 
 static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 
 
