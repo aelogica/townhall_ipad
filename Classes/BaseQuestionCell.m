@@ -130,7 +130,7 @@
 
 -(void)voteDownPressed:(UIButton *)button {
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/votes/%@/toggle?format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, button.tag, UIAppDelegate.serverApiKey]];	
-	NSLog(@"Making a vote to Url: %@", url);
+	NSLog(@"i: %@", url);
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
 	[request setPostValue:button.tag forKey:@"nuggetID"];

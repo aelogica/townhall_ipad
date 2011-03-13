@@ -39,11 +39,11 @@
 }
 
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
-@property (nonatomic, retain) IBOutlet CategoriesViewController *categoriesViewController;
-@property (nonatomic, retain) IBOutlet TopicsViewController *topicsViewController;
-@property (nonatomic, retain) IBOutlet QuestionsViewController *questionsViewController;
-@property (nonatomic, retain) IBOutlet ResponsesViewController *responsesViewController;
-@property (nonatomic, retain) IBOutlet ProfileViewController *profileViewController;
+@property (nonatomic, retain) CategoriesViewController *categoriesViewController;
+@property (nonatomic, retain) TopicsViewController *topicsViewController;
+@property (nonatomic, retain) QuestionsViewController *questionsViewController;
+@property (nonatomic, retain) ResponsesViewController *responsesViewController;
+@property (nonatomic, retain) ProfileViewController *profileViewController;
 @property (nonatomic, retain) NSMutableArray *currentItems;
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic, retain) UIView *dimmer;
@@ -55,6 +55,8 @@
 -(void)changeToTopics:(NSNotification *)pUserInfo;
 -(void)changeDetailsTitle:(NSString*)newTitle;
 -(void)changeToCategories:(NSNotification *)pUserInfo;
+
+-(void) registeUserWithFbAccount;
 
 
 @end

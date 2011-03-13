@@ -28,15 +28,12 @@
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
 
+#import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "FBConnect/FBConnect.h"
 
-static NSString* kApiKey = @"2a9311b8e2dfbacdc6a80ec54c1d4891";
-
-// Enter either your API secret or a callback URL (as described in documentation):
-static NSString* kApiSecret = @"45a76b7c2d6871947008ed8f2f1ee9b8"; 
+NSDictionary *fbUser;
 static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
-
 
 @implementation RootViewController
 
@@ -48,7 +45,6 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 @synthesize dimmer;
 @synthesize oldTableView;
 @synthesize loginButton, logoutButton;
-
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -154,7 +150,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	[refreshButton release];
 	[profileButton release];	
 	
-   fbSession = [[FBSession sessionForApplication:kApiKey secret:kApiSecret delegate:self] retain];
+    fbSession = [[FBSession sessionForApplication:UIAppDelegate.fbApiKey secret:UIAppDelegate.fbSecretKey delegate:self] retain];
 }
 
 -(void)homeButtonPressed:(UIBarButtonItem *)button {
@@ -399,8 +395,19 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	} else {
 		[self changeDetailsRootButtonTitle:[question subject]];
 	}
-
 } 
+
+- (NSString *) genRandomStringLength: (int) len {
+	NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";	
+
+	NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+
+	for (int i = 0; i < len; i++) {
+		[randomString appendFormat: @"%c", [letters characterAtIndex: rand() % [letters length]]];
+	}
+			 
+	return randomString;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // FBDialogDelegate
@@ -429,16 +436,37 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 
 - (void)request:(FBRequest*)request didLoad:(id)result {
 	NSArray* users = result;
-	NSDictionary* user = [users objectAtIndex:0];
-	NSString* name = [user objectForKey:@"name"];
-	NSLog(@"Logged in as %@ %@", name, result);
+	fbUser = [users objectAtIndex:0];
+	NSLog(@"FB connect request succeeded: %@", result);
+
+	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@/account/fbconnect?format=json", UIAppDelegate.serverBaseUrl]];
+	NSLog(@"Making HTTP request: %@", url);		
 	
-//	NSDictionary *postData = [self getRequestParameters];  ;	
-	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@/account/register-adult/post?format=json&ApiKey=%@", UIAppDelegate.serverBaseUrl, UIAppDelegate.serverApiKey]];
-	NSLog(@"Making HTTP request: %@", url);	
+	ASIHTTPRequest *asiRequest = [ASIHTTPRequest requestWithURL:url];
+	[asiRequest addRequestHeader:@"ApiKey" value: UIAppDelegate.serverApiKey];	
+	[asiRequest addRequestHeader:@"fbApiKey" value: UIAppDelegate.fbApiKey];	
+	[asiRequest addRequestHeader:@"fbIndentifier" value:[fbUser objectForKey:@"uid"]];			
 	
-	/*
-	curl -d "
+	[asiRequest setDelegate:self];		
+	[asiRequest setValidatesSecureCertificate:NO];
+	[asiRequest startAsynchronous];		
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	
+	NSString *responseString = [request responseString];
+	NSLog(@"Http request succeeded: %@", responseString );	
+	
+	if ([responseString length] == 0 ) {
+		[self registeUserWithFbAccount];
+	} else {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoginSuccess" object:nil userInfo:nil];
+	}
+}
+
+-(void) registeUserWithFbAccount {
+	/*range ou
+	 curl -d "
 	 Username=test2&
 	 Email=test2@test.com&
 	 NewPassword=12345&
@@ -450,20 +478,36 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	 FacebookIdentifier=1322439724&
 	 TermsOfUse=true" 
 	 --insecure https://townhall2.cloudapp.net/account/register-adult/post?format=json\&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92
-    */
+	 */
+	
+	ASIFormDataRequest *logoutRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/account/logoff", UIAppDelegate.serverDataUrl]]];
+	[logoutRequest setDelegate:self];
+	[logoutRequest startSynchronous];
+	
+	
+	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@/account/register-adult/post?format=json&ApiKey=%@", UIAppDelegate.serverBaseUrl, UIAppDelegate.serverApiKey]];
+	NSLog(@"Making HTTP request: %@", url);			
+	
+	// Generate a timestamp for the email
+	NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+	NSNumber *timeStampNumber = [NSNumber numberWithDouble: timeStamp];
+	NSString *name = [fbUser objectForKey:@"name"];
+	NSString *username = [name stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+	NSString *password = [self genRandomStringLength:6];
+	
 	NSDictionary *postData = [NSDictionary dictionaryWithObjectsAndKeys:
-							 // [user objectForKey:@"uid"], @"FacebookIdentifier",
-							  @"test2", @"Username",
- 						      @"test2@test.com", @"Email",						  
-							  @"12345", @"NewPassword", 
-							  @"12345", @"ConfirmPassword",
+							  [fbUser objectForKey:@"uid"], @"FacebookIdentifier",
+							  //[NSString stringWithFormat:@"%d", timeStampNumber], @"Username",
+							  username, @"Username",
+ 						      [NSString stringWithFormat:@"%d@fbconnect.com", timeStampNumber], @"Email",						  
+							  password, @"NewPassword", 
+							  password, @"ConfirmPassword",
 							  @"Best childhood friend", @"PasswordQuestion", 
 							  @"Joe", @"PasswordAnswer",
 							  @"avatar-1", @"avatar",
 							  @"Zone 1", @"Zone",
 							  @"true", @"TermsOfUse",
 							  nil];
-	
 	
 	ASIFormDataRequest *asiRequest = [ASIFormDataRequest requestWithURL:url];
 	
@@ -480,13 +524,6 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	[asiRequest setDelegate:self];		
 	[asiRequest setValidatesSecureCertificate:NO];
 	[asiRequest startAsynchronous];
-	
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	
-	NSString *responseString = [request responseString];
-	NSLog(@"Http request succeeded: %@", responseString);	
 }
 
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error {

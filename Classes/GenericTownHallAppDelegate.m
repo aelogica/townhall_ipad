@@ -23,6 +23,7 @@
 
 @synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, serverApiKey, splashViewController;
 @synthesize currentOrientation, appWidth, appHeight, isLogin, currentView, currentBarButtonTitle, currentSlug;
+@synthesize fbApiKey, fbSecretKey;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -62,6 +63,8 @@
 	serverBaseUrl = [plistData objectForKey:@"ServerBaseUrl"];
 	serverDataUrl = [plistData objectForKey:@"ServerDataUrl"];
 	serverApiKey = [plistData objectForKey:@"ServerApiKey"];	
+	fbApiKey = [plistData objectForKey:@"FbApiKey"];	
+	fbSecretKey = [plistData objectForKey:@"FbSecretKey"];		
 	NSLog(@"Server Base URL set to: %@ Data URL set to: %@", serverBaseUrl, serverDataUrl);
     
     // Add the split view controller's view to the window and display.

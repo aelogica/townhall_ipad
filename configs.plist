@@ -8,5 +8,9 @@
 	<string>https://townhall2.cloudapp.net</string>
 	<key>ServerApiKey</key>
 	<string>6ad50a5a9b42848f65b63cc375ee3e92</string>
+	<key>FbApiKey</key>
+	<string>2a9311b8e2dfbacdc6a80ec54c1d4891</string>
+	<key>FbSecretKey</key>
+	<string>45a76b7c2d6871947008ed8f2f1ee9b8</string>
 </dict>
 </plist>

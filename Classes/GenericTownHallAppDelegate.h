@@ -46,6 +46,8 @@ enum {
 	NSString *serverBaseUrl;
 	NSString *serverDataUrl;
 	NSString *serverApiKey;	
+	NSString *fbApiKey;	
+	NSString *fbSecretKey;		
 	UIInterfaceOrientation currentOrientation;
 	CGFloat appWidth;
 	CGFloat appHeight;
@@ -65,6 +67,8 @@ enum {
 @property (readwrite, retain) NSString * serverBaseUrl;
 @property (readwrite, retain) NSString * serverDataUrl;
 @property (readwrite, retain) NSString * serverApiKey;
+@property (readwrite, retain) NSString * fbApiKey;
+@property (readwrite, retain) NSString * fbSecretKey;
 @property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
 @property (nonatomic, assign) CGFloat appWidth;
 @property (nonatomic, assign) CGFloat appHeight;

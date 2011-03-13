@@ -9,8 +9,6 @@
 //  Please see the LICENSE file for details
 //
 
-
-#import <UIKit/UIKit.h>
 #import "BaseDialog.h"
 
 @interface LoginDialog : BaseDialog {

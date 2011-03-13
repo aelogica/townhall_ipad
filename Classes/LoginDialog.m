@@ -11,8 +11,6 @@
 
 
 #import "LoginDialog.h"
-#import "GenericTownHallAppDelegate.h"
-#import "GTMHTTPFetcher.h"
 #import "FBLoginButton.h"
 
 @implementation LoginDialog
@@ -41,14 +39,17 @@
 	[passwordField release];
 	
 	FBLoginButton* fbButton = [[[FBLoginButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 100, passwordField.frame.size.height + passwordField.frame.origin.y + padding, 0 , 55.f)] autorelease];
+	[fbButton addTarget:self action:@selector(fbLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self addSubview:fbButton];	
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	NSLog(@"textFieldShouldReturn");
-	
 	[super rightButtonPressed:nil];
     return NO;
+}
+
+- (void) fbLoginButtonPressed:(id)sender {
+	[super leftButtonPressed:nil];
 }
 
 -(NSString *)getRequestUrl {
