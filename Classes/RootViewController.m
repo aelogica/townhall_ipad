@@ -28,6 +28,7 @@
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
 
+#import "ASIFormDataRequest.h"
 #import "FBConnect/FBConnect.h"
 
 static NSString* kApiKey = @"2a9311b8e2dfbacdc6a80ec54c1d4891";
@@ -204,9 +205,6 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 
 - (void)backButtonPressed:(UIBarButtonItem *)button {
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-
-	NSLog(@"%@", detailViewController.view);
-	
 	
 	if(appDelegate.currentView == CategoriesView) {
 		[self changeToHome];
@@ -433,7 +431,62 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	NSArray* users = result;
 	NSDictionary* user = [users objectAtIndex:0];
 	NSString* name = [user objectForKey:@"name"];
-	NSLog(@"Logged in as %@", name);
+	NSLog(@"Logged in as %@ %@", name, result);
+	
+//	NSDictionary *postData = [self getRequestParameters];  ;	
+	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@/account/register-adult/post?format=json&ApiKey=%@", UIAppDelegate.serverBaseUrl, UIAppDelegate.serverApiKey]];
+	NSLog(@"Making HTTP request: %@", url);	
+	
+	/*
+	curl -d "
+	 Username=test2&
+	 Email=test2@test.com&
+	 NewPassword=12345&
+	 ConfirmPassword=12345&
+	 PasswordQuestion=Best%20childhood%20friend&
+	 PasswordAnswer=Joe&
+	 avatar=avatar-1&
+	 Zone=Zone%201&
+	 FacebookIdentifier=1322439724&
+	 TermsOfUse=true" 
+	 --insecure https://townhall2.cloudapp.net/account/register-adult/post?format=json\&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92
+    */
+	NSDictionary *postData = [NSDictionary dictionaryWithObjectsAndKeys:
+							 // [user objectForKey:@"uid"], @"FacebookIdentifier",
+							  @"test2", @"Username",
+ 						      @"test2@test.com", @"Email",						  
+							  @"12345", @"NewPassword", 
+							  @"12345", @"ConfirmPassword",
+							  @"Best childhood friend", @"PasswordQuestion", 
+							  @"Joe", @"PasswordAnswer",
+							  @"avatar-1", @"avatar",
+							  @"Zone 1", @"Zone",
+							  @"true", @"TermsOfUse",
+							  nil];
+	
+	
+	ASIFormDataRequest *asiRequest = [ASIFormDataRequest requestWithURL:url];
+	
+	NSEnumerator *enumerator = [postData keyEnumerator];
+	id key;
+	while (key = [enumerator nextObject]) {
+		NSString *value = [postData objectForKey:key];	
+		[asiRequest setPostValue:value forKey:key];
+		NSLog(@"key:%@ val:%@", key, value);
+	}	
+	
+	//[request setPostLength:[postData length]];
+	
+	[asiRequest setDelegate:self];		
+	[asiRequest setValidatesSecureCertificate:NO];
+	[asiRequest startAsynchronous];
+	
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	
+	NSString *responseString = [request responseString];
+	NSLog(@"Http request succeeded: %@", responseString);	
 }
 
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error {
