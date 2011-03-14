@@ -23,7 +23,7 @@
 
 @synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, serverApiKey, splashViewController;
 @synthesize currentOrientation, appWidth, appHeight, isLogin, currentView, currentBarButtonTitle, currentSlug;
-@synthesize fbApiKey, fbSecretKey;
+@synthesize fbApiKey, fbSecretKey, fbUser, fbSession;
 
 #pragma mark -
 #pragma mark Application lifecycle

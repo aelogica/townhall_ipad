@@ -423,9 +423,11 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	
 	NSString* fql = [NSString stringWithFormat:
 					 @"select uid,name from user where uid == %lld", session.uid];
-	
+
 	NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
 	[[FBRequest requestWithDelegate:self] call:@"facebook.fql.query" params:params];
+	
+	UIAppDelegate.fbSession = session;
 }
 
 - (void)sessionDidLogout:(FBSession*)session {
@@ -436,7 +438,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 
 - (void)request:(FBRequest*)request didLoad:(id)result {
 	NSArray* users = result;
-	fbUser = [users objectAtIndex:0];
+	UIAppDelegate.fbUser = [users objectAtIndex:0];
 	NSLog(@"FB connect request succeeded: %@", result);
 
 	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@/account/fbconnect?format=json", UIAppDelegate.serverBaseUrl]];
@@ -445,7 +447,7 @@ static NSString* kGetSessionProxy = nil; // @"<YOUR SESSION CALLBACK)>";
 	ASIHTTPRequest *asiRequest = [ASIHTTPRequest requestWithURL:url];
 	[asiRequest addRequestHeader:@"ApiKey" value: UIAppDelegate.serverApiKey];	
 	[asiRequest addRequestHeader:@"fbApiKey" value: UIAppDelegate.fbApiKey];	
-	[asiRequest addRequestHeader:@"fbIndentifier" value:[fbUser objectForKey:@"uid"]];			
+	[asiRequest addRequestHeader:@"fbIndentifier" value:[UIAppDelegate.fbUser objectForKey:@"uid"]];			
 	
 	[asiRequest setDelegate:self];		
 	[asiRequest setValidatesSecureCertificate:NO];

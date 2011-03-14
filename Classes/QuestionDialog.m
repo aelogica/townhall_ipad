@@ -73,7 +73,7 @@
 }
 
 -(NSString *)getRequestUrl {
-	return [NSString stringWithFormat:@"%@/questions/in/%@/create/post", UIAppDelegate.serverDataUrl, topic.slug];
+	return [NSString stringWithFormat:@"%@/questions/in/%@/create/post?format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, topic.slug, UIAppDelegate.serverApiKey];
 }
 
 -(NSDictionary *)getRequestParameters { 
@@ -82,8 +82,8 @@
 
 	
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-							[self urlEncodeValue:[textView text]], @"body", 
-							[self urlEncodeValue:[textField text]], @"TagsCommaSeparated", 
+							[textView text], @"body", 
+							[textField text], @"TagsCommaSeparated", 
 							topic.slug, @"CategorySlug", 
 							nil];
 	return params;

@@ -140,7 +140,7 @@
 	
 	if ([results isKindOfClass:[NSArray class]] || [results isKindOfClass:[NSDictionary class]])  { 
 		
-		//NSLog(@"Http request succeeded: %@ Count: %d", responseString, [results count]);
+		NSLog(@"Http request succeeded: %@ Count: %d", responseString, [results count]);
 
 		[items removeAllObjects];
 		
@@ -148,7 +148,7 @@
 		
 		[tableView reloadData];			
 	} else {
-		//NSLog(@"Http request result bad data: %@", responseString);
+		NSLog(@"Http request result bad data: %@", responseString);
 	    
 //		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
 //		[alert show];

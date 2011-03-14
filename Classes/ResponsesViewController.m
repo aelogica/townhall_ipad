@@ -17,7 +17,7 @@
 #import "Response.h"
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
-
+#import "FBSession.h"
 
 @implementation ResponsesViewController
 
@@ -65,10 +65,13 @@
 	UIBarButtonItem *twitterBtn = [[UIBarButtonItem alloc] initWithCustomView:twitterButton]; //target:self action:@selector(tweetButtonPressed)
 	
 	UIImage *fbImage = [UIImage imageNamed:@"icon-facebook.png"];
+	
 	UIButton *fbButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	fbButton.bounds = CGRectMake( 0, 0, fbImage.size.width, fbImage.size.height );
 	[fbButton setImage:fbImage forState:UIControlStateNormal];	
-	UIBarButtonItem *fbBtn = [[UIBarButtonItem alloc] initWithCustomView:fbButton]; //target:self action:@selector(facebookShareButtonPressed)
+	[fbButton addTarget:self action:@selector(facebookShareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+	UIBarButtonItem *fbBtn = [[UIBarButtonItem alloc] initWithCustomView:fbButton]; 
 	
 	//Use this to put space in between your toolbox buttons
 	UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -76,7 +79,7 @@
 																			  action:nil];
 	
 	//Add buttons to the array
-	NSArray *items = [NSArray arrayWithObjects: button1, flexItem, twitterBtn, fbBtn, button2, nil];
+	NSArray *tbarItems = [NSArray arrayWithObjects: button1, flexItem, twitterBtn, fbBtn, button2, nil];
 	
 	//release buttons
 	[button1 release];
@@ -84,7 +87,7 @@
 	[flexItem release];
 	
 	// Add array of buttons to toolbar
-	[toolbar setItems:items animated:NO];
+	[toolbar setItems:tbarItems animated:NO];
 }
 
 - (NSString*)getServiceUrl {
@@ -126,6 +129,19 @@
 		[response release];		
 	}
 
+}
+
+-(void)facebookShareButtonPressed:(UIBarButtonItem*)button {
+	//NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://graph.facebook.com/1322439723/feed"]];
+	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://graph.facebook.com/%@/feed", @"David%20Ang"]];
+	NSLog(@"Making http request: %@", url);
+	ASIFormDataRequest *asiRequest = [ASIFormDataRequest requestWithURL:url];
+	
+	[asiRequest setPostValue:UIAppDelegate.fbSession.sessionKey forKey:@"access_token"];
+	[asiRequest setPostValue:@"I'm sharing this question" forKey:@"message"];	
+	[asiRequest setDelegate:self];		
+	[asiRequest setValidatesSecureCertificate:NO];
+	[asiRequest startAsynchronous];
 }
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {

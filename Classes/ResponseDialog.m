@@ -60,7 +60,7 @@
 }
 
 -(NSString *)getRequestUrl {
-	return [NSString stringWithFormat:@"%@/responses/for/%@/create", UIAppDelegate.serverDataUrl, question.nuggetId];
+	return [NSString stringWithFormat:@"%@/responses/for/%@/create?format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, question.nuggetId, UIAppDelegate.serverApiKey];
 }
 
 -(NSDictionary *)getRequestParameters { 
