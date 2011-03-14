@@ -81,11 +81,14 @@
 	UITextField *textField = (UITextField*)[self.subviews objectAtIndex:3];	
 
 	
-	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 							[textView text], @"body", 
-							[textField text], @"TagsCommaSeparated", 
 							topic.slug, @"CategorySlug", 
 							nil];
+	// Add TagsCommaSeperated
+	if ([[textField text] length] > 0) {
+		[params setValue: [textField text] forKey: @"TagsCommaSeparated"];
+	}
 	return params;
 }
 	
