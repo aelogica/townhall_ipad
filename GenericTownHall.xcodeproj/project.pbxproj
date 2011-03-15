@@ -58,6 +58,7 @@
 		19E5881C132F375D000FA818 /* FBLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E5881B132F375D000FA818 /* FBLoginButton.m */; };
 		19E588C0132F4154000FA818 /* FBConnect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19E588BE132F4154000FA818 /* FBConnect.bundle */; };
 		19E588C1132F4154000FA818 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19E588BF132F4154000FA818 /* FBDialog.bundle */; };
+		19E58C9E132FAC7B000FA818 /* TwitterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E58C9D132FAC7B000FA818 /* TwitterView.m */; };
 		19EC53FC12CC46D000C307EC /* icon-mostinterest-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 19EC53F812CC46D000C307EC /* icon-mostinterest-off.png */; };
 		19EC53FD12CC46D000C307EC /* icon-mostrecent-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 19EC53F912CC46D000C307EC /* icon-mostrecent-off.png */; };
 		19EC53FE12CC46D000C307EC /* icon-totalvotes-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 19EC53FA12CC46D000C307EC /* icon-totalvotes-off.png */; };
@@ -204,6 +205,8 @@
 		19E5881B132F375D000FA818 /* FBLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBLoginButton.m; path = FBConnect/FBLoginButton.m; sourceTree = "<group>"; };
 		19E588BE132F4154000FA818 /* FBConnect.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBConnect.bundle; path = FBConnect/FBConnect.bundle; sourceTree = "<group>"; };
 		19E588BF132F4154000FA818 /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBDialog.bundle; path = FBConnect/FBDialog.bundle; sourceTree = "<group>"; };
+		19E58C9C132FAC7B000FA818 /* TwitterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterView.h; sourceTree = "<group>"; };
+		19E58C9D132FAC7B000FA818 /* TwitterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterView.m; sourceTree = "<group>"; };
 		19EC53F812CC46D000C307EC /* icon-mostinterest-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-mostinterest-off.png"; path = "DESIGN/icon-mostinterest-off.png"; sourceTree = "<group>"; };
 		19EC53F912CC46D000C307EC /* icon-mostrecent-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-mostrecent-off.png"; path = "DESIGN/icon-mostrecent-off.png"; sourceTree = "<group>"; };
 		19EC53FA12CC46D000C307EC /* icon-totalvotes-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-totalvotes-off.png"; path = "DESIGN/icon-totalvotes-off.png"; sourceTree = "<group>"; };
@@ -573,6 +576,8 @@
 				63A36D9512BB549A0028AC5B /* LoginDialog.m */,
 				63764A5E12BF8D4A00F380B5 /* ResponseDialog.h */,
 				63764A5F12BF8D4A00F380B5 /* ResponseDialog.m */,
+				19E58C9C132FAC7B000FA818 /* TwitterView.h */,
+				19E58C9D132FAC7B000FA818 /* TwitterView.m */,
 			);
 			name = Dialogs;
 			sourceTree = "<group>";
@@ -776,6 +781,7 @@
 				19E58763132EBCCE000FA818 /* FBLoginDialog.m in Sources */,
 				19E58764132EBCCE000FA818 /* FBRequest.m in Sources */,
 				19E5881C132F375D000FA818 /* FBLoginButton.m in Sources */,
+				19E58C9E132FAC7B000FA818 /* TwitterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

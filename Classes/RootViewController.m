@@ -32,6 +32,8 @@
 #import "ASIFormDataRequest.h"
 #import "FBConnect/FBConnect.h"
 
+#import "TwitterView.h"
+
 
 @implementation RootViewController
 

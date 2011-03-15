@@ -17,6 +17,7 @@
 #import "Response.h"
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
+#import "TwitterView.h"
 
 @implementation ResponsesViewController
 
@@ -144,10 +145,43 @@
 	[UIAppDelegate.facebook dialog:@"feed" andParams:params andDelegate:self];
 }
 
+- (NSString *)urlEncodeValue:(NSString *)str {
+	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, CFSTR("?=&+"), kCFStringEncodingUTF8);
+	return [result autorelease];
+}
+
 -(void)twitterShareButtonPressed:(UIButton*)button {
-	FBDialog *dlg = [[FBDialog alloc] initWithURL:@"http://twitter.com/login"
-										   params:nil delegate:nil];
-	[dlg show];
+	
+	int viewHeight = UIAppDelegate.appHeight;
+	TwitterView *twitterView = [[TwitterView alloc] initWithFrame:CGRectMake(0, UIAppDelegate.appHeight, UIAppDelegate.appWidth, viewHeight)];
+	NSString *url = [NSString stringWithFormat:@"http://twitter.com/login?redirect_after_login=%%2Fhome%%3Fstatus%%3DSee%%2520what%%2520people%%2520are%%2520talking%%2520about%%2520on%%2520TOWNHALL%%3A%%2520http%%3A%%2F%%2Ftownhall2.cloudapp.net%%252fquestions%%252f%@%%252f%@", curQuestion.nuggetId, curQuestion.subjectSlug];
+	
+	CGRect webFrame = CGRectMake(0, 0, UIAppDelegate.appWidth, UIAppDelegate.appHeight-44.f); 
+	UIWebView *webView = [[UIWebView alloc] initWithFrame:webFrame]; 
+	[webView setBackgroundColor:[UIColor blackColor]];
+	
+	NSURL *nsUrl = [NSURL URLWithString:url];
+	NSLog(@"twitter url: %@", nsUrl);
+	NSURLRequest *requestObj = [NSURLRequest requestWithURL:nsUrl]; 
+	[webView loadRequest:requestObj]; 
+	[twitterView addSubview:webView]; 
+	
+	[webView release];
+	
+	
+	
+
+	CGRect frame = twitterView.frame;
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.5f];
+	
+	frame.origin.y =  UIAppDelegate.appHeight - viewHeight - 44.f;
+	twitterView.frame = frame;
+	
+	[UIView commitAnimations];
+	
+	
+	[self.view addSubview:twitterView];
 }
 
 
