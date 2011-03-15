@@ -10,9 +10,12 @@
 //
 
 #import "BaseDialog.h"
+#import "FBConnect.h"
 
-@interface LoginDialog : BaseDialog {
-
+@interface LoginDialog : BaseDialog <FBRequestDelegate, FBDialogDelegate, FBSessionDelegate, UITextFieldDelegate> {
+	NSArray *_permissions;
+	BOOL isRegisteringNewUser;
+	UILabel *activityIndicatorLabel;
 }
 
 @end

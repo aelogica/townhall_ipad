@@ -18,12 +18,13 @@
 #import "MBProgressHUD.h"
 #import "globals.h"
 #import "SplashViewController.h"
+#import "Facebook.h"
 
 @implementation GenericTownHallAppDelegate
 
 @synthesize window, splitViewController, rootViewController, detailViewController, progressHUD, serverBaseUrl, serverDataUrl, serverApiKey, splashViewController;
 @synthesize currentOrientation, appWidth, appHeight, isLogin, currentView, currentBarButtonTitle, currentSlug;
-@synthesize fbApiKey, fbSecretKey, fbUser, fbSession;
+@synthesize fbApiKey, fbSecretKey, fbUser, facebook;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -66,6 +67,8 @@
 	fbApiKey = [plistData objectForKey:@"FbApiKey"];	
 	fbSecretKey = [plistData objectForKey:@"FbSecretKey"];		
 	NSLog(@"Server Base URL set to: %@ Data URL set to: %@", serverBaseUrl, serverDataUrl);
+	
+	facebook = [[Facebook alloc] initWithAppId: [plistData objectForKey:@"FbAppId"]];
     
     // Add the split view controller's view to the window and display.
 	splashViewController = [[SplashViewController alloc] init];

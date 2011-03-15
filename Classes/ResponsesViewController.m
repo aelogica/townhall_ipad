@@ -17,7 +17,6 @@
 #import "Response.h"
 #import "LoginDialog.h"
 #import "ResponseDialog.h"
-#import "FBSession.h"
 
 @implementation ResponsesViewController
 
@@ -62,6 +61,8 @@
 	UIButton *twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	twitterButton.bounds = CGRectMake( 0, 0, twitterImage.size.width, twitterImage.size.height );
 	[twitterButton setImage:twitterImage forState:UIControlStateNormal];	
+	[twitterButton addTarget:self action:@selector(twitterShareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
 	UIBarButtonItem *twitterBtn = [[UIBarButtonItem alloc] initWithCustomView:twitterButton]; //target:self action:@selector(tweetButtonPressed)
 	
 	UIImage *fbImage = [UIImage imageNamed:@"icon-facebook.png"];
@@ -131,18 +132,29 @@
 
 }
 
--(void)facebookShareButtonPressed:(UIBarButtonItem*)button {
-	//NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://graph.facebook.com/1322439723/feed"]];
-	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://graph.facebook.com/%@/feed", @"David%20Ang"]];
-	NSLog(@"Making http request: %@", url);
-	ASIFormDataRequest *asiRequest = [ASIFormDataRequest requestWithURL:url];
+-(void)facebookShareButtonPressed:(UIButton*)button {
+	NSString *serverUrl = [UIAppDelegate.serverDataUrl stringByReplacingOccurrencesOfString:@"https" withString:@"http"];
+	NSString *link = [NSString stringWithFormat:@"%@/questions/%@/%@", serverUrl, curQuestion.nuggetId, curQuestion.subjectSlug];
 	
-	[asiRequest setPostValue:UIAppDelegate.fbSession.sessionKey forKey:@"access_token"];
-	[asiRequest setPostValue:@"I'm sharing this question" forKey:@"message"];	
-	[asiRequest setDelegate:self];		
-	[asiRequest setValidatesSecureCertificate:NO];
-	[asiRequest startAsynchronous];
+	NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+								   @"Share on Facebook",  @"user_message_prompt",
+								   @"", @"message",
+								   link, @"link",
+								   @"See what people are talking about on TOWNHALL:", @"name",
+								   @"", @"caption",
+								   link, @"description",								  
+								   nil];	
+	
+	[UIAppDelegate.facebook dialog:@"feed" andParams:params andDelegate:self];
 }
+
+-(void)twitterShareButtonPressed:(UIButton*)button {
+	FBDialog *dlg = [[FBDialog alloc] initWithURL:@"http://twitter.com/login"
+										   params:nil delegate:nil];
+	[dlg show];
+}
+
+
 
 -(void)postButtonPressed:(UIBarButtonItem *)button {
 	

@@ -111,6 +111,7 @@
 		question.body = [objectInstance objectForKey:@"Body"];
 		question.nuggetId = [objectInstance objectForKey:@"NuggetID"];
 		question.responseCount = [objectInstance objectForKey:@"ResponseCount"];
+		question.subjectSlug = [objectInstance objectForKey:@"SubjectSlug"];		
 		question.dateCreated = [self getDateFromJSON:[objectInstance objectForKey:@"DateCreated"]];
 		
 		NSDictionary *nuggetOriginator = [objectInstance objectForKey:@"NuggetOriginator"];

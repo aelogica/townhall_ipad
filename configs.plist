@@ -12,5 +12,7 @@
 	<string>2a9311b8e2dfbacdc6a80ec54c1d4891</string>
 	<key>FbSecretKey</key>
 	<string>45a76b7c2d6871947008ed8f2f1ee9b8</string>
+	<key>FbAppId</key>
+	<string>190056134368625</string>
 </dict>
 </plist>

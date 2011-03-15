@@ -30,7 +30,7 @@ enum {
 @class SplashViewController;
 @class RootViewController;
 @class DetailViewController;
-@class FBSession;
+@class Facebook;
 
 @interface GenericTownHallAppDelegate : NSObject <UIApplicationDelegate> {
     
@@ -46,7 +46,7 @@ enum {
 	MBProgressHUD *progressHUD;
 	NSString *serverBaseUrl;
 	NSString *serverDataUrl;
-	NSString *serverApiKey;	
+	NSString *serverApiKey;		
 	NSString *fbApiKey;	
 	NSString *fbSecretKey;		
 	UIInterfaceOrientation currentOrientation;
@@ -58,7 +58,8 @@ enum {
 	
 	NSString *currentSlug;
 	NSDictionary *fbUser;
-	FBSession *fbSession;
+	Facebook *facebook;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -73,7 +74,7 @@ enum {
 @property (readwrite, retain) NSString * fbApiKey;
 @property (readwrite, retain) NSString * fbSecretKey;
 @property (readwrite, retain) NSDictionary *fbUser;
-@property (nonatomic, assign) FBSession *fbSession;
+@property (readonly) Facebook *facebook;
 @property (nonatomic, assign) UIInterfaceOrientation currentOrientation;
 @property (nonatomic, assign) CGFloat appWidth;
 @property (nonatomic, assign) CGFloat appHeight;

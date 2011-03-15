@@ -163,30 +163,33 @@ CGFloat DegreesToRadians2(CGFloat degrees)
 - (void)requestFinished:(ASIHTTPRequest *)request {
 	// Use when fetching text data
 	NSString *responseString = [request responseString];
-	
-	// Create an array out of the returned json string
-	id *results = [responseString JSONValue];
-	
-	if ([results isKindOfClass:[NSArray class]] || [results isKindOfClass:[NSDictionary class]])  { 
-		
-		NSLog(@"Http request succeeded: %@ Count: %d", responseString, [results count]);	
-		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector: @selector(cancelAnimationDidStop:finished:context:)];
-		[UIView setAnimationDuration:.7f];	
-		[self setAlpha:0.f];
-		[UIView commitAnimations];
-		
-		[self handleHttpResponse:responseString];
+	NSLog(@"Http request succeeded: %@", responseString);	
 
-	} else {
-		NSLog(@"Http request result bad data: %@", responseString);
-	    
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
-		[alert show];
-		[alert release];
+	// Verify responseString contains any characters
+	if ([responseString length] > 0) {
+		// Create an array out of the returned json string
+		id *results = [responseString JSONValue];
+		
+		if ([results isKindOfClass:[NSArray class]] || [results isKindOfClass:[NSDictionary class]])  { 
+			
+			[UIView beginAnimations:nil context:nil];
+			[UIView setAnimationDelegate:self];
+			[UIView setAnimationDidStopSelector: @selector(cancelAnimationDidStop:finished:context:)];
+			[UIView setAnimationDuration:.7f];	
+			[self setAlpha:0.f];
+			[UIView commitAnimations];
+		} else {
+	//		NSLog(@"Http request result bad data: %@", responseString);
+	//	    
+	//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+	//		[alert show];
+	//		[alert release];
+
+		}
 	}
+	
+	// Let any child class handle the responeString
+	[self handleHttpResponse:responseString];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {

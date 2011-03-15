@@ -11,7 +11,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
+
 
 @class DetailViewController;
 @class CategoriesViewController;
@@ -19,8 +19,9 @@
 @class QuestionsViewController;
 @class ResponsesViewController;
 @class ProfileViewController;
+@class Facebook;
 
-@interface RootViewController : UITableViewController <FBDialogDelegate, FBSessionDelegate, FBRequestDelegate> {
+@interface RootViewController : UITableViewController {
     DetailViewController *detailViewController;
 	CategoriesViewController *categoriesViewController;
 	TopicsViewController *topicsViewController;	
@@ -35,7 +36,8 @@
 
 	NSMutableArray *categories;
 	NSMutableArray *currentItems;
-    FBSession* fbSession;
+
+    Facebook *facebook;
 }
 
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
