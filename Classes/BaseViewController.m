@@ -169,7 +169,8 @@
 
 // Adjust the frame sizes of the various UI controls
 - (void)viewDidAppear:(BOOL)animated {
-	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);
+	NSLog(@"%@: %@", NSStringFromSelector(_cmd), self);	
+	
 	
 	if (headerView != nil) {
 		CGFloat rootViewWidth = self.view.superview.frame.size.width;	

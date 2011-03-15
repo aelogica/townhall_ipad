@@ -91,22 +91,29 @@
 	[toolbar setItems:tbarItems animated:NO];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	// Remove all objects else this will show old data from previous list 
+	[items removeAllObjects];
+	
+	[super viewDidAppear:NO];
+	
+	// Set the subject and author in the header
+	UILabel *subject = (UILabel*)[headerView.subviews objectAtIndex:0];
+	UILabel *author = (UILabel*)[headerView.subviews objectAtIndex:1];
+	subject.text = curQuestion.body;
+	author.text = [NSString stringWithFormat:@"    Posted by %@ at %@ (%@ pts).", curQuestion.nuggetOriginator.displayName, curQuestion.dateCreatedFormatted, curQuestion.nuggetOriginator.userReputationString];
+}
+
 - (NSString*)getServiceUrl {
 	NSString *url = [NSURL URLWithString:[NSString stringWithFormat:@"questions/%@", curQuestion.nuggetId]];
 	return url;
 }
 
-- (void)handleHttpResponse:(NSString*)responseString {
-	
-	UILabel *subject = (UILabel*)[headerView.subviews objectAtIndex:0];
-	UILabel *author = (UILabel*)[headerView.subviews objectAtIndex:1];
-	subject.text = curQuestion.body;
-	author.text = [NSString stringWithFormat:@"    Posted by %@ at %@ (%@ pts).", curQuestion.nuggetOriginator.displayName, curQuestion.dateCreatedFormatted, curQuestion.nuggetOriginator.userReputationString];
-	
-	NSDictionary *results = [responseString JSONValue];
+- (void)handleHttpResponse:(NSString*)responseString {	
+	NSDictionary *results = [responseString JSONValue];	
 	NSArray *allResponses = [results objectForKey:@"Responses"];
 	
-	if ([allResponses count] > 1) {
+	if ([allResponses count] ) {
 		for (NSDictionary *objectInstance in allResponses) {
 			Response *response = [[Response alloc] init];
 			response.body = [objectInstance objectForKey:@"Body"];			
@@ -118,18 +125,7 @@
 			[items addObject: response ];
 			[response release];
 		}	
-	} else {
-		Response *response = [[Response alloc] init];
-		response.body = [results objectForKey:@"Body"];			
-		
-		NSDictionary *originator = [results objectForKey:@"Originator"];
-		response.originator.displayName = [originator objectForKey:@"DisplayName"];
-		response.originator.userReputationString = [originator objectForKey:@"UserReputationString"];				
-		
-		[items addObject: response ];
-		[response release];		
-	}
-
+	} 
 }
 
 -(void)facebookShareButtonPressed:(UIButton*)button {
