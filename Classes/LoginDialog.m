@@ -119,7 +119,7 @@
 	ASIHTTPRequest *asiRequest = [ASIHTTPRequest requestWithURL:url];
 	[asiRequest addRequestHeader:@"ApiKey" value: UIAppDelegate.serverApiKey];	
 	[asiRequest addRequestHeader:@"fbApiKey" value: UIAppDelegate.fbApiKey];	
-	//[asiRequest addRequestHeader:@"fbIndentifier" value:@"xxx"];			
+	[asiRequest addRequestHeader:@"fbIndentifier" value:[UIAppDelegate.fbUser objectForKey:@"id"]];
 	
 	[asiRequest setDelegate:self];		
 	[asiRequest setValidatesSecureCertificate:NO];
