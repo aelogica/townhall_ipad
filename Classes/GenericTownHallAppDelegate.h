@@ -80,7 +80,7 @@ enum {
 @property (nonatomic, assign) CGFloat appHeight;
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, assign) NSUInteger currentView;
-@property (nonatomic, assign) NSString *currentBarButtonTitle;
+@property (nonatomic, retain) NSString *currentBarButtonTitle;
 
 @property (nonatomic, assign) NSString *currentSlug;
 

@@ -57,23 +57,15 @@
 #pragma mark Split view support
 
 - (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc {
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	if(appDelegate.currentView == CategoriesView) {
-		
-	} else if (appDelegate.currentView == TopicsView) {
-	   
-	} else if (appDelegate.currentView == QuestionsView) {
-		
-	} else if (appDelegate.currentView == ResponsesView) {
-		
+	@try {
+		barButtonItem.title = UIAppDelegate.currentBarButtonTitle != nil ? UIAppDelegate.currentBarButtonTitle : @"Home";		
+		NSMutableArray *items = [[toolbar items] mutableCopy];
+		[items insertObject:barButtonItem atIndex:0];
+		[toolbar setItems:items animated:YES];
+		[items release];
 	}
-
-	barButtonItem.title = appDelegate.currentBarButtonTitle != nil ? appDelegate.currentBarButtonTitle : @"Home";
-    
-	NSMutableArray *items = [[toolbar items] mutableCopy];
-    [items insertObject:barButtonItem atIndex:0];
-    [toolbar setItems:items animated:YES];
-    [items release];
+	@catch (NSException * e) {
+	}
 	
     self.popoverController = pc;
 }

@@ -171,7 +171,7 @@
 
 	NSLog(@"Http request failed: %@ Count: %d", error);
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been an error on our server. Would you try again a little later our programmers are working hard to fix the error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message: @"We apologize but there has been a problem connecting with our server. Would you try again a little later?." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];            
 	[alert show];
 	[alert release];	
 }

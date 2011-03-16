@@ -250,8 +250,8 @@
     [toolbar setItems:items animated:YES];
     [items release];	
 	
-	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-	appDelegate.currentBarButtonTitle = newTitle;	
+	
+	UIAppDelegate.currentBarButtonTitle = newTitle;
 }
 
 	
