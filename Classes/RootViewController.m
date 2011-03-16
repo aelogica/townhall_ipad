@@ -211,6 +211,7 @@
 }
 
 -(void)refreshButtonPressed:(UIBarButtonItem *)button {
+	
 	GenericTownHallAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 	if(appDelegate.currentView == CategoriesView) {	
 		//[self changeToTopics:nil];

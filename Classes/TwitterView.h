@@ -10,9 +10,10 @@
 
 
 @interface TwitterView : UIView {
-
+	UIWebView *webView;
+	UIToolbar *toolbar;
 }
 
-- (id)initWithFrame:(CGRect)frame url:(NSString*)urlTo;
+- (id) initWithFrame:(CGRect)frame url:(NSString*)urlTo;
 
 @end

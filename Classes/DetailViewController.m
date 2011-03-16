@@ -69,10 +69,12 @@
 	}
 
 	barButtonItem.title = appDelegate.currentBarButtonTitle != nil ? appDelegate.currentBarButtonTitle : @"Home";
-    NSMutableArray *items = [[toolbar items] mutableCopy];
+    
+	NSMutableArray *items = [[toolbar items] mutableCopy];
     [items insertObject:barButtonItem atIndex:0];
     [toolbar setItems:items animated:YES];
     [items release];
+	
     self.popoverController = pc;
 }
 
@@ -105,7 +107,7 @@
     }
     else if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft){
 		appDelegate.appWidth = 703.f;
-		appDelegate.appHeight = 704.f;
+		appDelegate.appHeight = 748.f;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"OrientationChange" object:@"Landscape" userInfo:nil];
 		NSLog(@"toLandscape Details view width: %.2f height: %.2f", self.view.frame.size.width, self.view.frame.size.height);
     }
