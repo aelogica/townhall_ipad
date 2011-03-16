@@ -84,16 +84,26 @@
 -(void)orientationChange:(NSNotification *)orientation { 
 	CGRect tableViewFrame = tableView.frame;
 	tableViewFrame.size.width = UIAppDelegate.appWidth;
-
-	// Adjust the table view height if we're on a plain style
-	if (tableView.style == UITableViewStylePlain) {
-		if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-			tableViewFrame.size.height = UIAppDelegate.appHeight - 150.f;	
-		} else {
-			tableViewFrame.size.height = UIAppDelegate.appHeight - 200.f;	
+	
+	
+	
+	CGFloat rootViewWidth = self.view.superview.frame.size.width;	
+	
+	// See if this view controller is showing up on the root view pane
+	if(rootViewWidth < 400.f) {
+		[tableView setFrame:CGRectMake(0.f, 0.f, rootViewWidth, UIAppDelegate.appHeight - 50.f)];
+	} else {
+		// Adjust the table view height if we're on a plain style
+		if (tableView.style == UITableViewStylePlain) {
+			if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+				tableViewFrame.size.height = UIAppDelegate.appHeight - 200.f;	
+			} else {
+				tableViewFrame.size.height = UIAppDelegate.appHeight - 200.f;	
+			}
 		}
+		tableView.frame = tableViewFrame;		
 	}
-	tableView.frame = tableViewFrame;		
+
 	[tableView reloadData];
 	
 	// Also adjust the header if its set
@@ -190,7 +200,7 @@
 			if(UIAppDelegate.currentOrientation == UIInterfaceOrientationPortrait || UIAppDelegate.currentOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 				[tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
 			} else {
-				[tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 150.f)];
+				[tableView setFrame:CGRectMake(.0f, 150.f, UIAppDelegate.appWidth, UIAppDelegate.appHeight - 200.f)];
 			}
 		}
 	}
