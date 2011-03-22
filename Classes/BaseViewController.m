@@ -119,9 +119,9 @@
 	NSString *url = nil;
 	
 	if (extraParams) {
-		url = [NSString stringWithFormat:@"%@/%@?%@&format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl, serviceUrl, extraParams];
+		url = [NSString stringWithFormat:@"%@/%@?%@&format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, serviceUrl, extraParams, UIAppDelegate.serverApiKey];
 	} else {
-		url = [NSString stringWithFormat:@"%@/%@?format=json&ApiKey=6ad50a5a9b42848f65b63cc375ee3e92", UIAppDelegate.serverDataUrl, serviceUrl];
+		url = [NSString stringWithFormat:@"%@/%@?format=json&ApiKey=%@", UIAppDelegate.serverDataUrl, serviceUrl, UIAppDelegate.serverApiKey];
 	}
 	
 	NSURL *nsUrl = [NSURL URLWithString: url];
